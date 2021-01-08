@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/08 20:38:15 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/08 20:44:20 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -42,11 +42,8 @@ int		check_main_input(int argc)
 int		main(int argc, char *argv[])
 {
 	int		fd;
-	int		fd2;
 	char	*line;
-	char	*line2;
 	int		i;
-	int		i2;
 
 	if (check_main_input(argc))
 	{
@@ -58,38 +55,11 @@ int		main(int argc, char *argv[])
 		}
 		while ((i = get_next_line(fd, &line)))
 		{
-			printf("			GNL result = %d\n			line = %s\n", i,
-				   line);
+			printf("GNL result = %d\nline =\n%s\n", i, line);
 			free(line);
 		}
-		printf("			GNL result = %d\n			line = %s\n", i, line);
+		printf("GNL result = %d\nline =\n%s\n", i, line);
 		free(line);
 		close(fd);
 	}
-	fd = open("empty_lines", O_RDONLY);
-	fd2 = open("alphabet", O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr(NREAD_MSG);
-		return (0);
-	}
-	i = get_next_line(fd, &line);
-	i2 = get_next_line(fd2, &line2);
-	while (i || i2)
-	{
-		printf("			GNL result = %d\n			line = %s\n", i, line);
-		printf("			GNL result2 = %d\n			line = %s\n", i2,
-			   line2);
-		free(line);
-		free(line2);
-		i = get_next_line(fd, &line);
-		i2 = get_next_line(fd2, &line2);
-	}
-	printf("			GNL result = %d\n			line = %s\n", i, line);
-	printf("			GNL result2 = %d\n			line = %s\n", i2,
-		   line2);
-	free(line);
-	free(line2);
-	close(fd);
-	close(fd2);
 }
