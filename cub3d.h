@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 19:24:13 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/08 19:31:18 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/08 20:18:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,18 @@
 
 typedef	struct
 {
-	unsigned int	flag;
-	int				wide;
-	int				precision;
-	char			type;
-	int				dbl_type;
-	int				parsed_size;
-}					t_frmt;
+	int				res_v;
+	int				res_h;
+	char 			*north;
+	char 			*south;
+	char 			*west;
+	char 			*east;
+	char 			*sprite;
+	char			**map;
+}					t_map;
 
-int		check_input(int fd, char **line);
 int		get_next_line(int fd, char **line);
-void	ft_putstr(char *str, int fd);
+void	ft_putstr(char *str);
 size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char *s1, char *s2);
 int		has_buff_nl(char *buff);
