@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/08 20:18:06 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/08 20:38:15 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -24,7 +24,7 @@ void	ft_putstr(char *str)
 	}
 }
 
-int		check_input(int argc)
+int		check_main_input(int argc)
 {
 	if (argc == 1)
 	{
@@ -48,12 +48,12 @@ int		main(int argc, char *argv[])
 	int		i;
 	int		i2;
 
-	if (check_input(argc))
+	if (check_main_input(argc))
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
 		{
-			ft_putstr(NREAD_MSG, 2);
+			ft_putstr(NREAD_MSG);
 			return (0);
 		}
 		while ((i = get_next_line(fd, &line)))
@@ -70,7 +70,7 @@ int		main(int argc, char *argv[])
 	fd2 = open("alphabet", O_RDONLY);
 	if (fd == -1)
 	{
-		ft_putstr(NREAD_MSG, 2);
+		ft_putstr(NREAD_MSG);
 		return (0);
 	}
 	i = get_next_line(fd, &line);
@@ -92,9 +92,4 @@ int		main(int argc, char *argv[])
 	free(line2);
 	close(fd);
 	close(fd2);
-//		 while(1){}
-
-
-}
-
 }
