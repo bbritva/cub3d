@@ -49,6 +49,8 @@ typedef	struct
 
 t_map	*parser(char *f_name);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+t_color	get_color(char *line, t_color color);
+
 
 
 #endif

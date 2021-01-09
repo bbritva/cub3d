@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/09 15:36:21 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/09 18:24:27 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ void 	parse_line(t_map *map, char *line)
 		map->east = get_path(line);
 	if (line[0] == 'S')
 		map->sprite = get_path(line);
+	if (line[0] == 'F')
+		map->floor_color = get_color(line, map->floor_color);
+	if (line[0] == 'C')
+		map->ceil_color = get_color(line, map->floor_color);
 }
 
 t_map	*parser(char *f_name)
@@ -101,6 +105,13 @@ t_map	*parser(char *f_name)
 		printf("west = \"%s\"\n", map->west);
 		printf("east = \"%s\"\n", map->east);
 		printf("sprite = \"%s\"\n", map->sprite);
+		printf("f_color_r = \"%d\"\n", map->floor_color.red);
+		printf("f_color_g = \"%d\"\n", map->floor_color.green);
+		printf("f_color_b = \"%d\"\n", map->floor_color.blue);
+		printf("c_color_r = \"%d\"\n", map->ceil_color.red);
+		printf("c_color_g = \"%d\"\n", map->ceil_color.green);
+		printf("c_color_b = \"%d\"\n", map->ceil_color.blue);
+
 		free(line);
 		return (map);
 	}

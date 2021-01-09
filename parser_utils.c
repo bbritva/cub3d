@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 15:11:23 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/09 15:22:24 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/09 18:33:26 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,33 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		ptr2++;
 	}
 	return (0);
+}
+
+t_color get_color(char *line, t_color color)
+{
+
+	int i;
+
+	i = 0;
+	while ((line[i] < '0' || line[i] > '9') && line[i] != 0)
+		i++;
+	if (line[i] != 0)
+		color.red = 0;
+	while ((line[i] >= '0' && line[i] <= '9') && line[i] != 0)
+		color.red = color.red * 10 + (line[i++] - '0');
+	if (line[i] != 0)
+	{
+		color.green = 0;
+		i++;
+	}
+	while ((line[i] >= '0' && line[i] <= '9') && line[i] != 0)
+		color.green = color.green * 10 + (line[i++] - '0');
+	if (line[i] != 0)
+	{
+		color.blue = 0;
+		i++;
+	}
+	while ((line[i] >= '0' && line[i] <= '9') && line[i] != 0)
+		color.blue = color.blue * 10 + (line[i++] - '0');
+	return (color);
 }
