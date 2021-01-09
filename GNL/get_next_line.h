@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:43:11 by grvelva           #+#    #+#             */
-/*   Updated: 2020/11/18 09:01:50 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/09 11:09:43 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,11 @@
 # include <stdlib.h>
 # include <string.h>
 
-# define BUFFER_SIZE 5
-# define F_MISS_MSG "File name missing.\n"
-# define M_ARGS_MSG "Too many arguments.\n"
-# define NREAD_MSG "Cannot read file.\n"
+# define BUFFER_SIZE 32
 
 int		check_input(int fd, char **line);
 int		get_next_line(int fd, char **line);
-void	ft_putstr(char *str, int fd);
+void	ft_putstr(char *str);
 size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char *s1, char *s2);
 int		has_buff_nl(char *buff);

@@ -1,10 +1,10 @@
-NAME		=	cub3d.out
+NAME		=	cub3d
 LIBFT		=	libft.a
 CCF			=	@gcc $(CFLAGS)
 MKLIB		=	@ar rc
 RM			=	@rm -f
 CFLAGS		=	-Wall -Wextra -Werror -c
-SRCS		=	main.c
+SRCS		=	main.c GNL/get_next_line.c GNL/get_next_line_utils.c
 OBJS		=	$(SRCS:.c=.o)
 LIB_DIR		=	./libft/
 HDR			=	cub3d.h
@@ -24,9 +24,7 @@ fclean:		clean
 re:			fclean all
 
 $(NAME):	$(OBJS)
-			@make bonus -C $(LIB_DIR)
-			@cp $(LIB_DIR)$(LIBFT) $(NAME)
-			$(MKLIB) $(NAME) $(OBJS)
+			$(CCF) $(OBJS) -o $(NAME)
 			@echo $(NAME) compilled
 
 %.o:		%.c $(HDR)

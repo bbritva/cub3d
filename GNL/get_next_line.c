@@ -18,8 +18,6 @@ int		check_input(int fd, char **line)
 
 	if (fd < 0)
 		return (0);
-	if (BUFFER_SIZE < 1)
-		return (0);
 	if ((read(fd, test_buff, 0)) < 0)
 		return (0);
 	if (!line)

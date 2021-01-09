@@ -6,14 +6,12 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/08 20:44:20 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/09 12:10:23 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
+
 #include "cub3d.h"
 #include <stdio.h>
-
-int		get_next_line(int fd, char **line);
 
 void	ft_putstr(char *str)
 {
@@ -39,27 +37,51 @@ int		check_main_input(int argc)
 	return (1);
 }
 
-int		main(int argc, char *argv[])
+void 	parse_line(t_map *map, char *line)
+{
+	(void) map;
+	(void) line;
+}
+
+t_map	*parser(char *f_name)
 {
 	int		fd;
 	char	*line;
 	int		i;
+	t_map	*map;
 
-	if (check_main_input(argc))
+	fd = open(f_name, O_RDONLY);
+	if (fd == -1)
 	{
-		fd = open(argv[1], O_RDONLY);
-		if (fd == -1)
-		{
-			ft_putstr(NREAD_MSG);
-			return (0);
-		}
+		ft_putstr(NREAD_MSG);
+		return (NULL);
+	}
+	if ((map = (t_map *)malloc(sizeof(t_map))))
+	{
 		while ((i = get_next_line(fd, &line)))
 		{
+			parse_line(map, line);
 			printf("GNL result = %d\nline =\n%s\n", i, line);
 			free(line);
 		}
 		printf("GNL result = %d\nline =\n%s\n", i, line);
 		free(line);
-		close(fd);
+		return (map);
 	}
+	close(fd);
+	return (map);
+}
+
+
+int	main(int argc, char *argv[])
+{
+	t_map	*map;
+
+	if (check_main_input(argc) && (map = parser(argv[1])))
+	{
+		printf("map - ok\n");
+		free(map);
+	}
+	else
+		printf("map error\n");
 }
