@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 19:24:13 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/09 11:44:58 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/09 13:23:15 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@
 # define M_ARGS_MSG "Too many arguments.\n"
 # define NREAD_MSG "Cannot read file.\n"
 
+
+typedef struct
+{
+	int				red;
+	int				green;
+	int				blue;
+}					t_color;
+
 typedef	struct
 {
 	int				res_v;
@@ -35,6 +43,8 @@ typedef	struct
 	char 			*east;
 	char 			*sprite;
 	char			**map;
+	t_color			floor_color;
+	t_color			ceil_color;
 }					t_map;
 
 #endif
