@@ -47,4 +47,6 @@ typedef	struct
 	t_color			ceil_color;
 }					t_map;
 
+t_map	*parser(char *f_name);
+
 #endif

@@ -4,7 +4,7 @@ CCF			=	@gcc $(CFLAGS)
 MKLIB		=	@ar rc
 RM			=	@rm -f
 CFLAGS		=	-Wall -Wextra -Werror
-SRCS		=	main.c GNL/get_next_line.c GNL/get_next_line_utils.c
+SRCS		=	main.c parser.c GNL/get_next_line.c GNL/get_next_line_utils.c
 OBJS		=	$(SRCS:.c=.o)
 LIB_DIR		=	./libft/
 HDR			=	cub3d.h
