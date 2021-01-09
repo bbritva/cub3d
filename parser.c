@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/09 18:24:27 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/09 18:42:49 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,30 @@ void 	parse_line(t_map *map, char *line)
 		map->ceil_color = get_color(line, map->floor_color);
 }
 
+t_map	*map_init()
+{
+	t_map	*map;
+
+	map = (t_map *)malloc(sizeof(t_map));
+	if (map)
+	{
+		map->res_h = -1;
+		map->res_v = -1;
+		map->north = NULL;
+		map->south = NULL;
+		map->west = NULL;
+		map->east = NULL;
+		map->sprite = NULL;
+		map->floor_color.red = -1;
+		map->floor_color.green = -1;
+		map->floor_color.blue = -1;
+		map->ceil_color.red = -1;
+		map->ceil_color.green = -1;
+		map->ceil_color.blue = -1;
+	}
+	return (map);
+}
+
 t_map	*parser(char *f_name)
 {
 	int		fd;
@@ -91,7 +115,7 @@ t_map	*parser(char *f_name)
 		ft_putstr(NREAD_MSG);
 		return (NULL);
 	}
-	if ((map = (t_map *)malloc(sizeof(t_map))))
+	if ((map = map_init()))
 	{
 		while ((i = get_next_line(fd, &line)))
 		{

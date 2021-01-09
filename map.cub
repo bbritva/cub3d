@@ -4,7 +4,7 @@ SO ./path_to_the_south_texture
 WE ./path_to_the_west_texture
 EA ./path_to_the_east_texture
 S ./path_to_the_sprite_texture
-F 220,1c00,44
+F 220,1
 C 225,3c0,55
 
         1111111111111111111111111
