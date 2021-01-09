@@ -3,4 +3,4 @@ project(cub3d C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(cub3d main.c cub3d.h parser.c)
+add_executable(cub3d main.c cub3d.h parser.c parser_utils.c)

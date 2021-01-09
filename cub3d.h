@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 19:24:13 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/09 13:23:15 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/09 14:54:48 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ typedef	struct
 }					t_map;
 
 t_map	*parser(char *f_name);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+
 
 #endif

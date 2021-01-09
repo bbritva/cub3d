@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/09 14:51:17 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/09 15:36:21 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,39 @@ int		get_rez(t_map *map, char *line)
 	return (i);
 }
 
+char 	*get_path(char *line)
+{
+	int		i;
+	int		j;
+	char 	*path;
+
+	i = 0;
+	while (line[i] && line[i] != '.')
+		i++;
+	if ((path = (char *)malloc(sizeof(char) * (ft_strlen(&line[i] + 1)))))
+	{
+		j = 0;
+		while(line[i])
+			path[j++] = line[i++];
+		path[j] = 0;
+	}
+	return (path);
+}
+
 void 	parse_line(t_map *map, char *line)
 {
 	if (line[0] == 'R')
-	{
-		line += get_rez(map, line);
-	}
-	(void) map;
-	(void) line;
+		get_rez(map, line);
+	if (!ft_strncmp("NO", line, 2))
+		map->north = get_path(line);
+	if (!ft_strncmp("SO", line, 2))
+		map->south = get_path(line);
+	if (!ft_strncmp("WE", line, 2))
+		map->west = get_path(line);
+	if (!ft_strncmp("EA", line, 2))
+		map->east = get_path(line);
+	if (line[0] == 'S')
+		map->sprite = get_path(line);
 }
 
 t_map	*parser(char *f_name)
@@ -67,11 +92,15 @@ t_map	*parser(char *f_name)
 		while ((i = get_next_line(fd, &line)))
 		{
 			parse_line(map, line);
-			printf("hrez = %d\n", map->res_h);
-			printf("vrez = %d\n", map->res_v);
 			free(line);
 		}
-		printf("GNL result = %d\nline =\n%s\n", i, line);
+		printf("hrez = %d\n", map->res_h);
+		printf("vrez = %d\n", map->res_v);
+		printf("north = \"%s\"\n", map->north);
+		printf("south = \"%s\"\n", map->south);
+		printf("west = \"%s\"\n", map->west);
+		printf("east = \"%s\"\n", map->east);
+		printf("sprite = \"%s\"\n", map->sprite);
 		free(line);
 		return (map);
 	}
