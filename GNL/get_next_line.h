@@ -25,7 +25,7 @@
 int		check_input(int fd, char **line);
 int		get_next_line(int fd, char **line);
 void	ft_putstr(char *str);
-size_t	ft_strlen(const char *str);
+size_t	gnl_strlen(const char *str);
 char	*gnl_strjoin(char *s1, char *s2);
 int		has_buff_nl(char *buff);
 char	*getline_from_buff(char *buff);

@@ -43,15 +43,14 @@ typedef	struct
 	char 			*west;
 	char 			*east;
 	char 			*sprite;
-	char			**map;
 	t_color			floor_color;
 	t_color			ceil_color;
-}					t_map;
+}					t_params;
 
-t_map	*parser(char *f_name);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-t_color	get_color(char *line, t_color color);
-int		is_map_line(char *line);
+t_params			*parser(char *f_name);
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
+t_color				get_color(char *line, t_color color);
+int					is_map_line(char *line);
 
 
 

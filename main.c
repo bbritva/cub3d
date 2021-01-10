@@ -13,7 +13,7 @@
 #include "cub3d.h"
 #include <stdio.h>
 
-void	map_free(t_map *map)
+void	map_free(t_params *map)
 {
 	if (map->sprite)
 		free(map->sprite);
@@ -54,7 +54,7 @@ int		check_main_input(int argc)
 
 int	main(int argc, char *argv[])
 {
-	t_map	*map;
+	t_params	*map;
 
 	if (check_main_input(argc) && (map = parser(argv[1])))
 	{

@@ -76,7 +76,7 @@ int		get_next_line(int fd, char **line)
 	if (has_buff_nl(buff))
 	{
 		if ((*line = getline_from_buff(buff)))
-			if ((buff = buff_trim(buff, ft_strlen(*line) + 1)))
+			if ((buff = buff_trim(buff, gnl_strlen(*line) + 1)))
 				return (1);
 		free(buff);
 		return (-1);

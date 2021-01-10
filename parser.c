@@ -6,14 +6,14 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/10 12:41:35 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/10 15:24:07 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <stdio.h>
 
-int		get_rez(t_map *map, char *line)
+int		get_rez(t_params *map, char *line)
 {
 	int i;
 
@@ -59,7 +59,7 @@ char 	*get_path(char *line, char *path)
 	return (path);
 }
 
-void 	parse_line(t_map *map, char *line)
+void 	parse_line(t_params *map, char *line)
 {
 	if (line[0] == 'R')
 		get_rez(map, line);
@@ -79,11 +79,11 @@ void 	parse_line(t_map *map, char *line)
 		map->ceil_color = get_color(line, map->floor_color);
 }
 
-t_map	*map_init()
+t_params	*map_init()
 {
-	t_map	*map;
+	t_params	*map;
 
-	map = (t_map *)malloc(sizeof(t_map));
+	map = (t_params *)malloc(sizeof(t_params));
 	if (map)
 	{
 		map->res_h = -1;
@@ -103,12 +103,12 @@ t_map	*map_init()
 	return (map);
 }
 
-t_map	*parser(char *f_name)
+t_params	*parser(char *f_name)
 {
 	int		fd;
 	char	*line;
 	int		i;
-	t_map	*map;
+	t_params	*map;
 
 	fd = open(f_name, O_RDONLY);
 	if (fd == -1)
@@ -118,10 +118,17 @@ t_map	*parser(char *f_name)
 	}
 	if ((map = map_init()))
 	{
-		while ((i = get_next_line(fd, &line)))
+		while ((i = get_next_line(fd, &line)) && !is_map_line(line))
 		{
 			parse_line(map, line);
 			free(line);
+		}
+		while (is_map_line(line) && i)
+		{
+			printf("%s\n", line);
+//			parse_line(map, line);
+			free(line);
+			i = get_next_line(fd, &line);
 		}
 		printf("hrez = %d\n", map->res_h);
 		printf("vrez = %d\n", map->res_v);
