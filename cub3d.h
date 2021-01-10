@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 19:24:13 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/09 14:54:48 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/10 13:03:44 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef	struct
 t_map	*parser(char *f_name);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 t_color	get_color(char *line, t_color color);
+int		is_map_line(char *line);
+
 
 
 

@@ -6,20 +6,22 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 15:11:23 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/10 12:45:33 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/10 14:07:12 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-//
-//int is_map_line(char *line)
-//{
-//	while (line)
-//	{
-//		if (ft_strchr(" 012NSWE", *line))
-//
-//	}
-//}
+
+int is_map_line(char *line)
+{
+	int	result;
+
+	result = 1;
+	while (line)
+		if (!ft_strchr(" 012NSWE", *line++))
+			result = 0;
+	return (result);
+}
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/10 12:36:14 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/10 12:41:35 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void 	parse_line(t_map *map, char *line)
 		map->west = get_path(line, map->west);
 	if (!ft_strncmp("EA", line, 2))
 		map->east = get_path(line, map->east);
-	if (line[0] == 'S')
+	if (line[0] == 'S' && line[1] != 'O')
 		map->sprite = get_path(line, map->sprite);
 	if (line[0] == 'F')
 		map->floor_color = get_color(line, map->floor_color);
