@@ -25,7 +25,8 @@ fclean:		clean
 re:			fclean all
 
 $(NAME):	$(OBJS)
-			$(CCF) $(OBJS) -o $(NAME)
+			@make bonus -C $(LIB_DIR)
+			$(CCF) $(OBJS) $(LIB_DIR)$(LIBFT) -o $(NAME)
 			@echo $(NAME) compilled
 
 %.o:		%.c $(HDR)

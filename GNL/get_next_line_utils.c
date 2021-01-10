@@ -26,7 +26,7 @@ size_t	ft_strlen(const char *str)
 	return (result);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	char	*result;
 	int		j;
@@ -38,7 +38,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	{
 		j = 0;
 		if (s1)
-			ft_strlcpy(result, s1, ft_strlen(s1) + 1);
+			gnl_strlcpy(result, s1, ft_strlen(s1) + 1);
 		while (*(s2 + j))
 		{
 			result[ft_strlen(s1) + j] = *(s2 + j);
@@ -74,7 +74,7 @@ char	*buff_trim(char *buff, size_t len)
 	return (result);
 }
 
-void	ft_strlcpy(char *dest, const char *src, size_t size)
+void	gnl_strlcpy(char *dest, const char *src, size_t size)
 {
 	if (!dest || !src)
 		return ;

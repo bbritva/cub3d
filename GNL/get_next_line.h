@@ -26,12 +26,12 @@ int		check_input(int fd, char **line);
 int		get_next_line(int fd, char **line);
 void	ft_putstr(char *str);
 size_t	ft_strlen(const char *str);
-char	*ft_strjoin(char *s1, char *s2);
+char	*gnl_strjoin(char *s1, char *s2);
 int		has_buff_nl(char *buff);
 char	*getline_from_buff(char *buff);
 int		stdin_read(char **line);
 char	*buff_trim(char *buff, size_t len);
-void	ft_strlcpy(char *dest, const char *src, size_t size);
+void	gnl_strlcpy(char *dest, const char *src, size_t size);
 char	*init_buff(char *buff, int fd);
 
 #endif

@@ -81,7 +81,7 @@ int		get_next_line(int fd, char **line)
 		free(buff);
 		return (-1);
 	}
-	*line = ft_strjoin(buff, "\0");
+	*line = gnl_strjoin(buff, "\0");
 	buff = NULL;
 	return (0);
 }
@@ -97,10 +97,10 @@ char	*init_buff(char *buff, int fd)
 		while (!has_buff_nl(buff) && ((ret = read(fd, buff1, BUFFER_SIZE)) > 0))
 		{
 			buff1[ret] = 0;
-			buff = ft_strjoin(buff, buff1);
+			buff = gnl_strjoin(buff, buff1);
 		}
 		if (!buff)
-			buff = ft_strjoin(buff, "\0");
+			buff = gnl_strjoin(buff, "\0");
 		free(buff1);
 		buff1 = NULL;
 		return (buff);

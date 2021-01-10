@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/09 18:42:49 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/10 12:36:14 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,16 @@ int		get_rez(t_map *map, char *line)
 	return (i);
 }
 
-char 	*get_path(char *line)
+char 	*get_path(char *line, char *path)
 {
 	int		i;
 	int		j;
-	char 	*path;
 
 	i = 0;
 	while (line[i] && line[i] != '.')
 		i++;
+	if (path)
+		return (NULL);
 	if ((path = (char *)malloc(sizeof(char) * (ft_strlen(&line[i] + 1)))))
 	{
 		j = 0;
@@ -63,15 +64,15 @@ void 	parse_line(t_map *map, char *line)
 	if (line[0] == 'R')
 		get_rez(map, line);
 	if (!ft_strncmp("NO", line, 2))
-		map->north = get_path(line);
+		map->north = get_path(line, map->north);
 	if (!ft_strncmp("SO", line, 2))
-		map->south = get_path(line);
+		map->south = get_path(line, map->south);
 	if (!ft_strncmp("WE", line, 2))
-		map->west = get_path(line);
+		map->west = get_path(line, map->west);
 	if (!ft_strncmp("EA", line, 2))
-		map->east = get_path(line);
+		map->east = get_path(line, map->east);
 	if (line[0] == 'S')
-		map->sprite = get_path(line);
+		map->sprite = get_path(line, map->sprite);
 	if (line[0] == 'F')
 		map->floor_color = get_color(line, map->floor_color);
 	if (line[0] == 'C')

@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include "./GNL/get_next_line.h"
+# include "./libft/libft.h"
 
 # define F_MISS_MSG "File name missing.\n"
 # define M_ARGS_MSG "Too many arguments.\n"
