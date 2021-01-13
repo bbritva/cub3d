@@ -6,11 +6,11 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/13 15:46:45 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/13 15:51:16 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 #include <stdio.h>
 
 void	show_parse_res(t_params * params);

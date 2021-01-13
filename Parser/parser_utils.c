@@ -6,11 +6,11 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 15:11:23 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/13 15:37:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/13 15:48:48 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int is_map_line(char *line)
 {
