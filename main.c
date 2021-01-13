@@ -6,26 +6,28 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/09 14:54:48 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/13 13:49:59 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <stdio.h>
 
-void	map_free(t_params *map)
+void	params_free(t_params *params)
 {
-	if (map->sprite)
-		free(map->sprite);
-	if (map->north)
-		free(map->north);
-	if (map->south)
-		free(map->south);
-	if (map->west)
-		free(map->west);
-	if (map->east)
-		free(map->east);
-	free(map);
+	if (params->sprite)
+		free(params->sprite);
+	if (params->north)
+		free(params->north);
+	if (params->south)
+		free(params->south);
+	if (params->west)
+		free(params->west);
+	if (params->east)
+		free(params->east);
+	if (params->map)
+		free(params->map);
+	free(params);
 }
 
 void	ft_putstr(char *str)
@@ -54,13 +56,13 @@ int		check_main_input(int argc)
 
 int	main(int argc, char *argv[])
 {
-	t_params	*map;
+	t_params	*params;
 
-	if (check_main_input(argc) && (map = parser(argv[1])))
+	if (check_main_input(argc) && (params = parser(argv[1])))
 	{
-		printf("map - ok\n");
-		map_free(map);
+		printf("params - ok\n");
+		params_free(params);
 	}
 	else
-		printf("map error\n");
+		printf("params error\n");
 }

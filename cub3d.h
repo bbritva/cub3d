@@ -45,6 +45,7 @@ typedef	struct
 	char 			*sprite;
 	t_color			floor_color;
 	t_color			ceil_color;
+	char 			*map;
 }					t_params;
 
 t_params			*parser(char *f_name);
