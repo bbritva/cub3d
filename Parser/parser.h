@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:05:44 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/13 17:08:05 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/13 18:20:32 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ typedef	struct
 t_params			*parser(char *f_name);
 t_color				get_color(char *line, t_color color);
 int					is_map_line(char *line);
-
-
-
+t_params			*param_parser(int fd, t_params *params, char **line);
+t_params			*map_parser(int fd, t_params *params, char **line);
 
 #endif
