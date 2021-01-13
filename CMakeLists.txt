@@ -59,5 +59,5 @@ add_executable(cub3d
         libft/libft.h
         cub3d.h
         main.c
-        parser.c
-        parser_utils.c)
+        Parser/parser.c
+        Parser/parser_utils.c)
