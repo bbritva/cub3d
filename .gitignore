@@ -8,4 +8,5 @@
 /*.o
 /cub3d
 /GNL/*.o
+/Parser/*.o
 /libft/

@@ -60,4 +60,4 @@ add_executable(cub3d
         cub3d.h
         main.c
         Parser/parser.c
-        Parser/parser_utils.c)
+        Parser/parser_utils.c Parser/parser.h)
