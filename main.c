@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/16 14:17:38 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/16 15:16:55 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,45 +65,75 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void		draw_circle(t_data *data, int x_c, int y_c, int r, int color)
+void		draw_line(t_data *data, int x0, int y0, int x1, int y1, int color)
 {
-	int cur_x;
-	int cur_y;
-	int k;
-
-	(void) data;
-	cur_x = x_c - r;
-	while (cur_x < x_c + r)
+	int deltax = x1 - x0;
+	int deltay = y1 - y0;
+	int error = 0;
+	int deltaerr = deltay + 1;
+	int y = y0;
+	int x = x0;
+	int diry = y1 - y0;
+	if (diry > 0)
+		diry = 1;
+	if (diry < 0)
+		diry = -1;
+	while (x <= x1)
 	{
-		cur_y = y_c - r;
-		while (cur_y < y_c + r)
+		my_mlx_pixel_put(data, x, y, color);
+		error = error + deltaerr;
+		if (error >= (deltax + 1))
 		{
-			k = ((cur_y - y_c) * (cur_y - y_c) + (cur_x - x_c) * (cur_x - x_c))
-					/ (r * r);
-			printf("x = %d, y = %d, r= %d, k = %d\n", (cur_x - x_c), (cur_y -
-			y_c), r, k);
-			if (k < 1 && cur_y > 0 && cur_x > 0)
-			{
-				my_mlx_pixel_put(data, cur_x, cur_y, color);
-			}
-			cur_y++;
+			y = y + diry;
+			error = error - (deltax + 1);
 		}
-		cur_x++;
+		x++;
 	}
 }
 
-void		draw_circle2(t_data *data, int X1, int Y1, int r, int color)
+void 		draw_map(t_data *data, char *in_map)
+{
+	char **map;
+	int i;
+	int j;
+	int k = 20;
+
+	map = ft_split(in_map, '\n');
+	i = 0;
+	while (map[i/k])
+	{
+		j = 0;
+		while (map[i/k][j/k])
+		{
+			if (map[i/k][j/k] == '1')
+				my_mlx_pixel_put(data, j, i, 0x000000FF);
+			if (map[i/k][j/k] == '0')
+				my_mlx_pixel_put(data, j, i, 0x00FF0000);
+			if (map[i/k][j/k] == '2')
+				my_mlx_pixel_put(data, j, i, 0x0000FF00);
+			if (map[i/k][j/k] == 'N')
+				my_mlx_pixel_put(data, j, i, 0x00FFFFFF);
+			j++;
+		}
+		i++;
+	}
+}
+
+void		draw_circle(t_data *data, int X1, int Y1, int r, int color)
 {
 	int x = 0;
 	int y = r;
 	int delta = 1 - 2 * r;
 	int error;
+
+	(void) color;
 	while (y >= 0)
 	{
 		my_mlx_pixel_put(data, X1 + x, Y1 + y, color);
 		my_mlx_pixel_put(data, X1 + x, Y1 - y, color);
 		my_mlx_pixel_put(data, X1 - x, Y1 + y, color);
 		my_mlx_pixel_put(data, X1 - x, Y1 - y, color);
+
 		error = 2 * (delta + y) - 1;
 		if ((delta < 0) && (error <= 0))
 			delta += 2 * ++x + 1;
@@ -131,11 +161,13 @@ int	main(int argc, char *argv[])
 		img.img = mlx_new_image(mlx, params->res_h, params->res_v);
 		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 									 &img.endian);
-//		my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-		draw_circle2(&img, 300, 300, 250, 0x0000FF00);
+		draw_circle(&img, 300, 300, 250, 0x0000FF00);
+		draw_line(&img, 400,300,400,900, 0x00FF0000);
+		draw_map(&img, params->map);
 		mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 		mlx_loop(mlx);
 		params_free(params);
+
 	}
 	else
 		printf("params error\n");
