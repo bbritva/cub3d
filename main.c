@@ -6,11 +6,12 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/13 18:35:32 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/16 12:35:04 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <mlx.h>
 #include <stdio.h>
 
 void	show_parse_res(t_params * params);
@@ -56,14 +57,59 @@ int		check_main_input(int argc)
 	return (1);
 }
 
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char    *dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+void		draw_circle(t_data *data, int x_c, int y_c, int r)
+{
+	int cur_x;
+	int cur_y;
+	int k;
+
+	cur_x = x_c - r;
+	while (cur_x < x_c + r)
+	{
+		cur_y = y_c - r;
+		while (cur_y < y_c + r)
+		{
+			k = (cur_y - y_c) * (cur_y - y_c) + (cur_x - x_c) * (cur_x - x_c)
+					- (r * r);
+			if (k == 0 && cur_y > 0 && cur_x > 0)
+			{
+				my_mlx_pixel_put(data, cur_x, cur_y, 0x00FF0000);
+				printf("%d", k);
+			}
+			cur_y++;
+		}
+		cur_x++;
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	t_params	*params;
+	void		*mlx;
+	void		*mlx_win;
+	t_data		img;
 
 	if (check_main_input(argc) && (params = parser(argv[1])))
 	{
 		printf("params - ok\n");
 		show_parse_res(params);
+		mlx = mlx_init();
+		mlx_win = mlx_new_window(mlx, params->res_h, params->res_v, "cub3d");
+		img.img = mlx_new_image(mlx, params->res_h, params->res_v);
+		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+									 &img.endian);
+//		my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
+		draw_circle(&img, 100, 100, 150);
+		mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+		mlx_loop(mlx);
 		params_free(params);
 	}
 	else

@@ -27,9 +27,10 @@ int 		check_map(t_params *params)
 		j = 0;
 		while (map[i][j] && map[i][j + 1])
 		{
-			if (map[i][j] == '1' && ft_strchr("02NSWE", map[i][j + 1]))
+			if (map[i][j + 1] == '1' && !ft_strchr("02NSWE", map[i][j]))
 				in_map = 1;
-			if (ft_strchr("02NSWE", map[i][j]) && map[i][j + 1] == '1' && in_map)
+			if (!ft_strchr("02NSWE", map[i][j + 1]) && map[i][j] == '1' &&
+			in_map)
 				in_map = 0;
 			j++;
 		}

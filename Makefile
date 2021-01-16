@@ -8,6 +8,9 @@ SRCS		=	main.c Parser/parser.c Parser/param_parser.c Parser/map_parser.c GNL/get
 				GNL/get_next_line_utils.c Parser/parser_utils.c
 OBJS		=	$(SRCS:.c=.o)
 LIB_DIR		=	./libft/
+MLIB_DIR	=	./minilibx_mms/
+MNAME		=	libmlx.dylib
+
 HDR			=	cub3d.h
 
 all:		$(NAME)
@@ -26,7 +29,9 @@ re:			fclean all
 
 $(NAME):	$(OBJS)
 			@make bonus -C $(LIB_DIR)
-			$(CCF) $(OBJS) $(LIB_DIR)$(LIBFT) -o $(NAME)
+			@make -C $(MLIB_DIR)
+			@cp $(MLIB_DIR)$(MNAME) $(MNAME)
+			$(CCF) $(OBJS) $(LIB_DIR)$(LIBFT) -L$(MLIB_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 			@echo $(NAME) compilled
 
 %.o:		%.c $(HDR)
