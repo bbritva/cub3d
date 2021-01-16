@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/16 12:35:04 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/16 14:17:38 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,28 +65,53 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void		draw_circle(t_data *data, int x_c, int y_c, int r)
+void		draw_circle(t_data *data, int x_c, int y_c, int r, int color)
 {
 	int cur_x;
 	int cur_y;
 	int k;
 
+	(void) data;
 	cur_x = x_c - r;
 	while (cur_x < x_c + r)
 	{
 		cur_y = y_c - r;
 		while (cur_y < y_c + r)
 		{
-			k = (cur_y - y_c) * (cur_y - y_c) + (cur_x - x_c) * (cur_x - x_c)
-					- (r * r);
-			if (k == 0 && cur_y > 0 && cur_x > 0)
+			k = ((cur_y - y_c) * (cur_y - y_c) + (cur_x - x_c) * (cur_x - x_c))
+					/ (r * r);
+			printf("x = %d, y = %d, r= %d, k = %d\n", (cur_x - x_c), (cur_y -
+			y_c), r, k);
+			if (k < 1 && cur_y > 0 && cur_x > 0)
 			{
-				my_mlx_pixel_put(data, cur_x, cur_y, 0x00FF0000);
-				printf("%d", k);
+				my_mlx_pixel_put(data, cur_x, cur_y, color);
 			}
 			cur_y++;
 		}
 		cur_x++;
+	}
+}
+
+void		draw_circle2(t_data *data, int X1, int Y1, int r, int color)
+{
+	int x = 0;
+	int y = r;
+	int delta = 1 - 2 * r;
+	int error;
+	while (y >= 0)
+	{
+		my_mlx_pixel_put(data, X1 + x, Y1 + y, color);
+		my_mlx_pixel_put(data, X1 + x, Y1 - y, color);
+		my_mlx_pixel_put(data, X1 - x, Y1 + y, color);
+		my_mlx_pixel_put(data, X1 - x, Y1 - y, color);
+		error = 2 * (delta + y) - 1;
+		if ((delta < 0) && (error <= 0))
+			delta += 2 * ++x + 1;
+		else
+		if ((delta > 0) && (error > 0))
+			delta -= 2 * --y + 1;
+		else
+		delta += 2 * (++x - --y);
 	}
 }
 
@@ -100,14 +125,14 @@ int	main(int argc, char *argv[])
 	if (check_main_input(argc) && (params = parser(argv[1])))
 	{
 		printf("params - ok\n");
-		show_parse_res(params);
+//		show_parse_res(params);
 		mlx = mlx_init();
 		mlx_win = mlx_new_window(mlx, params->res_h, params->res_v, "cub3d");
 		img.img = mlx_new_image(mlx, params->res_h, params->res_v);
 		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 									 &img.endian);
 //		my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-		draw_circle(&img, 100, 100, 150);
+		draw_circle2(&img, 300, 300, 250, 0x0000FF00);
 		mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 		mlx_loop(mlx);
 		params_free(params);
