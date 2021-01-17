@@ -11,3 +11,4 @@
 /Parser/*.o
 /libft/
 /libmlx.dylib
+/Render/*.o
