@@ -60,7 +60,7 @@ add_executable(cub3d
         cub3d.h
         main.c
         Parser/parser.c
-        Parser/parser_utils.c Parser/parser.h Parser/param_parser.c Parser/map_parser.c)
+        Parser/parser_utils.c Parser/parser.h Parser/param_parser.c Parser/map_parser.c Render/render.c Render/render.h)
 
 target_link_libraries (cub3d ${CMAKE_CURRENT_SOURCE_DIR}/libmlx.dylib)
 
