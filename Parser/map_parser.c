@@ -6,12 +6,30 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:20:39 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/13 19:54:21 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:28:57 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #include <stdio.h>
+
+char 	**map_convert(char *char_map, int len, int height)
+{
+	char	**map;
+	int 	i;
+	int 	j;
+
+	if ((map = ft_calloc(height + 1, sizeof(char *))))
+	{
+		i = 0;
+		if ((map[i] = ft_calloc(len + 1, sizeof(char *))))
+		{
+			while (*char_map && *char_map != '\n')
+		}
+
+	}
+	return (map);
+}
 
 int 		check_map(t_params *params)
 {
