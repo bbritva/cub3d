@@ -16,6 +16,8 @@
 # include "./Parser/parser.h"
 # include "./Render/render.h"
 # include "./libft/libft.h"
+# include <mlx.h>
+
 
 void 	render(t_params	*params);
 

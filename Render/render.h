@@ -22,6 +22,11 @@ typedef struct  s_data {
 	int         endian;
 }               t_data;
 
+typedef struct  s_vars {
+	void        *mlx;
+	void        *win;
+}               t_vars;
+
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif
