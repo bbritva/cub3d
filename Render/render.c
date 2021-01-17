@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/17 18:33:25 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/17 18:45:14 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,17 @@ int             mouse_hook(int button,int x,int y,t_vars *vars)
 	return (0);
 }
 
+int             mouse_move_hook(int x, int y,t_vars *vars)
+{
+	(void) vars;
+	ft_putstr("Mouse_moved!\n");
+	ft_putnbr_fd(x, 1);
+	ft_putstr("\n");
+	ft_putnbr_fd(y, 1);
+	ft_putstr("\n");
+	return (0);
+}
+
 int     render_next_frame(void *YourStruct)
 {
 	(void) YourStruct;
@@ -118,7 +129,8 @@ void 	render(t_params	*params)
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_mouse_hook(vars.win, mouse_hook, &vars);
-	mlx_loop_hook(vars.mlx, render_next_frame, &vars);
+	mlx_hook(vars.win, 6, 1L<<6, mouse_move_hook, &vars);
+//	mlx_loop_hook(vars.mlx, render_next_frame, &vars);
 	mlx_loop(vars.mlx);
 }
 
