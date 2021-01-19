@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/18 12:17:14 by bbritva          ###   ########.fr       */
+/*   Updated: 2021/01/19 13:42:58 by bbritva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	main(int argc, char *argv[])
 
 void	show_parse_res(t_params * params)
 {
+	int i;
+
 	printf("hrez = %d\n", params->res_h);
 	printf("vrez = %d\n", params->res_v);
 	printf("north = \"%s\"\n", params->north);
@@ -86,5 +88,7 @@ void	show_parse_res(t_params * params)
 	printf("c_color_r = %d\n", params->ceil_color.red);
 	printf("c_color_g = %d\n", params->ceil_color.green);
 	printf("c_color_b = %d\n", params->ceil_color.blue);
-	printf("map:\n%s\n", params->map);
+	i = 0;
+	while (*(params->map + i))
+		printf("%s\n", params->map[i++]);
 }
