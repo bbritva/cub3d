@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:20:39 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/18 12:15:37 by bbritva          ###   ########.fr       */
+/*   Updated: 2021/01/19 15:02:40 by bbritva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,17 @@ int 		check_map(t_params *params)
 t_params	*map_parser(int fd, t_params *params, char **line)
 {
 	int 	i;
+	char	*line_map
 
 	i = 1;
 	while (is_map_line(*line) && i)
 	{
-		params->map = gnl_strjoin(params->map, *line);
-		params->map = gnl_strjoin(params->map, "\n");
+		line_map = gnl_strjoin(line_map, *line);
+		line_map = gnl_strjoin(line_map, "\n");
 		free(*line);
 		i = get_next_line(fd, line);
 	}
+	params->map = map_split(line_map, '\n');
 	if (check_map(params))
 	{
 		printf("map - ok\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:05:44 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/13 18:20:32 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/19 15:03:07 by bbritva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef	struct
 	char 			*sprite;
 	t_color			floor_color;
 	t_color			ceil_color;
-	char 			*map;
+	char 			**map;
 }					t_params;
 
 t_params			*parser(char *f_name);
@@ -53,5 +53,6 @@ t_color				get_color(char *line, t_color color);
 int					is_map_line(char *line);
 t_params			*param_parser(int fd, t_params *params, char **line);
 t_params			*map_parser(int fd, t_params *params, char **line);
+char				**map_split(char const *s, char c);
 
 #endif
