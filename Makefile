@@ -3,7 +3,7 @@ LIBFT		=	libft.a
 CCF			=	@gcc $(CFLAGS)
 MKLIB		=	@ar rc
 RM			=	@rm -f
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g
 SRCS		=	main.c Parser/parser.c Parser/param_parser.c Parser/map_parser.c Parser/map_split.c \
 				GNL/get_next_line.c \
 				GNL/get_next_line_utils.c Parser/parser_utils.c Render/render.c
