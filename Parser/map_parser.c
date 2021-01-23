@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/23 12:01:57 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/23 13:07:40 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ t_player	*get_player(t_params *params)
 	i = 0;
 	while (params->map[i] != 0)
 	{
-		char *s = params->map[i];
-		printf("%s\n", s);
 		j = 0;
 		while (params->map[i][j])
 		{
@@ -117,7 +115,6 @@ t_player	*get_player(t_params *params)
 					(params->map[i][j] == 'S') ? p->angle_h = 270 : p->angle_h;
 					(params->map[i][j] == 'E') ? p->angle_h = 0 : p->angle_h;
 					(params->map[i][j] == 'W') ? p->angle_h = 180 : p->angle_h;
-					return (p);
 				}
 			}
 			j++;
