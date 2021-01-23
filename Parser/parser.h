@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:05:44 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/19 15:03:07 by bbritva          ###   ########.fr       */
+/*   Updated: 2021/01/23 10:17:16 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef	struct
 	char 			*sprite;
 	t_color			floor_color;
 	t_color			ceil_color;
-	t_player		player;
+	t_player		*player;
 	char 			**map;
 }					t_params;
 

@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/17 18:45:41 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/23 13:00:51 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,34 @@ void 		draw_map(t_data *data, char **map)
 			if (map[i/k][j/k] == '2')
 				my_mlx_pixel_put(data, j, i, 0x0000FF00);
 			if (map[i/k][j/k] == 'N')
-				my_mlx_pixel_put(data, j, i, 0x00FFFFFF);
+				my_mlx_pixel_put(data, j, i, 0x00FF0000);
 			j++;
 		}
 		i++;
 	}
 }
+
+void		draw_player(t_data *data, t_player *p)
+{
+	int k;
+	int i;
+	int j;
+
+	k = 20;
+	i = 0;
+	while (i < k)
+	{
+		j = 0;
+		while (j < k)
+		{
+			my_mlx_pixel_put(data, j + p->pos_x * k, i + p->pos_y * k,
+					0x00FFFFFF);
+			j++;
+		}
+		i++;
+	}
+}
+
 
 int             key_hook(int keycode, t_vars *vars)
 {
@@ -124,6 +146,7 @@ void 	render(t_params	*params)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								 &img.endian);
 	draw_map(&img, params->map);
+	draw_player(&img, params->player);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_mouse_hook(vars.win, mouse_hook, &vars);

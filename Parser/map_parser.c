@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/23 10:03:59 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/23 12:01:57 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 //	}
 //	return (map);
 //}
+
+t_player	*get_player(t_params *params);
 
 int 		check_map(t_params *params)
 {
@@ -75,6 +77,7 @@ t_params	*map_parser(int fd, t_params *params, char **line)
 		i = get_next_line(fd, line);
 	}
 	params->map = map_split(line_map, '\n');
+	params->player = get_player(params);
 	if (check_map(params))
 	{
 		printf("map - ok\n");
@@ -82,4 +85,44 @@ t_params	*map_parser(int fd, t_params *params, char **line)
 	}
 	printf("map - error\n");
 	return (params);
+}
+
+t_player	*get_player(t_params *params)
+{
+	int			i;
+	int			j;
+	t_player	*p;
+
+	i = 0;
+	while (params->map[i] != 0)
+	{
+		char *s = params->map[i];
+		printf("%s\n", s);
+		j = 0;
+		while (params->map[i][j])
+		{
+			if (ft_strchr("NSWE",params->map[i][j]))
+			{
+				if (params->player)
+				{
+					free(params->player);
+					return (NULL);
+				}
+				if ((p = (t_player *)malloc(sizeof(t_player))))
+				{
+					p->pos_x = (float )j;
+					p->pos_y = (float )i;
+					p->angle_v = 0;
+					(params->map[i][j] == 'N') ? p->angle_h = 90 : p->angle_h;
+					(params->map[i][j] == 'S') ? p->angle_h = 270 : p->angle_h;
+					(params->map[i][j] == 'E') ? p->angle_h = 0 : p->angle_h;
+					(params->map[i][j] == 'W') ? p->angle_h = 180 : p->angle_h;
+					return (p);
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+	return (p);
 }
