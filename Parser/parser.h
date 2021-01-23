@@ -26,13 +26,20 @@
 # define M_ARGS_MSG "Too many arguments.\n"
 # define NREAD_MSG "Cannot read file.\n"
 
-
 typedef struct
 {
 	int				red;
 	int				green;
 	int				blue;
 }					t_color;
+
+typedef struct
+{
+	float			pos_x;
+	float			pos_y;
+	float			angle_h;
+	float			angle_v;
+}					t_player;
 
 typedef	struct
 {
@@ -45,6 +52,7 @@ typedef	struct
 	char 			*sprite;
 	t_color			floor_color;
 	t_color			ceil_color;
+	t_player		player;
 	char 			**map;
 }					t_params;
 

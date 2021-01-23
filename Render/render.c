@@ -44,14 +44,12 @@ void 	draw_rainbow(t_data *data)
 	}
 }
 
-void 		draw_map(t_data *data, char *in_map)
+void 		draw_map(t_data *data, char **map)
 {
-	char **map;
 	int i;
 	int j;
 	int k = 20;
 
-	map = ft_split(in_map, '\n');
 	i = 0;
 	while (map[i/k])
 	{
