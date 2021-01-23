@@ -6,45 +6,22 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/23 13:00:51 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/23 18:27:54 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
 
-void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void		my_mlx_pixel_put(t_win *win, int x, int y, int color)
 {
 	char    *dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = win->addr + (y * win->line_l + x * (win->bpp / 8));
 	*(unsigned int*)dst = color;
 }
 
-void 	draw_rainbow(t_data *data)
-{
-	int i;
-	int j;
-	int color;
-
-	i = 0;
-	while (i < 255)
-	{
-		j = 0;
-		while (j < 255)
-		{
-			color = 0x00000000;
-			color = color | ((j) << 8);
-			color = color | ((255 - j) << 16);
-			color = color | (255 - i);
-			my_mlx_pixel_put(data, j, i, color);
-			j++;
-		}
-		i++;
-	}
-}
-
-void 		draw_map(t_data *data, char **map)
+void 		draw_map(t_win *win, char **map)
 {
 	int i;
 	int j;
@@ -57,20 +34,20 @@ void 		draw_map(t_data *data, char **map)
 		while (map[i/k][j/k])
 		{
 			if (map[i/k][j/k] == '1')
-				my_mlx_pixel_put(data, j, i, 0x000000FF);
+				my_mlx_pixel_put(win, j, i, 0x000000FF);
 			if (map[i/k][j/k] == '0')
-				my_mlx_pixel_put(data, j, i, 0x00FF0000);
+				my_mlx_pixel_put(win, j, i, 0x00FF0000);
 			if (map[i/k][j/k] == '2')
-				my_mlx_pixel_put(data, j, i, 0x0000FF00);
+				my_mlx_pixel_put(win, j, i, 0x0000FF00);
 			if (map[i/k][j/k] == 'N')
-				my_mlx_pixel_put(data, j, i, 0x00FF0000);
+				my_mlx_pixel_put(win, j, i, 0x00FF0000);
 			j++;
 		}
 		i++;
 	}
 }
 
-void		draw_player(t_data *data, t_player *p)
+void		draw_player(t_win *win, t_player *p)
 {
 	int k;
 	int i;
@@ -83,7 +60,7 @@ void		draw_player(t_data *data, t_player *p)
 		j = 0;
 		while (j < k)
 		{
-			my_mlx_pixel_put(data, j + p->pos_x * k, i + p->pos_y * k,
+			my_mlx_pixel_put(win, j + p->pos_x * k, i + p->pos_y * k,
 					0x00FFFFFF);
 			j++;
 		}
@@ -92,18 +69,20 @@ void		draw_player(t_data *data, t_player *p)
 }
 
 
-int             key_hook(int keycode, t_vars *vars)
+int			key_hook(int keycode, t_vars *vars, t_player *p)
 {
 	(void) vars;
 	ft_putstr("Hello from key_hook!\n");
 	ft_putnbr_fd(keycode, 1);
 	ft_putstr("\n");
+	if (keycode == 126)
+		p->pos_y--;
 	if (keycode == 53)
 		mlx_destroy_window(vars->mlx, vars->win);
 	return (0);
 }
 
-int             mouse_hook(int button,int x,int y,t_vars *vars)
+int			mouse_hook(int button,int x,int y,t_vars *vars)
 {
 	(void) vars;
 	ft_putstr("Hello from mouse_hook!\n");
@@ -116,9 +95,9 @@ int             mouse_hook(int button,int x,int y,t_vars *vars)
 	return (0);
 }
 
-int             mouse_move_hook(int x, int y,t_vars *vars)
+int			mouse_move_hook(int x, int y, t_win *win)
 {
-	(void) vars;
+	(void) win;
 	ft_putstr("Mouse_moved!\n");
 	ft_putnbr_fd(x, 1);
 	ft_putstr("\n");
@@ -127,31 +106,37 @@ int             mouse_move_hook(int x, int y,t_vars *vars)
 	return (0);
 }
 
-int     render_next_frame(void *YourStruct)
+int			render_next_frame(t_win *win, t_params *params)
 {
-	(void) YourStruct;
+	draw_map(win->img, params->map);
+	draw_player(win->img, params->player);
+	mlx_put_image_to_window(win->mlx, win->win, win->img, 0, 0);
 	ft_putstr("Hello from loop_hook!\n");
 	return (0);
 }
 
 
-void 	render(t_params	*params)
+void		render(t_params	*params)
 {
-	t_data		img;
-	t_vars 		vars;
+	t_win		*win;
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, params->res_h, params->res_v, "cub3d");
-	img.img = mlx_new_image(vars.mlx, params->res_h, params->res_v);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								 &img.endian);
-	draw_map(&img, params->map);
-	draw_player(&img, params->player);
-	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-	mlx_key_hook(vars.win, key_hook, &vars);
-	mlx_mouse_hook(vars.win, mouse_hook, &vars);
-	mlx_hook(vars.win, 6, 1L << 6, mouse_move_hook, &vars);
-//	mlx_loop_hook(vars.mlx, render_next_frame, &vars);
-	mlx_loop(vars.mlx);
+	if ((win = (t_win *)malloc(sizeof(t_win))))
+	{
+		win->mlx = mlx_init();
+		win->win = mlx_new_window(win->mlx, params->res_h, params->res_v,
+								  "cub3d");
+		win->img = mlx_new_image(win->mlx, params->res_h, params->res_v);
+		win->addr = mlx_get_data_addr(win->img, &win->bpp,
+									 &win->line_l, &win->en);
+		draw_map(win, params->map);
+		draw_player(win, params->player);
+		mlx_put_image_to_window(win->mlx, win->win, win->img, 0, 0);
+		mlx_key_hook(win->win, key_hook, win);
+		mlx_mouse_hook(win->win, mouse_hook, win);
+		mlx_hook(win->win, 6, 1L << 6, mouse_move_hook, win);
+		mlx_loop_hook(win->mlx, render_next_frame, win);
+		mlx_loop(win->mlx);
+		free(win);
+	}
 }
 

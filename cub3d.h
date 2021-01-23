@@ -18,7 +18,6 @@
 # include "./libft/libft.h"
 # include <mlx.h>
 
-
 void 	render(t_params	*params);
 
 #endif
