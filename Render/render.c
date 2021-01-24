@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/24 18:22:06 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/24 20:00:12 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ int			move_fwd(t_win *win)
 	p = *(win->params->player);
 	i_cur = (int)(p.pos_y / SCALE);
 	j_cur = (int)(p.pos_x / SCALE);
-	i_new = (int)((p.pos_y - sin(p.angle_h))/ SCALE);
+	i_new = (int)((p.pos_y - sin(p.angle_h)) / SCALE);
 	j_new = (int)((p.pos_x + cos(p.angle_h)) / SCALE);
 	if (win->params->map[i_new][j_cur] != '1')
 		win->params->player->pos_y -= sin(p.angle_h);
@@ -213,15 +213,15 @@ int			move_left(t_win *win)
 	t_player p;
 
 	p = *(win->params->player);
-	p.angle_h += M_PI_4;
+	p.angle_h += M_PI_2;
 	i_cur = (int)(p.pos_y / SCALE);
 	j_cur = (int)(p.pos_x / SCALE);
 	i_new = (int)((p.pos_y - sin(p.angle_h))/ SCALE);
 	j_new = (int)((p.pos_x + cos(p.angle_h)) / SCALE);
 	if (win->params->map[i_new][j_cur] != '1')
-		win->params->player->pos_y -= sin(p.angle_h + M_PI_4);
+		win->params->player->pos_y -= sin(p.angle_h);
 	if (win->params->map[i_cur][j_new] != '1')
-		win->params->player->pos_x += cos(p.angle_h + M_PI_4);
+		win->params->player->pos_x += cos(p.angle_h);
 	return (0);
 }
 
@@ -234,15 +234,15 @@ int			move_right(t_win *win)
 	t_player p;
 
 	p = *(win->params->player);
-	p.angle_h -= M_PI_4;
+	p.angle_h -= M_PI_2;
 	i_cur = (int)(p.pos_y / SCALE);
 	j_cur = (int)(p.pos_x / SCALE);
 	i_new = (int)((p.pos_y - sin(p.angle_h))/ SCALE);
 	j_new = (int)((p.pos_x + cos(p.angle_h)) / SCALE);
 	if (win->params->map[i_new][j_cur] != '1')
-		win->params->player->pos_y -= sin(p.angle_h - M_PI_4);
+		win->params->player->pos_y -= sin(p.angle_h);
 	if (win->params->map[i_cur][j_new] != '1')
-		win->params->player->pos_x += cos(p.angle_h - M_PI_4);
+		win->params->player->pos_x += cos(p.angle_h);
 	return (0);
 }
 
