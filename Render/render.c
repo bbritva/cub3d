@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/24 18:02:58 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/24 18:22:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,16 +181,68 @@ int			move_fwd(t_win *win)
 		win->params->player->pos_y -= sin(p.angle_h);
 	if (win->params->map[i_cur][j_new] != '1')
 		win->params->player->pos_x += cos(p.angle_h);
+	return (0);
+}
 
-//	while (win->params->map[i][j] != '1')
-//	{
-//		p.pos_x += cos(p.angle_h);
-//		p.pos_y -= sin(p.angle_h);
-//
-//		my_mlx_pixel_put(win, p.pos_x, p.pos_y, 0x00FFFFFF);
-//		i = (int)(p.pos_y / SCALE);
-//		j = (int)(p.pos_x / SCALE);
-//	}
+int			move_bwd(t_win *win)
+{
+	int i_cur;
+	int j_cur;
+	int i_new;
+	int j_new;
+	t_player p;
+
+	p = *(win->params->player);
+	i_cur = (int)(p.pos_y / SCALE);
+	j_cur = (int)(p.pos_x / SCALE);
+	i_new = (int)((p.pos_y + sin(p.angle_h))/ SCALE);
+	j_new = (int)((p.pos_x - cos(p.angle_h)) / SCALE);
+	if (win->params->map[i_new][j_cur] != '1')
+		win->params->player->pos_y += sin(p.angle_h);
+	if (win->params->map[i_cur][j_new] != '1')
+		win->params->player->pos_x -= cos(p.angle_h);
+	return (0);
+}
+
+int			move_left(t_win *win)
+{
+	int i_cur;
+	int j_cur;
+	int i_new;
+	int j_new;
+	t_player p;
+
+	p = *(win->params->player);
+	p.angle_h += M_PI_4;
+	i_cur = (int)(p.pos_y / SCALE);
+	j_cur = (int)(p.pos_x / SCALE);
+	i_new = (int)((p.pos_y - sin(p.angle_h))/ SCALE);
+	j_new = (int)((p.pos_x + cos(p.angle_h)) / SCALE);
+	if (win->params->map[i_new][j_cur] != '1')
+		win->params->player->pos_y -= sin(p.angle_h + M_PI_4);
+	if (win->params->map[i_cur][j_new] != '1')
+		win->params->player->pos_x += cos(p.angle_h + M_PI_4);
+	return (0);
+}
+
+int			move_right(t_win *win)
+{
+	int i_cur;
+	int j_cur;
+	int i_new;
+	int j_new;
+	t_player p;
+
+	p = *(win->params->player);
+	p.angle_h -= M_PI_4;
+	i_cur = (int)(p.pos_y / SCALE);
+	j_cur = (int)(p.pos_x / SCALE);
+	i_new = (int)((p.pos_y - sin(p.angle_h))/ SCALE);
+	j_new = (int)((p.pos_x + cos(p.angle_h)) / SCALE);
+	if (win->params->map[i_new][j_cur] != '1')
+		win->params->player->pos_y -= sin(p.angle_h - M_PI_4);
+	if (win->params->map[i_cur][j_new] != '1')
+		win->params->player->pos_x += cos(p.angle_h - M_PI_4);
 	return (0);
 }
 
@@ -199,13 +251,12 @@ int			render_next_frame(t_win *win)
 	mlx_destroy_image(win->mlx, win->img);
 	if (win->move_mask & FORWARD)
 		move_fwd(win);
-//		win->params->player->pos_y -= 0.5f;
 	if (win->move_mask & MV_LEFT)
-		win->params->player->pos_x -= 0.5f;
+		move_left(win);
 	if (win->move_mask & BACKWARD)
-		win->params->player->pos_y += 0.5f;
+		move_bwd(win);
 	if (win->move_mask & MV_RIGHT)
-		win->params->player->pos_x += 0.5f;
+		move_right(win);
 	if (win->move_mask & RT_LEFT)
 		win->params->player->angle_h -= 0.03f;
 	if (win->move_mask & RT_RIGHT)
