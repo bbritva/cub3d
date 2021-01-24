@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/24 11:43:57 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/24 17:02:16 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 
 # include <math.h>
 # define SCALE 20
+# define FORWARD 32
+# define BACKWARD 16
+# define MV_LEFT 8
+# define MV_RIGHT 4
+# define RT_LEFT 2
+# define RT_RIGHT 1
+
 typedef struct	s_win //структура для окна
 {
 	void		*mlx;
@@ -25,6 +32,7 @@ typedef struct	s_win //структура для окна
 	int			line_l;
 	int			bpp;
 	int			en;
+	int			move_mask;
 	t_params	*params;
 }				t_win;
 

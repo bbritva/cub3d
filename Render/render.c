@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/24 13:24:37 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/24 17:20:58 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,52 @@ int			key_hook(int keycode, t_win *win)
 	return (0);
 }
 
+int			key_press(int keycode, t_win *win)
+{
+	ft_putstr("Key_press!\n");
+	if (keycode == 126 || keycode == 13)
+		win->move_mask = win->move_mask | FORWARD;
+	if (keycode == 0)
+		win->move_mask = win->move_mask | MV_LEFT;
+	if (keycode == 1 || keycode == 125)
+		win->move_mask = win->move_mask | BACKWARD;
+	if (keycode == 2)
+		win->move_mask = win->move_mask | MV_RIGHT;
+	if (keycode == 124)
+		win->move_mask = win->move_mask | RT_LEFT;
+	if (keycode == 123)
+		win->move_mask = win->move_mask | RT_RIGHT;
+	if (keycode == 53)
+	{
+		mlx_destroy_image(win->mlx, win->img);
+		mlx_destroy_window(win->mlx, win->win);
+	}
+	return (0);
+}
+
+int			key_release(int keycode, t_win *win)
+{
+	ft_putstr("Key_release!\n");
+	if (keycode == 126 || keycode == 13)
+		win->move_mask = win->move_mask - FORWARD;
+	if (keycode == 0)
+		win->move_mask = win->move_mask - MV_LEFT;
+	if (keycode == 1 || keycode == 125)
+		win->move_mask = win->move_mask - BACKWARD;
+	if (keycode == 2)
+		win->move_mask = win->move_mask - MV_RIGHT;
+	if (keycode == 124)
+		win->move_mask = win->move_mask - RT_LEFT;
+	if (keycode == 123)
+		win->move_mask = win->move_mask - RT_RIGHT;
+	if (keycode == 53)
+	{
+		mlx_destroy_image(win->mlx, win->img);
+		mlx_destroy_window(win->mlx, win->win);
+	}
+	return (0);
+}
+
 int			mouse_hook(int button, int x, int y, t_win *win)
 {
 	(void) win;
@@ -139,12 +185,21 @@ int			mouse_move_hook(int x, int y, t_win *win)
 
 int			render_next_frame(t_win *win)
 {
-//	(void) win;
-
 	mlx_destroy_image(win->mlx, win->img);
+	if (win->move_mask & FORWARD)
+		win->params->player->pos_y -= 0.5f;
+	if (win->move_mask & MV_LEFT)
+		win->params->player->pos_x -= 0.5f;
+	if (win->move_mask & BACKWARD)
+		win->params->player->pos_y += 0.5f;
+	if (win->move_mask & MV_RIGHT)
+		win->params->player->pos_x += 0.5f;
+	if (win->move_mask & RT_LEFT)
+		win->params->player->angle_h -= 0.03f;
+	if (win->move_mask & RT_RIGHT)
+		win->params->player->angle_h += 0.03f;
 	create_img(win->params, win);
 	mlx_put_image_to_window(win->mlx, win->win, win->img, 0, 0);
-//	ft_putstr("Hello from loop_hook!\n");
 	return (1);
 }
 
@@ -159,36 +214,15 @@ void		render(t_params	*params)
 								  "cub3d");
 		create_img(params, win);
 		win->params = params;
-		mlx_destroy_image(win->mlx, win->img);
-		create_img(params, win);
+		win->move_mask = 0;
 		mlx_key_hook(win->win, key_hook, win);
 //		mlx_mouse_hook(win->win, mouse_hook, win);
 //		mlx_hook(win->win, 6, 1L << 6, mouse_move_hook, win);
-		mlx_hook(win->win, 2, 0, key_hook, win);
+		mlx_hook(win->win, 2, 1L << 0, key_press, win);
+		mlx_hook(win->win, 3, 1L << 1, key_release, win);
 		mlx_loop_hook(win->mlx, render_next_frame, win);
 		mlx_put_image_to_window(win->mlx, win->win, win->img, 0, 0);
 		mlx_loop(win->mlx);
 	}
 }
-
-//void		render(t_params	*params)
-//{
-//	t_win		win;
-//
-//	win.mlx = mlx_init();
-//		win.win = mlx_new_window(win.mlx, params->res_h, params->res_v,
-//								  "cub3d");
-//		win.img = mlx_new_image(win.mlx, params->res_h, params->res_v);
-//		win.addr = mlx_get_data_addr(win.img, &win.bpp,
-//									 &win.line_l, &win.en);
-//		draw_map(&win, params->map);
-//		draw_player(&win, params);
-//		mlx_key_hook(win.win, key_hook, &win);
-//		mlx_mouse_hook(win.win, mouse_hook, &win);
-//		mlx_hook(win.win, 6, 1L << 6, mouse_move_hook, &win);
-//		mlx_hook(win.win, 2, 0, key_hook, &win);
-//		mlx_loop_hook(win.mlx, render_next_frame, &win);
-//		mlx_put_image_to_window(win.mlx, win.win, win.img, 0, 0);
-//		mlx_loop(win.mlx);
-//}
 
