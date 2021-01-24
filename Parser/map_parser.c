@@ -111,10 +111,12 @@ t_player	*get_player(t_params *params)
 					p->pos_x = (float )j;
 					p->pos_y = (float )i;
 					p->angle_v = 0;
-					(params->map[i][j] == 'N') ? p->angle_h = 90 : p->angle_h;
-					(params->map[i][j] == 'S') ? p->angle_h = 270 : p->angle_h;
+					(params->map[i][j] == 'N') ? p->angle_h = M_PI_4 : p->angle_h;
+					(params->map[i][j] == 'S') ? p->angle_h = 3 * M_PI_4 :
+							p->angle_h;
 					(params->map[i][j] == 'E') ? p->angle_h = 0 : p->angle_h;
-					(params->map[i][j] == 'W') ? p->angle_h = 180 : p->angle_h;
+					(params->map[i][j] == 'W') ? p->angle_h = M_PI_2 :
+							p->angle_h;
 				}
 			}
 			j++;

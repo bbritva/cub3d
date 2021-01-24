@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/24 10:54:55 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/24 12:22:12 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void		draw_player(t_win *win, t_params *params)
 	int k;
 	int i;
 	int j;
+	t_player p;
+	char c;
 
+	p = *(params->player);
 	k = 20;
 	i = 0;
 	while (i < k)
@@ -64,6 +67,17 @@ void		draw_player(t_win *win, t_params *params)
 			j++;
 		}
 		i++;
+	}
+	i = (int)p.pos_y;
+	j = (int)p.pos_x;
+	c = params->map[i][j];
+	while (params->map[i][j] != '1')
+	{
+		p.pos_x += cos(p.angle_h);
+		p.pos_y += sin(p.angle_h);
+		my_mlx_pixel_put(win, p.pos_x * k, p.pos_y * k, 0x00FFFFFF);
+		i = (int)p.pos_y;
+		j = (int)p.pos_x;
 	}
 }
 
@@ -79,20 +93,19 @@ int		create_img(t_params *params, t_win *win)
 
 int			key_hook(int keycode, t_win *win)
 {
-//	(void) win;
 	ft_putstr("Hello from key_hook!\n");
 	ft_putnbr_fd(keycode, 1);
 	ft_putstr("\n");
-	if (keycode == 126)
-	{
-		win->params->player->pos_y -= 1;
-		ft_putnbr_fd((int)win->params->player->pos_y, 1);
-		ft_putstr("\n");
-	}
+	if (keycode == 126 || keycode == 13)
+		win->params->player->pos_y -= 0.1f;
+	if (keycode == 0)
+		win->params->player->pos_x -= 0.1f;
+	if (keycode == 1 || keycode == 125)
+		win->params->player->pos_y += 0.1f;
+	if (keycode == 2)
+		win->params->player->pos_x += 0.1f;
 	if (keycode == 53)
 		mlx_destroy_window(win->mlx, win->win);
-//	draw_player(win, params);
-//	mlx_put_image_to_window(win->mlx, win->win, win->img, 0, 0);
 	return (0);
 }
 
@@ -145,8 +158,8 @@ void		render(t_params	*params)
 		mlx_destroy_image(win->mlx, win->img);
 		create_img(params, win);
 		mlx_key_hook(win->win, key_hook, win);
-		mlx_mouse_hook(win->win, mouse_hook, win);
-		mlx_hook(win->win, 6, 1L << 6, mouse_move_hook, win);
+//		mlx_mouse_hook(win->win, mouse_hook, win);
+//		mlx_hook(win->win, 6, 1L << 6, mouse_move_hook, win);
 		mlx_hook(win->win, 2, 0, key_hook, win);
 		mlx_loop_hook(win->mlx, render_next_frame, win);
 		mlx_put_image_to_window(win->mlx, win->win, win->img, 0, 0);

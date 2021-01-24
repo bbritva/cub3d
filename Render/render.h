@@ -6,13 +6,15 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/23 18:27:54 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/24 10:48:36 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #ifndef RENDER_H
 # define RENDER_H
+
+# include <math.h>
 
 typedef struct	s_win //структура для окна
 {
