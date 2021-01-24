@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/24 18:01:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/24 18:02:58 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,17 +166,21 @@ int			mouse_move_hook(int x, int y, t_win *win)
 
 int			move_fwd(t_win *win)
 {
-	int i;
-	int j;
+	int i_cur;
+	int j_cur;
+	int i_new;
+	int j_new;
 	t_player p;
 
 	p = *(win->params->player);
-	i = (int)(p.pos_y / SCALE);
-	j = (int)(p.pos_x / SCALE);
-//	if (win->params->map[(int)(p.pos_y - sin(p.angle_h))][j] != '1')
-	win->params->player->pos_y -= sin(p.angle_h);
-//	if (win->params->map[i][(int)(p.pos_x + cos(p.angle_h))] != '1')
-	win->params->player->pos_x += cos(p.angle_h);
+	i_cur = (int)(p.pos_y / SCALE);
+	j_cur = (int)(p.pos_x / SCALE);
+	i_new = (int)((p.pos_y - sin(p.angle_h))/ SCALE);
+	j_new = (int)((p.pos_x + cos(p.angle_h)) / SCALE);
+	if (win->params->map[i_new][j_cur] != '1')
+		win->params->player->pos_y -= sin(p.angle_h);
+	if (win->params->map[i_cur][j_new] != '1')
+		win->params->player->pos_x += cos(p.angle_h);
 
 //	while (win->params->map[i][j] != '1')
 //	{
