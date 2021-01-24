@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/24 17:20:58 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/24 18:01:44 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,6 @@ void		draw_player(t_win *win, t_params *params)
 	t_player p;
 
 	p = *(params->player);
-	i = 0;
-//	while (i < SCALE)
-//	{
-//		j = 0;
-//		while (j < SCALE)
-//		{
-//			my_mlx_pixel_put(win, j + params->player->pos_x, i + params->player->pos_y,
-//					0x00FFFFFF);
-//			j++;
-//		}
-//		i++;
-//	}
 	i = (int)(p.pos_y / SCALE);
 	j = (int)(p.pos_x / SCALE);
 	while (params->map[i][j] != '1')
@@ -115,7 +103,6 @@ int			key_hook(int keycode, t_win *win)
 
 int			key_press(int keycode, t_win *win)
 {
-	ft_putstr("Key_press!\n");
 	if (keycode == 126 || keycode == 13)
 		win->move_mask = win->move_mask | FORWARD;
 	if (keycode == 0)
@@ -138,7 +125,6 @@ int			key_press(int keycode, t_win *win)
 
 int			key_release(int keycode, t_win *win)
 {
-	ft_putstr("Key_release!\n");
 	if (keycode == 126 || keycode == 13)
 		win->move_mask = win->move_mask - FORWARD;
 	if (keycode == 0)
@@ -151,11 +137,6 @@ int			key_release(int keycode, t_win *win)
 		win->move_mask = win->move_mask - RT_LEFT;
 	if (keycode == 123)
 		win->move_mask = win->move_mask - RT_RIGHT;
-	if (keycode == 53)
-	{
-		mlx_destroy_image(win->mlx, win->img);
-		mlx_destroy_window(win->mlx, win->win);
-	}
 	return (0);
 }
 
@@ -183,11 +164,38 @@ int			mouse_move_hook(int x, int y, t_win *win)
 	return (0);
 }
 
+int			move_fwd(t_win *win)
+{
+	int i;
+	int j;
+	t_player p;
+
+	p = *(win->params->player);
+	i = (int)(p.pos_y / SCALE);
+	j = (int)(p.pos_x / SCALE);
+//	if (win->params->map[(int)(p.pos_y - sin(p.angle_h))][j] != '1')
+	win->params->player->pos_y -= sin(p.angle_h);
+//	if (win->params->map[i][(int)(p.pos_x + cos(p.angle_h))] != '1')
+	win->params->player->pos_x += cos(p.angle_h);
+
+//	while (win->params->map[i][j] != '1')
+//	{
+//		p.pos_x += cos(p.angle_h);
+//		p.pos_y -= sin(p.angle_h);
+//
+//		my_mlx_pixel_put(win, p.pos_x, p.pos_y, 0x00FFFFFF);
+//		i = (int)(p.pos_y / SCALE);
+//		j = (int)(p.pos_x / SCALE);
+//	}
+	return (0);
+}
+
 int			render_next_frame(t_win *win)
 {
 	mlx_destroy_image(win->mlx, win->img);
 	if (win->move_mask & FORWARD)
-		win->params->player->pos_y -= 0.5f;
+		move_fwd(win);
+//		win->params->player->pos_y -= 0.5f;
 	if (win->move_mask & MV_LEFT)
 		win->params->player->pos_x -= 0.5f;
 	if (win->move_mask & BACKWARD)
