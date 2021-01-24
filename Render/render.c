@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/24 12:22:12 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/24 13:24:37 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void 		draw_map(t_win *win, char **map)
 				my_mlx_pixel_put(win, j, i, 0x00FF0000);
 			if (map[i/k][j/k] == '2')
 				my_mlx_pixel_put(win, j, i, 0x0000FF00);
-			if (map[i/k][j/k] == 'N')
+			if (ft_strchr("NSEW", map[i/k][j/k]))
 				my_mlx_pixel_put(win, j, i, 0x00FF0000);
 			j++;
 		}
@@ -48,36 +48,33 @@ void 		draw_map(t_win *win, char **map)
 
 void		draw_player(t_win *win, t_params *params)
 {
-	int k;
 	int i;
 	int j;
 	t_player p;
-	char c;
 
 	p = *(params->player);
-	k = 20;
 	i = 0;
-	while (i < k)
-	{
-		j = 0;
-		while (j < k)
-		{
-			my_mlx_pixel_put(win, j + params->player->pos_x * k, i + params->player->pos_y * k,
-					0x00FFFFFF);
-			j++;
-		}
-		i++;
-	}
-	i = (int)p.pos_y;
-	j = (int)p.pos_x;
-	c = params->map[i][j];
+//	while (i < SCALE)
+//	{
+//		j = 0;
+//		while (j < SCALE)
+//		{
+//			my_mlx_pixel_put(win, j + params->player->pos_x, i + params->player->pos_y,
+//					0x00FFFFFF);
+//			j++;
+//		}
+//		i++;
+//	}
+	i = (int)(p.pos_y / SCALE);
+	j = (int)(p.pos_x / SCALE);
 	while (params->map[i][j] != '1')
 	{
 		p.pos_x += cos(p.angle_h);
-		p.pos_y += sin(p.angle_h);
-		my_mlx_pixel_put(win, p.pos_x * k, p.pos_y * k, 0x00FFFFFF);
-		i = (int)p.pos_y;
-		j = (int)p.pos_x;
+		p.pos_y -= sin(p.angle_h);
+
+		my_mlx_pixel_put(win, p.pos_x, p.pos_y, 0x00FFFFFF);
+		i = (int)(p.pos_y / SCALE);
+		j = (int)(p.pos_x / SCALE);
 	}
 }
 
@@ -97,15 +94,22 @@ int			key_hook(int keycode, t_win *win)
 	ft_putnbr_fd(keycode, 1);
 	ft_putstr("\n");
 	if (keycode == 126 || keycode == 13)
-		win->params->player->pos_y -= 0.1f;
+		win->params->player->pos_y -= 0.5f;
 	if (keycode == 0)
-		win->params->player->pos_x -= 0.1f;
+		win->params->player->pos_x -= 0.5f;
 	if (keycode == 1 || keycode == 125)
-		win->params->player->pos_y += 0.1f;
+		win->params->player->pos_y += 0.5f;
 	if (keycode == 2)
-		win->params->player->pos_x += 0.1f;
+		win->params->player->pos_x += 0.5f;
+	if (keycode == 124)
+		win->params->player->angle_h -= 0.03f;
+	if (keycode == 123)
+		win->params->player->angle_h += 0.03f;
 	if (keycode == 53)
+	{
+		mlx_destroy_image(win->mlx, win->img);
 		mlx_destroy_window(win->mlx, win->win);
+	}
 	return (0);
 }
 

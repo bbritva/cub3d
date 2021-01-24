@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/23 13:07:40 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/24 12:48:39 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,15 @@ t_player	*get_player(t_params *params)
 				}
 				if ((p = (t_player *)malloc(sizeof(t_player))))
 				{
-					p->pos_x = (float )j;
-					p->pos_y = (float )i;
+					p->pos_x = (float)j * SCALE;
+					p->pos_y = (float)i * SCALE;
 					p->angle_v = 0;
-					(params->map[i][j] == 'N') ? p->angle_h = M_PI_4 : p->angle_h;
-					(params->map[i][j] == 'S') ? p->angle_h = 3 * M_PI_4 :
+					(params->map[i][j] == 'N') ? p->angle_h = M_PI_2 :
+							p->angle_h;
+					(params->map[i][j] == 'S') ? p->angle_h = 3 * M_PI_2 :
 							p->angle_h;
 					(params->map[i][j] == 'E') ? p->angle_h = 0 : p->angle_h;
-					(params->map[i][j] == 'W') ? p->angle_h = M_PI_2 :
+					(params->map[i][j] == 'W') ? p->angle_h = M_PI :
 							p->angle_h;
 				}
 			}
