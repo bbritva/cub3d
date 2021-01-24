@@ -6,12 +6,11 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/23 20:42:52 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/24 10:54:55 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
 
 void		my_mlx_pixel_put(t_win *win, int x, int y, int color)
 {
@@ -68,16 +67,27 @@ void		draw_player(t_win *win, t_params *params)
 	}
 }
 
-int			key_hook(int keycode, t_win *win, t_params *params)
+int		create_img(t_params *params, t_win *win)
+{
+	win->img = mlx_new_image(win->mlx, params->res_h, params->res_v);
+	win->addr = mlx_get_data_addr(win->img, &win->bpp,
+								  &win->line_l, &win->en);
+	draw_map(win, params->map);
+	draw_player(win, params);
+	return (0);
+}
+
+int			key_hook(int keycode, t_win *win)
 {
 //	(void) win;
-	(void) params;
 	ft_putstr("Hello from key_hook!\n");
 	ft_putnbr_fd(keycode, 1);
 	ft_putstr("\n");
 	if (keycode == 126)
 	{
-//		params->player->pos_y -= 1;
+		win->params->player->pos_y -= 1;
+		ft_putnbr_fd((int)win->params->player->pos_y, 1);
+		ft_putstr("\n");
 	}
 	if (keycode == 53)
 		mlx_destroy_window(win->mlx, win->win);
@@ -86,7 +96,7 @@ int			key_hook(int keycode, t_win *win, t_params *params)
 	return (0);
 }
 
-int			mouse_hook(int button,int x,int y,t_win *win)
+int			mouse_hook(int button, int x, int y, t_win *win)
 {
 	(void) win;
 	ft_putstr("Hello from mouse_hook!\n");
@@ -110,15 +120,15 @@ int			mouse_move_hook(int x, int y, t_win *win)
 	return (0);
 }
 
-int			render_next_frame(t_win *win, t_params *params)
+int			render_next_frame(t_win *win)
 {
-	(void) params;
-	(void) win;
-//	draw_map(win, params->map);
-//	draw_player(win, params);
+//	(void) win;
+
+	mlx_destroy_image(win->mlx, win->img);
+	create_img(win->params, win);
 	mlx_put_image_to_window(win->mlx, win->win, win->img, 0, 0);
-	ft_putstr("Hello from loop_hook!\n");
-	return (0);
+//	ft_putstr("Hello from loop_hook!\n");
+	return (1);
 }
 
 void		render(t_params	*params)
@@ -130,11 +140,10 @@ void		render(t_params	*params)
 		win->mlx = mlx_init();
 		win->win = mlx_new_window(win->mlx, params->res_h, params->res_v,
 								  "cub3d");
-		win->img = mlx_new_image(win->mlx, params->res_h, params->res_v);
-		win->addr = mlx_get_data_addr(win->img, &win->bpp,
-									 &win->line_l, &win->en);
-		draw_map(win, params->map);
-		draw_player(win, params);
+		create_img(params, win);
+		win->params = params;
+		mlx_destroy_image(win->mlx, win->img);
+		create_img(params, win);
 		mlx_key_hook(win->win, key_hook, win);
 		mlx_mouse_hook(win->win, mouse_hook, win);
 		mlx_hook(win->win, 6, 1L << 6, mouse_move_hook, win);

@@ -23,6 +23,7 @@ typedef struct	s_win //структура для окна
 	int			line_l;
 	int			bpp;
 	int			en;
+	t_params	*params;
 }				t_win;
 
 void		my_mlx_pixel_put(t_win *win, int x, int y, int color);
