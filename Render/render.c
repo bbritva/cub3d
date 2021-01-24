@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/24 20:00:12 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/24 20:22:21 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,23 @@ void 		draw_map(t_win *win, char **map)
 
 void		draw_player(t_win *win, t_params *params)
 {
-	int i;
-	int j;
 	t_player p;
+	float end_angle;
+	float angle;
 
-	p = *(params->player);
-	i = (int)(p.pos_y / SCALE);
-	j = (int)(p.pos_x / SCALE);
-	while (params->map[i][j] != '1')
+	angle = params->player->angle_h - M_PI_4;
+	end_angle = params->player->angle_h + M_PI_4;
+	while (angle < end_angle)
 	{
-		p.pos_x += cos(p.angle_h);
-		p.pos_y -= sin(p.angle_h);
-
-		my_mlx_pixel_put(win, p.pos_x, p.pos_y, 0x00FFFFFF);
-		i = (int)(p.pos_y / SCALE);
-		j = (int)(p.pos_x / SCALE);
+		p.pos_x = params->player->pos_x;
+		p.pos_y = params->player->pos_y;
+		while (params->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)] != '1')
+		{
+			p.pos_x += cos(angle);
+			p.pos_y -= sin(angle);
+			my_mlx_pixel_put(win, p.pos_x, p.pos_y, 0x00FFFFFF);
+		}
+		angle += M_PI_2 / 640;
 	}
 }
 
