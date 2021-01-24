@@ -13,3 +13,5 @@
 /libmlx.dylib
 /Render/*.o
 parser
+.idea
+.idea/*
