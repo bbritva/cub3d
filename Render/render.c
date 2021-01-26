@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/26 20:03:23 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/26 20:04:52 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void 		draw_line(t_win *win, int x_pos, int h)
 		h = win->params->res_v;
 	i = (win->params->res_v - h) / 2;
 	while (i < (win->params->res_v + h) / 2)
-		my_pixel_put(win, x_pos, i++, 0x00FF0000);
+		my_pixel_put(win, x_pos, i++, 0x00007864);
 }
 
 void 		draw_map(t_win *win, char **map)
