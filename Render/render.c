@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/26 15:26:21 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/26 19:55:54 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@ void 		draw_fc(t_win *win)
 			my_pixel_put(win, j++, i, ctoi(win->params->floor_color));
 		i++;
 	}
+}
+
+void 		draw_line(t_win *win, int x_pos, int h)
+{
+	int i;
+
+	if (h > win->params->res_v)
+		h = win->params->res_v;
+	i = (win->params->res_v - h) / 2;
+	while (i < (win->params->res_v + h) / 2)
+		my_pixel_put(win, x_pos, i++, 0x00FF0000);
 }
 
 void 		draw_map(t_win *win, char **map)
@@ -95,6 +106,38 @@ void		draw_player(t_win *win, t_params *params)
 	}
 }
 
+int		get_height(t_win *win, float angle)
+{
+	t_player	p;
+	int			h;
+
+	p = *(win->params->player);
+	while (win->params->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)] != '1')
+	{
+		p.pos_x += cos(angle);
+		p.pos_y -= sin(angle);
+	}
+	p.pos_x -= win->params->player->pos_x;
+	p.pos_y -= win->params->player->pos_y;
+	h = (int) (5000 / sqrt((p.pos_x * p.pos_x) + (p.pos_y * p.pos_y)));
+	return (h);
+}
+
+void 		draw_view(t_win *win)
+{
+	int i;
+	float angle;
+
+	i = 0;
+	while (i < win->params->res_h)
+	{
+		angle = win->params->player->angle_h - M_PI_4 + i * (M_PI_2 /
+															 win->params->res_h);
+		draw_line(win, i++, get_height(win, angle));
+	}
+
+}
+
 int		create_img(t_params *params, t_win *win)
 {
 	win->img = mlx_new_image(win->mlx, params->res_h, params->res_v);
@@ -103,6 +146,7 @@ int		create_img(t_params *params, t_win *win)
 	draw_fc(win);
 	draw_map(win, params->map);
 	draw_player(win, params);
+	draw_view(win);
 	return (0);
 }
 
