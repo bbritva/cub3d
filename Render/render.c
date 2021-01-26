@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/26 19:55:54 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/26 20:03:23 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int		get_height(t_win *win, float angle)
 {
 	t_player	p;
 	int			h;
+	float 		k;
 
 	p = *(win->params->player);
 	while (win->params->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)] != '1')
@@ -119,7 +120,8 @@ int		get_height(t_win *win, float angle)
 	}
 	p.pos_x -= win->params->player->pos_x;
 	p.pos_y -= win->params->player->pos_y;
-	h = (int) (5000 / sqrt((p.pos_x * p.pos_x) + (p.pos_y * p.pos_y)));
+	k = cos(angle - win->params->player->angle_h);
+	h = (int) (5000 / (sqrt((p.pos_x * p.pos_x) + (p.pos_y * p.pos_y)) * k));
 	return (h);
 }
 
@@ -131,7 +133,7 @@ void 		draw_view(t_win *win)
 	i = 0;
 	while (i < win->params->res_h)
 	{
-		angle = win->params->player->angle_h - M_PI_4 + i * (M_PI_2 /
+		angle = win->params->player->angle_h + M_PI_4 - i * (M_PI_2 /
 															 win->params->res_h);
 		draw_line(win, i++, get_height(win, angle));
 	}
