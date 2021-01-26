@@ -6,18 +6,45 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/24 20:22:21 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/26 15:26:21 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void		my_mlx_pixel_put(t_win *win, int x, int y, int color)
+void		my_pixel_put(t_win *win, int x, int y, int color)
 {
 	char    *dst;
 
 	dst = win->addr + (y * win->line_l + x * (win->bpp / 8));
 	*(unsigned int*)dst = color;
+}
+
+int 		ctoi(t_color color)
+{
+	return(color.red << 16 | color.green << 8 | color.blue);
+}
+
+void 		draw_fc(t_win *win)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < win->params->res_v / 2)
+	{
+		j = 0;
+		while (j < win->params->res_h)
+			my_pixel_put(win, j++, i, ctoi(win->params->ceil_color));
+		i++;
+	}
+	while (i < win->params->res_v)
+	{
+		j = 0;
+		while (j < win->params->res_h)
+			my_pixel_put(win, j++, i, ctoi(win->params->floor_color));
+		i++;
+	}
 }
 
 void 		draw_map(t_win *win, char **map)
@@ -33,13 +60,13 @@ void 		draw_map(t_win *win, char **map)
 		while (map[i/k][j/k])
 		{
 			if (map[i/k][j/k] == '1')
-				my_mlx_pixel_put(win, j, i, 0x000000FF);
+				my_pixel_put(win, j, i, 0x000000FF);
 			if (map[i/k][j/k] == '0')
-				my_mlx_pixel_put(win, j, i, 0x00FF0000);
+				my_pixel_put(win, j, i, 0x00FF0000);
 			if (map[i/k][j/k] == '2')
-				my_mlx_pixel_put(win, j, i, 0x0000FF00);
+				my_pixel_put(win, j, i, 0x0000FF00);
 			if (ft_strchr("NSEW", map[i/k][j/k]))
-				my_mlx_pixel_put(win, j, i, 0x00FF0000);
+				my_pixel_put(win, j, i, 0x00FF0000);
 			j++;
 		}
 		i++;
@@ -62,7 +89,7 @@ void		draw_player(t_win *win, t_params *params)
 		{
 			p.pos_x += cos(angle);
 			p.pos_y -= sin(angle);
-			my_mlx_pixel_put(win, p.pos_x, p.pos_y, 0x00FFFFFF);
+			my_pixel_put(win, p.pos_x, p.pos_y, 0x00FFFFFF);
 		}
 		angle += M_PI_2 / 640;
 	}
@@ -73,6 +100,7 @@ int		create_img(t_params *params, t_win *win)
 	win->img = mlx_new_image(win->mlx, params->res_h, params->res_v);
 	win->addr = mlx_get_data_addr(win->img, &win->bpp,
 								  &win->line_l, &win->en);
+	draw_fc(win);
 	draw_map(win, params->map);
 	draw_player(win, params);
 	return (0);
@@ -277,8 +305,8 @@ void		render(t_params	*params)
 		win->mlx = mlx_init();
 		win->win = mlx_new_window(win->mlx, params->res_h, params->res_v,
 								  "cub3d");
-		create_img(params, win);
 		win->params = params;
+		create_img(params, win);
 		win->move_mask = 0;
 		mlx_key_hook(win->win, key_hook, win);
 //		mlx_mouse_hook(win->win, mouse_hook, win);
