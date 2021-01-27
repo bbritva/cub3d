@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/27 18:18:42 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/27 19:18:34 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,28 @@ int		get_height2(t_win *win, float angle)
 	t_player	p;
 	int			h;
 	float 		k;
-	float 		dirX;
-	float 		dirY;
-	float 		stepX;
-	float 		stepY;
-	float 		ray_dirX;
-	float 		ray_dirY;
-	float 		camX;
-	float 		camY;
+	float 		len;
+	float 		dir_X;
+	float 		dir_Y;
+	float 		step_X;
+	float 		step_Y;
+	int 		map_X;
+	int 		map_Y;
+	float 		ray_X;
+	float 		ray_Y;
+	float 		plane_X;
+	float 		plane_Y;
 
-	dirX = cosf(win->params->player->angle_h);
-	dirY = - sinf(win->params->player->angle_h);
-	ray_dirX = cosf(angle);
-	ray_dirY = - sinf(angle);
-	camX = dirY / 3;
-	camY = dirX / 3;
+	dir_X = cosf(win->params->player->angle_h);
+	dir_Y = -sinf(win->params->player->angle_h);
+	ray_X = cosf(angle);
+	ray_Y = -sinf(angle);
+	plane_X = 2 * dir_Y / 3;
+	plane_Y = 2 * dir_X / 3;
 	p = *(win->params->player);
+	len = 0;
+	map_X = (int)p.pos_x;
+	map_Y = (int)p.pos_y;
 
-	while (win->params->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)] != '1')
-	{
-		p.pos_x += 0.05f * cosf(angle);
-		p.pos_y -= 0.05f * sinf(angle);
-	}
-	p.pos_x -= win->params->player->pos_x;
-	p.pos_y -= win->params->player->pos_y;
-	k = cosf(angle - win->params->player->angle_h);
-	h = (int) (5000 / (sqrtf((p.pos_x * p.pos_x) + (p.pos_y * p.pos_y)) * k));
 	return (h);
 }

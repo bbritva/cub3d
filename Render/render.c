@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/27 14:28:09 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/27 20:02:43 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,11 @@ int		get_height(t_win *win, float angle)
 	int			h;
 	float 		k;
 
+
 	p = *(win->params->player);
-	while (win->params->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)] != '1')
+	while (win->params->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)]
+	!= '1' && win->params->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x /
+	SCALE)])
 	{
 		p.pos_x += 0.05f * cosf(angle);
 		p.pos_y -= 0.05f * sinf(angle);
@@ -148,31 +151,6 @@ int		create_img(t_params *params, t_win *win)
 	draw_map(win, params->map);
 	draw_player(win, params);
 	draw_view(win);
-	return (0);
-}
-
-int			key_hook(int keycode, t_win *win)
-{
-	ft_putstr("Hello from key_hook!\n");
-	ft_putnbr_fd(keycode, 1);
-	ft_putstr("\n");
-	if (keycode == 126 || keycode == 13)
-		win->params->player->pos_y -= 0.5f;
-	if (keycode == 0)
-		win->params->player->pos_x -= 0.5f;
-	if (keycode == 1 || keycode == 125)
-		win->params->player->pos_y += 0.5f;
-	if (keycode == 2)
-		win->params->player->pos_x += 0.5f;
-	if (keycode == 124)
-		win->params->player->angle_h -= 0.03f;
-	if (keycode == 123)
-		win->params->player->angle_h += 0.03f;
-	if (keycode == 53)
-	{
-		mlx_destroy_image(win->mlx, win->img);
-		mlx_destroy_window(win->mlx, win->win);
-	}
 	return (0);
 }
 
