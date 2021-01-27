@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/24 17:02:16 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/01/27 11:24:31 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include <math.h>
 # define SCALE 20
+# define SPEED 1
 # define FORWARD 32
 # define BACKWARD 16
 # define MV_LEFT 8
