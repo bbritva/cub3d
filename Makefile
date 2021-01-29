@@ -35,7 +35,7 @@ $(NAME):	$(OBJS)
 			@make bonus -C $(LIB_DIR)
 			@make -C $(MLIB_DIR)
 			@cp $(MLIB_DIR)$(MNAME) $(MNAME)
-			$(CCF) $(OBJS) $(LIB_DIR)$(LIBFT) -L$(MLIB_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+			$(CCF) $(OBJS) -L$(LIB_DIR) -lft -L$(MLIB_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 			@echo $(NAME) compilled
 
 parser:		$(P_OBJS)
