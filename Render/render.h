@@ -38,5 +38,7 @@ typedef struct	s_win //структура для окна
 }					t_win;
 
 void		my_pixel_put(t_win *win, int x, int y, unsigned int	color);
+int			get_height2(t_win *win, double angle);
+
 
 #endif

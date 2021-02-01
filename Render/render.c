@@ -137,7 +137,7 @@ void 		draw_view(t_win *win)
 	{
 		angle = win->prms->plr->ang_h + M_PI_4 - i * (M_PI_2 /
 													  win->prms->res_h);
-		draw_line(win, i++, get_height(win, angle));
+		draw_line(win, i++, get_height2(win, angle));
 	}
 
 }

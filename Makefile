@@ -6,7 +6,7 @@ RM			=	@rm -f
 CFLAGS		=	-Wall -Wextra -Werror -g
 SRCS		=	main.c Parser/parser.c Parser/param_parser.c Parser/map_parser.c Parser/map_split.c \
 				GNL/get_next_line.c \
-				GNL/get_next_line_utils.c Parser/parser_utils.c Render/render.c
+				GNL/get_next_line_utils.c Parser/parser_utils.c Render/render.c Render/raycast.c
 P_SRCS		=	Parser/main_parser.c Parser/parser.c Parser/param_parser.c Parser/map_parser.c GNL/get_next_line.c \
 				GNL/get_next_line_utils.c Parser/parser_utils.c Parser/map_split.c 
 OBJS		=	$(SRCS:.c=.o)
