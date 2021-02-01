@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/27 20:02:43 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/01 11:25:44 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,6 +314,10 @@ int			render_next_frame(t_win *win)
 		win->params->player->angle_h -= 0.03f;
 	if (win->move_mask & RT_RIGHT)
 		win->params->player->angle_h += 0.03f;
+	win->params->player->angle_h -= (win->params->player->angle_h > M_PI * 2)
+			? M_PI * 2 : 0;
+	win->params->player->angle_h += (win->params->player->angle_h < 0) ? M_PI
+			* 2 : 0;
 	create_img(win->params, win);
 	mlx_put_image_to_window(win->mlx, win->win, win->img, 0, 0);
 	return (1);
