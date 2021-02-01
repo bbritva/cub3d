@@ -15,7 +15,7 @@ LIB_DIR		=	./libft/
 MLIB_DIR	=	./minilibx_mms/
 MNAME		=	libmlx.dylib
 
-HDR			=	cub3d.h
+HDR			=	cub3d.h Parser/parser.h Render/render.h
 
 all:		$(NAME)
 
@@ -31,7 +31,7 @@ fclean:		clean
 
 re:			fclean all
 
-$(NAME):	$(OBJS)
+$(NAME):	$(OBJS) $(HDR)
 			@make bonus -C $(LIB_DIR)
 			@make -C $(MLIB_DIR)
 			@cp $(MLIB_DIR)$(MNAME) $(MNAME)

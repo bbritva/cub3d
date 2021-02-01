@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/01 17:15:40 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/01 18:35:15 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,18 @@ void 		draw_map(t_win *win, char **map)
 	int j;
 
 	i = 0;
-	while (map[i/SCALE])
+	while (map[i/SCALE2])
 	{
 		j = 0;
-		while (map[i/SCALE][j/SCALE])
+		while (map[i/SCALE2][j/SCALE2])
 		{
-			if (map[i/SCALE][j/SCALE] == '1')
+			if (map[i/SCALE2][j/SCALE2] == '1')
 				my_pixel_put(win, j, i, 0x000000FF);
-			if (map[i/SCALE][j/SCALE] == '0')
+			if (map[i/SCALE2][j/SCALE2] == '0')
 				my_pixel_put(win, j, i, 0x00FF0000);
-			if (map[i/SCALE][j/SCALE] == '2')
+			if (map[i/SCALE2][j/SCALE2] == '2')
 				my_pixel_put(win, j, i, 0x0000FF00);
-			if (ft_strchr("NSEW", map[i/SCALE][j/SCALE]))
+			if (ft_strchr("NSEW", map[i/SCALE2][j/SCALE2]))
 				my_pixel_put(win, j, i, 0x00FF0000);
 			j++;
 		}
@@ -95,7 +95,8 @@ void		draw_player(t_win *win, t_params *params)
 	{
 		p.pos_x = params->plr->pos_x;
 		p.pos_y = params->plr->pos_y;
-		while (params->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)] != '1')
+		while (params->map[(int) (p.pos_y / SCALE2)][(int) (p.pos_x / SCALE2)]
+		&& params->map[(int) (p.pos_y / SCALE2)][(int) (p.pos_x / SCALE2)] != '1')
 		{
 			p.pos_x += cos(angle);
 			p.pos_y -= sin(angle);
@@ -123,7 +124,7 @@ int		get_height(t_win *win, double angle)
 	p.pos_x -= win->prms->plr->pos_x;
 	p.pos_y -= win->prms->plr->pos_y;
 	k = cos(angle - win->prms->plr->ang_h);
-	h = (int) (5000 / (sqrt((p.pos_x * p.pos_x) + (p.pos_y * p.pos_y)) * k));
+	h = (int) (100 / (sqrt((p.pos_x * p.pos_x) + (p.pos_y * p.pos_y)) * k));
 	return (h);
 }
 
@@ -137,7 +138,8 @@ void 		draw_view(t_win *win)
 	{
 		angle = win->prms->plr->ang_h + M_PI_4 - i * (M_PI_2 /
 													  win->prms->res_h);
-		draw_line(win, i++, get_height2(win, angle));
+		draw_line(win, i, get_height(win, angle));
+		i += 10;
 	}
 
 }
@@ -149,7 +151,7 @@ int		create_img(t_params *params, t_win *win)
 								  &win->line_l, &win->en);
 	draw_fc(win);
 	draw_map(win, params->map);
-	draw_player(win, params);
+//	draw_player(win, params);
 	draw_view(win);
 	return (0);
 }
