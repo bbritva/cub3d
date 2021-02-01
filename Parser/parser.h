@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:05:44 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/01 11:36:47 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/01 11:38:54 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@
 
 typedef struct
 {
-	int				red;
-	int				green;
-	int				blue;
+	unsigned int	red;
+	unsigned int	green;
+	unsigned int	blue;
 }					t_color;
 
 typedef struct
