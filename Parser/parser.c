@@ -31,7 +31,7 @@ t_params	*params_init()
 		params->east = NULL;
 		params->sprite = NULL;
 		params->map = NULL;
-		params->player = NULL;
+		params->plr = NULL;
 		params->floor_color.red = -1;
 		params->floor_color.green = -1;
 		params->floor_color.blue = -1;

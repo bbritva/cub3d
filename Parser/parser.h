@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:05:44 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/23 13:06:20 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/01 11:36:47 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ typedef struct
 
 typedef struct
 {
-	float			pos_x;
-	float			pos_y;
-	float			angle_h;
-	float			angle_v;
+	double			pos_x;
+	double			pos_y;
+	double			ang_h;
+	double			angle_v;
 }					t_player;
 
 typedef	struct
@@ -52,7 +52,7 @@ typedef	struct
 	char 			*sprite;
 	t_color			floor_color;
 	t_color			ceil_color;
-	t_player		*player;
+	t_player		*plr;
 	char 			**map;
 }					t_params;
 

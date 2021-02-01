@@ -34,7 +34,7 @@ typedef struct	s_win //структура для окна
 	int			bpp;
 	int			en;
 	int			move_mask;
-	t_params	*params;
+	t_params	*prms;
 }				t_win;
 
 void		my_pixel_put(t_win *win, int x, int y, int color);

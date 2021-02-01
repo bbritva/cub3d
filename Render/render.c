@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/01 11:25:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/01 11:35:32 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ void 		draw_fc(t_win *win)
 	int j;
 
 	i = 0;
-	while (i < win->params->res_v / 2)
+	while (i < win->prms->res_v / 2)
 	{
 		j = 0;
-		while (j < win->params->res_h)
-			my_pixel_put(win, j++, i, ctoi(win->params->ceil_color));
+		while (j < win->prms->res_h)
+			my_pixel_put(win, j++, i, ctoi(win->prms->ceil_color));
 		i++;
 	}
-	while (i < win->params->res_v)
+	while (i < win->prms->res_v)
 	{
 		j = 0;
-		while (j < win->params->res_h)
-			my_pixel_put(win, j++, i, ctoi(win->params->floor_color));
+		while (j < win->prms->res_h)
+			my_pixel_put(win, j++, i, ctoi(win->prms->floor_color));
 		i++;
 	}
 }
@@ -51,10 +51,10 @@ void 		draw_line(t_win *win, int x_pos, int h)
 {
 	int i;
 
-	if (h > win->params->res_v)
-		h = win->params->res_v;
-	i = (win->params->res_v - h) / 2;
-	while (i < (win->params->res_v + h) / 2)
+	if (h > win->prms->res_v)
+		h = win->prms->res_v;
+	i = (win->prms->res_v - h) / 2;
+	while (i < (win->prms->res_v + h) / 2)
 		my_pixel_put(win, x_pos, i++, 0x00007864);
 }
 
@@ -89,12 +89,12 @@ void		draw_player(t_win *win, t_params *params)
 	float end_angle;
 	float angle;
 
-	angle = params->player->angle_h - 33 * (M_PI / 180);
-	end_angle = params->player->angle_h + 33 * (M_PI / 180);
+	angle = params->plr->ang_h - 33 * (M_PI / 180);
+	end_angle = params->plr->ang_h + 33 * (M_PI / 180);
 	while (angle < end_angle)
 	{
-		p.pos_x = params->player->pos_x;
-		p.pos_y = params->player->pos_y;
+		p.pos_x = params->plr->pos_x;
+		p.pos_y = params->plr->pos_y;
 		while (params->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)] != '1')
 		{
 			p.pos_x += cosf(angle);
@@ -112,17 +112,17 @@ int		get_height(t_win *win, float angle)
 	float 		k;
 
 
-	p = *(win->params->player);
-	while (win->params->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)]
-	!= '1' && win->params->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x /
-	SCALE)])
+	p = *(win->prms->plr);
+	while (win->prms->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)]
+	!= '1' && win->prms->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x /
+															 SCALE)])
 	{
 		p.pos_x += 0.05f * cosf(angle);
 		p.pos_y -= 0.05f * sinf(angle);
 	}
-	p.pos_x -= win->params->player->pos_x;
-	p.pos_y -= win->params->player->pos_y;
-	k = cosf(angle - win->params->player->angle_h);
+	p.pos_x -= win->prms->plr->pos_x;
+	p.pos_y -= win->prms->plr->pos_y;
+	k = cosf(angle - win->prms->plr->ang_h);
 	h = (int) (5000 / (sqrtf((p.pos_x * p.pos_x) + (p.pos_y * p.pos_y)) * k));
 	return (h);
 }
@@ -133,10 +133,10 @@ void 		draw_view(t_win *win)
 	float angle;
 
 	i = 0;
-	while (i < win->params->res_h)
+	while (i < win->prms->res_h)
 	{
-		angle = win->params->player->angle_h + M_PI_4 - i * (M_PI_2 /
-															 win->params->res_h);
+		angle = win->prms->plr->ang_h + M_PI_4 - i * (M_PI_2 /
+													  win->prms->res_h);
 		draw_line(win, i++, get_height(win, angle));
 	}
 
@@ -225,15 +225,15 @@ int			move_fwd(t_win *win)
 	int j_new;
 	t_player p;
 
-	p = *(win->params->player);
+	p = *(win->prms->plr);
 	i_cur = (int)(p.pos_y / SCALE);
 	j_cur = (int)(p.pos_x / SCALE);
-	i_new = (int)((p.pos_y - sinf(p.angle_h)) / SCALE);
-	j_new = (int)((p.pos_x + cosf(p.angle_h)) / SCALE);
-	if (win->params->map[i_new][j_cur] != '1')
-		win->params->player->pos_y -= SPEED * sinf(p.angle_h);
-	if (win->params->map[i_cur][j_new] != '1')
-		win->params->player->pos_x += SPEED * cosf(p.angle_h);
+	i_new = (int)((p.pos_y - sinf(p.ang_h)) / SCALE);
+	j_new = (int)((p.pos_x + cosf(p.ang_h)) / SCALE);
+	if (win->prms->map[i_new][j_cur] != '1')
+		win->prms->plr->pos_y -= SPEED * sinf(p.ang_h);
+	if (win->prms->map[i_cur][j_new] != '1')
+		win->prms->plr->pos_x += SPEED * cosf(p.ang_h);
 	return (0);
 }
 
@@ -245,15 +245,15 @@ int			move_bwd(t_win *win)
 	int j_new;
 	t_player p;
 
-	p = *(win->params->player);
+	p = *(win->prms->plr);
 	i_cur = (int)(p.pos_y / SCALE);
 	j_cur = (int)(p.pos_x / SCALE);
-	i_new = (int)((p.pos_y + sinf(p.angle_h))/ SCALE);
-	j_new = (int)((p.pos_x - cosf(p.angle_h)) / SCALE);
-	if (win->params->map[i_new][j_cur] != '1')
-		win->params->player->pos_y += SPEED * sinf(p.angle_h);
-	if (win->params->map[i_cur][j_new] != '1')
-		win->params->player->pos_x -= SPEED * cosf(p.angle_h);
+	i_new = (int)((p.pos_y + sinf(p.ang_h)) / SCALE);
+	j_new = (int)((p.pos_x - cosf(p.ang_h)) / SCALE);
+	if (win->prms->map[i_new][j_cur] != '1')
+		win->prms->plr->pos_y += SPEED * sinf(p.ang_h);
+	if (win->prms->map[i_cur][j_new] != '1')
+		win->prms->plr->pos_x -= SPEED * cosf(p.ang_h);
 	return (0);
 }
 
@@ -265,16 +265,16 @@ int			move_left(t_win *win)
 	int j_new;
 	t_player p;
 
-	p = *(win->params->player);
-	p.angle_h += M_PI_2;
+	p = *(win->prms->plr);
+	p.ang_h += M_PI_2;
 	i_cur = (int)(p.pos_y / SCALE);
 	j_cur = (int)(p.pos_x / SCALE);
-	i_new = (int)((p.pos_y - sinf(p.angle_h))/ SCALE);
-	j_new = (int)((p.pos_x + cosf(p.angle_h)) / SCALE);
-	if (win->params->map[i_new][j_cur] != '1')
-		win->params->player->pos_y -= SPEED * sinf(p.angle_h);
-	if (win->params->map[i_cur][j_new] != '1')
-		win->params->player->pos_x += SPEED * cosf(p.angle_h);
+	i_new = (int)((p.pos_y - sinf(p.ang_h)) / SCALE);
+	j_new = (int)((p.pos_x + cosf(p.ang_h)) / SCALE);
+	if (win->prms->map[i_new][j_cur] != '1')
+		win->prms->plr->pos_y -= SPEED * sinf(p.ang_h);
+	if (win->prms->map[i_cur][j_new] != '1')
+		win->prms->plr->pos_x += SPEED * cosf(p.ang_h);
 	return (0);
 }
 
@@ -286,16 +286,16 @@ int			move_right(t_win *win)
 	int j_new;
 	t_player p;
 
-	p = *(win->params->player);
-	p.angle_h -= M_PI_2;
+	p = *(win->prms->plr);
+	p.ang_h -= M_PI_2;
 	i_cur = (int)(p.pos_y / SCALE);
 	j_cur = (int)(p.pos_x / SCALE);
-	i_new = (int)((p.pos_y - sinf(p.angle_h))/ SCALE);
-	j_new = (int)((p.pos_x + cosf(p.angle_h)) / SCALE);
-	if (win->params->map[i_new][j_cur] != '1')
-		win->params->player->pos_y -= SPEED * sinf(p.angle_h);
-	if (win->params->map[i_cur][j_new] != '1')
-		win->params->player->pos_x += SPEED * cosf(p.angle_h);
+	i_new = (int)((p.pos_y - sinf(p.ang_h)) / SCALE);
+	j_new = (int)((p.pos_x + cosf(p.ang_h)) / SCALE);
+	if (win->prms->map[i_new][j_cur] != '1')
+		win->prms->plr->pos_y -= SPEED * sinf(p.ang_h);
+	if (win->prms->map[i_cur][j_new] != '1')
+		win->prms->plr->pos_x += SPEED * cosf(p.ang_h);
 	return (0);
 }
 
@@ -311,14 +311,12 @@ int			render_next_frame(t_win *win)
 	if (win->move_mask & MV_RIGHT)
 		move_right(win);
 	if (win->move_mask & RT_LEFT)
-		win->params->player->angle_h -= 0.03f;
+		win->prms->plr->ang_h -= 0.03f;
 	if (win->move_mask & RT_RIGHT)
-		win->params->player->angle_h += 0.03f;
-	win->params->player->angle_h -= (win->params->player->angle_h > M_PI * 2)
-			? M_PI * 2 : 0;
-	win->params->player->angle_h += (win->params->player->angle_h < 0) ? M_PI
-			* 2 : 0;
-	create_img(win->params, win);
+		win->prms->plr->ang_h += 0.03f;
+	win->prms->plr->ang_h -= (win->prms->plr->ang_h > M_PI * 2)	? M_PI * 2 : 0;
+	win->prms->plr->ang_h += (win->prms->plr->ang_h < 0) ? M_PI * 2 : 0;
+	create_img(win->prms, win);
 	mlx_put_image_to_window(win->mlx, win->win, win->img, 0, 0);
 	return (1);
 }
@@ -332,7 +330,7 @@ void		render(t_params	*params)
 		win->mlx = mlx_init();
 		win->win = mlx_new_window(win->mlx, params->res_h, params->res_v,
 								  "cub3d");
-		win->params = params;
+		win->prms = params;
 		create_img(params, win);
 		win->move_mask = 0;
 //		mlx_key_hook(win->win, key_hook, win);

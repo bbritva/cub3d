@@ -41,7 +41,7 @@ int 		check_map(t_params *params)
 	// int 	j;
 
 	(void) params;
-	// map = params->map;
+	// map = prms->map;
 	// i = 0;
 	// while (map[i])
 	// {
@@ -77,7 +77,7 @@ t_params	*map_parser(int fd, t_params *params, char **line)
 		i = get_next_line(fd, line);
 	}
 	params->map = map_split(line_map, '\n');
-	params->player = get_player(params);
+	params->plr = get_player(params);
 	if (check_map(params))
 	{
 		printf("map - ok\n");
@@ -101,9 +101,9 @@ t_player	*get_player(t_params *params)
 		{
 			if (ft_strchr("NSWE",params->map[i][j]))
 			{
-				if (params->player)
+				if (params->plr)
 				{
-					free(params->player);
+					free(params->plr);
 					return (NULL);
 				}
 				if ((p = (t_player *)malloc(sizeof(t_player))))
@@ -111,13 +111,13 @@ t_player	*get_player(t_params *params)
 					p->pos_x = (float)j * SCALE;
 					p->pos_y = (float)i * SCALE;
 					p->angle_v = 0;
-					(params->map[i][j] == 'N') ? p->angle_h = M_PI_2 :
-							p->angle_h;
-					(params->map[i][j] == 'S') ? p->angle_h = 3 * M_PI_2 :
-							p->angle_h;
-					(params->map[i][j] == 'E') ? p->angle_h = 0 : p->angle_h;
-					(params->map[i][j] == 'W') ? p->angle_h = M_PI :
-							p->angle_h;
+					(params->map[i][j] == 'N') ? p->ang_h = M_PI_2 :
+							p->ang_h;
+					(params->map[i][j] == 'S') ? p->ang_h = 3 * M_PI_2 :
+							p->ang_h;
+					(params->map[i][j] == 'E') ? p->ang_h = 0 : p->ang_h;
+					(params->map[i][j] == 'W') ? p->ang_h = M_PI :
+							p->ang_h;
 				}
 			}
 			j++;

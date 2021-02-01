@@ -62,12 +62,12 @@ int	main(int argc, char *argv[])
 
 	if (check_main_input(argc) && (params = parser(argv[1])))
 	{
-		printf("params - ok\n");
+		printf("prms - ok\n");
 
 		render(params);
 		params_free(params);
 
 	}
 	else
-		printf("params error\n");
+		printf("prms error\n");
 }
