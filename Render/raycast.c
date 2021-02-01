@@ -90,6 +90,6 @@ int		get_height2(t_win *win, double angle)
 	h_intesect = get_h_intersect(win, angle);
 	dist = (h_intesect > v_intesect) ? v_intesect : h_intesect;
 	dist *= cos(angle - win->prms->plr->ang_h);
-	h = (int) (5000 / dist);
+	h = (int) (250 * SCALE / dist);
 	return (h);
 }

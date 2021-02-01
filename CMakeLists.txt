@@ -65,6 +65,7 @@ add_executable(cub3d
         Parser/param_parser.c
         Parser/map_parser.c
         Render/render.c
+        Render/raycast.c
         Parser/map_split.c
         Render/render.h Render/raycast.c)
 

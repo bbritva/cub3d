@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/01 17:15:09 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/01 17:15:40 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,8 +228,8 @@ int			move_fwd(t_win *win)
 	p = *(win->prms->plr);
 	i_cur = (int)(p.pos_y / SCALE);
 	j_cur = (int)(p.pos_x / SCALE);
-	i_new = (int)((p.pos_y - sin(p.ang_h)) / SCALE);
-	j_new = (int)((p.pos_x + cos(p.ang_h)) / SCALE);
+	i_new = (int)((p.pos_y - SPEED * sin(p.ang_h)) / SCALE);
+	j_new = (int)((p.pos_x + SPEED * cos(p.ang_h)) / SCALE);
 	if (win->prms->map[i_new][j_cur] != '1')
 		win->prms->plr->pos_y -= SPEED * sin(p.ang_h);
 	if (win->prms->map[i_cur][j_new] != '1')

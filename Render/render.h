@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/01 11:49:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/01 17:39:59 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 # define RENDER_H
 
 # include <math.h>
-# define SCALE 20
-# define SPEED 1
+# define SCALE 1
+# define SPEED 0.1f
 # define FORWARD 32
 # define BACKWARD 16
 # define MV_LEFT 8
