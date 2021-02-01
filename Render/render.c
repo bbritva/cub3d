@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/01 11:56:40 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/01 17:15:09 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ int			key_press(int keycode, t_win *win)
 		win->move_mask = win->move_mask | FORWARD;
 	if (keycode == 0)
 		win->move_mask = win->move_mask | MV_LEFT;
-	if (keycode == 1 || keycode == 125)
+	if (keycode == 1)
 		win->move_mask = win->move_mask | BACKWARD;
 	if (keycode == 2)
 		win->move_mask = win->move_mask | MV_RIGHT;
@@ -178,11 +178,11 @@ int			key_press(int keycode, t_win *win)
 
 int			key_release(int keycode, t_win *win)
 {
-	if (keycode == 126 || keycode == 13)
+	if (keycode == 13)
 		win->move_mask = win->move_mask - FORWARD;
 	if (keycode == 0)
 		win->move_mask = win->move_mask - MV_LEFT;
-	if (keycode == 1 || keycode == 125)
+	if (keycode == 1)
 		win->move_mask = win->move_mask - BACKWARD;
 	if (keycode == 2)
 		win->move_mask = win->move_mask - MV_RIGHT;

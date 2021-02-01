@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/01 17:03:45 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/01 17:10:11 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		get_height2(t_win *win, double angle)
 	v_intesect = get_v_intersect(win, angle);
 	h_intesect = get_h_intersect(win, angle);
 	dist = (h_intesect > v_intesect) ? v_intesect : h_intesect;
-	dist /= cos(angle - win->prms->plr->ang_h);
+	dist *= cos(angle - win->prms->plr->ang_h);
 	h = (int) (5000 / dist);
 	return (h);
 }
