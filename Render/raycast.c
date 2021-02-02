@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/01 17:10:11 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/02 14:49:50 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ double		get_h_intersect(t_win *win, double angle)
 	p = *(win->prms->plr);
 	if (angle > 0 && angle < M_PI)
 	{
-		p.pos_y = floor(p.pos_y);
-		p.pos_x += (p.pos_y - win->prms->plr->pos_y) * tan(angle);
-		dY = 1;
+		p.pos_y = floor(p.pos_y / SCALE) * SCALE;
+		p.pos_x += (p.pos_y - win->prms->plr->pos_y) / tan(angle);
+		dY = 1 * SCALE;
 	}
 	else
 	{
-		p.pos_y = ceil(p.pos_y);
-		p.pos_x += (p.pos_y - win->prms->plr->pos_y) * tan(angle);
-		dY = -1;
+		p.pos_y = ceil(p.pos_y / SCALE) * SCALE;
+		p.pos_x += (p.pos_y - win->prms->plr->pos_y) / tan(angle);
+		dY = -1 * SCALE;
 	}
-	dX = dY * tan(angle);
-	while (win->prms->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)]
-		   != '1' && win->prms->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)])
+	dX = dY / tan(angle);
+	while (ft_strchr("02NSWE", win->prms->map[(int) (p.pos_y / SCALE)][(int)
+	(p.pos_x / SCALE)]))
 	{
 		p.pos_x += dX;
 		p.pos_y += dY;
@@ -55,19 +55,19 @@ double		get_v_intersect(t_win *win, double angle)
 	p = *(win->prms->plr);
 	if (angle > 3 * M_PI_2 || angle < M_PI_2)
 	{
-		p.pos_x = ceil(p.pos_x);
+		p.pos_x = ceil(p.pos_x / SCALE) * SCALE;
 		p.pos_y += (p.pos_x - win->prms->plr->pos_x) * tan(angle);
-		dX = 1;
+		dX = 1 * SCALE;
 	}
 	else
 	{
-		p.pos_x = floor(p.pos_x);
+		p.pos_x = floor(p.pos_x / SCALE) * SCALE;
 		p.pos_y += (p.pos_x - win->prms->plr->pos_x) * tan(angle);
-		dX = -1;
+		dX = -1 * SCALE;
 	}
 	dY = dX * tan(angle);
-	while (win->prms->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)]
-	!= '1' && win->prms->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)])
+	while (ft_strchr("02NSWE", win->prms->map[(int) (p.pos_y / SCALE)][(int)
+			(p.pos_x / SCALE)]))
 	{
 		p.pos_x += dX;
 		p.pos_y += dY;

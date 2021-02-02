@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/01 17:59:32 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/02 10:34:14 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 # define RENDER_H
 
 # include <math.h>
-# define SCALE 1
-# define SCALE2 10
-# define SPEED 0.02f
-# define FORWARD 32
-# define BACKWARD 16
-# define MV_LEFT 8
-# define MV_RIGHT 4
-# define RT_LEFT 2
-# define RT_RIGHT 1
+# define SCALE 20
+# define SCALE2 20
+//# define SPEED 0.02f
+# define SPEED 1.0f
+# define FORWARD 0b100000
+# define BACKWARD 0b10000
+# define MV_LEFT 0b1000
+# define MV_RIGHT 0b100
+# define RT_LEFT 0b10
+# define RT_RIGHT 0b1
 
 typedef struct	s_win //структура для окна
 {

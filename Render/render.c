@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/01 18:35:15 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/02 12:25:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ int		get_height(t_win *win, double angle)
 	p.pos_x -= win->prms->plr->pos_x;
 	p.pos_y -= win->prms->plr->pos_y;
 	k = cos(angle - win->prms->plr->ang_h);
-	h = (int) (100 / (sqrt((p.pos_x * p.pos_x) + (p.pos_y * p.pos_y)) * k));
+	h = (int) (250 * SCALE / (sqrt((p.pos_x * p.pos_x) + (p.pos_y * p.pos_y)) *
+			k));
 	return (h);
 }
 
@@ -138,19 +139,19 @@ void 		draw_view(t_win *win)
 	{
 		angle = win->prms->plr->ang_h + M_PI_4 - i * (M_PI_2 /
 													  win->prms->res_h);
-		draw_line(win, i, get_height(win, angle));
-		i += 10;
+		draw_line(win, i, get_height2(win, angle));
+		i += 1;
 	}
 
 }
 
-int		create_img(t_params *params, t_win *win)
+int			create_img(t_params *params, t_win *win)
 {
 	win->img = mlx_new_image(win->mlx, params->res_h, params->res_v);
 	win->addr = mlx_get_data_addr(win->img, &win->bpp,
 								  &win->line_l, &win->en);
 	draw_fc(win);
-	draw_map(win, params->map);
+//	draw_map(win, params->map);
 //	draw_player(win, params);
 	draw_view(win);
 	return (0);
@@ -181,17 +182,17 @@ int			key_press(int keycode, t_win *win)
 int			key_release(int keycode, t_win *win)
 {
 	if (keycode == 13)
-		win->move_mask = win->move_mask - FORWARD;
+		win->move_mask = win->move_mask & ~FORWARD;
 	if (keycode == 0)
-		win->move_mask = win->move_mask - MV_LEFT;
+		win->move_mask = win->move_mask & ~MV_LEFT;
 	if (keycode == 1)
-		win->move_mask = win->move_mask - BACKWARD;
+		win->move_mask = win->move_mask & ~BACKWARD;
 	if (keycode == 2)
-		win->move_mask = win->move_mask - MV_RIGHT;
+		win->move_mask = win->move_mask & ~MV_RIGHT;
 	if (keycode == 124)
-		win->move_mask = win->move_mask - RT_LEFT;
+		win->move_mask = win->move_mask & ~RT_LEFT;
 	if (keycode == 123)
-		win->move_mask = win->move_mask - RT_RIGHT;
+		win->move_mask = win->move_mask & ~RT_RIGHT;
 	return (0);
 }
 
@@ -313,9 +314,9 @@ int			render_next_frame(t_win *win)
 	if (win->move_mask & MV_RIGHT)
 		move_right(win);
 	if (win->move_mask & RT_LEFT)
-		win->prms->plr->ang_h -= 0.03f;
+		win->prms->plr->ang_h -= 0.06f;
 	if (win->move_mask & RT_RIGHT)
-		win->prms->plr->ang_h += 0.03f;
+		win->prms->plr->ang_h += 0.06f;
 	win->prms->plr->ang_h -= (win->prms->plr->ang_h > M_PI * 2)	? M_PI * 2 : 0;
 	win->prms->plr->ang_h += (win->prms->plr->ang_h < 0) ? M_PI * 2 : 0;
 	create_img(win->prms, win);
