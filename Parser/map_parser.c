@@ -76,6 +76,12 @@ t_params	*map_parser(int fd, t_params *params, char **line)
 		free(*line);
 		i = get_next_line(fd, line);
 	}
+	if (**line)
+	{
+		line_map = gnl_strjoin(line_map, *line);
+		line_map = gnl_strjoin(line_map, "\n");
+		free(*line);
+	}
 	params->map = map_split(line_map, '\n');
 	params->plr = get_player(params);
 	if (check_map(params))
