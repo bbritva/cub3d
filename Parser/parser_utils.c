@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 15:11:23 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/13 15:48:48 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/04 11:40:34 by bbritva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "parser.h"
 
 int is_map_line(char *line)
 {
