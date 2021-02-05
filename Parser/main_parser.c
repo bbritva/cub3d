@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "parser.h"
 #include <stdio.h>
 
 void	show_parse_res(t_params *params);
@@ -69,26 +69,4 @@ int	main(int argc, char *argv[])
 	}
 	else
 		printf("params error\n");
-}
-
-void	show_parse_res(t_params * params)
-{
-	int i;
-
-	printf("hrez = %d\n", params->res_h);
-	printf("vrez = %d\n", params->res_v);
-	printf("north = \"%s\"\n", params->north);
-	printf("south = \"%s\"\n", params->south);
-	printf("west = \"%s\"\n", params->west);
-	printf("east = \"%s\"\n", params->east);
-	printf("sprite = \"%s\"\n", params->sprite);
-	printf("f_color_r = %d\n", params->floor_color.red);
-	printf("f_color_g = %d\n", params->floor_color.green);
-	printf("f_color_b = %d\n", params->floor_color.blue);
-	printf("c_color_r = %d\n", params->ceil_color.red);
-	printf("c_color_g = %d\n", params->ceil_color.green);
-	printf("c_color_b = %d\n", params->ceil_color.blue);
-	i = 0;
-	while (*(params->map + i))
-		printf("%s\n", params->map[i++]);
 }

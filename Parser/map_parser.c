@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "parser.h"
 #include <stdio.h>
 //
 //char 	**map_convert(char *char_map, int len, int height)
@@ -76,6 +76,12 @@ t_params	*map_parser(int fd, t_params *params, char **line)
 		free(*line);
 		i = get_next_line(fd, line);
 	}
+	if (**line)
+	{
+		line_map = gnl_strjoin(line_map, *line);
+		line_map = gnl_strjoin(line_map, "\n");
+		free(*line);
+	}
 	params->map = map_split(line_map, '\n');
 	params->plr = get_player(params);
 	if (check_map(params))
@@ -108,8 +114,8 @@ t_player	*get_player(t_params *params)
 				}
 				if ((p = (t_player *)malloc(sizeof(t_player))))
 				{
-					p->pos_x = (double)j * SCALE;
-					p->pos_y = (double)i * SCALE;
+					p->pos_x = (double)j;
+					p->pos_y = (double)i;
 					p->angle_v = 0;
 					(params->map[i][j] == 'N') ? p->ang_h = M_PI_2 :
 							p->ang_h;

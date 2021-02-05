@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:05:44 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/01 11:38:54 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/04 11:40:29 by bbritva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <string.h>
+# include <math.h>
 # include "../GNL/get_next_line.h"
 # include "../libft/libft.h"
 
