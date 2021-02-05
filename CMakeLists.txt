@@ -67,7 +67,7 @@ add_executable(cub3d
         Render/render.c
         Render/raycast.c
         Parser/map_split.c
-        Render/render.h Render/raycast.c)
+        Render/render.h)
 
 target_link_libraries (cub3d ${CMAKE_CURRENT_SOURCE_DIR}/libmlx.dylib)
 
