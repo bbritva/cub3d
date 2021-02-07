@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 08:51:37 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/07 12:53:43 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -330,12 +330,17 @@ void		render(t_params	*params)
 {
 	t_win		*win;
 
+	ft_putstr("RENDER:\n");
+	show_parse_res(params);
 	if ((win = (t_win *)malloc(sizeof(t_win))))
 	{
 		win->mlx = mlx_init();
 		win->win = mlx_new_window(win->mlx, params->res_h, params->res_v,
 								  "cub3d");
 		win->prms = params;
+		ft_putstr("RENDER:\n");
+		show_parse_res(params);
+		show_parse_res(win->prms);
 		create_img(params, win);
 		win->move_mask = 0;
 //		mlx_key_hook(win->win, key_hook, win);

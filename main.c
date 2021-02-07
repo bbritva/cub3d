@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/01/23 12:29:11 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/07 12:51:39 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int	main(int argc, char *argv[])
 	if (check_main_input(argc) && (params = parser(argv[1])))
 	{
 		printf("prms - ok\n");
-
+		ft_putstr("MAIN:\n");
+		show_parse_res(params);
 		render(params);
 		params_free(params);
 

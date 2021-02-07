@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 09:59:32 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/07 10:55:30 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <math.h>
 # define SCALE 1
 # define SCALE2 10
-# define SPEED 0.02f
+# define SPEED 0.05f
 # define FORWARD 32
 # define BACKWARD 16
 # define MV_LEFT 8
@@ -40,6 +40,6 @@ typedef struct	s_win //структура для окна
 
 void		my_pixel_put(t_win *win, int x, int y, unsigned int	color);
 int			get_height2(t_win *win, double angle);
-int			is_wall(char **map, t_player p, double angle, char hv);
+int			is_wall(t_win *win, t_player p, double angle, char hv);
 
 #endif

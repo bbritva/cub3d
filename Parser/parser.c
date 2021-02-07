@@ -13,9 +13,6 @@
 #include "parser.h"
 #include <stdio.h>
 
-
-void	show_parse_res(t_params * params);
-
 t_params	*params_init()
 {
 	t_params	*params;

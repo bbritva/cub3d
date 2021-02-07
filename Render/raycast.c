@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 10:29:56 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/07 10:30:39 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ int		get_height2(t_win *win, double angle)
 		{
 			p.pos_x += dX * cos(angle);
 			p.pos_y -= dX * sin(angle);
-			if (is_wall(win->prms->map, p, angle, 'v'))
+			if (is_wall(win, p, angle, 'v'))
 				break;
 		}
 		else
 		{
 			p.pos_y += dY * sin(angle);
 			p.pos_x -= dY * cos(angle);
-			if (is_wall(win->prms->map, p, angle, 'h'))
+			if (is_wall(win, p, angle, 'h'))
 				break;
 		}
 	}

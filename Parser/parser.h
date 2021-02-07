@@ -63,5 +63,7 @@ int					is_map_line(char *line);
 t_params			*param_parser(int fd, t_params *params, char **line);
 t_params			*map_parser(int fd, t_params *params, char **line);
 char				**map_split(char const *s, char c);
+void				show_parse_res(t_params * params);
+
 
 #endif
