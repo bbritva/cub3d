@@ -23,7 +23,6 @@ typedef struct
 {
 	t_player 		*plr;
 	t_params		*prms;
-	char 			**map;
 	t_win			*win;
 }					t_all;
 

@@ -50,6 +50,7 @@ typedef	struct
 	char 			*sprite;
 	t_color			floor_color;
 	t_color			ceil_color;
+	char 			**map;
 }					t_params;
 
 t_color				get_color(char *line, t_color color);

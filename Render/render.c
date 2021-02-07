@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 15:49:06 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/07 16:41:19 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void		draw_player(t_all *all)
 	{
 		p.pos_x = all->plr->pos_x;
 		p.pos_y = all->plr->pos_y;
-		while (all->map[(int) (p.pos_y / SCALE2)][(int) (p.pos_x / SCALE2)]
-		&& all->map[(int) (p.pos_y / SCALE2)][(int) (p.pos_x / SCALE2)] != '1')
+		while (all->prms->map[(int) (p.pos_y / SCALE2)][(int) (p.pos_x / SCALE2)]
+		&& all->prms->map[(int) (p.pos_y / SCALE2)][(int) (p.pos_x / SCALE2)] != '1')
 		{
 			p.pos_x += cos(angle);
 			p.pos_y -= sin(angle);
@@ -114,8 +114,8 @@ int		get_height(t_all *all, double angle)
 
 
 	p = *(all->plr);
-	while (all->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)]
-	!= '1' && all->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)])
+	while (all->prms->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)]
+	!= '1' && all->prms->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)])
 	{
 		p.pos_x += 0.05f * cos(angle);
 		p.pos_y -= 0.05f * sin(angle);
@@ -233,9 +233,9 @@ int			move_fwd(t_all *all)
 	j_cur = (int)(all->plr->pos_x / SCALE);
 	i_new = (int)((all->plr->pos_y - SPEED * sin(all->plr->ang_h)) / SCALE);
 	j_new = (int)((all->plr->pos_x + SPEED * cos(all->plr->ang_h)) / SCALE);
-	if (all->map[i_new][j_cur] != '1')
+	if (all->prms->map[i_new][j_cur] != '1')
 		all->plr->pos_y -= SPEED * sin(all->plr->ang_h);
-	if (all->map[i_cur][j_new] != '1')
+	if (all->prms->map[i_cur][j_new] != '1')
 		all->plr->pos_x += SPEED * cos(all->plr->ang_h);
 	return (0);
 }
@@ -251,9 +251,9 @@ int			move_bwd(t_all *all)
 	j_cur = (int)(all->plr->pos_x / SCALE);
 	i_new = (int)((all->plr->pos_y + sin(all->plr->ang_h)) / SCALE);
 	j_new = (int)((all->plr->pos_x - cos(all->plr->ang_h)) / SCALE);
-	if (all->map[i_new][j_cur] != '1')
+	if (all->prms->map[i_new][j_cur] != '1')
 		all->plr->pos_y += SPEED * sin(all->plr->ang_h);
-	if (all->map[i_cur][j_new] != '1')
+	if (all->prms->map[i_cur][j_new] != '1')
 		all->plr->pos_x -= SPEED * cos(all->plr->ang_h);
 	return (0);
 }
@@ -271,9 +271,9 @@ int			move_left(t_all *all)
 	j_cur = (int)(all->plr->pos_x / SCALE);
 	i_new = (int)((all->plr->pos_y - sin(ang)) / SCALE);
 	j_new = (int)((all->plr->pos_x + cos(ang)) / SCALE);
-	if (all->map[i_new][j_cur] != '1')
+	if (all->prms->map[i_new][j_cur] != '1')
 		all->plr->pos_y -= SPEED * sin(ang);
-	if (all->map[i_cur][j_new] != '1')
+	if (all->prms->map[i_cur][j_new] != '1')
 		all->plr->pos_x += SPEED * cos(ang);
 	return (0);
 }
@@ -291,9 +291,9 @@ int			move_right(t_all *all)
 	j_cur = (int)(all->plr->pos_x / SCALE);
 	i_new = (int)((all->plr->pos_y - sin(ang)) / SCALE);
 	j_new = (int)((all->plr->pos_x + cos(ang)) / SCALE);
-	if (all->map[i_new][j_cur] != '1')
+	if (all->prms->map[i_new][j_cur] != '1')
 		all->plr->pos_y -= SPEED * sin(ang);
-	if (all->map[i_cur][j_new] != '1')
+	if (all->prms->map[i_cur][j_new] != '1')
 		all->plr->pos_x += SPEED * cos(ang);
 	return (0);
 }
@@ -322,16 +322,9 @@ int			render_next_frame(t_all *all)
 
 void		render(t_all *all)
 {
-	void *tmp;
-		ft_putstr("RENDER1:\n");
-	ft_putendl_fd(all->map[0],1);
 	if ((all->win = (t_win *)malloc(sizeof(t_win))))
 	{
-
-		ft_putstr("RENDER2:\n");
-		ft_putendl_fd(all->map[0],1);
-		tmp = mlx_init();
-		all->win->mlx = tmp;
+		all->win->mlx = mlx_init();
 		all->win->win = mlx_new_window(all->win->mlx, all->prms->res_h,
 								 all->prms->res_v, "cub3d");
 		create_img(all);

@@ -71,9 +71,9 @@ int		get_height2(t_all *all, double angle)
 //	double		first_step_Y;
 
 	p = *(all->plr);
-	while (all->map[(int) p.pos_y][(int) p.pos_x])
+	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
 	{
-		c = all->map[(int) p.pos_y][(int) p.pos_x];
+		c = all->prms->map[(int) p.pos_y][(int) p.pos_x];
 		dX = get_dX(&p, angle);
 		dY = get_dY(&p, angle);
 		if (fabs(dY) > fabs(dX))

@@ -46,8 +46,8 @@ int			is_wall(t_all *all, t_player p, double angle, char hv)
 			y = (int) p.pos_y;
 		}
 	}
-	c = all->map[y][x];
-	if (ft_strchr("02NSWE", all->map[y][x]))
+	c = all->prms->map[y][x];
+	if (ft_strchr("02NSWE", all->prms->map[y][x]))
 		return (0);
 	return (1);
 }

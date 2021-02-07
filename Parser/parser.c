@@ -79,8 +79,8 @@ void	show_parse_res(t_all *all)
 	printf("c_color_g = %d\n", all->prms->ceil_color.green);
 	printf("c_color_b = %d\n", all->prms->ceil_color.blue);
 	i = 0;
-	while (*(all->map + i))
-		ft_putendl_fd(all->map[i++], 1);
+	while (*(all->prms->map + i))
+		ft_putendl_fd(all->prms->map[i++], 1);
 }
 
 

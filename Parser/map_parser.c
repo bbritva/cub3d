@@ -79,7 +79,7 @@ int 		map_parser(int fd, t_all *all, char **line)
 		line_map = gnl_strjoin(line_map, "\n");
 		free(*line);
 	}
-	all->map = map_split(line_map, '\n');//незащищенный маллок
+	all->prms->map = map_split(line_map, '\n');//незащищенный маллок
 	get_player(all);
 	if (check_map(all))
 	{
@@ -98,12 +98,12 @@ int 	get_player(t_all *all)
 
 	i = 0;
 	all->plr = NULL;
-	while (all->map[i] != 0)
+	while (all->prms->map[i] != 0)
 	{
 		j = 0;
-		while (all->map[i][j])
+		while (all->prms->map[i][j])
 		{
-			if (ft_strchr("NSWE",all->map[i][j]))
+			if (ft_strchr("NSWE",all->prms->map[i][j]))
 			{
 				if (all->plr)
 				{
@@ -115,12 +115,12 @@ int 	get_player(t_all *all)
 					p->pos_x = (double)j;
 					p->pos_y = (double)i;
 					p->angle_v = 0;
-					(all->map[i][j] == 'N') ? p->ang_h = M_PI_2 :
+					(all->prms->map[i][j] == 'N') ? p->ang_h = M_PI_2 :
 							p->ang_h;
-					(all->map[i][j] == 'S') ? p->ang_h = 3 * M_PI_2 :
+					(all->prms->map[i][j] == 'S') ? p->ang_h = 3 * M_PI_2 :
 							p->ang_h;
-					(all->map[i][j] == 'E') ? p->ang_h = 0 : p->ang_h;
-					(all->map[i][j] == 'W') ? p->ang_h = M_PI :
+					(all->prms->map[i][j] == 'E') ? p->ang_h = 0 : p->ang_h;
+					(all->prms->map[i][j] == 'W') ? p->ang_h = M_PI :
 							p->ang_h;
 				}
 			}
