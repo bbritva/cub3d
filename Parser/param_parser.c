@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:58:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 19:24:16 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/07 19:25:22 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char 	*get_path(char *line, char *path)
 		i++;
 	if (path)
 		return (NULL);
-	if ((path = ft_calloc(sizeof(char), (ft_strlen(&line[i]) + 1))))
+	if ((path = ft_calloc(sizeof(char), ft_strlen(&line[i]) + 1)))
 	{
 		j = 0;
 		while(line[i])

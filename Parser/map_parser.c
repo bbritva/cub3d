@@ -80,6 +80,7 @@ int 		map_parser(int fd, t_all *all, char **line)
 		free(*line);
 	}
 	all->prms->map = map_split(line_map, '\n');//незащищенный маллок
+	free(line_map);
 	get_player(all);
 	if (check_map(all))
 	{
