@@ -6,13 +6,13 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 09:59:41 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 12:42:36 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/07 12:50:48 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int			is_wall(t_win *win, t_player p, double angle, char hv)
+int			is_wall(t_all *all, t_player p, double angle, char hv)
 {
 	int		x;
 	int 	y;
@@ -46,8 +46,8 @@ int			is_wall(t_win *win, t_player p, double angle, char hv)
 			y = (int) p.pos_y;
 		}
 	}
-	c = win->prms->map[y][x];
-	if (ft_strchr("02NSWE", win->prms->map[y][x]))
+	c = all->map[y][x];
+	if (ft_strchr("02NSWE", all->map[y][x]))
 		return (0);
 	return (1);
 }

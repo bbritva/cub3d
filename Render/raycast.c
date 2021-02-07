@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 10:30:39 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/07 15:36:09 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ double		get_dX(t_player *plr, double angle)
 }
 
 
-int		get_height2(t_win *win, double angle)
+int		get_height2(t_all *all, double angle)
 {
 	int 		h;
 	char 		c;
@@ -70,33 +70,33 @@ int		get_height2(t_win *win, double angle)
 //	double		first_step_X;
 //	double		first_step_Y;
 
-	p = *(win->prms->plr);
-	while (win->prms->map[(int) p.pos_y][(int) p.pos_x])
+	p = *(all->plr);
+	while (all->map[(int) p.pos_y][(int) p.pos_x])
 	{
-		c = win->prms->map[(int) p.pos_y][(int) p.pos_x];
+		c = all->map[(int) p.pos_y][(int) p.pos_x];
 		dX = get_dX(&p, angle);
 		dY = get_dY(&p, angle);
 		if (fabs(dY) > fabs(dX))
 		{
 			p.pos_x += dX * cos(angle);
 			p.pos_y -= dX * sin(angle);
-			if (is_wall(win, p, angle, 'v'))
+			if (is_wall(all, p, angle, 'v'))
 				break;
 		}
 		else
 		{
 			p.pos_y += dY * sin(angle);
 			p.pos_x -= dY * cos(angle);
-			if (is_wall(win, p, angle, 'h'))
+			if (is_wall(all, p, angle, 'h'))
 				break;
 		}
 	}
-	dX = p.pos_x - win->prms->plr->pos_x;
-	dY = p.pos_y - win->prms->plr->pos_y;
+	dX = p.pos_x - all->plr->pos_x;
+	dY = p.pos_y - all->plr->pos_y;
 //	dist = dX * cos(angle) + dY * sin(angle);
 	dist = sqrt(dX * dX + dY * dY);
-	dist *= cos(angle - win->prms->plr->ang_h);
-	h = (int) (((double)win->prms->res_v / 3) * SCALE / dist);
+	dist *= cos(angle - all->plr->ang_h);
+	h = (int) (((double)all->prms->res_v / 3) * SCALE / dist);
 	return (h);
 }
 

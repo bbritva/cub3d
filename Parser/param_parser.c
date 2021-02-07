@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../cub3d.h"
 
 int		get_rez(t_params *params, char *line)
 {

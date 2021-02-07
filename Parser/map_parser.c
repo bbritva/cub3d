@@ -6,12 +6,11 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/06 13:51:03 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/07 14:55:53 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include <stdio.h>
+#include "../cub3d.h"
 //
 //char 	**map_convert(char *char_map, int len, int height)
 //{
@@ -31,16 +30,14 @@
 //	return (map);
 //}
 
-t_player	*get_player(t_params *params);
-
-int 		check_map(t_params *params)
+int 		check_map(t_all *all)
 {
 	// int		in_map;
 	// char 	**map;
 	// int 	i;
 	// int 	j;
 
-	(void) params;
+	(void) all;
 	// map = prms->map;
 	// i = 0;
 	// while (map[i])
@@ -62,7 +59,7 @@ int 		check_map(t_params *params)
 	return (1);
 }
 
-t_params	*map_parser(int fd, t_params *params, char **line)
+int 		map_parser(int fd, t_all *all, char **line)
 {
 	int 	i;
 	char	*line_map;
@@ -82,47 +79,48 @@ t_params	*map_parser(int fd, t_params *params, char **line)
 		line_map = gnl_strjoin(line_map, "\n");
 		free(*line);
 	}
-	params->map = map_split(line_map, '\n');
-	params->plr = get_player(params);
-	if (check_map(params))
+	all->map = map_split(line_map, '\n');//незащищенный маллок
+	get_player(all);
+	if (check_map(all))
 	{
-		printf("map - ok\n");
-		return (params);
+		ft_putstr("map - ok\n");
+		return (1);
 	}
-	printf("map - error\n");
-	return (params);
+	ft_putstr("map - error\n");
+	return (0);
 }
 
-t_player	*get_player(t_params *params)
+int 	get_player(t_all *all)
 {
 	int			i;
 	int			j;
 	t_player	*p;
 
 	i = 0;
-	while (params->map[i] != 0)
+	all->plr = NULL;
+	while (all->map[i] != 0)
 	{
 		j = 0;
-		while (params->map[i][j])
+		while (all->map[i][j])
 		{
-			if (ft_strchr("NSWE",params->map[i][j]))
+			if (ft_strchr("NSWE",all->map[i][j]))
 			{
-				if (params->plr)
+				if (all->plr)
 				{
-					free(params->plr);
-					return (NULL);
+					free(all->plr);
+					return (-1);
 				}
 				if ((p = (t_player *)malloc(sizeof(t_player))))
 				{
 					p->pos_x = (double)j;
 					p->pos_y = (double)i;
 					p->angle_v = 0;
-					(params->map[i][j] == 'N') ? p->ang_h = M_PI_2 :
+					(all->map[i][j] == 'N') ? p->ang_h = M_PI_2 :
 							p->ang_h;
-					(params->map[i][j] == 'S') ? p->ang_h = 3 * M_PI_2 :
+					(all->map[i][j] == 'S') ? p->ang_h = 3 * M_PI_2 :
 							p->ang_h;
-					(params->map[i][j] == 'E') ? p->ang_h = 0 : p->ang_h;
-					(params->map[i][j] == 'W') ? p->ang_h = M_PI :
+					(all->map[i][j] == 'E') ? p->ang_h = 0 : p->ang_h;
+					(all->map[i][j] == 'W') ? p->ang_h = M_PI :
 							p->ang_h;
 				}
 			}
@@ -130,5 +128,7 @@ t_player	*get_player(t_params *params)
 		}
 		i++;
 	}
-	return (p);
+	if (all->plr)
+		return (1);
+	return (0);
 }

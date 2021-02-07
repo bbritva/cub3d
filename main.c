@@ -6,14 +6,11 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 12:51:39 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/07 15:39:08 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
-
-void	show_parse_res(t_params * params);
 
 void	params_free(t_params *params)
 {
@@ -27,8 +24,6 @@ void	params_free(t_params *params)
 		free(params->west);
 	if (params->east)
 		free(params->east);
-	if (params->map)
-		free(params->map);
 	free(params);
 }
 
@@ -58,17 +53,20 @@ int		check_main_input(int argc)
 
 int	main(int argc, char *argv[])
 {
-	t_params	*params;
+	t_all	*all;
 
-	if (check_main_input(argc) && (params = parser(argv[1])))
+	if ((all = (t_all *)malloc(sizeof (t_all))))
 	{
-		printf("prms - ok\n");
-		ft_putstr("MAIN:\n");
-		show_parse_res(params);
-		render(params);
-		params_free(params);
-
+		if (check_main_input(argc) && (parser(argv[1], all)))
+		{
+			ft_putstr("prms - ok\n");
+			ft_putstr("MAIN:\n");
+			show_parse_res(all);
+			render(all);
+			params_free(all->prms);
+		} else
+			ft_putstr("prms error\n");
+		free(all);
 	}
-	else
-		printf("prms error\n");
+	ft_putstr("end of cub3d\n");
 }

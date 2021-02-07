@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "parser.h"
-#include <stdio.h>
-
-void	show_parse_res(t_params *params);
 
 void	params_free(t_params *params)
 {
@@ -62,11 +59,11 @@ int	main(int argc, char *argv[])
 
 	if (check_main_input(argc) && (params = parser(argv[1])))
 	{
-		printf("params - ok\n");
+		ft_putstr("params - ok\n");
 		show_parse_res(params);
 		params_free(params);
 
 	}
 	else
-		printf("params error\n");
+		ft_putstr("params error\n");
 }

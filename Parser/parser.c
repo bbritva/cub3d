@@ -6,11 +6,11 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/06 13:51:03 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/07 14:02:38 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../cub3d.h"
 #include <stdio.h>
 
 t_params	*params_init()
@@ -27,8 +27,6 @@ t_params	*params_init()
 		params->west = NULL;
 		params->east = NULL;
 		params->sprite = NULL;
-		params->map = NULL;
-		params->plr = NULL;
 		params->floor_color.red = -1;
 		params->floor_color.green = -1;
 		params->floor_color.blue = -1;
@@ -39,50 +37,50 @@ t_params	*params_init()
 	return (params);
 }
 
-t_params	*parser(char *f_name)
+int 	parser(char *f_name, t_all *all)
 {
 	int			fd;
 	char		*line;
-	t_params	*params;
 
 	fd = open(f_name, O_RDONLY);
 	if (fd == -1)
 	{
 		ft_putstr(NREAD_MSG);
-		return (NULL);
+		return (0);
 	}
-	if ((params = params_init()))
+	if ((all->prms = params_init()))
 	{
-		params = param_parser(fd, params, &line);
-		params = map_parser(fd, params, &line);
+		param_parser(fd, all->prms, &line);
+		map_parser(fd, all, &line);
 		free(line);
-		show_parse_res(params);
-		return (params);
+		show_parse_res(all);
+		close(fd);
+		return (1);
 	}
 	close(fd);
-	return (params);
+	return (0);
 }
 
-void	show_parse_res(t_params * params)
+void	show_parse_res(t_all *all)
 {
 	int i;
 
-	printf("hrez = %d\n", params->res_h);
-	printf("vrez = %d\n", params->res_v);
-	printf("north = \"%s\"\n", params->north);
-	printf("south = \"%s\"\n", params->south);
-	printf("west = \"%s\"\n", params->west);
-	printf("east = \"%s\"\n", params->east);
-	printf("sprite = \"%s\"\n", params->sprite);
-	printf("f_color_r = %d\n", params->floor_color.red);
-	printf("f_color_g = %d\n", params->floor_color.green);
-	printf("f_color_b = %d\n", params->floor_color.blue);
-	printf("c_color_r = %d\n", params->ceil_color.red);
-	printf("c_color_g = %d\n", params->ceil_color.green);
-	printf("c_color_b = %d\n", params->ceil_color.blue);
+	printf("hrez = %d\n", all->prms->res_h);
+	printf("vrez = %d\n", all->prms->res_v);
+	printf("north = \"%s\"\n", all->prms->north);
+	printf("south = \"%s\"\n", all->prms->south);
+	printf("west = \"%s\"\n", all->prms->west);
+	printf("east = \"%s\"\n", all->prms->east);
+	printf("sprite = \"%s\"\n", all->prms->sprite);
+	printf("f_color_r = %d\n", all->prms->floor_color.red);
+	printf("f_color_g = %d\n", all->prms->floor_color.green);
+	printf("f_color_b = %d\n", all->prms->floor_color.blue);
+	printf("c_color_r = %d\n", all->prms->ceil_color.red);
+	printf("c_color_g = %d\n", all->prms->ceil_color.green);
+	printf("c_color_b = %d\n", all->prms->ceil_color.blue);
 	i = 0;
-	while (*(params->map + i))
-		printf("%s\n", params->map[i++]);
+	while (*(all->map + i))
+		ft_putendl_fd(all->map[i++], 1);
 }
 
 

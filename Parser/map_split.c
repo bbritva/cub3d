@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../cub3d.h"
 
 static size_t	ft_calcsize(char *s, char c)
 {
