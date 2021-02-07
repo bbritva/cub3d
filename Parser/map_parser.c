@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 14:55:53 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/07 19:57:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ int 	get_player(t_all *all)
 {
 	int			i;
 	int			j;
-	t_player	*p;
+//	t_player	p;
 
 	i = 0;
-	all->plr = NULL;
+	all->plr.pos_y = 0;
 	while (all->prms->map[i] != 0)
 	{
 		j = 0;
@@ -106,30 +106,30 @@ int 	get_player(t_all *all)
 		{
 			if (ft_strchr("NSWE",all->prms->map[i][j]))
 			{
-				if (all->plr)
+				if (all->plr.pos_y > 0)
 				{
-					free(all->plr);
+//					free(all->plr);
 					return (-1);
 				}
-				if ((p = (t_player *)malloc(sizeof(t_player))))
-				{
-					p->pos_x = (double)j;
-					p->pos_y = (double)i;
-					p->angle_v = 0;
-					(all->prms->map[i][j] == 'N') ? p->ang_h = M_PI_2 :
-							p->ang_h;
-					(all->prms->map[i][j] == 'S') ? p->ang_h = 3 * M_PI_2 :
-							p->ang_h;
-					(all->prms->map[i][j] == 'E') ? p->ang_h = 0 : p->ang_h;
-					(all->prms->map[i][j] == 'W') ? p->ang_h = M_PI :
-							p->ang_h;
-				}
+//				if ((all->plr = (t_player *)malloc(sizeof(t_player))))
+//				{
+					all->plr.pos_x = (double)j;
+					all->plr.pos_y = (double)i;
+					all->plr.angle_v = 0;
+					(all->prms->map[i][j] == 'N') ? all->plr.ang_h = M_PI_2 :
+							all->plr.ang_h;
+					(all->prms->map[i][j] == 'S') ? all->plr.ang_h = 3 *
+							M_PI_2 :
+							all->plr.ang_h;
+					(all->prms->map[i][j] == 'E') ? all->plr.ang_h = 0 :
+							all->plr.ang_h;
+					(all->prms->map[i][j] == 'W') ? all->plr.ang_h = M_PI :
+							all->plr.ang_h;
+//				}
 			}
 			j++;
 		}
 		i++;
 	}
-	if (all->plr)
-		return (1);
-	return (0);
+	return (1);
 }

@@ -70,7 +70,7 @@ int		get_height2(t_all *all, double angle)
 //	double		first_step_X;
 //	double		first_step_Y;
 
-	p = *(all->plr);
+	p = all->plr;
 	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
 	{
 		c = all->prms->map[(int) p.pos_y][(int) p.pos_x];
@@ -91,11 +91,11 @@ int		get_height2(t_all *all, double angle)
 				break;
 		}
 	}
-	dX = p.pos_x - all->plr->pos_x;
-	dY = p.pos_y - all->plr->pos_y;
+	dX = p.pos_x - all->plr.pos_x;
+	dY = p.pos_y - all->plr.pos_y;
 //	dist = dX * cos(angle) + dY * sin(angle);
 	dist = sqrt(dX * dX + dY * dY);
-	dist *= cos(angle - all->plr->ang_h);
+	dist *= cos(angle - all->plr.ang_h);
 	h = (int) (((double)all->prms->res_v / 3) * SCALE / dist);
 	return (h);
 }

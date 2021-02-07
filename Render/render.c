@@ -89,12 +89,12 @@ void		draw_player(t_all *all)
 	double		end_angle;
 	double		angle;
 
-	angle = all->plr->ang_h - 33 * (M_PI / 180);
-	end_angle = all->plr->ang_h + 33 * (M_PI / 180);
+	angle = all->plr.ang_h - 33 * (M_PI / 180);
+	end_angle = all->plr.ang_h + 33 * (M_PI / 180);
 	while (angle < end_angle)
 	{
-		p.pos_x = all->plr->pos_x;
-		p.pos_y = all->plr->pos_y;
+		p.pos_x = all->plr.pos_x;
+		p.pos_y = all->plr.pos_y;
 		while (all->prms->map[(int) (p.pos_y / SCALE2)][(int) (p.pos_x / SCALE2)]
 		&& all->prms->map[(int) (p.pos_y / SCALE2)][(int) (p.pos_x / SCALE2)] != '1')
 		{
@@ -113,16 +113,16 @@ int		get_height(t_all *all, double angle)
 	double 		k;
 
 
-	p = *(all->plr);
+	p = all->plr;
 	while (all->prms->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)]
 	!= '1' && all->prms->map[(int) (p.pos_y / SCALE)][(int) (p.pos_x / SCALE)])
 	{
 		p.pos_x += 0.05f * cos(angle);
 		p.pos_y -= 0.05f * sin(angle);
 	}
-	p.pos_x -= all->plr->pos_x;
-	p.pos_y -= all->plr->pos_y;
-	k = cos(angle - all->plr->ang_h);
+	p.pos_x -= all->plr.pos_x;
+	p.pos_y -= all->plr.pos_y;
+	k = cos(angle - all->plr.ang_h);
 	h = (int) (250 * SCALE / (sqrt((p.pos_x * p.pos_x) + (p.pos_y * p.pos_y)) *
 			k));
 	return (h);
@@ -136,7 +136,7 @@ void 		draw_view(t_all *all)
 	i = 0;
 	while (i < all->prms->res_h)
 	{
-		angle = all->plr->ang_h + M_PI / 6 - i * (M_PI / (3 *
+		angle = all->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
 				all->prms->res_h));
 		(angle < 0) ? angle += 2 * M_PI : angle;
 		(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
@@ -229,14 +229,14 @@ int			move_fwd(t_all *all)
 	int i_new;
 	int j_new;
 
-	i_cur = (int)(all->plr->pos_y / SCALE);
-	j_cur = (int)(all->plr->pos_x / SCALE);
-	i_new = (int)((all->plr->pos_y - SPEED * sin(all->plr->ang_h)) / SCALE);
-	j_new = (int)((all->plr->pos_x + SPEED * cos(all->plr->ang_h)) / SCALE);
+	i_cur = (int)(all->plr.pos_y / SCALE);
+	j_cur = (int)(all->plr.pos_x / SCALE);
+	i_new = (int)((all->plr.pos_y - SPEED * sin(all->plr.ang_h)) / SCALE);
+	j_new = (int)((all->plr.pos_x + SPEED * cos(all->plr.ang_h)) / SCALE);
 	if (all->prms->map[i_new][j_cur] != '1')
-		all->plr->pos_y -= SPEED * sin(all->plr->ang_h);
+		all->plr.pos_y -= SPEED * sin(all->plr.ang_h);
 	if (all->prms->map[i_cur][j_new] != '1')
-		all->plr->pos_x += SPEED * cos(all->plr->ang_h);
+		all->plr.pos_x += SPEED * cos(all->plr.ang_h);
 	return (0);
 }
 
@@ -247,14 +247,14 @@ int			move_bwd(t_all *all)
 	int i_new;
 	int j_new;
 
-	i_cur = (int)(all->plr->pos_y / SCALE);
-	j_cur = (int)(all->plr->pos_x / SCALE);
-	i_new = (int)((all->plr->pos_y + sin(all->plr->ang_h)) / SCALE);
-	j_new = (int)((all->plr->pos_x - cos(all->plr->ang_h)) / SCALE);
+	i_cur = (int)(all->plr.pos_y / SCALE);
+	j_cur = (int)(all->plr.pos_x / SCALE);
+	i_new = (int)((all->plr.pos_y + sin(all->plr.ang_h)) / SCALE);
+	j_new = (int)((all->plr.pos_x - cos(all->plr.ang_h)) / SCALE);
 	if (all->prms->map[i_new][j_cur] != '1')
-		all->plr->pos_y += SPEED * sin(all->plr->ang_h);
+		all->plr.pos_y += SPEED * sin(all->plr.ang_h);
 	if (all->prms->map[i_cur][j_new] != '1')
-		all->plr->pos_x -= SPEED * cos(all->plr->ang_h);
+		all->plr.pos_x -= SPEED * cos(all->plr.ang_h);
 	return (0);
 }
 
@@ -266,15 +266,15 @@ int			move_left(t_all *all)
 	int		j_new;
 	double	ang;
 
-	ang = all->plr->ang_h + M_PI_2;
-	i_cur = (int)(all->plr->pos_y / SCALE);
-	j_cur = (int)(all->plr->pos_x / SCALE);
-	i_new = (int)((all->plr->pos_y - sin(ang)) / SCALE);
-	j_new = (int)((all->plr->pos_x + cos(ang)) / SCALE);
+	ang = all->plr.ang_h + M_PI_2;
+	i_cur = (int)(all->plr.pos_y / SCALE);
+	j_cur = (int)(all->plr.pos_x / SCALE);
+	i_new = (int)((all->plr.pos_y - sin(ang)) / SCALE);
+	j_new = (int)((all->plr.pos_x + cos(ang)) / SCALE);
 	if (all->prms->map[i_new][j_cur] != '1')
-		all->plr->pos_y -= SPEED * sin(ang);
+		all->plr.pos_y -= SPEED * sin(ang);
 	if (all->prms->map[i_cur][j_new] != '1')
-		all->plr->pos_x += SPEED * cos(ang);
+		all->plr.pos_x += SPEED * cos(ang);
 	return (0);
 }
 
@@ -286,15 +286,15 @@ int			move_right(t_all *all)
 	int		j_new;
 	double	ang;
 
-	ang = all->plr->ang_h - M_PI_2;
-	i_cur = (int)(all->plr->pos_y / SCALE);
-	j_cur = (int)(all->plr->pos_x / SCALE);
-	i_new = (int)((all->plr->pos_y - sin(ang)) / SCALE);
-	j_new = (int)((all->plr->pos_x + cos(ang)) / SCALE);
+	ang = all->plr.ang_h - M_PI_2;
+	i_cur = (int)(all->plr.pos_y / SCALE);
+	j_cur = (int)(all->plr.pos_x / SCALE);
+	i_new = (int)((all->plr.pos_y - sin(ang)) / SCALE);
+	j_new = (int)((all->plr.pos_x + cos(ang)) / SCALE);
 	if (all->prms->map[i_new][j_cur] != '1')
-		all->plr->pos_y -= SPEED * sin(ang);
+		all->plr.pos_y -= SPEED * sin(ang);
 	if (all->prms->map[i_cur][j_new] != '1')
-		all->plr->pos_x += SPEED * cos(ang);
+		all->plr.pos_x += SPEED * cos(ang);
 	return (0);
 }
 
@@ -310,11 +310,11 @@ int			render_next_frame(t_all *all)
 	if (all->win->move_mask & MV_RIGHT)
 		move_right(all);
 	if (all->win->move_mask & RT_LEFT)
-		all->plr->ang_h -= 0.06f;
+		all->plr.ang_h -= 0.06f;
 	if (all->win->move_mask & RT_RIGHT)
-		all->plr->ang_h += 0.06f;
-	all->plr->ang_h -= (all->plr->ang_h > M_PI * 2)	? M_PI * 2 : 0;
-	all->plr->ang_h += (all->plr->ang_h < 0) ? M_PI * 2 : 0;
+		all->plr.ang_h += 0.06f;
+	all->plr.ang_h -= (all->plr.ang_h > M_PI * 2)	? M_PI * 2 : 0;
+	all->plr.ang_h += (all->plr.ang_h < 0) ? M_PI * 2 : 0;
 	create_img(all);
 	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
 	return (1);

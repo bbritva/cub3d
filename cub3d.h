@@ -21,7 +21,7 @@
 
 typedef struct
 {
-	t_player 		*plr;
+	t_player 		plr;
 	t_params		*prms;
 	t_win			*win;
 }					t_all;
