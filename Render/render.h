@@ -18,6 +18,7 @@
 # define SCALE 1
 # define SCALE2 10
 # define SPEED 0.05f
+# define ESC 64
 # define FORWARD 32
 # define BACKWARD 16
 # define MV_LEFT 8

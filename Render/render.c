@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/08 14:41:16 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/08 15:48:11 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,8 @@ int			key_press(int keycode, t_all *all)
 		all->win->move_mask = all->win->move_mask | RT_LEFT;
 	if (keycode == 123)
 		all->win->move_mask = all->win->move_mask | RT_RIGHT;
+	if (keycode == 53)
+		all->win->move_mask = all->win->move_mask | ESC;
 	return (0);
 }
 
@@ -216,19 +218,6 @@ int			key_release(int keycode, t_all *all)
 		all->win->move_mask = all->win->move_mask & ~RT_RIGHT;
 	return (0);
 }
-
-int             key_hook(int keycode, t_win *win)
-{
-	printf("hooked key = %d\n", keycode);
-	if (keycode == 53)
-	{
-		mlx_destroy_image(win->mlx, win->img);
-		mlx_destroy_window(win->mlx, win->win);
-	}
-	return (0);
-}
-
-
 
 int			mouse_hook(int button, int x, int y, t_win *win)
 {
@@ -345,6 +334,11 @@ int			render_next_frame(t_all *all)
 		all->plr.ang_h -= 0.06f;
 	if (all->win->move_mask & RT_RIGHT)
 		all->plr.ang_h += 0.06f;
+	if (all->win->move_mask & ESC)
+	{
+		mlx_destroy_window(all->win->mlx, all->win->win);
+		return (1);
+	}
 	all->plr.ang_h -= (all->plr.ang_h > M_PI * 2)	? M_PI * 2 : 0;
 	all->plr.ang_h += (all->plr.ang_h < 0) ? M_PI * 2 : 0;
 	create_img(all);
@@ -361,7 +355,6 @@ void		render(t_all *all)
 								 all->prms->res_v, "cub3d");
 		create_img(all);
 		all->win->move_mask = 0;
-		mlx_key_hook(all->win->win, key_hook, all->win);
 //		mlx_mouse_hook(win->win, mouse_hook, win);
 //		mlx_hook(win->win, 6, 1L << 6, mouse_move_hook, win);
 		mlx_hook(all->win->win, 2, 1L << 0, key_press, all);
