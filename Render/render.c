@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/08 11:35:14 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/08 14:25:12 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,23 +87,49 @@ void 		draw_map(t_win *win, char **map)
 void		draw_player(t_all *all)
 {
 	t_player	p;
-	double		end_angle;
 	double		angle;
+	int 		i;
 
-	angle = all->plr.ang_h - 33 * (M_PI / 180);
-	end_angle = all->plr.ang_h + 33 * (M_PI / 180);
-	while (angle < end_angle)
+	i = 0;
+	while (i < 50)
 	{
-		p.pos_x = all->plr.pos_x;
-		p.pos_y = all->plr.pos_y;
-		while (all->prms->map[(int) (p.pos_y / SCALE2)][(int) (p.pos_x / SCALE2)]
-		&& all->prms->map[(int) (p.pos_y / SCALE2)][(int) (p.pos_x / SCALE2)] != '1')
+		angle = all->plr.ang_h + M_PI / 6 - i * (M_PI / (3 * 50));
+		p.pos_x = all->plr.pos_x * SCALE2;
+		p.pos_y = all->plr.pos_y * SCALE2;
+		while (all->prms->map[(int) (p.pos_y / SCALE2)][(int) (p.pos_x / SCALE2)] != '1')
 		{
-			p.pos_x += cos(angle);
-			p.pos_y -= sin(angle);
+			p.pos_x += SPEED * cos(angle);
+			p.pos_y -= SPEED * sin(angle);
 			my_pixel_put(all->win, (int) p.pos_x, (int) p.pos_y, 0x00FFFFFF);
 		}
-		angle += 66 * (M_PI / 180) / 640;
+		i++;
+	}
+}
+
+void		draw_player_on_map(t_all *all)
+{
+	t_player	p;
+	int 		x;
+	int 		y;
+	int			a;
+	int 		b;
+
+	p = all->plr;
+	p.pos_y *= SCALE2;
+	p.pos_x *= SCALE2;
+	x = p.pos_x - SCALE2;
+	while (x < p.pos_x + SCALE2)
+	{
+		y = p.pos_y - SCALE2;
+		while (y < p.pos_y + SCALE2)
+		{
+			a = SCALE2 * SCALE2 / 5;
+			b = (p.pos_x - x) * (p.pos_x - x) +	(p.pos_y - y) * (p.pos_y - y);
+			if (b < a)
+				my_pixel_put(all->win, x, y, 0x00FFFFFF);
+			y++;
+		}
+		x++;
 	}
 }
 
@@ -154,9 +180,10 @@ int			create_img(t_all *all)
 	all->win->addr = mlx_get_data_addr(all->win->img, &all->win->bpp,
 									&all->win->line_l, &all->win->en);
 	draw_fc(all);
-//	draw_map(win, params->map);
-//	draw_player(win, params);
 	draw_view(all);
+	draw_map(all->win, all->prms->map);
+	draw_player_on_map(all);
+	draw_player(all);
 	return (0);
 }
 
