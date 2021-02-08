@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 16:41:19 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/08 11:04:02 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,42 +159,37 @@ int			create_img(t_all *all)
 	return (0);
 }
 
-int			key_press(int keycode, t_win *win)
+int			key_press(int keycode, t_all *all)
 {
 	if (keycode == 13)
-		win->move_mask = win->move_mask | FORWARD;
+		all->win->move_mask = all->win->move_mask | FORWARD;
 	if (keycode == 0)
-		win->move_mask = win->move_mask | MV_LEFT;
+		all->win->move_mask = all->win->move_mask | MV_LEFT;
 	if (keycode == 1)
-		win->move_mask = win->move_mask | BACKWARD;
+		all->win->move_mask = all->win->move_mask | BACKWARD;
 	if (keycode == 2)
-		win->move_mask = win->move_mask | MV_RIGHT;
+		all->win->move_mask = all->win->move_mask | MV_RIGHT;
 	if (keycode == 124)
-		win->move_mask = win->move_mask | RT_LEFT;
+		all->win->move_mask = all->win->move_mask | RT_LEFT;
 	if (keycode == 123)
-		win->move_mask = win->move_mask | RT_RIGHT;
-	if (keycode == 53)
-	{
-		mlx_destroy_image(win->mlx, win->img);
-		mlx_destroy_window(win->mlx, win->win);
-	}
+		all->win->move_mask = all->win->move_mask | RT_RIGHT;
 	return (0);
 }
 
-int			key_release(int keycode, t_win *win)
+int			key_release(int keycode, t_all *all)
 {
 	if (keycode == 13)
-		win->move_mask = win->move_mask & ~FORWARD;
+		all->win->move_mask = all->win->move_mask & ~FORWARD;
 	if (keycode == 0)
-		win->move_mask = win->move_mask & ~MV_LEFT;
+		all->win->move_mask = all->win->move_mask & ~MV_LEFT;
 	if (keycode == 1)
-		win->move_mask = win->move_mask & ~BACKWARD;
+		all->win->move_mask = all->win->move_mask & ~BACKWARD;
 	if (keycode == 2)
-		win->move_mask = win->move_mask & ~MV_RIGHT;
+		all->win->move_mask = all->win->move_mask & ~MV_RIGHT;
 	if (keycode == 124)
-		win->move_mask = win->move_mask & ~RT_LEFT;
+		all->win->move_mask = all->win->move_mask & ~RT_LEFT;
 	if (keycode == 123)
-		win->move_mask = win->move_mask & ~RT_RIGHT;
+		all->win->move_mask = all->win->move_mask & ~RT_RIGHT;
 	return (0);
 }
 
@@ -329,14 +324,15 @@ void		render(t_all *all)
 								 all->prms->res_v, "cub3d");
 		create_img(all);
 		all->win->move_mask = 0;
-//		mlx_key_hook(win->win, key_hook, win);
+		mlx_key_hook(all->win->win, key_hook, all);
 //		mlx_mouse_hook(win->win, mouse_hook, win);
 //		mlx_hook(win->win, 6, 1L << 6, mouse_move_hook, win);
-		mlx_hook(all->win->win, 2, 1L << 0, key_press, all->win);
-		mlx_hook(all->win->win, 3, 1L << 1, key_release, all->win);
-		mlx_loop_hook(all->win->mlx, render_next_frame, all->win);
+		mlx_hook(all->win->win, 2, 1L << 0, key_press, all);
+		mlx_hook(all->win->win, 3, 1L << 1, key_release, all);
+		mlx_loop_hook(all->win->mlx, render_next_frame, all);
 		mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
 		mlx_loop(all->win->mlx);
+//		free(all->win);
 	}
 }
 

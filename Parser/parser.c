@@ -52,7 +52,7 @@ int 	parser(char *f_name, t_all *all)
 	{
 		param_parser(fd, all->prms, &line);
 		map_parser(fd, all, &line);
-		free(line);
+//		free(line);
 		show_parse_res(all);
 		close(fd);
 		return (1);
