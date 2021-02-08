@@ -6,11 +6,12 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/08 11:04:02 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/08 11:35:14 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <stdio.h>
 
 void		my_pixel_put(t_win *win, int x, int y, unsigned int color)
 {
@@ -193,6 +194,19 @@ int			key_release(int keycode, t_all *all)
 	return (0);
 }
 
+int             key_hook(int keycode, t_win *win)
+{
+	printf("hooked key = %d\n", keycode);
+	if (keycode == 53)
+	{
+		mlx_destroy_image(win->mlx, win->img);
+		mlx_destroy_window(win->mlx, win->win);
+	}
+	return (0);
+}
+
+
+
 int			mouse_hook(int button, int x, int y, t_win *win)
 {
 	(void) win;
@@ -244,8 +258,8 @@ int			move_bwd(t_all *all)
 
 	i_cur = (int)(all->plr.pos_y / SCALE);
 	j_cur = (int)(all->plr.pos_x / SCALE);
-	i_new = (int)((all->plr.pos_y + sin(all->plr.ang_h)) / SCALE);
-	j_new = (int)((all->plr.pos_x - cos(all->plr.ang_h)) / SCALE);
+	i_new = (int)((all->plr.pos_y + SPEED * sin(all->plr.ang_h)) / SCALE);
+	j_new = (int)((all->plr.pos_x - SPEED * cos(all->plr.ang_h)) / SCALE);
 	if (all->prms->map[i_new][j_cur] != '1')
 		all->plr.pos_y += SPEED * sin(all->plr.ang_h);
 	if (all->prms->map[i_cur][j_new] != '1')
@@ -264,8 +278,8 @@ int			move_left(t_all *all)
 	ang = all->plr.ang_h + M_PI_2;
 	i_cur = (int)(all->plr.pos_y / SCALE);
 	j_cur = (int)(all->plr.pos_x / SCALE);
-	i_new = (int)((all->plr.pos_y - sin(ang)) / SCALE);
-	j_new = (int)((all->plr.pos_x + cos(ang)) / SCALE);
+	i_new = (int)((all->plr.pos_y - SPEED * sin(ang)) / SCALE);
+	j_new = (int)((all->plr.pos_x + SPEED * cos(ang)) / SCALE);
 	if (all->prms->map[i_new][j_cur] != '1')
 		all->plr.pos_y -= SPEED * sin(ang);
 	if (all->prms->map[i_cur][j_new] != '1')
@@ -284,8 +298,8 @@ int			move_right(t_all *all)
 	ang = all->plr.ang_h - M_PI_2;
 	i_cur = (int)(all->plr.pos_y / SCALE);
 	j_cur = (int)(all->plr.pos_x / SCALE);
-	i_new = (int)((all->plr.pos_y - sin(ang)) / SCALE);
-	j_new = (int)((all->plr.pos_x + cos(ang)) / SCALE);
+	i_new = (int)((all->plr.pos_y - SPEED * sin(ang)) / SCALE);
+	j_new = (int)((all->plr.pos_x + SPEED * cos(ang)) / SCALE);
 	if (all->prms->map[i_new][j_cur] != '1')
 		all->plr.pos_y -= SPEED * sin(ang);
 	if (all->prms->map[i_cur][j_new] != '1')
@@ -324,7 +338,7 @@ void		render(t_all *all)
 								 all->prms->res_v, "cub3d");
 		create_img(all);
 		all->win->move_mask = 0;
-		mlx_key_hook(all->win->win, key_hook, all);
+		mlx_key_hook(all->win->win, key_hook, all->win);
 //		mlx_mouse_hook(win->win, mouse_hook, win);
 //		mlx_hook(win->win, 6, 1L << 6, mouse_move_hook, win);
 		mlx_hook(all->win->win, 2, 1L << 0, key_press, all);
