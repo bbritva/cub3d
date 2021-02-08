@@ -78,3 +78,27 @@ void 	draw_rainbow(t_data *data)
 		i++;
 	}
 }
+
+
+
+void		draw_player(t_all *all)
+{
+	t_player	p;
+	double		angle;
+	int 		i;
+
+	i = 0;
+	while (i < 50)
+	{
+		angle = all->plr.ang_h + M_PI / 6 - i * (M_PI / (3 * 50));
+		p.pos_x = all->plr.pos_x * SCALE2;
+		p.pos_y = all->plr.pos_y * SCALE2;
+		while (all->prms->map[(int) (p.pos_y / SCALE2)][(int) (p.pos_x / SCALE2)] != '1')
+		{
+			p.pos_x += SPEED * cos(angle);
+			p.pos_y -= SPEED * sin(angle);
+			my_pixel_put(all->win, (int) p.pos_x, (int) p.pos_y, 0x00FFFFFF);
+		}
+		i++;
+	}
+}

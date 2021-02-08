@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/08 14:25:12 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/08 14:41:16 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,17 @@ void 		draw_map(t_win *win, char **map)
 void		draw_player(t_all *all)
 {
 	t_player	p;
-	double		angle;
 	int 		i;
 
 	i = 0;
-	while (i < 50)
+	p = all->plr;
+	p.pos_x *= SCALE2;
+	p.pos_y *= SCALE2;
+	while (i < 10)
 	{
-		angle = all->plr.ang_h + M_PI / 6 - i * (M_PI / (3 * 50));
-		p.pos_x = all->plr.pos_x * SCALE2;
-		p.pos_y = all->plr.pos_y * SCALE2;
-		while (all->prms->map[(int) (p.pos_y / SCALE2)][(int) (p.pos_x / SCALE2)] != '1')
-		{
-			p.pos_x += SPEED * cos(angle);
-			p.pos_y -= SPEED * sin(angle);
-			my_pixel_put(all->win, (int) p.pos_x, (int) p.pos_y, 0x00FFFFFF);
-		}
+		p.pos_x += cos(p.ang_h);
+		p.pos_y -= sin(p.ang_h);
+		my_pixel_put(all->win, (int) p.pos_x, (int) p.pos_y, 0x00FFFFFF);
 		i++;
 	}
 }
@@ -123,7 +119,7 @@ void		draw_player_on_map(t_all *all)
 		y = p.pos_y - SCALE2;
 		while (y < p.pos_y + SCALE2)
 		{
-			a = SCALE2 * SCALE2 / 5;
+			a = SCALE2 * SCALE2 / 8;
 			b = (p.pos_x - x) * (p.pos_x - x) +	(p.pos_y - y) * (p.pos_y - y);
 			if (b < a)
 				my_pixel_put(all->win, x, y, 0x00FFFFFF);
