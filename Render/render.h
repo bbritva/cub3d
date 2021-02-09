@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 15:36:09 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/09 10:05:14 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # define RENDER_H
 
 # include <math.h>
+# include <mlx.h>
+# include "../cub3d.h"
 # define SCALE 1
 # define SCALE2 10
 # define SPEED 0.05f
@@ -38,6 +40,6 @@ typedef struct	s_win //структура для окна
 	unsigned int	move_mask;
 }					t_win;
 
-void		my_pixel_put(t_win *win, int x, int y, unsigned int	color);
+
 
 #endif

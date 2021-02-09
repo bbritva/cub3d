@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 19:24:13 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 15:38:43 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/09 10:05:14 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "./Render/render.h"
 # include "./libft/libft.h"
 # include "./GNL/get_next_line.h"
-# include <mlx.h>
 
 typedef struct
 {
@@ -30,13 +29,22 @@ void 				render(t_all	*all);
 int					parser(char *f_name, t_all *all);
 void				show_parse_res(t_all *all);
 int					map_parser(int fd, t_all *all, char **line);
-int					get_player(t_all *all);
 void				ft_putstr(char *str);
+void				my_pixel_put(t_win *win, int x, int y, unsigned int	color);
+int					get_player(t_all *all);
 int					get_height2(t_all *all, double angle);
+int					mouse_move_hook(int x, int y, t_win *win);
 int					is_wall(t_all *all, t_player p, double angle, char hv);
-
-
-
-
+int					key_press(int keycode, t_all *all);
+int					key_release(int keycode, t_all *all);
+int					mouse_hook(int button, int x, int y, t_win *win);
+int					mouse_move_hook(int x, int y, t_win *win);
+int					render_next_frame(t_all *all);
+int					create_img(t_all *all);
+int					move_fwd(t_all *all);
+int					move_bwd(t_all *all);
+int					move_left(t_all *all);
+int					move_right(t_all *all);
+unsigned int		ctoi(t_color color);
 
 #endif
