@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 12:57:00 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/09 23:48:08 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int		get_height(t_all *all, double angle)
 	dist = sqrt(dX * dX + dY * dY);
 	dist *= cos(angle - all->plr.ang_h);
 	h = (int) (((double)all->prms->res_v / 3) * SCALE / dist);
-	h = (h > 2000) ? 2000 : h;
 	return (h | dir);
 }
 
@@ -139,7 +138,7 @@ int		get_s_height(t_all *all, double angle)
 		dist = sqrt(dX * dX + dY * dY);
 		dist *= cos(angle - all->plr.ang_h);
 		h = (int) (((double) all->prms->res_v / 10) * SCALE / dist);
-		h = (h > 2000) ? 2000 : h;
+//		h = (h > 2000) ? 2000 : h;
 		return (h | dir);
 	}
 	return (0);

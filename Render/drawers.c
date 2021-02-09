@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 12:20:15 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/10 01:11:01 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,54 @@ void 		draw_line(t_all *all, int x_pos, int h)
 	if (h & WEST)
 		color = 0x0000FF00;
 	if (h & EAST)
-		color = 0x00557864;
+		color = 0x00999999;
 	h = h & ~(0b1111 << 12);
 	if (h > all->prms->res_v)
 		h = all->prms->res_v;
 	i = (all->prms->res_v - h) / 2;
 	while (i < (all->prms->res_v + h) / 2)
 		my_pixel_put(all->win, x_pos, i++, color);
+}
+
+int 		get_pxl(t_tex *tex, int i, int h)
+{
+	char    *src;
+	int		color;
+	int 	y;
+	int 	x = 0;
+
+	y = 64 * i / h;
+	src = tex->addr + (y * tex->line_l + x * (tex->bpp / 8));
+	color = *(int*)src;
+	return (color);
+}
+
+void 		draw_txtr_line(t_all *all, int x_pos, int h)
+{
+	int i;
+	t_tex *tex;
+
+	if (h & NORTH)
+		tex = all->win->north;
+	if (h & SOUTH)
+		tex = all->win->south;
+	if (h & WEST)
+		tex = all->win->west;
+	if (h & EAST)
+		tex = all->win->east;
+	h = h & ~(0b1111 << 27);
+//	if (h > all->prms->res_v)
+//		h = all->prms->res_v;
+	i = 0;
+	while (i < h)
+	{
+		if ((all->prms->res_v - h) / 2 + i > -1 && (all->prms->res_v - h) / 2
+		+ i
+		< all->prms->res_v)
+			my_pixel_put(all->win, x_pos, (all->prms->res_v - h) / 2 + i,
+				get_pxl(tex, i, h));
+		i++;
+	}
 }
 
 
@@ -139,7 +180,7 @@ void 		draw_view(t_all *all)
 														 all->prms->res_h));
 		(angle < 0) ? angle += 2 * M_PI : angle;
 		(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
-		draw_line(all, i, get_height(all, angle));
+		draw_txtr_line(all, i, get_height(all, angle));
 		i += 1;
 	}
 
@@ -171,7 +212,7 @@ int			create_img(t_all *all)
 									   &all->win->line_l, &all->win->en);
 	draw_fc(all);
 	draw_view(all);
-	draw_sprite(all);
+//	draw_sprite(all);
 	draw_map(all->win, all->prms->map);
 	draw_player_on_map(all);
 	draw_player(all);
