@@ -27,12 +27,8 @@ t_params	*params_init()
 		params->west = NULL;
 		params->east = NULL;
 		params->sprite = NULL;
-		params->floor_color.red = -1;
-		params->floor_color.green = -1;
-		params->floor_color.blue = -1;
-		params->ceil_color.red = -1;
-		params->ceil_color.green = -1;
-		params->ceil_color.blue = -1;
+		params->floor_color = -1;
+		params->ceil_color = -1;
 	}
 	return (params);
 }
@@ -72,12 +68,8 @@ void	show_parse_res(t_all *all)
 	printf("west = \"%s\"\n", all->prms->west);
 	printf("east = \"%s\"\n", all->prms->east);
 	printf("sprite = \"%s\"\n", all->prms->sprite);
-	printf("f_color_r = %d\n", all->prms->floor_color.red);
-	printf("f_color_g = %d\n", all->prms->floor_color.green);
-	printf("f_color_b = %d\n", all->prms->floor_color.blue);
-	printf("c_color_r = %d\n", all->prms->ceil_color.red);
-	printf("c_color_g = %d\n", all->prms->ceil_color.green);
-	printf("c_color_b = %d\n", all->prms->ceil_color.blue);
+	printf("f_color = %d\n", all->prms->floor_color);
+	printf("c_color = %d\n", all->prms->ceil_color);
 	i = 0;
 	while (*(all->prms->map + i))
 		ft_putendl_fd(all->prms->map[i++], 1);

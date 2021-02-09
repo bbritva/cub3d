@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 10:00:21 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/09 10:01:34 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void 		draw_fc(t_all *all)
 	{
 		j = 0;
 		while (j < all->prms->res_h)
-			my_pixel_put(all->win, j++, i, ctoi(all->prms->ceil_color));
+			my_pixel_put(all->win, j++, i, all->prms->ceil_color);
 		i++;
 	}
 	while (i < all->prms->res_v)
 	{
 		j = 0;
 		while (j < all->prms->res_h)
-			my_pixel_put(all->win, j++, i, ctoi(all->prms->floor_color));
+			my_pixel_put(all->win, j++, i, all->prms->floor_color);
 		i++;
 	}
 }

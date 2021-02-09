@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:51 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 14:07:52 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/09 10:42:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@
 
 typedef struct
 {
-	unsigned int	red;
-	unsigned int	green;
-	unsigned int	blue;
-}					t_color;
-
-typedef struct
-{
 	double			pos_x;
 	double			pos_y;
 	double			ang_h;
@@ -48,12 +41,12 @@ typedef	struct
 	char 			*west;
 	char 			*east;
 	char 			*sprite;
-	t_color			floor_color;
-	t_color			ceil_color;
+	int				floor_color;
+	int				ceil_color;
 	char 			**map;
 }					t_params;
 
-t_color				get_color(char *line, t_color color);
+int					get_color(char *line, int color);
 int					is_map_line(char *line);
 t_params			*param_parser(int fd, t_params *params, char **line);
 char				**map_split(char const *s, char c);

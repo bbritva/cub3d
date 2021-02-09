@@ -6,12 +6,11 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 09:52:54 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/09 10:36:54 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <stdio.h>
 
 void		my_pixel_put(t_win *win, int x, int y, unsigned int color)
 {
@@ -19,11 +18,6 @@ void		my_pixel_put(t_win *win, int x, int y, unsigned int color)
 
 	dst = win->addr + (y * win->line_l + x * (win->bpp / 8));
 	*(unsigned int*)dst = color;
-}
-
-unsigned int	ctoi(t_color color)
-{
-	return(color.red << 16 | color.green << 8 | color.blue);
 }
 
 void		render(t_all *all)

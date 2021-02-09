@@ -75,7 +75,7 @@ void 	parse_line(t_params *params, char *line)
 	if (line[0] == 'F')
 		params->floor_color = get_color(line, params->floor_color);
 	if (line[0] == 'C')
-		params->ceil_color = get_color(line, params->floor_color);
+		params->ceil_color = get_color(line, params->ceil_color);
 }
 
 t_params	*param_parser(int fd, t_params *params, char **line)

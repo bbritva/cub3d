@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 19:24:13 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 10:05:14 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/09 10:06:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ int					move_fwd(t_all *all);
 int					move_bwd(t_all *all);
 int					move_left(t_all *all);
 int					move_right(t_all *all);
-unsigned int		ctoi(t_color color);
 
 #endif
