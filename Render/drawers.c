@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 11:27:58 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/09 11:28:16 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,23 @@ void 		draw_line(t_all *all, int x_pos, int h)
 
 	if (h & NORTH)
 	{
-		color = 0x00007864;
+		color = 0x000000FF;
 		h = h & ~(NORTH);
 	}
 	if (h & SOUTH)
 	{
-		color = 0x00557864;
+		color = 0x00FF0000;
 		h = h & ~(SOUTH);
+	}
+	if (h & WEST)
+	{
+		color = 0x0000ff00;
+		h = h & ~(WEST);
+	}
+	if (h & EAST)
+	{
+		color = 0x00557864;
+		h = h & ~(EAST);
 	}
 
 	if (h > all->prms->res_v)
