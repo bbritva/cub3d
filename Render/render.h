@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 11:15:13 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/09 11:23:15 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define MV_RIGHT 4
 # define RT_LEFT 2
 # define RT_RIGHT 1
+# define D 0.2f
 # define NORTH 1 << 12
 # define SOUTH 1 << 13
 # define WEST 1 << 14
