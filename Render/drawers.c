@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 11:35:14 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/09 12:20:15 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void 		draw_line(t_all *all, int x_pos, int h)
 	int i;
 	int color;
 
+	color = 0x00FFFFFF;
 	if (h & NORTH)
 	{
 		color = 0x000000FF;
@@ -150,7 +151,25 @@ void 		draw_view(t_all *all)
 														 all->prms->res_h));
 		(angle < 0) ? angle += 2 * M_PI : angle;
 		(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
-		draw_line(all, i, get_height2(all, angle));
+		draw_line(all, i, get_height(all, angle));
+		i += 1;
+	}
+
+}
+
+void 		draw_sprite(t_all *all)
+{
+	int		i;
+	double	angle;
+
+	i = 0;
+	while (i < all->prms->res_h)
+	{
+		angle = all->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
+														 all->prms->res_h));
+		(angle < 0) ? angle += 2 * M_PI : angle;
+		(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
+		draw_line(all, i, get_s_height(all, angle));
 		i += 1;
 	}
 
@@ -164,6 +183,7 @@ int			create_img(t_all *all)
 									   &all->win->line_l, &all->win->en);
 	draw_fc(all);
 	draw_view(all);
+	draw_sprite(all);
 	draw_map(all->win, all->prms->map);
 	draw_player_on_map(all);
 	draw_player(all);
