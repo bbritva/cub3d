@@ -41,26 +41,14 @@ void 		draw_line(t_all *all, int x_pos, int h)
 
 	color = 0x00FFFFFF;
 	if (h & NORTH)
-	{
 		color = 0x000000FF;
-		h = h & ~(NORTH);
-	}
 	if (h & SOUTH)
-	{
 		color = 0x00FF0000;
-		h = h & ~(SOUTH);
-	}
 	if (h & WEST)
-	{
 		color = 0x0000FF00;
-		h = h & ~(WEST);
-	}
 	if (h & EAST)
-	{
 		color = 0x00557864;
-		h = h & ~(EAST);
-	}
-
+	h = h & ~(0b1111 << 12);
 	if (h > all->prms->res_v)
 		h = all->prms->res_v;
 	i = (all->prms->res_v - h) / 2;
