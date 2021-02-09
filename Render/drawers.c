@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 10:01:34 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/09 11:27:58 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,24 @@ void 		draw_fc(t_all *all)
 void 		draw_line(t_all *all, int x_pos, int h)
 {
 	int i;
+	int color;
+
+	if (h & NORTH)
+	{
+		color = 0x00007864;
+		h = h & ~(NORTH);
+	}
+	if (h & SOUTH)
+	{
+		color = 0x00557864;
+		h = h & ~(SOUTH);
+	}
 
 	if (h > all->prms->res_v)
 		h = all->prms->res_v;
 	i = (all->prms->res_v - h) / 2;
 	while (i < (all->prms->res_v + h) / 2)
-		my_pixel_put(all->win, x_pos, i++, 0x00007864);
+		my_pixel_put(all->win, x_pos, i++, color);
 }
 
 
