@@ -82,9 +82,6 @@ int 		map_parser(int fd, t_all *all, char **line)
 	all->prms->map = map_split(line_map, '\n');//незащищенный маллок
 	free(line_map);
 	get_player(all);
-	all->plr.pos_x = 25.2;
-	all->plr.pos_y = 11.0;
-	all->plr.ang_h = 3 * M_PI_4;
 	if (check_map(all))
 	{
 		ft_putstr("map - ok\n");
@@ -116,8 +113,8 @@ int 	get_player(t_all *all)
 				}
 //				if ((all->plr = (t_player *)malloc(sizeof(t_player))))
 //				{
-					all->plr.pos_x = (double)j;
-					all->plr.pos_y = (double)i;
+					all->plr.pos_x = (double)j + 0.5f;
+					all->plr.pos_y = (double)i + 0.5f;
 					all->plr.angle_v = 0;
 					(all->prms->map[i][j] == 'N') ? all->plr.ang_h = M_PI_2 :
 							all->plr.ang_h;
