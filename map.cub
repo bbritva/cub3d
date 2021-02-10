@@ -1,8 +1,8 @@
 R 1000 1000
-NO ../Render/textures/north.xpm
-SO ../Render/textures/south.xpm
-WE ../Render//textures/west.xpm
-EA ../Render/textures/east.xpm
+NO ./Render/textures/north.xpm
+SO ./Render/textures/south.xpm
+WE ./Render//textures/west.xpm
+EA ./Render/textures/east.xpm
 
 S ./path_to_the_sprite_texture
 F 0,151,57
