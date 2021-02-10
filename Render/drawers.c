@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/10 22:48:20 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/10 23:08:26 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int 		get_pxl(t_tex *tex, int i, int h, int x_coor)
 	int 	y;
 	int 	x;
 
-	y = 64 * i / h;
-	x = 64 * x_coor / 100;
+	y = tex->h_tex * i / h;
+	x = tex->w_tex * x_coor / 255;
 	src = tex->addr + (y * tex->line_l + x * (tex->bpp / 8));
 	color = *(int*)src;
 	return (color);
