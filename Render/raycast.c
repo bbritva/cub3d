@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/10 22:58:01 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/11 00:21:45 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		get_height(t_all *all, double angle)
 		{
 			p.pos_x += dX * cos(angle);
 			p.pos_y -= dX * sin(angle);
-			x_coor = (int) fabs((fabs(dY) - fabs(dX)) * sin(angle) * 100);
+			x_coor = (int) ((p.pos_y - floor(p.pos_y)) * 100);
 			dir = (angle > M_PI_2 && angle < 3 * M_PI_2) ? WEST : EAST;
 			if (is_wall(all, p, angle, 'v'))
 				break;
@@ -85,7 +85,7 @@ int		get_height(t_all *all, double angle)
 		{
 			p.pos_y += dY * sin(angle);
 			p.pos_x -= dY * cos(angle);
-			x_coor = (int) fabs((fabs(dX) - fabs(dY)) * cos(angle) * 100);
+			x_coor = (int) ((p.pos_x - floor(p.pos_x)) * 100);
 			dir = (angle > 0 && angle < M_PI) ? NORTH : SOUTH;
 			if (is_wall(all, p, angle, 'h'))
 				break;
