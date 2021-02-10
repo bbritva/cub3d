@@ -50,7 +50,7 @@ void		render(t_all *all)
 
 		all->win->east = malloc(sizeof (t_tex));
 		all->win->east->img = mlx_xpm_file_to_image(all->win->mlx,
-			all->prms->north,&all->win->east->w_tex, &all->win->east->h_tex);
+			all->prms->east,&all->win->east->w_tex, &all->win->east->h_tex);
 		all->win->east->addr = mlx_get_data_addr(all->win->east->img,
 			&all->win->east->bpp, &all->win->east->line_l,
 			&all->win->east->en);

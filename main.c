@@ -60,8 +60,6 @@ int	main(int argc, char *argv[])
 		if (check_main_input(argc) && (parser(argv[1], all)))
 		{
 			ft_putstr("prms - ok\n");
-			ft_putstr("MAIN:\n");
-			show_parse_res(all);
 			render(all);
 			params_free(all->prms);
 		} else

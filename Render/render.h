@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 23:46:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/10 23:08:26 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 # define RT_LEFT 2
 # define RT_RIGHT 1
 # define D 0.2f
-# define NORTH 1 << 27
-# define SOUTH 1 << 28
-# define WEST 1 << 29
-# define EAST 1 << 30
+# define NORTH 1 << 26
+# define SOUTH 1 << 27
+# define WEST 1 << 28
+# define EAST 1 << 29
 
 typedef struct	s_tex //структура для окна
 {

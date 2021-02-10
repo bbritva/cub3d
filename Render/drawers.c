@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/10 01:11:01 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/10 22:48:20 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,15 @@ void 		draw_line(t_all *all, int x_pos, int h)
 		my_pixel_put(all->win, x_pos, i++, color);
 }
 
-int 		get_pxl(t_tex *tex, int i, int h)
+int 		get_pxl(t_tex *tex, int i, int h, int x_coor)
 {
 	char    *src;
 	int		color;
 	int 	y;
-	int 	x = 0;
+	int 	x;
 
 	y = 64 * i / h;
+	x = 64 * x_coor / 100;
 	src = tex->addr + (y * tex->line_l + x * (tex->bpp / 8));
 	color = *(int*)src;
 	return (color);
@@ -72,6 +73,7 @@ int 		get_pxl(t_tex *tex, int i, int h)
 void 		draw_txtr_line(t_all *all, int x_pos, int h)
 {
 	int i;
+	int x_coor;
 	t_tex *tex;
 
 	if (h & NORTH)
@@ -82,7 +84,9 @@ void 		draw_txtr_line(t_all *all, int x_pos, int h)
 		tex = all->win->west;
 	if (h & EAST)
 		tex = all->win->east;
-	h = h & ~(0b1111 << 27);
+	h = h & ~(0b1111 << 26);
+	x_coor = h >> 16;
+	h = h & ~(0b11111111 << 16);
 //	if (h > all->prms->res_v)
 //		h = all->prms->res_v;
 	i = 0;
@@ -92,7 +96,7 @@ void 		draw_txtr_line(t_all *all, int x_pos, int h)
 		+ i
 		< all->prms->res_v)
 			my_pixel_put(all->win, x_pos, (all->prms->res_v - h) / 2 + i,
-				get_pxl(tex, i, h));
+				get_pxl(tex, i, h, x_coor));
 		i++;
 	}
 }
