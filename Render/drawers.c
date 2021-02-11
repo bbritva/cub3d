@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/11 18:53:18 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/11 19:01:21 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,7 @@ void 		draw_sprites(t_all *all)
 														 all->prms->res_h));
 		(angle < 0) ? angle += 2 * M_PI : angle;
 		(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
-		draw_txtr_line(all, i, get_spr_prms(all, i));
+		draw_txtr_line(all, i, get_spr_prms(all, angle));
 		i += 1;
 	}
 

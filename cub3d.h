@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 19:24:13 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/11 13:40:20 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/11 15:59:59 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int					move_fwd(t_all *all);
 int					move_bwd(t_all *all);
 int					move_left(t_all *all);
 int					move_right(t_all *all);
-int					get_spr_prms(t_all *all, int i);
+int					get_spr_prms(t_all *all, double angle);
 int					is_sprite(t_all *all, t_player p, double angle, char hv);
 
 
