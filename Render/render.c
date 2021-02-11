@@ -55,6 +55,13 @@ void		render(t_all *all)
 			&all->win->east->bpp, &all->win->east->line_l,
 			&all->win->east->en);
 
+		all->win->sprite = malloc(sizeof (t_tex));
+		all->win->sprite->img = mlx_xpm_file_to_image(all->win->mlx,
+			all->prms->sprite,&all->win->sprite->w_tex, &all->win->sprite->h_tex);
+		all->win->sprite->addr = mlx_get_data_addr(all->win->sprite->img,
+			&all->win->sprite->bpp, &all->win->sprite->line_l,
+			&all->win->sprite->en);
+
 		create_img(all);
 		all->win->move_mask = 0;
 //		mlx_mouse_hook(win->win, mouse_hook, win);

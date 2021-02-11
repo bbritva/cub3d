@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:51 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 10:42:06 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/11 15:46:56 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,17 @@ typedef struct
 	double			angle_v;
 }					t_player;
 
+typedef struct		s_sprite
+{
+	int 			pos_x;
+	int 			pos_y;
+	int				i_start;
+	int				i_end;
+	int				i_center;
+	char 			is_visible;
+	double			dist;
+}					t_sprite;
+
 typedef	struct
 {
 	int				res_v;
@@ -44,6 +55,7 @@ typedef	struct
 	int				floor_color;
 	int				ceil_color;
 	char 			**map;
+	t_sprite		**sprites;
 }					t_params;
 
 int					get_color(char *line, int color);

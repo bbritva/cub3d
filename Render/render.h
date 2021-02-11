@@ -58,6 +58,7 @@ typedef struct	s_win //структура для окна
 	t_tex			*south;
 	t_tex			*west;
 	t_tex			*east;
+	t_tex			*sprite;
 }					t_win;
 
 

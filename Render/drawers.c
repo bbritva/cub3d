@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/10 23:08:26 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/11 18:53:18 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ void 		draw_txtr_line(t_all *all, int x_pos, int h)
 	int i;
 	int x_coor;
 	t_tex *tex;
+	int color;
 
+	tex = all->win->sprite;
 	if (h & NORTH)
 		tex = all->win->north;
 	if (h & SOUTH)
@@ -92,11 +94,13 @@ void 		draw_txtr_line(t_all *all, int x_pos, int h)
 	i = 0;
 	while (i < h)
 	{
+
 		if ((all->prms->res_v - h) / 2 + i > -1 && (all->prms->res_v - h) / 2
-		+ i
-		< all->prms->res_v)
+		+ i	< all->prms->res_v && (color = get_pxl(tex, i, h, x_coor)) > 0)
+		{
 			my_pixel_put(all->win, x_pos, (all->prms->res_v - h) / 2 + i,
-				get_pxl(tex, i, h, x_coor));
+				color);
+		}
 		i++;
 	}
 }
@@ -190,7 +194,24 @@ void 		draw_view(t_all *all)
 
 }
 
-void 		draw_sprite(t_all *all)
+//void		prepare_sprites(t_all *all)
+//{
+//	int		i;
+//	double	angle;
+//
+//	i = 0;
+//	while (i < all->prms->res_h)
+//	{
+//		angle = all->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
+//														 all->prms->res_h));
+//		(angle < 0) ? angle += 2 * M_PI : angle;
+//		(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
+//		get_spr_prms(all, i);
+//		i += 1;
+//	}
+//}
+
+void 		draw_sprites(t_all *all)
 {
 	int		i;
 	double	angle;
@@ -202,7 +223,7 @@ void 		draw_sprite(t_all *all)
 														 all->prms->res_h));
 		(angle < 0) ? angle += 2 * M_PI : angle;
 		(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
-		draw_line(all, i, get_s_height(all, angle));
+		draw_txtr_line(all, i, get_spr_prms(all, i));
 		i += 1;
 	}
 
@@ -216,7 +237,7 @@ int			create_img(t_all *all)
 									   &all->win->line_l, &all->win->en);
 	draw_fc(all);
 	draw_view(all);
-//	draw_sprite(all);
+	draw_sprites(all);
 	draw_map(all->win, all->prms->map);
 	draw_player_on_map(all);
 	draw_player(all);

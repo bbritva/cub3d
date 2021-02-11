@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/10 21:55:40 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/11 12:10:23 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,10 @@ int 		map_parser(int fd, t_all *all, char **line)
 	all->prms->map = map_split(line_map, '\n');//незащищенный маллок
 	free(line_map);
 	get_player(all);
+	get_sprites(all);
 //	all->plr.pos_x = 25.2;
 //	all->plr.pos_y = 11.0;
-	all->plr.ang_h = M_PI_4;
+//	all->plr.ang_h = M_PI_4;
 	if (check_map(all))
 	{
 		ft_putstr("map - ok\n");
@@ -98,7 +99,6 @@ int 	get_player(t_all *all)
 {
 	int			i;
 	int			j;
-//	t_player	p;
 
 	i = 0;
 	all->plr.pos_y = 0;
@@ -110,29 +110,82 @@ int 	get_player(t_all *all)
 			if (ft_strchr("NSWE",all->prms->map[i][j]))
 			{
 				if (all->plr.pos_y > 0)
-				{
-//					free(all->plr);
 					return (-1);
-				}
-//				if ((all->plr = (t_player *)malloc(sizeof(t_player))))
-//				{
-					all->plr.pos_x = (double)j + 0.5;
-					all->plr.pos_y = (double)i + 0.5;
-					all->plr.angle_v = 0;
-					(all->prms->map[i][j] == 'N') ? all->plr.ang_h = M_PI_2 :
-							all->plr.ang_h;
-					(all->prms->map[i][j] == 'S') ? all->plr.ang_h = 3 *
-							M_PI_2 :
-							all->plr.ang_h;
-					(all->prms->map[i][j] == 'E') ? all->plr.ang_h = 0 :
-							all->plr.ang_h;
-					(all->prms->map[i][j] == 'W') ? all->plr.ang_h = M_PI :
-							all->plr.ang_h;
-//				}
+				all->plr.pos_x = (double)j + 0.5;
+				all->plr.pos_y = (double)i + 0.5;
+				all->plr.angle_v = 0;
+				(all->prms->map[i][j] == 'N') ? all->plr.ang_h = M_PI_2 :
+					all->plr.ang_h;
+				(all->prms->map[i][j] == 'S') ? all->plr.ang_h = 3 * M_PI_2 :
+						all->plr.ang_h;
+				(all->prms->map[i][j] == 'E') ? all->plr.ang_h = 0 : all->plr
+						.ang_h;
+				(all->prms->map[i][j] == 'W') ? all->plr.ang_h = M_PI :
+						all->plr.ang_h;
 			}
 			j++;
 		}
 		i++;
+	}
+	return (1);
+}
+
+int 	get_spr_count(char **map)
+{
+	int			i;
+	int			j;
+	int 		size;
+
+	size = 0;
+	i = 0;
+	while (map[i] != 0)
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_strchr("2", map[i][j]))
+				size++;
+			j++;
+		}
+		i++;
+	}
+	return (size);
+}
+
+int 	get_sprites(t_all *all)
+{
+	int			i;
+	int			j;
+	int			k;
+	int 		size;
+
+	size = get_spr_count(all->prms->map);
+	if (size > 0 && (all->prms->sprites = (t_sprite **)ft_calloc(size,
+	(sizeof(t_sprite *) + 1))))
+	{
+		i = 0;
+		k = 0;
+		while (all->prms->map[i] != 0)
+		{
+			j = 0;
+			while (all->prms->map[i][j])
+			{
+				if (ft_strchr("2", all->prms->map[i][j]) &&
+				(all->prms->sprites[k] = ft_calloc(1, sizeof (t_sprite))))
+				{
+					all->prms->sprites[k]->pos_x = j;
+					all->prms->sprites[k]->pos_y = i;
+					all->prms->sprites[k]->i_start = 0;
+					all->prms->sprites[k]->i_end = 0;
+					all->prms->sprites[k]->i_center = 0;
+					all->prms->sprites[k]->is_visible = 0;
+					all->prms->sprites[k++]->dist = 0;
+				}
+				j++;
+			}
+			i++;
+		}
+		all->prms->sprites[k] = NULL;
 	}
 	return (1);
 }
