@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/11 20:22:47 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/15 16:22:25 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,47 +99,98 @@ int		get_height(t_all *all, double angle)
 	return (h | dir | (x_coor << 16));
 }
 
+//сложный кастер для спрайтов
+//int		get_spr_prms(t_all *all, double angle)
+//{
+//	int 		h;
+//	int 		x_coor;
+//	double		dX;
+//	double		dY;
+//	double		dist;
+//	t_player	p;
+//
+//	p = all->plr;
+//	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
+//	{
+//		dX = get_dX(&p, angle);
+//		dY = get_dY(&p, angle);
+//		if (fabs(dY) > fabs(dX))
+//		{
+//			p.pos_x += dX * cos(angle);
+//			p.pos_y -= dX * sin(angle);
+//			x_coor = (int) ((p.pos_y - floor(p.pos_y)) * 255);
+//			if (is_wall(all, p, angle, 'v'))
+//				return (0);
+//			if (is_sprite(all, p, angle, 'v'))
+//				break;
+//		}
+//		else
+//		{
+//			p.pos_y += dY * sin(angle);
+//			p.pos_x -= dY * cos(angle);
+//			x_coor = (int) ((p.pos_x - floor(p.pos_x)) * 255);
+//			if (is_wall(all, p, angle, 'v'))
+//				return (0);
+//			if (is_sprite(all, p, angle, 'h'))
+//				break;
+//		}
+//	}
+//	dX = ceil(p.pos_x) - 0.5 - all->plr.pos_x;
+//	dY = ceil(p.pos_y) - 0.5 - all->plr.pos_y;
+//	dist = sqrt(dX * dX + dY * dY);
+//	dist *= cos(angle - all->plr.ang_h);
+//	h = (int) (((double)all->prms->res_v / 1.2) * SCALE / dist);
+//	return (h | (x_coor << 16));
+//}
 
-int		get_spr_prms(t_all *all, double angle)
+
+//упрощенный кастер для спрайтов
+//int		get_spr_prms(t_all *all, double angle)
+//{
+//	int 		h;
+//	int 		x_coor;
+//	double		dX;
+//	double		dY;
+//	double		dist;
+//	t_player	p;
+//
+//	p = all->plr;
+//	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
+//	{
+//		p.pos_x += 0.1 * cos(angle);
+//		p.pos_y -= 0.1 * sin(angle);
+//		if (is_wall(all, p, angle, 'v'))
+//			return (0);
+//		if (is_sprite(all, p, angle, 'v'))
+//			break;
+//	}
+//	dX = ceil(p.pos_x) - 0.5 - all->plr.pos_x;
+//	dY = ceil(p.pos_y) - 0.5 - all->plr.pos_y;
+//	x_coor = (int) ((0.5 - (dX * sin(p.ang_h) + dY * cos(p.ang_h))) * 255);
+//	dist = sqrt(dX * dX + dY * dY);
+//	dist *= cos(angle - all->plr.ang_h);
+//	h = (int) (((double)all->prms->res_v / 1.2) * SCALE / dist);
+//	return (h | (x_coor << 16));
+//}
+
+//кастер для конкретного спрайта
+int		set_spr_prms(t_sprite *spr,  t_player plr)
 {
-	int 		h;
-	int 		x_coor;
 	double		dX;
 	double		dY;
-	double		dist;
-	t_player	p;
 
-	p = all->plr;
-	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
-	{
-		dX = get_dX(&p, angle);
-		dY = get_dY(&p, angle);
-		if (fabs(dY) > fabs(dX))
-		{
-			p.pos_x += dX * cos(angle);
-			p.pos_y -= dX * sin(angle);
-			x_coor = (int) ((p.pos_y - floor(p.pos_y)) * 255);
-			if (is_wall(all, p, angle, 'v'))
-				return (0);
-			if (is_sprite(all, p, angle, 'v'))
-				break;
-		}
-		else
-		{
-			p.pos_y += dY * sin(angle);
-			p.pos_x -= dY * cos(angle);
-			x_coor = (int) ((p.pos_x - floor(p.pos_x)) * 255);
-			if (is_wall(all, p, angle, 'v'))
-				return (0);
-			if (is_sprite(all, p, angle, 'h'))
-				break;
-		}
-	}
-	dX = ceil(p.pos_x) - 0.5 - all->plr.pos_x;
-	dY = ceil(p.pos_y) - 0.5 - all->plr.pos_y;
-	dist = sqrt(dX * dX + dY * dY);
-	dist *= cos(angle - all->plr.ang_h);
-	h = (int) (((double)all->prms->res_v / 1.2) * SCALE / dist);
-	return (h | (x_coor << 16));
+	dX = ceil(spr->pos_x) - 0.5 - plr.pos_x;
+	dY = ceil(spr->pos_y) - 0.5 - plr.pos_y;
+	spr->angle = atan2(-dY, dX);
+	while (spr->angle < 0)
+		spr->angle += 2 * M_PI;
+	while (spr->angle > 2 * M_PI)
+		spr->angle -= 2 * M_PI;
+//	if (fabs(plr.ang_h - spr->angle) > M_PI / 6)
+//		return (0);
+//	x_coor = (int) ((0.5 - (dX * sin(p.ang_h) + dY * cos(p.ang_h))) * 255);
+	spr->dist = sqrt(pow(dX, 2) + pow(dY, 2));
+//	h = (int) (((double)200 / 1.2) * SCALE / spr->dist);
+	return (0);
 }
 

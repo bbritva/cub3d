@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/11 19:01:21 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/15 16:14:07 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,14 +160,14 @@ void		draw_player_on_map(t_all *all)
 	p = all->plr;
 	p.pos_y *= SCALE2;
 	p.pos_x *= SCALE2;
-	x = p.pos_x - SCALE2;
+	x = (int) (p.pos_x - SCALE2);
 	while (x < p.pos_x + SCALE2)
 	{
-		y = p.pos_y - SCALE2;
+		y = (int) (p.pos_y - SCALE2);
 		while (y < p.pos_y + SCALE2)
 		{
-			a = SCALE2 * SCALE2 / 8;
-			b = (p.pos_x - x) * (p.pos_x - x) +	(p.pos_y - y) * (p.pos_y - y);
+			a = (int) pow(SCALE2, 2) / 8;
+			b = (int) (pow(p.pos_x - x, 2) + pow(p.pos_y - y, 2));
 			if (b < a)
 				my_pixel_put(all->win, x, y, 0x00FFFFFF);
 			y++;
@@ -194,37 +194,68 @@ void 		draw_view(t_all *all)
 
 }
 
-//void		prepare_sprites(t_all *all)
-//{
-//	int		i;
-//	double	angle;
-//
-//	i = 0;
-//	while (i < all->prms->res_h)
-//	{
-//		angle = all->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
-//														 all->prms->res_h));
-//		(angle < 0) ? angle += 2 * M_PI : angle;
-//		(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
-//		get_spr_prms(all, i);
-//		i += 1;
-//	}
-//}
+void 		sort_sprites(t_sprite **sprites)
+{
+	int			i;
+	int			j;
+	t_sprite	*temp;
+
+	i = 0;
+	while (sprites[i + 1])
+	{
+		j = i;
+		while (sprites[j + 1])
+		{
+			if (sprites[j]->dist > sprites[j + 1]->dist)
+			{
+				temp = sprites[j];
+				sprites[j] = sprites[j + 1];
+				sprites[j + 1] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+
+
+}
+
+void		prepare_sprites(t_all *all)
+{
+	int			i;
+//	double		angle;
+
+	i = 0;
+	while (all->prms->sprites[i])
+	{
+		set_spr_prms(all->prms->sprites[i++], all->plr);
+	}
+	sort_sprites(all->prms->sprites);
+}
 
 void 		draw_sprites(t_all *all)
 {
 	int		i;
-	double	angle;
+	int		j;
+	int 	n;
+//	double	angle;
+	int		size;
 
 	i = 0;
-	while (i < all->prms->res_h)
+	prepare_sprites(all);
+	while (all->prms->sprites[i])
 	{
-		angle = all->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
-														 all->prms->res_h));
-		(angle < 0) ? angle += 2 * M_PI : angle;
-		(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
-		draw_txtr_line(all, i, get_spr_prms(all, angle));
-		i += 1;
+		n = (int)((all->plr.ang_h - all->prms->sprites[i]->angle + M_PI / 6)
+				* 3 * all->prms->res_h / M_PI);
+		size = (int)(200 / all->prms->sprites[i]->dist);
+		j = n - size / 2;
+		while (j < n + size / 2)
+		{
+
+			draw_line(all, n, size);
+			j++;
+		}
+		i++;
 	}
 
 }

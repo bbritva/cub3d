@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/10 23:08:26 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/15 12:35:29 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../cub3d.h"
 # define SCALE 1
 # define SCALE2 10
-# define SPEED 0.05f
+# define SPEED 0.1f
 # define ESC 64
 # define FORWARD 32
 # define BACKWARD 16
@@ -62,6 +62,7 @@ typedef struct	s_win //структура для окна
 }					t_win;
 
 
+int					set_spr_prms(t_sprite *spr, t_player plr);
 
 
 

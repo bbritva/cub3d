@@ -41,6 +41,7 @@ typedef struct		s_sprite
 	int				i_center;
 	char 			is_visible;
 	double			dist;
+	double			angle;
 }					t_sprite;
 
 typedef	struct
