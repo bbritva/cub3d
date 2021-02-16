@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/16 10:41:35 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/16 17:52:23 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int 		get_pxl(t_tex *tex, int i, int h, int x_coor)
 	y = tex->h_tex * i / h;
 	x = tex->w_tex * x_coor / 255;
 	src = tex->addr + (y * tex->line_l + x * (tex->bpp / 8));
-	color = *(int*)src;
+	color = *(int *)src;
 	return (color);
 }
 
@@ -176,7 +176,7 @@ void		draw_player_on_map(t_all *all)
 	}
 }
 
-void 		draw_view(t_all *all)
+void 		draw_walls(t_all *all)
 {
 	int		i;
 	double	angle;
@@ -247,10 +247,6 @@ void 		draw_sprites(t_all *all)
 	while (all->prms->sprites[i])
 	{
 		angle = all->plr.ang_h - all->prms->sprites[i]->angle + M_PI / 6;
-		if (angle < 0)
-			angle += 2 * M_PI;
-		if (angle > 2 * M_PI)
-			angle -= 2 * M_PI;
 		n = (int)(angle	* 3 * all->prms->res_h / M_PI);
 		size = (int)(all->prms->res_v /(3 * all->prms->sprites[i]->dist));
 		j = n - size / 2;
@@ -276,7 +272,7 @@ int			create_img(t_all *all)
 	all->win->addr = mlx_get_data_addr(all->win->img, &all->win->bpp,
 									   &all->win->line_l, &all->win->en);
 	draw_fc(all);
-	draw_view(all);
+	draw_walls(all);
 	draw_sprites(all);
 	draw_map(all->win, all->prms->map);
 	draw_player_on_map(all);

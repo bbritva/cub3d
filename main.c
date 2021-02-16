@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 15:39:08 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/16 13:24:31 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ void	params_free(t_params *params)
 
 void	ft_putstr(char *str)
 {
-	while (*str != 0)
-	{
-		write(1, str, 1);
-		str++;
-	}
+		write(1, str, ft_strlen(str));
 }
 
 int		check_main_input(int argc)

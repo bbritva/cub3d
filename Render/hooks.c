@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 09:51:12 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/16 13:30:09 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int			render_next_frame(t_all *all)
 	{
 		mlx_clear_window(all->win->mlx, all->win->win);
 		mlx_destroy_window(all->win->mlx, all->win->win);
-		return (1);
+		exit(0);
 	}
 	all->plr.ang_h -= (all->plr.ang_h > M_PI * 2)	? M_PI * 2 : 0;
 	all->plr.ang_h += (all->plr.ang_h < 0) ? M_PI * 2 : 0;

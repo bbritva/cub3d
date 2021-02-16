@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/15 12:35:29 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/16 17:57:15 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <mlx.h>
 # include "../cub3d.h"
 # define SCALE 1
-# define SCALE2 10
+# define SCALE2 20
 # define SPEED 0.1f
 # define ESC 64
 # define FORWARD 32
