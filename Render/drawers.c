@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/16 10:24:35 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/16 10:29:25 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ void 		draw_sprites(t_all *all)
 	int		i;
 	int		j;
 	int 	n;
+	int 	x_coor;
 //	double	angle;
 	int		size;
 
@@ -252,7 +253,11 @@ void 		draw_sprites(t_all *all)
 		while (j < n + size / 2)
 		{
 			if (j > 0 && j < all->prms->res_h)
-				draw_line(all, j, size);
+			{
+				x_coor = (j - n + size / 2) * 255 / size;
+				draw_txtr_line(all, j, size | x_coor << 16);
+
+			}
 			j++;
 		}
 		i++;
