@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/16 10:29:25 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/16 10:36:59 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,7 @@ void 		sort_sprites(t_sprite **sprites)
 		j = i;
 		while (sprites[j + 1])
 		{
-			if (sprites[j]->dist > sprites[j + 1]->dist)
+			if (sprites[j]->dist < sprites[j + 1]->dist)
 			{
 				temp = sprites[j];
 				sprites[j] = sprites[j + 1];
