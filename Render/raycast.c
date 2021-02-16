@@ -179,8 +179,8 @@ int		set_spr_prms(t_sprite *spr,  t_player plr)
 	double		dX;
 	double		dY;
 
-	dX = ceil(spr->pos_x) - 0.5 - plr.pos_x;
-	dY = ceil(spr->pos_y) - 0.5 - plr.pos_y;
+	dX = ceil(spr->pos_x) + 0.5 - plr.pos_x;
+	dY = ceil(spr->pos_y) + 0.5 - plr.pos_y;
 	spr->angle = atan2(-dY, dX);
 	while (spr->angle < 0)
 		spr->angle += 2 * M_PI;

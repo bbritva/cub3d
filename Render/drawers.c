@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/15 16:14:07 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/16 10:24:35 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,12 +247,12 @@ void 		draw_sprites(t_all *all)
 	{
 		n = (int)((all->plr.ang_h - all->prms->sprites[i]->angle + M_PI / 6)
 				* 3 * all->prms->res_h / M_PI);
-		size = (int)(200 / all->prms->sprites[i]->dist);
+		size = (int)(all->prms->res_v /(3 * all->prms->sprites[i]->dist));
 		j = n - size / 2;
 		while (j < n + size / 2)
 		{
-
-			draw_line(all, n, size);
+			if (j > 0 && j < all->prms->res_h)
+				draw_line(all, j, size);
 			j++;
 		}
 		i++;
