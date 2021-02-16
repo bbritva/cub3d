@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/11 12:10:23 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/16 12:02:33 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ int 		map_parser(int fd, t_all *all, char **line)
 	free(line_map);
 	get_player(all);
 	get_sprites(all);
-//	all->plr.pos_x = 25.2;
-//	all->plr.pos_y = 11.0;
-//	all->plr.ang_h = M_PI_4;
+	all->plr.pos_x = 26.5;
+	all->plr.pos_y = 11.0;
+	all->plr.ang_h = 0;
 	if (check_map(all))
 	{
 		ft_putstr("map - ok\n");
@@ -157,11 +157,12 @@ int 	get_sprites(t_all *all)
 	int			i;
 	int			j;
 	int			k;
-	int 		size;
+	int 		count;
 
-	size = get_spr_count(all->prms->map);
-	if (size > 0 && (all->prms->sprites = (t_sprite **)ft_calloc(size,
-	(sizeof(t_sprite *) + 1))))
+	count = get_spr_count(all->prms->map);
+
+	if (count > 0 && (all->prms->sprites = (t_sprite **)ft_calloc(count + 1,
+															   sizeof(void *))))
 	{
 		i = 0;
 		k = 0;
@@ -175,11 +176,8 @@ int 	get_sprites(t_all *all)
 				{
 					all->prms->sprites[k]->pos_x = j;
 					all->prms->sprites[k]->pos_y = i;
-					all->prms->sprites[k]->i_start = 0;
-					all->prms->sprites[k]->i_end = 0;
-					all->prms->sprites[k]->i_center = 0;
-					all->prms->sprites[k]->is_visible = 0;
-					all->prms->sprites[k++]->dist = 0;
+					all->prms->sprites[k]->dist = 0;
+					all->prms->sprites[k++]->wall_dist = 0;
 				}
 				j++;
 			}

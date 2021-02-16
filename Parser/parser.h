@@ -36,11 +36,8 @@ typedef struct		s_sprite
 {
 	int 			pos_x;
 	int 			pos_y;
-	int				i_start;
-	int				i_end;
-	int				i_center;
-	char 			is_visible;
 	double			dist;
+	double			wall_dist;
 	double			angle;
 }					t_sprite;
 
