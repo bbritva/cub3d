@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/16 17:52:23 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/16 18:59:14 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,13 +240,16 @@ void 		draw_sprites(t_all *all)
 	int 	n;
 	int 	x_coor;
 	double	angle;
+	double	dA;
 	int		size;
 
 	i = 0;
 	prepare_sprites(all);
+	dA = ((all->plr.ang_h - M_PI / 6) < 0) ? M_PI / 6 - all->plr.ang_h : 0;
 	while (all->prms->sprites[i])
 	{
-		angle = all->plr.ang_h - all->prms->sprites[i]->angle + M_PI / 6;
+		angle = (all->plr.ang_h + dA) - (all->prms->sprites[i]->angle + dA) +
+				M_PI / 6;
 		n = (int)(angle	* 3 * all->prms->res_h / M_PI);
 		size = (int)(all->prms->res_v /(3 * all->prms->sprites[i]->dist));
 		j = n - size / 2;

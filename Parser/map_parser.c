@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/16 12:56:07 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/16 19:06:14 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int 		map_parser(int fd, t_all *all, char **line)
 	free(line_map);
 	get_player(all);
 	get_sprites(all);
-	all->plr.pos_x = 26.5;
-	all->plr.pos_y = 12.2;
+	all->plr.pos_x = 25.5;
+	all->plr.pos_y = 11.2;
 	all->plr.ang_h = 0;
 	if (check_map(all))
 	{
