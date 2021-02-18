@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 19:24:13 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/11 15:59:59 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/18 14:28:48 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct
 	t_player 		plr;
 	t_params		*prms;
 	t_win			*win;
+	int
 }					t_all;
 
 void 				render(t_all	*all);
