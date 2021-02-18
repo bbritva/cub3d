@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/18 13:40:16 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/18 14:25:47 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,6 +240,7 @@ void 		draw_sprites(t_all *all)
 	int		j;
 	int 	n;
 	int 	x_coor;
+	char 	isVisible;
 	double	angle;
 	int		size;
 
@@ -251,16 +252,19 @@ void 		draw_sprites(t_all *all)
 		angle -= (angle > M_PI * 2)	? M_PI * 2 : 0;
 		angle += (angle < 0) ? M_PI * 2 : 0;
 		n = (int)((0.5 + sin(angle)) * all->prms->res_h);
-		size = (int)(all->prms->res_v / (2.4 * all->prms->sprites[i]->dist));
+		size = (int)(all->prms->res_v / (1.2 * all->prms->sprites[i]->dist));
 		j = n - size / 2;
 		while (j < n + size / 2)
 		{
+			isVisible = 0;
+			if (get_wall_dist(all, all->prms->sprites[i]->angle) >
+			all->prms->sprites[i]->dist)
+				isVisible = 1;
 			if (j > 0 && j < all->prms->res_h && (angle < (M_PI / 2) || angle
-			> (3 * M_PI / 2)))
+			> (3 * M_PI / 2)) && isVisible)
 			{
 				x_coor = (j - n + size / 2) * 255 / size;
-				draw_txtr_line(all, j, size | x_coor << 16, size / 2);
-
+				draw_txtr_line(all, j, size | x_coor << 16, 0);
 			}
 			j++;
 		}

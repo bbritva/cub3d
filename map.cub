@@ -3,7 +3,7 @@ NO ./Render/textures/north.xpm
 SO ./Render/textures/south.xpm
 WE ./Render/textures/west.xpm
 EA ./Render/textures/east.xpm
-S ./Render/textures/tank.xpm
+S ./Render/textures/barrel.xpm
 F 0,151,57
 C 0,191,255
 

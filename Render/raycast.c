@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/16 12:30:09 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/18 14:28:48 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,33 +145,27 @@ int		get_height(t_all *all, double angle)
 
 
 //упрощенный кастер для спрайтов
-//int		get_spr_prms(t_all *all, double angle)
-//{
-//	int 		h;
-//	int 		x_coor;
-//	double		dX;
-//	double		dY;
-//	double		dist;
-//	t_player	p;
-//
-//	p = all->plr;
-//	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
-//	{
-//		p.pos_x += 0.1 * cos(angle);
-//		p.pos_y -= 0.1 * sin(angle);
-//		if (is_wall(all, p, angle, 'v'))
-//			return (0);
-//		if (is_sprite(all, p, angle, 'v'))
-//			break;
-//	}
-//	dX = ceil(p.pos_x) - 0.5 - all->plr.pos_x;
-//	dY = ceil(p.pos_y) - 0.5 - all->plr.pos_y;
-//	x_coor = (int) ((0.5 - (dX * sin(p.ang_h) + dY * cos(p.ang_h))) * 255);
-//	dist = sqrt(dX * dX + dY * dY);
-//	dist *= cos(angle - all->plr.ang_h);
-//	h = (int) (((double)all->prms->res_v / 1.2) * SCALE / dist);
-//	return (h | (x_coor << 16));
-//}
+double		get_wall_dist(t_all *all, double angle)
+{
+	double		dX;
+	double		dY;
+	double		dist;
+	t_player	p;
+
+	p = all->plr;
+	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
+	{
+		p.pos_x += 0.1 * cos(angle);
+		p.pos_y -= 0.1 * sin(angle);
+		if (is_wall(all, p, angle, 'v'))
+			break;
+	}
+	dX = p.pos_x - all->plr.pos_x;
+	dY = p.pos_y - all->plr.pos_y;
+	dist = sqrt(dX * dX + dY * dY);
+	dist *= cos(angle - all->plr.ang_h);
+	return (dist);
+}
 
 //кастер для конкретного спрайта
 int		set_spr_prms(t_sprite *spr,  t_player plr)

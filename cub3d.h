@@ -48,6 +48,8 @@ int					move_left(t_all *all);
 int					move_right(t_all *all);
 int					get_spr_prms(t_all *all, double angle);
 int					is_sprite(t_all *all, t_player p, double angle, char hv);
+double				get_wall_dist(t_all *all, double angle);
+
 
 
 #endif
