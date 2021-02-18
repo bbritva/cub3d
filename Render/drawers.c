@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/18 11:25:23 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/18 13:40:16 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,20 +240,23 @@ void 		draw_sprites(t_all *all)
 	int		j;
 	int 	n;
 	int 	x_coor;
-//	double	angle;
+	double	angle;
 	int		size;
 
 	i = 0;
 	prepare_sprites(all);
 	while (all->prms->sprites[i])
 	{
-		n = (int)((0.5 + sin(all->plr.ang_h - all->prms->sprites[i]->angle))
-				* all->prms->res_h);
-		size = (int)(all->prms->res_v /(2.4 * all->prms->sprites[i]->dist));
+		angle = all->plr.ang_h - all->prms->sprites[i]->angle;
+		angle -= (angle > M_PI * 2)	? M_PI * 2 : 0;
+		angle += (angle < 0) ? M_PI * 2 : 0;
+		n = (int)((0.5 + sin(angle)) * all->prms->res_h);
+		size = (int)(all->prms->res_v / (2.4 * all->prms->sprites[i]->dist));
 		j = n - size / 2;
 		while (j < n + size / 2)
 		{
-			if (j > 0 && j < all->prms->res_h)
+			if (j > 0 && j < all->prms->res_h && (angle < (M_PI / 2) || angle
+			> (3 * M_PI / 2)))
 			{
 				x_coor = (j - n + size / 2) * 255 / size;
 				draw_txtr_line(all, j, size | x_coor << 16, size / 2);
