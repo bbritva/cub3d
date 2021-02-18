@@ -33,7 +33,7 @@
 # define WEST 1 << 28
 # define EAST 1 << 29
 
-typedef struct	s_tex //структура для окна
+typedef struct	s_tex //структура для текстуры
 {
 	void			*img;
 	void			*addr;

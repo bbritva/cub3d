@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/18 10:40:54 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/18 11:25:23 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int 		get_pxl(t_tex *tex, int i, int h, int x_coor)
 	return (color);
 }
 
-void 		draw_txtr_line(t_all *all, int x_pos, int h)
+void 		draw_txtr_line(t_all *all, int x_pos, int h, int center)
 {
 	int i;
 	int x_coor;
@@ -95,11 +95,12 @@ void 		draw_txtr_line(t_all *all, int x_pos, int h)
 	while (i < h)
 	{
 
-		if ((all->prms->res_v - h) / 2 + i > -1 && (all->prms->res_v - h) / 2
-		+ i	< all->prms->res_v && (color = get_pxl(tex, i, h, x_coor)) > 0)
+		if ((all->prms->res_v - h) / 2 + i  + center > -1 && (all->prms->res_v
+		- h) / 2 + i  + center < all->prms->res_v && (color = get_pxl(tex, i, h,
+													  x_coor)) > 0)
 		{
-			my_pixel_put(all->win, x_pos, (all->prms->res_v - h) / 2 + i,
-				color);
+			my_pixel_put(all->win, x_pos, (all->prms->res_v - h) / 2
+			+ i + center, color);
 		}
 		i++;
 	}
@@ -188,7 +189,7 @@ void 		draw_walls(t_all *all)
 														 all->prms->res_h));
 		(angle < 0) ? angle += 2 * M_PI : angle;
 		(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
-		draw_txtr_line(all, i, get_height(all, angle));
+		draw_txtr_line(all, i, get_height(all, angle), 0);
 		i += 1;
 	}
 
@@ -246,18 +247,16 @@ void 		draw_sprites(t_all *all)
 	prepare_sprites(all);
 	while (all->prms->sprites[i])
 	{
-//		angle = all->plr.ang_h - all->prms->sprites[i]->angle + M_PI / 6;
-//		n = (int)(angle	* 3 * all->prms->res_h / M_PI);
 		n = (int)((0.5 + sin(all->plr.ang_h - all->prms->sprites[i]->angle))
 				* all->prms->res_h);
-		size = (int)(all->prms->res_v /(3 * all->prms->sprites[i]->dist));
+		size = (int)(all->prms->res_v /(2.4 * all->prms->sprites[i]->dist));
 		j = n - size / 2;
 		while (j < n + size / 2)
 		{
 			if (j > 0 && j < all->prms->res_h)
 			{
 				x_coor = (j - n + size / 2) * 255 / size;
-				draw_txtr_line(all, j, size | x_coor << 16);
+				draw_txtr_line(all, j, size | x_coor << 16, size / 2);
 
 			}
 			j++;
