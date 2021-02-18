@@ -57,7 +57,7 @@ double		get_dX(t_player *plr, double angle)
 }
 
 
-int		get_height(t_all *all, double angle)
+int		get_height(t_all *all, int i)
 {
 	int 		h;
 	int 		dir;
@@ -66,8 +66,13 @@ int		get_height(t_all *all, double angle)
 	double		dY;
 	double		dist;
 	t_player	p;
+	double		angle;
 
 	p = all->plr;
+	angle = all->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
+													 all->prms->res_h));
+	(angle < 0) ? angle += 2 * M_PI : angle;
+	(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
 	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
 	{
 		dX = get_dX(&p, angle);
@@ -95,6 +100,7 @@ int		get_height(t_all *all, double angle)
 	dY = p.pos_y - all->plr.pos_y;
 	dist = sqrt(dX * dX + dY * dY);
 	dist *= cos(angle - all->plr.ang_h);
+	all->prms->dists[i] = dist;
 	h = (int) (((double)all->prms->res_v / 1.2) * SCALE / dist);
 	return (h | dir | (x_coor << 16));
 }

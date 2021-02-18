@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:58:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 19:25:22 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/18 19:01:31 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,15 @@ void 	parse_line(t_params *params, char *line)
 		params->ceil_color = get_color(line, params->ceil_color);
 }
 
+double 		*dists_init(int size)
+{
+	double	*dists;
+
+	if (size > 0 && (dists = (double *)ft_calloc(size, sizeof (double))))
+		return (dists);
+	return (NULL);
+}
+
 t_params	*param_parser(int fd, t_params *params, char **line)
 {
 	int 	i;
@@ -87,5 +96,6 @@ t_params	*param_parser(int fd, t_params *params, char **line)
 		parse_line(params, *line);
 		free(*line);
 	}
+	params->dists = dists_init(params->res_h);
 	return (params);
 }

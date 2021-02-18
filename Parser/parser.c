@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/07 19:36:56 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/18 18:44:41 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_params	*params_init()
 		params->west = NULL;
 		params->east = NULL;
 		params->sprite = NULL;
+		params->dists = NULL;
 		params->floor_color = -1;
 		params->ceil_color = -1;
 	}

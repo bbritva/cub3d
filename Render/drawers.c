@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/18 14:25:47 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/18 19:10:45 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,16 +180,16 @@ void		draw_player_on_map(t_all *all)
 void 		draw_walls(t_all *all)
 {
 	int		i;
-	double	angle;
+//	double	angle;
 
 	i = 0;
 	while (i < all->prms->res_h)
 	{
-		angle = all->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
-														 all->prms->res_h));
-		(angle < 0) ? angle += 2 * M_PI : angle;
-		(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
-		draw_txtr_line(all, i, get_height(all, angle), 0);
+//		angle = all->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
+//														 all->prms->res_h));
+//		(angle < 0) ? angle += 2 * M_PI : angle;
+//		(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
+		draw_txtr_line(all, i, get_height(all, i), 0);
 		i += 1;
 	}
 
@@ -257,8 +257,7 @@ void 		draw_sprites(t_all *all)
 		while (j < n + size / 2)
 		{
 			isVisible = 0;
-			if (get_wall_dist(all, all->prms->sprites[i]->angle) >
-			all->prms->sprites[i]->dist)
+			if (all->prms->dists[j] > all->prms->sprites[i]->dist)
 				isVisible = 1;
 			if (j > 0 && j < all->prms->res_h && (angle < (M_PI / 2) || angle
 			> (3 * M_PI / 2)) && isVisible)

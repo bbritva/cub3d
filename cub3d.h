@@ -23,7 +23,6 @@ typedef struct
 	t_player 		plr;
 	t_params		*prms;
 	t_win			*win;
-	int
 }					t_all;
 
 void 				render(t_all	*all);
@@ -34,7 +33,7 @@ void				ft_putstr(char *str);
 void				my_pixel_put(t_win *win, int x, int y, unsigned int	color);
 int					get_player(t_all *all);
 int				 	get_sprites(t_all *all);
-int					get_height(t_all *all, double angle);
+int					get_height(t_all *all, int i);
 int					mouse_move_hook(int x, int y, t_win *win);
 int					is_wall(t_all *all, t_player p, double angle, char hv);
 int					key_press(int keycode, t_all *all);

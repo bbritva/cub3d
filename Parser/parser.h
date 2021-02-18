@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:51 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/11 15:46:56 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/18 18:53:09 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ typedef	struct
 	char 			*sprite;
 	int				floor_color;
 	int				ceil_color;
+	int				i;
 	char 			**map;
 	t_sprite		**sprites;
+	double			*dists;
 }					t_params;
 
 int					get_color(char *line, int color);
