@@ -83,9 +83,9 @@ int 		map_parser(int fd, t_all *all, char **line)
 	free(line_map);
 	get_player(all);
 	get_sprites(all);
-	all->plr.pos_x = 25.5;
-	all->plr.pos_y = 11.2;
-	all->plr.ang_h = M_PI;
+//	all->plr.pos_x = 25.5;
+//	all->plr.pos_y = 11.2;
+//	all->plr.ang_h = M_PI;
 	if (check_map(all))
 	{
 		ft_putstr("map - ok\n");
