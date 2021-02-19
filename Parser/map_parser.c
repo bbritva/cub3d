@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/16 19:06:14 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/19 10:07:29 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ int 	get_sprites(t_all *all)
 				{
 					all->prms->sprites[k]->pos_x = j;
 					all->prms->sprites[k]->pos_y = i;
-					all->prms->sprites[k]->dist = 0;
+					all->prms->sprites[k++]->dist = 0;
 				}
 				j++;
 			}

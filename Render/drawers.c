@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/19 10:14:52 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/19 10:18:19 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,12 @@ int 		shadow_color(int color, int h)
 	int green;
 	int blue;
 
-	if (h > 500)
+	if (h > 200)
 		return (color);
-	red = ((color & 0xFF << 16) >> 16) * h / 500;
-	green = ((color & 0xFF << 8) * h >> 8) / 500;
-	blue = (color & 0xFF) * h / 500;
+	h = (h < 50) ? 50 : h;
+	red = ((color & 0xFF << 16) >> 16) * h / 200;
+	green = ((color & 0xFF << 8) * h >> 8) / 200;
+	blue = (color & 0xFF) * h / 200;
 	color = red << 16 | green << 8 | blue;
 	return (color);
 }
