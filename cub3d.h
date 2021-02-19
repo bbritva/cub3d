@@ -25,7 +25,7 @@ typedef struct
 	t_win			*win;
 }					t_all;
 
-void 				render(t_all	*all);
+void 				render(t_all *all);
 int					parser(char *f_name, t_all *all);
 void				show_parse_res(t_all *all);
 int					map_parser(int fd, t_all *all, char **line);

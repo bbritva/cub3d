@@ -177,7 +177,6 @@ int 	get_sprites(t_all *all)
 					all->prms->sprites[k]->pos_x = j;
 					all->prms->sprites[k]->pos_y = i;
 					all->prms->sprites[k]->dist = 0;
-					all->prms->sprites[k++]->wall_dist = 0;
 				}
 				j++;
 			}

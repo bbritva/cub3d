@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:51 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/18 18:53:09 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/19 08:57:33 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct		s_sprite
 	int 			pos_x;
 	int 			pos_y;
 	double			dist;
-	double			wall_dist;
 	double			angle;
 }					t_sprite;
 

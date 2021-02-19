@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/18 19:10:45 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/19 10:14:52 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,21 @@ int 		get_pxl(t_tex *tex, int i, int h, int x_coor)
 	return (color);
 }
 
+int 		shadow_color(int color, int h)
+{
+	int red;
+	int green;
+	int blue;
+
+	if (h > 500)
+		return (color);
+	red = ((color & 0xFF << 16) >> 16) * h / 500;
+	green = ((color & 0xFF << 8) * h >> 8) / 500;
+	blue = (color & 0xFF) * h / 500;
+	color = red << 16 | green << 8 | blue;
+	return (color);
+}
+
 void 		draw_txtr_line(t_all *all, int x_pos, int h, int center)
 {
 	int i;
@@ -99,6 +114,7 @@ void 		draw_txtr_line(t_all *all, int x_pos, int h, int center)
 		- h) / 2 + i  + center < all->prms->res_v && (color = get_pxl(tex, i, h,
 													  x_coor)) > 0)
 		{
+			color = shadow_color(color, h);
 			my_pixel_put(all->win, x_pos, (all->prms->res_v - h) / 2
 			+ i + center, color);
 		}
