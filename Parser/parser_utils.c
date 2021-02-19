@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 15:11:23 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 10:40:43 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/19 11:25:59 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,3 +57,11 @@ int			get_color(char *line, int color)
 		blue = blue * 10 + (line[i++] - '0');
 	return (red << 16 | green << 8 | blue);
 }
+
+int		skip_spaces(const char *str, int i)
+{
+	while ((str[i] >= 9 && str[i] <= 13 ) || str[i] == 32)
+		i++;
+	return (i);
+}
+

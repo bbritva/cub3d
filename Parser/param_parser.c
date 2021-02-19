@@ -6,19 +6,18 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:58:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/18 19:01:31 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/19 11:07:11 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int		get_rez(t_params *params, char *line)
+int		get_rez(t_params *params, const char *line)
 {
 	int i;
 
-	i = 0;
-	while ((line[i] < '0' || line[i] > '9') && line[i] != 0)
-		i++;
+	i = 1;
+	i = skip_spaces(line, i);
 	if (line[i] != 0)
 		params->res_h = 0;
 	while ((line[i] >= '0' && line[i] <= '9') && line[i] != 0)

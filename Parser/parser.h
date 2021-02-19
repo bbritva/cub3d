@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:51 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/19 08:57:33 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/19 09:43:22 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int					get_color(char *line, int color);
 int					is_map_line(char *line);
 t_params			*param_parser(int fd, t_params *params, char **line);
 char				**map_split(char const *s, char c);
+int					skip_spaces(const char *str, int i);
+
 
 
 
