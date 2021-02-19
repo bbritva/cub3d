@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/16 13:24:31 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/19 09:02:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,20 @@ void	ft_putstr(char *str)
 		write(1, str, ft_strlen(str));
 }
 
-int		check_main_input(int argc)
+int		check_main_input(int argc, char *argv[])
 {
 	if (argc == 1)
 	{
 		ft_putstr(F_MISS_MSG);
 		return (0);
 	}
-	if (argc > 2)
-	{
-		ft_putstr(M_ARGS_MSG);
-		return (0);
-	}
-	return (1);
+	if (argc == 2 && ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
+		return (1);
+	if (argc == 3 && ft_strncmp("––save", argv[2], 6))
+		if (ft_strlen(ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))) == 4)
+			return (1);
+	ft_putstr(M_ARGS_MSG);
+	return (0);
 }
 
 int	main(int argc, char *argv[])
@@ -53,7 +54,7 @@ int	main(int argc, char *argv[])
 
 	if ((all = (t_all *)malloc(sizeof (t_all))))
 	{
-		if (check_main_input(argc) && (parser(argv[1], all)))
+		if (check_main_input(argc, argv) && (parser(argv[1], all)))
 		{
 			ft_putstr("prms - ok\n");
 			render(all);
