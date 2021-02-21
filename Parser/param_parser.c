@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:58:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/19 11:07:11 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/21 09:07:27 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,18 @@ int		get_rez(t_params *params, const char *line)
 
 	i = 1;
 	i = skip_spaces(line, i);
-	if (line[i] != 0)
+	if (ft_isdigit(line[i]) && params->res_h == -1)
 		params->res_h = 0;
-	while ((line[i] >= '0' && line[i] <= '9') && line[i] != 0)
-	{
-		params->res_h = params->res_h * 10 + (line[i] - '0');
-		i++;
-	}
-	while ((line[i] < '0' || line[i] > '9') && line[i] != 0)
-		i++;
-	if (line[i] != 0)
+	while (ft_isdigit(line[i]))
+		params->res_h = params->res_h * 10 + (line[i++] - '0');
+	i = skip_spaces(line, i);
+	if (ft_isdigit(line[i]) && params->res_v == -1)
 		params->res_v = 0;
 	while ((line[i] >= '0' && line[i] <= '9') && line[i] != 0)
-	{
-		params->res_v = params->res_v * 10 + (line[i] - '0');
-		i++;
-	}
+		params->res_v = params->res_v * 10 + (line[i++] - '0');
+	i = skip_spaces(line, i);
+	if (line[i] != 0)
+		params->res_h = -2;
 	return (i);
 }
 
