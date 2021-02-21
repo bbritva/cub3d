@@ -12,7 +12,6 @@
 /libft/
 /libmlx.dylib
 /Render/*.o
-parser
-.idea
+parser.idea
 .idea/*
 /ft_split2.c

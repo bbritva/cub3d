@@ -30,7 +30,7 @@ static size_t	map_calcsize(char *s, char c)
 	return (result);
 }
 
-static size_t	ft_wrdlen(char *s, char c)
+static size_t	ft_wrdlen(const char *s, char c)
 {
 	size_t result;
 

@@ -50,18 +50,18 @@ int		check_main_input(int argc, char *argv[])
 
 int	main(int argc, char *argv[])
 {
-	t_all	*all;
+	t_params	*prms;
 
-	if ((all = (t_all *)malloc(sizeof (t_all))))
+	if ((prms = (t_params *)malloc(sizeof (t_params))))
 	{
-		if (check_main_input(argc, argv) && (parser(argv[1], all)))
+		if (check_main_input(argc, argv) && (parser(argv[1], prms)))
 		{
 			ft_putstr("prms - ok\n");
-			render(all);
-			params_free(all->prms);
+			render(prms);
+			params_free(prms);
 		} else
 			ft_putstr("prms error\n");
-		free(all);
+		free(prms);
 	}
 	ft_putstr("end of cub3d\n");
 }

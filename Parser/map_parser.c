@@ -59,7 +59,7 @@ int 		check_map(t_all *all)
 	return (1);
 }
 
-int 		map_parser(int fd, t_all *all, char **line)
+int					map_parser(int fd, t_params *prms, char **line)
 {
 	int 	i;
 	char	*line_map;
@@ -79,14 +79,14 @@ int 		map_parser(int fd, t_all *all, char **line)
 		line_map = gnl_strjoin(line_map, "\n");
 		free(*line);
 	}
-	all->prms->map = map_split(line_map, '\n');//незащищенный маллок
+	prms->map = map_split(line_map, '\n');//незащищенный маллок
 	free(line_map);
-	get_player(all);
-	get_sprites(all);
+	get_player(prms);
+	get_sprites(prms);
 //	all->plr.pos_x = 25.5;
 //	all->plr.pos_y = 11.2;
 //	all->plr.ang_h = M_PI;
-	if (check_map(all))
+	if (check_map(prms))
 	{
 		ft_putstr("map - ok\n");
 		return (1);
@@ -95,33 +95,33 @@ int 		map_parser(int fd, t_all *all, char **line)
 	return (0);
 }
 
-int 	get_player(t_all *all)
+int 	get_player(t_params *prms)
 {
 	int			i;
 	int			j;
 
 	i = 0;
-	all->plr.pos_y = 0;
-	while (all->prms->map[i] != 0)
+	prms->plr.pos_y = 0;
+	while (prms->map[i] != 0)
 	{
 		j = 0;
-		while (all->prms->map[i][j])
+		while (prms->map[i][j])
 		{
-			if (ft_strchr("NSWE",all->prms->map[i][j]))
+			if (ft_strchr("NSWE",prms->map[i][j]))
 			{
-				if (all->plr.pos_y > 0)
+				if (prms->plr.pos_y > 0)
 					return (-1);
-				all->plr.pos_x = (double)j + 0.5;
-				all->plr.pos_y = (double)i + 0.5;
-				all->plr.angle_v = 0;
-				(all->prms->map[i][j] == 'N') ? all->plr.ang_h = M_PI_2 :
-					all->plr.ang_h;
-				(all->prms->map[i][j] == 'S') ? all->plr.ang_h = 3 * M_PI_2 :
-						all->plr.ang_h;
-				(all->prms->map[i][j] == 'E') ? all->plr.ang_h = 0 : all->plr
+				prms->plr.pos_x = (double)j + 0.5;
+				prms->plr.pos_y = (double)i + 0.5;
+				prms->plr.angle_v = 0;
+				(prms->map[i][j] == 'N') ? prms->plr.ang_h = M_PI_2 :
+					prms->plr.ang_h;
+				(prms->map[i][j] == 'S') ? prms->plr.ang_h = 3 * M_PI_2 :
+						prms->plr.ang_h;
+				(prms->map[i][j] == 'E') ? prms->plr.ang_h = 0 : prms->plr
 						.ang_h;
-				(all->prms->map[i][j] == 'W') ? all->plr.ang_h = M_PI :
-						all->plr.ang_h;
+				(prms->map[i][j] == 'W') ? prms->plr.ang_h = M_PI :
+						prms->plr.ang_h;
 			}
 			j++;
 		}

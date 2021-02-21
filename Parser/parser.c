@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/19 08:20:20 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/21 10:13:33 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_params	*params_init()
 	return (params);
 }
 
-int 	parser(char *f_name, t_all *all)
+int 	parser(char *f_name, t_params *prms)
 {
 	int			fd;
 	char		*line;
@@ -45,12 +45,12 @@ int 	parser(char *f_name, t_all *all)
 		ft_putstr(NREAD_MSG);
 		return (0);
 	}
-	if ((all->prms = params_init()))
+	if ((prms = params_init()))
 	{
-		param_parser(fd, all->prms, &line);
-//		check_params(all->prms);
-		map_parser(fd, all, &line);
-		show_parse_res(all);
+		param_parser(fd, prms, &line);
+//		check_params(prms);
+		map_parser(fd, prms, &line);
+		show_parse_res(prms);
 		close(fd);
 		return (1);
 	}
@@ -58,22 +58,22 @@ int 	parser(char *f_name, t_all *all)
 	return (0);
 }
 
-void	show_parse_res(t_all *all)
+void	show_parse_res(t_params *prms)
 {
 	int i;
 
-	printf("hrez = %d\n", all->prms->res_h);
-	printf("vrez = %d\n", all->prms->res_v);
-	printf("north = \"%s\"\n", all->prms->north);
-	printf("south = \"%s\"\n", all->prms->south);
-	printf("west = \"%s\"\n", all->prms->west);
-	printf("east = \"%s\"\n", all->prms->east);
-	printf("sprite = \"%s\"\n", all->prms->sprite);
-	printf("f_color = %d\n", all->prms->floor_color);
-	printf("c_color = %d\n", all->prms->ceil_color);
+	printf("hrez = %d\n", prms->res_h);
+	printf("vrez = %d\n", prms->res_v);
+	printf("north = \"%s\"\n", prms->north);
+	printf("south = \"%s\"\n", prms->south);
+	printf("west = \"%s\"\n", prms->west);
+	printf("east = \"%s\"\n", prms->east);
+	printf("sprite = \"%s\"\n", prms->sprite);
+	printf("f_color = %d\n", prms->floor_color);
+	printf("c_color = %d\n", prms->ceil_color);
 	i = 0;
-	while (*(all->prms->map + i))
-		ft_putendl_fd(all->prms->map[i++], 1);
+	while (*(prms->map + i))
+		ft_putendl_fd(prms->map[i++], 1);
 }
 
 

@@ -1,3 +1,4 @@
+#include <__wctype.h>
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:58:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/21 09:07:27 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/21 09:32:11 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +85,7 @@ double 		*dists_init(int size)
 
 t_params	*param_parser(int fd, t_params *params, char **line)
 {
-	int 	i;
-
-	while ((i = get_next_line(fd, line)) && !is_map_line(*line))
+	while ((get_next_line(fd, line)) && !is_map_line(*line))
 	{
 		parse_line(params, *line);
 		free(*line);
