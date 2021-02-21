@@ -34,28 +34,6 @@ void 		draw_fc(t_all *all)
 	}
 }
 
-void 		draw_line(t_all *all, int x_pos, int h)
-{
-	int i;
-	int color;
-
-	color = 0x00FFFFFF;
-	if (h & NORTH)
-		color = 0x000000FF;
-	if (h & SOUTH)
-		color = 0x00FF0000;
-	if (h & WEST)
-		color = 0x0000FF00;
-	if (h & EAST)
-		color = 0x00999999;
-	h = h & ~(0b1111 << 12);
-	if (h > all->prms->res_v)
-		h = all->prms->res_v;
-	i = (all->prms->res_v - h) / 2;
-	while (i < (all->prms->res_v + h) / 2)
-		my_pixel_put(all->win, x_pos, i++, color);
-}
-
 int 		get_pxl(t_tex *tex, int i, int h, int x_coor)
 {
 	char    *src;
@@ -155,7 +133,7 @@ void		draw_player(t_all *all)
 	int 		i;
 
 	i = 0;
-	p = all->plr;
+	p = all->prms->plr;
 	p.pos_x *= SCALE2;
 	p.pos_y *= SCALE2;
 	while (i < 10)
@@ -175,7 +153,7 @@ void		draw_player_on_map(t_all *all)
 	int			a;
 	int 		b;
 
-	p = all->plr;
+	p = all->prms->plr;
 	p.pos_y *= SCALE2;
 	p.pos_x *= SCALE2;
 	x = (int) (p.pos_x - SCALE2);
@@ -246,7 +224,7 @@ void		prepare_sprites(t_all *all)
 	i = 0;
 	while (all->prms->sprites[i])
 	{
-		set_spr_prms(all->prms->sprites[i++], all->plr);
+		set_spr_prms(all->prms->sprites[i++], all->prms->plr);
 	}
 	sort_sprites(all->prms->sprites);
 }
@@ -265,7 +243,7 @@ void 		draw_sprites(t_all *all)
 	prepare_sprites(all);
 	while (all->prms->sprites[i])
 	{
-		angle = all->plr.ang_h - all->prms->sprites[i]->angle;
+		angle = all->prms->plr.ang_h - all->prms->sprites[i]->angle;
 		angle -= (angle > M_PI * 2)	? M_PI * 2 : 0;
 		angle += (angle < 0) ? M_PI * 2 : 0;
 		n = (int)((0.5 + sin(angle)) * all->prms->res_h);

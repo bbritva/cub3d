@@ -25,7 +25,7 @@ int is_map_line(char *line)
 	return (result);
 }
 
-int			get_color(char *line, int color)
+int			get_color(const char *line, int color)
 {
 	int i;
 	int red;

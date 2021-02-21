@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:51 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/21 10:12:55 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/21 10:40:25 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define M_ARGS_MSG "Wrong arguments.\n"
 # define NREAD_MSG "Cannot read file.\n"
 
-typedef struct
+typedef struct		s_player
 {
 	double			pos_x;
 	double			pos_y;
@@ -42,7 +42,7 @@ typedef struct		s_sprite
 	double			angle;
 }					t_sprite;
 
-typedef	struct
+typedef	struct		s_params
 {
 	int				res_v;
 	int				res_h;
@@ -60,7 +60,7 @@ typedef	struct
 	double			*dists;
 }					t_params;
 
-int					get_color(char *line, int color);
+int					get_color(const char *line, int color);
 int					is_map_line(char *line);
 t_params			*param_parser(int fd, t_params *params, char **line);
 char				**map_split(char const *s, char c);

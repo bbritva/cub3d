@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/19 10:07:29 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/21 10:28:13 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@
 //	return (map);
 //}
 
-int 		check_map(t_all *all)
+int 		check_map(t_params *prms)
 {
 	// int		in_map;
 	// char 	**map;
 	// int 	i;
 	// int 	j;
 
-	(void) all;
+	(void) prms;
 	// map = prms->map;
 	// i = 0;
 	// while (map[i])
@@ -152,37 +152,37 @@ int 	get_spr_count(char **map)
 	return (size);
 }
 
-int 	get_sprites(t_all *all)
+int 	get_sprites(t_params *prms)
 {
 	int			i;
 	int			j;
 	int			k;
 	int 		count;
 
-	count = get_spr_count(all->prms->map);
+	count = get_spr_count(prms->map);
 
-	if (count > 0 && (all->prms->sprites = (t_sprite **)ft_calloc(count + 1,
+	if (count > 0 && (prms->sprites = (t_sprite **)ft_calloc(count + 1,
 															   sizeof(void *))))
 	{
 		i = 0;
 		k = 0;
-		while (all->prms->map[i] != 0)
+		while (prms->map[i] != 0)
 		{
 			j = 0;
-			while (all->prms->map[i][j])
+			while (prms->map[i][j])
 			{
-				if (ft_strchr("2", all->prms->map[i][j]) &&
-				(all->prms->sprites[k] = ft_calloc(1, sizeof (t_sprite))))
+				if (ft_strchr("2", prms->map[i][j]) &&
+				(prms->sprites[k] = ft_calloc(1, sizeof (t_sprite))))
 				{
-					all->prms->sprites[k]->pos_x = j;
-					all->prms->sprites[k]->pos_y = i;
-					all->prms->sprites[k++]->dist = 0;
+					prms->sprites[k]->pos_x = j;
+					prms->sprites[k]->pos_y = i;
+					prms->sprites[k++]->dist = 0;
 				}
 				j++;
 			}
 			i++;
 		}
-		all->prms->sprites[k] = NULL;
+		prms->sprites[k] = NULL;
 	}
 	return (1);
 }

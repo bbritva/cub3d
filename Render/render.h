@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/16 17:57:15 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/21 10:40:25 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,8 @@ typedef struct	s_win //структура для окна
 	t_tex			*sprite;
 }					t_win;
 
-typedef struct
+typedef struct		s_all
 {
-	t_player 		plr;
 	t_params		*prms;
 	t_win			*win;
 }					t_all;

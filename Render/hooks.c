@@ -84,17 +84,17 @@ int			render_next_frame(t_all *all)
 	if (all->win->move_mask & MV_RIGHT)
 		move_right(all);
 	if (all->win->move_mask & RT_LEFT)
-		all->plr.ang_h -= 0.06f;
+		all->prms->plr.ang_h -= 0.06f;
 	if (all->win->move_mask & RT_RIGHT)
-		all->plr.ang_h += 0.06f;
+		all->prms->plr.ang_h += 0.06f;
 	if (all->win->move_mask & ESC)
 	{
 		mlx_clear_window(all->win->mlx, all->win->win);
 		mlx_destroy_window(all->win->mlx, all->win->win);
 		exit(0);
 	}
-	all->plr.ang_h -= (all->plr.ang_h > M_PI * 2)	? M_PI * 2 : 0;
-	all->plr.ang_h += (all->plr.ang_h < 0) ? M_PI * 2 : 0;
+	all->prms->plr.ang_h -= (all->prms->plr.ang_h > M_PI * 2)	? M_PI * 2 : 0;
+	all->prms->plr.ang_h += (all->prms->plr.ang_h < 0) ? M_PI * 2 : 0;
 	create_img(all);
 	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
 	return (1);

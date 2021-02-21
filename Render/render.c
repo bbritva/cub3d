@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 10:36:54 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/21 10:42:09 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,18 @@ void		render(t_params *prms)
 
 	if ((all = (t_all *)ft_calloc(1, sizeof(t_all))))
 	{
-		if ((all->win = (t_win *) malloc(sizeof(t_win))))
+		all->prms = prms;
+		if ((all->win = (t_win *)malloc(sizeof(t_win))))
 		{
+			all->win->mlx = mlx_init();
+			all->win->win = mlx_new_window(all->win->mlx, all->prms->res_h,
+										   all->prms->res_v, "cub3d");
 			all->win->north = tex_init(all, all->prms->north);
 			all->win->south = tex_init(all, all->prms->south);
 			all->win->west = tex_init(all, all->prms->west);
 			all->win->east = tex_init(all, all->prms->east);
 			all->win->sprite = tex_init(all, all->prms->sprite);
-//			all->win->mlx = mlx_init();
-//			all->win->win = mlx_new_window(all->win->mlx, all->prms->res_h,
-//										   all->prms->res_v, "cub3d");
+
 //			all->win->north = malloc(sizeof(t_tex));
 //			all->win->north->img = mlx_xpm_file_to_image(all->win->mlx,
 //														 all->prms->north,

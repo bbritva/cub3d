@@ -102,3 +102,25 @@ void		draw_player(t_all *all)
 		i++;
 	}
 }
+
+void 		draw_line(t_all *all, int x_pos, int h)
+{
+	int i;
+	int color;
+
+	color = 0x00FFFFFF;
+	if (h & NORTH)
+		color = 0x000000FF;
+	if (h & SOUTH)
+		color = 0x00FF0000;
+	if (h & WEST)
+		color = 0x0000FF00;
+	if (h & EAST)
+		color = 0x00999999;
+	h = h & ~(0b1111 << 12);
+	if (h > all->prms->res_v)
+		h = all->prms->res_v;
+	i = (all->prms->res_v - h) / 2;
+	while (i < (all->prms->res_v + h) / 2)
+		my_pixel_put(all->win, x_pos, i++, color);
+}

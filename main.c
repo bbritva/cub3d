@@ -52,7 +52,7 @@ int	main(int argc, char *argv[])
 {
 	t_params	*prms;
 
-	if ((prms = (t_params *)malloc(sizeof (t_params))))
+	if ((prms = (t_params *)ft_calloc(1, sizeof (t_params))))
 	{
 		if (check_main_input(argc, argv) && (parser(argv[1], prms)))
 		{

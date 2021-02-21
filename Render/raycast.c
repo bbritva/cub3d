@@ -68,8 +68,8 @@ int		get_height(t_all *all, int i)
 	t_player	p;
 	double		angle;
 
-	p = all->plr;
-	angle = all->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
+	p = all->prms->plr;
+	angle = all->prms->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
 													 all->prms->res_h));
 	(angle < 0) ? angle += 2 * M_PI : angle;
 	(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
@@ -96,10 +96,10 @@ int		get_height(t_all *all, int i)
 				break;
 		}
 	}
-	dX = p.pos_x - all->plr.pos_x;
-	dY = p.pos_y - all->plr.pos_y;
+	dX = p.pos_x - all->prms->plr.pos_x;
+	dY = p.pos_y - all->prms->plr.pos_y;
 	dist = sqrt(dX * dX + dY * dY);
-	dist *= cos(angle - all->plr.ang_h);
+	dist *= cos(angle - all->prms->plr.ang_h);
 	all->prms->dists[i] = dist;
 	h = (int) (((double)all->prms->res_v / 1.2) * SCALE / dist);
 	return (h | dir | (x_coor << 16));
@@ -158,7 +158,7 @@ double		get_wall_dist(t_all *all, double angle)
 	double		dist;
 	t_player	p;
 
-	p = all->plr;
+	p = all->prms->plr;
 	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
 	{
 		p.pos_x += 0.1 * cos(angle);
@@ -166,10 +166,10 @@ double		get_wall_dist(t_all *all, double angle)
 		if (is_wall(all, p, angle, 'v'))
 			break;
 	}
-	dX = p.pos_x - all->plr.pos_x;
-	dY = p.pos_y - all->plr.pos_y;
+	dX = p.pos_x - all->prms->plr.pos_x;
+	dY = p.pos_y - all->prms->plr.pos_y;
 	dist = sqrt(dX * dX + dY * dY);
-	dist *= cos(angle - all->plr.ang_h);
+	dist *= cos(angle - all->prms->plr.ang_h);
 	return (dist);
 }
 

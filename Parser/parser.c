@@ -13,11 +13,8 @@
 #include "../cub3d.h"
 #include <stdio.h>
 
-t_params	*params_init()
+int		params_init(t_params *params)
 {
-	t_params	*params;
-
-	params = (t_params *)malloc(sizeof(t_params));
 	if (params)
 	{
 		params->res_h = -1;
@@ -30,8 +27,9 @@ t_params	*params_init()
 		params->dists = NULL;
 		params->floor_color = -1;
 		params->ceil_color = -1;
+		return (1);
 	}
-	return (params);
+	return (0);
 }
 
 int 	parser(char *f_name, t_params *prms)
@@ -45,7 +43,7 @@ int 	parser(char *f_name, t_params *prms)
 		ft_putstr(NREAD_MSG);
 		return (0);
 	}
-	if ((prms = params_init()))
+	if (params_init(prms))
 	{
 		param_parser(fd, prms, &line);
 //		check_params(prms);
