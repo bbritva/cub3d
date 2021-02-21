@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/21 10:13:33 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/21 12:04:35 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		params_init(t_params *params)
 int 	parser(char *f_name, t_params *prms)
 {
 	int			fd;
+	int 		err;
 	char		*line;
 
 	fd = open(f_name, O_RDONLY);
@@ -45,7 +46,8 @@ int 	parser(char *f_name, t_params *prms)
 	}
 	if (params_init(prms))
 	{
-		param_parser(fd, prms, &line);
+		err = 0;
+		param_parser(fd, prms, &line, &err);
 //		check_params(prms);
 		map_parser(fd, prms, &line);
 		show_parse_res(prms);
