@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/19 09:02:06 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/23 17:52:15 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ int	main(int argc, char *argv[])
 			ft_putstr("prms - ok\n");
 			render(prms);
 			params_free(prms);
-		} else
-			ft_putstr("prms error\n");
-		free(prms);
+		}
+//		else
+//			ft_putstr("prms error\n");
+//		free(prms);
 	}
 	ft_putstr("end of cub3d\n");
 }

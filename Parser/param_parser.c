@@ -6,30 +6,33 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:58:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/23 16:22:16 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/23 17:54:40 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int		get_rez(t_params *params, const char *line)
+int		get_rez(t_params *params, const char *line, int *err)
 {
 	int i;
 
 	i = 1;
 	i = skip_spaces(line, i);
+	if (params->res_v != -1 || params->res_h != -1)
+		*err = *err | (1 << 1);
 	if (ft_isdigit(line[i]) && params->res_h == -1)
 		params->res_h = 0;
-	while (ft_isdigit(line[i]))
+	while (ft_isdigit(line[i]) && params->res_h < 8000)
 		params->res_h = params->res_h * 10 + (line[i++] - '0');
+	*err = (params->res_h > 8000) ? *err | (1 << 1) : *err;
 	i = skip_spaces(line, i);
 	if (ft_isdigit(line[i]) && params->res_v == -1)
 		params->res_v = 0;
-	while (ft_isdigit(line[i]))
+	while (ft_isdigit(line[i]) && params->res_v < 8000)
 		params->res_v = params->res_v * 10 + (line[i++] - '0');
+	*err = (params->res_v > 8000) ? *err | (1 << 1) : *err;
 	i = skip_spaces(line, i);
-	if (line[i] != 0)
-		params->res_h = -2;
+	*err = (line[i] != 0) ? *err | (1 << 1) : *err;
 	return (i);
 }
 
@@ -38,7 +41,7 @@ char	*get_path(char *line, char *path, int i, int *err)
 	int		j;
 
 	i = skip_spaces(line, i);
-	if (path && (*err = *err | 0b1))
+	if (path && (*err = *err | (1 << 3)))
 		return (0);
 	if ((path = ft_calloc(ft_strlen(&line[i]) + 1, sizeof(char))))
 	{
@@ -54,7 +57,7 @@ char	*get_path(char *line, char *path, int i, int *err)
 void 	parse_line(t_params *params, char *line, int *err)
 {
 	if (line[0] == 'R')
-		get_rez(params, line);
+		get_rez(params, line, err);
 	if (!ft_strncmp("NO", line, 2))
 		params->north = get_path(line, params->north, 2, err);
 	if (!ft_strncmp("SO", line, 2))
