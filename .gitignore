@@ -14,4 +14,3 @@
 /Render/*.o
 parser.idea
 .idea/*
-/ft_split2.c

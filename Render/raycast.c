@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/18 14:28:48 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/24 15:15:49 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ int		get_height(t_all *all, int i)
 	dist = sqrt(dX * dX + dY * dY);
 	dist *= cos(angle - all->prms->plr.ang_h);
 	all->prms->dists[i] = dist;
-	h = (int) (((double)all->prms->res_v / 1.2) * SCALE / dist);
+	dX = (all->prms->res_h > all->prms->res_v) ? all->prms->res_v :
+			all->prms->res_h;
+	h = (int) ((dX / 1.0) * SCALE / dist);
 	return (h | dir | (x_coor << 16));
 }
 
@@ -151,27 +153,27 @@ int		get_height(t_all *all, int i)
 
 
 //упрощенный кастер для спрайтов
-double		get_wall_dist(t_all *all, double angle)
-{
-	double		dX;
-	double		dY;
-	double		dist;
-	t_player	p;
-
-	p = all->prms->plr;
-	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
-	{
-		p.pos_x += 0.1 * cos(angle);
-		p.pos_y -= 0.1 * sin(angle);
-		if (is_wall(all, p, angle, 'v'))
-			break;
-	}
-	dX = p.pos_x - all->prms->plr.pos_x;
-	dY = p.pos_y - all->prms->plr.pos_y;
-	dist = sqrt(dX * dX + dY * dY);
-	dist *= cos(angle - all->prms->plr.ang_h);
-	return (dist);
-}
+//double		get_wall_dist(t_all *all, double angle)
+//{
+//	double		dX;
+//	double		dY;
+//	double		dist;
+//	t_player	p;
+//
+//	p = all->prms->plr;
+//	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
+//	{
+//		p.pos_x += 0.1 * cos(angle);
+//		p.pos_y -= 0.1 * sin(angle);
+//		if (is_wall(all, p, angle, 'v'))
+//			break;
+//	}
+//	dX = p.pos_x - all->prms->plr.pos_x;
+//	dY = p.pos_y - all->prms->plr.pos_y;
+//	dist = sqrt(dX * dX + dY * dY);
+//	dist *= cos(angle - all->prms->plr.ang_h);
+//	return (dist);
+//}
 
 //кастер для конкретного спрайта
 int		set_spr_prms(t_sprite *spr,  t_player plr)
