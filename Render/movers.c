@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/09 11:55:14 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/24 17:58:25 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,44 @@ double		min_wall_dist(t_all * all)
 	return min;
 }
 
+int			move(t_all *all, double angle);
+
+
 int			move_fwd(t_all *all)
 {
-	int i_cur;
-	int j_cur;
-	int i_new;
-	int j_new;
-
-	i_cur = (int)(all->prms->plr.pos_y / SCALE);
-	j_cur = (int)(all->prms->plr.pos_x / SCALE);
-	i_new = (int)((all->prms->plr.pos_y - (SPEED + D) * sin(all->prms->plr.ang_h)) / SCALE);
-	j_new = (int)((all->prms->plr.pos_x + (SPEED + D) * cos(all->prms->plr.ang_h)) / SCALE);
-	if (all->prms->map[i_new][j_cur] != '1')
-		all->prms->plr.pos_y -= SPEED * sin(all->prms->plr.ang_h);
-	if (all->prms->map[i_cur][j_new] != '1')
-		all->prms->plr.pos_x += SPEED * cos(all->prms->plr.ang_h);
+	move(all, all->prms->plr.ang_h);
 	return (0);
 }
 
 int			move_bwd(t_all *all)
 {
+	double angle;
+
+	angle = all->prms->plr.ang_h + M_PI;
+	move(all, angle);
+	return(0);
+}
+
+int			move_left(t_all *all)
+{
+	double angle;
+
+	angle = all->prms->plr.ang_h + M_PI_2;
+	move(all, angle);
+	return(0);
+}
+
+int			move_right(t_all *all)
+{
+	double angle;
+
+	angle = all->prms->plr.ang_h - M_PI_2;
+	move(all, angle);
+	return(0);
+}
+
+int			move(t_all *all, double angle)
+{
 	int i_cur;
 	int j_cur;
 	int i_new;
@@ -55,51 +73,11 @@ int			move_bwd(t_all *all)
 
 	i_cur = (int)(all->prms->plr.pos_y / SCALE);
 	j_cur = (int)(all->prms->plr.pos_x / SCALE);
-	i_new = (int)((all->prms->plr.pos_y + (SPEED + D) * sin(all->prms->plr.ang_h)) / SCALE);
-	j_new = (int)((all->prms->plr.pos_x - (SPEED + D) * cos(all->prms->plr.ang_h)) / SCALE);
+	i_new = (int)((all->prms->plr.pos_y - (SPEED + D) * sin(angle)) / SCALE);
+	j_new = (int)((all->prms->plr.pos_x + (SPEED + D) * cos(angle)) / SCALE);
 	if (all->prms->map[i_new][j_cur] != '1')
-		all->prms->plr.pos_y += SPEED * sin(all->prms->plr.ang_h);
+		all->prms->plr.pos_y -= SPEED * sin(angle);
 	if (all->prms->map[i_cur][j_new] != '1')
-		all->prms->plr.pos_x -= SPEED * cos(all->prms->plr.ang_h);
-	return (0);
-}
-
-int			move_left(t_all *all)
-{
-	int		i_cur;
-	int		j_cur;
-	int		i_new;
-	int		j_new;
-	double	ang;
-
-	ang = all->prms->plr.ang_h + M_PI_2;
-	i_cur = (int)(all->prms->plr.pos_y / SCALE);
-	j_cur = (int)(all->prms->plr.pos_x / SCALE);
-	i_new = (int)((all->prms->plr.pos_y - (SPEED + D) * sin(ang)) / SCALE);
-	j_new = (int)((all->prms->plr.pos_x + (SPEED + D) * cos(ang)) / SCALE);
-	if (all->prms->map[i_new][j_cur] != '1')
-		all->prms->plr.pos_y -= SPEED * sin(ang);
-	if (all->prms->map[i_cur][j_new] != '1')
-		all->prms->plr.pos_x += SPEED * cos(ang);
-	return (0);
-}
-
-int			move_right(t_all *all)
-{
-	int		i_cur;
-	int		j_cur;
-	int		i_new;
-	int		j_new;
-	double	ang;
-
-	ang = all->prms->plr.ang_h - M_PI_2;
-	i_cur = (int)(all->prms->plr.pos_y / SCALE);
-	j_cur = (int)(all->prms->plr.pos_x / SCALE);
-	i_new = (int)((all->prms->plr.pos_y - (SPEED + D) * sin(ang)) / SCALE);
-	j_new = (int)((all->prms->plr.pos_x + (SPEED + D) * cos(ang)) / SCALE);
-	if (all->prms->map[i_new][j_cur] != '1')
-		all->prms->plr.pos_y -= SPEED * sin(ang);
-	if (all->prms->map[i_cur][j_new] != '1')
-		all->prms->plr.pos_x += SPEED * cos(ang);
+		all->prms->plr.pos_x += SPEED * cos(angle);
 	return (0);
 }
