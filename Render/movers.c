@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/24 17:58:25 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/24 18:34:07 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ int			move(t_all *all, double angle)
 
 	i_cur = (int)(all->prms->plr.pos_y / SCALE);
 	j_cur = (int)(all->prms->plr.pos_x / SCALE);
-	i_new = (int)((all->prms->plr.pos_y - (SPEED + D) * sin(angle)) / SCALE);
-	j_new = (int)((all->prms->plr.pos_x + (SPEED + D) * cos(angle)) / SCALE);
+	i_new = (int)((all->prms->plr.pos_y - SPEED * sin(angle) - D * nearbyint(sin
+			(angle))) /	SCALE);
+	j_new = (int)((all->prms->plr.pos_x + SPEED * cos(angle) + D * nearbyint(cos
+			(angle))) / SCALE);
 	if (all->prms->map[i_new][j_cur] != '1')
 		all->prms->plr.pos_y -= SPEED * sin(angle);
 	if (all->prms->map[i_cur][j_new] != '1')
