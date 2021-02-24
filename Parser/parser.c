@@ -24,9 +24,7 @@ int 	show_param_errors(const int *err)
 	if (*err & (1 << 3))
 		ft_putstr("Multiple texture parameters\n");
 	if (*err & (1 << 4))
-		ft_putstr("None or wrong ceiling color parameter\n");
-	if (*err & (1 << 4))
-		ft_putstr("None or wrong floor color parameter\n");
+		ft_putstr("None or wrong ceiling/floor color parameters\n");
 	if (*err & (1 << 5))
 		ft_putstr("Memory allocating error\n");
 	return(0);
@@ -54,10 +52,10 @@ int 	check_params(t_params *params, int *err)
 {
 	*err = (params->res_h == -1 || params->res_v == -1) ? *err | 1 : *err;
 	*err = (params->north) ? *err : *err | (1 << 2);
-	*err = (params->south) ? *err : *err | (1 << 4);
-	*err = (params->west) ? *err : *err | (1 << 6);
-	*err = (params->east) ? *err : *err | (1 << 8);
-	*err = (params->sprite) ? *err : *err | (1 << 10);
+	*err = (params->south) ? *err : *err | (1 << 2);
+	*err = (params->west) ? *err : *err | (1 << 2);
+	*err = (params->east) ? *err : *err | (1 << 2);
+	*err = (params->sprite) ? *err : *err | (1 << 2);
 	return (1);
 }
 

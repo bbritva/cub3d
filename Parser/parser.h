@@ -60,7 +60,7 @@ typedef	struct		s_params
 	double			*dists;
 }					t_params;
 
-int					get_color(const char *line, int color);
+int					get_colors(const char *line, int color, int *err);
 int					is_map_line(char *line);
 t_params			*param_parser(int fd, t_params *prms, char **line, int
 *err);

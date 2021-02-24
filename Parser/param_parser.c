@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:58:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/23 17:54:40 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/24 08:43:32 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void 	parse_line(t_params *params, char *line, int *err)
 	if (!ft_strncmp("S ", line, 2))
 		params->sprite = get_path(line, params->sprite, 1, err);
 	if (line[0] == 'F')
-		params->floor_color = get_color(line, params->floor_color);
+		params->floor_color = get_colors(line, params->floor_color, err);
 	if (line[0] == 'C')
-		params->ceil_color = get_color(line, params->ceil_color);
+		params->ceil_color = get_colors(line, params->ceil_color, err);
 }
 
 double 		*dists_init(int size)
