@@ -1,4 +1,4 @@
-R 280 800
+R 1280 800
 NO ./Render/textures/north.xpm
 SO ./Render/textures/south.xpm
 WE ./Render/textures/west.xpm

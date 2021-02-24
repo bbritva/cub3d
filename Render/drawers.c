@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/24 19:01:01 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/24 19:57:20 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,11 @@ void 		draw_txtr_line(t_all *all, int x_pos, int h, int center)
 	i = 0;
 	while (i < h)
 	{
-
-		if ((all->prms->res_v - h) / 2 + i  + center > -1 && (all->prms->res_v
-		- h) / 2 + i  + center < all->prms->res_v && (color = get_pxl(tex, i, h,
-													  x_coor)) > 0)
+		if ((all->prms->res_v - h) / 2 + i  + center < 0)
+			i = (-all->prms->res_v + h) / 2 - center;
+		if ((all->prms->res_v - h) / 2 + i  + center >= all->prms->res_v)
+			break;
+		if ((color = get_pxl(tex, i, h, x_coor)) > 0)
 		{
 			color = shadow_color(color, h);
 			my_pixel_put(all->win, x_pos, (all->prms->res_v - h) / 2
