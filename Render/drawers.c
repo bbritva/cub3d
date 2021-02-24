@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/19 10:18:19 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/24 16:02:19 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,7 @@ void 		draw_sprites(t_all *all)
 	int 	x_coor;
 	char 	isVisible;
 	double	angle;
+	int 	base;
 	int		size;
 
 	i = 0;
@@ -247,7 +248,9 @@ void 		draw_sprites(t_all *all)
 		angle -= (angle > M_PI * 2)	? M_PI * 2 : 0;
 		angle += (angle < 0) ? M_PI * 2 : 0;
 		n = (int)((0.5 + sin(angle)) * all->prms->res_h);
-		size = (int)(all->prms->res_v / (1.2 * all->prms->sprites[i]->dist));
+		base = (all->prms->res_h > all->prms->res_v) ? all->prms->res_v :
+			   all->prms->res_h;
+		size = (int)(base / (1.2 * all->prms->sprites[i]->dist));
 		j = n - size / 2;
 		while (j < n + size / 2)
 		{

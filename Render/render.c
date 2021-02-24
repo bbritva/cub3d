@@ -74,7 +74,7 @@ int 		init_window(t_all * all)
 		(all->win->mlx, all->prms->res_h, all->prms->res_v, "cub3d")) &&
 		(all->win->north = tex_init(all, all->prms->north)) &&
 		(all->win->south = tex_init(all, all->prms->south)) &&
-		(all->win->west = NULL) &&
+		(all->win->west = tex_init(all, all->prms->west)) &&
 		(all->win->east = tex_init(all, all->prms->east)) &&
 		(all->win->sprite = tex_init(all, all->prms->sprite)))
 		return (1);

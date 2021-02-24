@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/24 15:15:49 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/24 15:16:19 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int		get_height(t_all *all, int i)
 	all->prms->dists[i] = dist;
 	dX = (all->prms->res_h > all->prms->res_v) ? all->prms->res_v :
 			all->prms->res_h;
-	h = (int) ((dX / 1.0) * SCALE / dist);
+	h = (int) ((dX / 1.2) * SCALE / dist);
 	return (h | dir | (x_coor << 16));
 }
 

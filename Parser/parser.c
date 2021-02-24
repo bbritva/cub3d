@@ -42,6 +42,8 @@ int 	free_params(t_params *params, int *err)
 		free (params->east);
 	if (params->sprite)
 		free (params->sprite);
+	if (params->dists)
+		free (params->dists);
 	free(params);
 	if (*err)
 		show_param_errors(err);
@@ -56,6 +58,7 @@ int 	check_params(t_params *params, int *err)
 	*err = (params->west) ? *err : *err | (1 << 2);
 	*err = (params->east) ? *err : *err | (1 << 2);
 	*err = (params->sprite) ? *err : *err | (1 << 2);
+	*err = (params->dists) ? *err : *err | (1 << 5);
 	return (1);
 }
 
