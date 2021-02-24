@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/24 15:07:16 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/24 16:16:46 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,29 @@ void 		get_shot(t_all *all)
 	ft_putstr("get_shot\n");
 }
 
+int			free_tex(t_tex *tex, void *mlx)
+{
+	if (tex)
+	{
+		if (tex->img)
+			mlx_destroy_image(mlx, tex->img);
+		free(tex);
+	}
+	return (0);
+}
+
 int			free_window(t_all *all)
 {
 	if (all->win->north)
-		free(all->win->north);
+		free_tex(all->win->north, all->win->mlx);
 	if (all->win->south)
-		free(all->win->south);
+		free_tex(all->win->south, all->win->mlx);
 	if (all->win->west)
-		free(all->win->west);
+		free_tex(all->win->west, all->win->mlx);
 	if (all->win->east)
-		free(all->win->east);
+		free_tex(all->win->east, all->win->mlx);
 	if (all->win->sprite)
-		free(all->win->sprite);
+		free_tex(all->win->sprite, all->win->mlx);
 	free(all);
 	return (0);
 }

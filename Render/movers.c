@@ -12,6 +12,22 @@
 
 #include "../cub3d.h"
 
+double		min_wall_dist(t_all * all)
+{
+	int i;
+	double min;
+
+	i = 0;
+	min = all->prms->dists[i++];
+	while (i < all->prms->res_h)
+	{
+		if (all->prms->dists[i] < min)
+			min = all->prms->dists[i];
+		i++;
+	}
+	return min;
+}
+
 int			move_fwd(t_all *all)
 {
 	int i_cur;
