@@ -45,12 +45,6 @@ void 		start_game(t_all *all)
 	mlx_loop(all->win->mlx);
 }
 
-void 		get_shot(t_all *all)
-{
-	(void) all;
-	ft_putstr("get_shot\n");
-}
-
 int			free_tex(t_tex *tex, void *mlx)
 {
 	if (tex)
