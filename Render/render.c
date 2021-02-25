@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/24 16:16:46 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/25 14:35:26 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ int			free_window(t_all *all)
 		free_tex(all->win->east, all->win->mlx);
 	if (all->win->sprite)
 		free_tex(all->win->sprite, all->win->mlx);
-	free(all);
+	mlx_clear_window(all->win->mlx, all->win->win);
+	mlx_destroy_image(all->win->mlx, all->win->img);
+	mlx_destroy_window(all->win->mlx, all->win->win);
 	return (0);
 }
 
