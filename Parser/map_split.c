@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 21:21:24 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/08 10:44:09 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/25 12:55:27 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,22 @@ static size_t	map_calcsize(char *s, char c)
 	return (result);
 }
 
-static size_t	ft_wrdlen(const char *s, char c)
+static size_t	arr_wide(const char *s, char c)
 {
-	size_t result;
+	size_t i;
+	size_t len;
+	size_t cur_len;
 
-	result = 0;
-	while (*(s + result) && *(s + result) != c)
-		result++;
-	return (++result);
+	i = 0;
+	while (s[i])
+	{
+		cur_len = 0;
+		while (s[i + cur_len] && s[i + cur_len] != c)
+			cur_len++;
+		len = (cur_len > len) ? cur_len : len;
+		i += cur_len + 1;
+	}
+	return (++len);
 }
 
 static void		ft_freeresult(char **res, size_t count)
@@ -47,46 +55,48 @@ static void		ft_freeresult(char **res, size_t count)
 	free(res);
 }
 
-static void		ft_fillarr(char **result, char *str, size_t size, char c)
+static void		ft_fill(char **res, char *str, size_t size, size_t wide)
 {
 	size_t i;
-	size_t wrd_len;
+	size_t j;
 
 	i = 0;
 	while (i < size)
-	{
-		if (*str != c)
+		if (*str != '\n')
 		{
-			wrd_len = ft_wrdlen(str, c);
-			result[i] = (char *)ft_calloc(wrd_len, sizeof(char));
-			if (result[i])
+			if ((res[i] = (char *)ft_calloc(wide, sizeof(char))))
 			{
-				ft_strlcpy(result[i++], str, wrd_len);
-				str = str + wrd_len - 1;
+				j = 0;
+				while (*str && *str != '\n')
+				{
+					res[i][j] = *str++;
+					j++;
+				}
+				i++;
+				str += 1;
 			}
 			else
 			{
-				ft_freeresult(result, i);
+				ft_freeresult(res, i);
 				break ;
 			}
 		}
-		str++;
-	}
-	result[i] = 0;
 }
 
 char			**map_split(char const *s, char c)
 {
 	size_t	res_size;
 	char	**result;
+	size_t	wide;
 
 	if (s == NULL)
 		return (NULL);
 	res_size = map_calcsize((char *)s, c);
+	wide = arr_wide(s, c);
 	result = (char **)ft_calloc((res_size + 1), sizeof(char *));
 	if (result)
 	{
-		ft_fillarr(result, (char *)s, res_size, c);
+		ft_fill(result, (char *)s, res_size, wide);
 	}
 	return (result);
 }
