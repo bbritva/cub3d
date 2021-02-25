@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/24 19:57:20 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/24 20:00:40 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void 		draw_txtr_line(t_all *all, int x_pos, int h, int center)
 	h = h & ~(0b1111 << 26);
 	x_coor = h >> 16;
 	h = h & ~(0b11111111 << 16);
-//	if (h > all->prms->res_v)
-//		h = all->prms->res_v;
 	i = 0;
 	while (i < h)
 	{
