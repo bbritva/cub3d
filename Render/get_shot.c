@@ -6,13 +6,13 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 13:11:28 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/26 14:52:58 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/26 15:14:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 
-int 		get_clr(t_all *all, int y, int x)
+int 		get_clr(t_all *all, int x, int y)
 {
 	char    *src;
 	int		color;
@@ -105,12 +105,12 @@ void 		get_shot(t_all *all)
 		ft_putnbr_fd(k, 1);
 		ft_putendl_fd("",1);
 		i = 0;
-		while (i < all->prms->res_h)
+		while (i < all->prms->res_v)
 		{
 			j = 0;
-			while (j < all->prms->res_v)
+			while (j < all->prms->res_h)
 			{
-				color = get_clr(all, all->prms->res_v - j - 1, i);
+				color = get_clr(all, j, all->prms->res_v - i - 1);
 				num_to_4bits(color, fd);
 				j++;
 			}
