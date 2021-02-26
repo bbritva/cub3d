@@ -25,6 +25,7 @@
 # define F_MISS_MSG "File name missing.\n"
 # define M_ARGS_MSG "Wrong arguments.\n"
 # define NREAD_MSG "Cannot read file.\n"
+# define RES_MAX 20000
 
 typedef struct		s_player
 {

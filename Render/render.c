@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/25 14:35:26 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/26 17:31:17 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,34 @@ int			free_window(t_all *all)
 	return (0);
 }
 
-int 		init_window(t_all * all)
+int			crop_resolution(t_all *all)
+{
+	int res_h;
+	int res_v;
+
+	mlx_get_screen_size(all->win->mlx, &res_h, &res_v);
+	all->prms->res_v = (all->prms->res_v > res_v) ? res_v : all->prms->res_v;
+	all->prms->res_h = (all->prms->res_h > res_h) ? res_h : all->prms->res_h;
+
+	return (0);
+}
+
+int 		init_window(t_all * all, int argc)
 {
 	if ((all->win = (t_win *) ft_calloc(1, sizeof(t_win))) &&
-		(all->win->mlx = mlx_init()) && (all->win->win = mlx_new_window
-		(all->win->mlx, all->prms->res_h, all->prms->res_v, "cub3d")) &&
-		(all->win->north = tex_init(all, all->prms->north)) &&
-		(all->win->south = tex_init(all, all->prms->south)) &&
-		(all->win->west = tex_init(all, all->prms->west)) &&
-		(all->win->east = tex_init(all, all->prms->east)) &&
-		(all->win->sprite = tex_init(all, all->prms->sprite)))
-		return (1);
+		(all->win->mlx = mlx_init()))
+	{
+		if (argc == 2)
+			crop_resolution(all);
+		if ((all->win->win = mlx_new_window(all->win->mlx, all->prms->res_h,
+				all->prms->res_v, "cub3d")) &&
+			(all->win->north = tex_init(all, all->prms->north)) &&
+			(all->win->south = tex_init(all, all->prms->south)) &&
+			(all->win->west = tex_init(all, all->prms->west)) &&
+			(all->win->east = tex_init(all, all->prms->east)) &&
+			(all->win->sprite = tex_init(all, all->prms->sprite)))
+			return (1);
+	}
 	return (0);
 }
 
@@ -95,7 +112,7 @@ void		render(t_params *prms, int argc)
 	if ((all = (t_all *)ft_calloc(1, sizeof(t_all))))
 	{
 		all->prms = prms;
-		if (init_window(all))
+		if (init_window(all, argc))
 		{
 			create_img(all);
 			all->win->move_mask = 0;

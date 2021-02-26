@@ -119,7 +119,4 @@ void 		get_shot(t_all *all)
 
 		close(fd);
 	}
-
-	(void) all;
-	ft_putstr("get_shot\n");
 }

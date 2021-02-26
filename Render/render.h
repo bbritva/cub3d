@@ -15,7 +15,7 @@
 # define RENDER_H
 
 # include <math.h>
-# include <mlx.h>
+# include "../minilibx_mms/mlx.h"
 # include "../cub3d.h"
 # define PUT_INIT_ERR_MSG ft_putstr("Initialization error\n");
 # define SCALE 1
