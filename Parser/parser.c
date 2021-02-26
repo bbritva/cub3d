@@ -18,7 +18,7 @@ int 	show_param_errors(const int *err)
 	if (*err & (1 << 0))
 		ft_putstr("None resolution parameters\n");
 	if (*err & (1 << 1))
-		ft_putstr("Multiple/overflow(>8000) resolution parameters\n");
+		ft_putstr("Multiple/overflow(>10000) resolution parameters\n");
 	if (*err & (1 << 2))
 		ft_putstr("Not enough texture parameters\n");
 	if (*err & (1 << 3))
