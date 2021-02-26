@@ -71,6 +71,8 @@ void				show_parse_res(t_params *prms);
 int					map_parser(int fd, t_params *prms, char **line);
 int					get_player(t_params *prms);
 int				 	get_sprites(t_params *prms);
+int					check_map(t_params *prms);
+
 
 
 

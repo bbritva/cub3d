@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/21 10:28:13 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/26 19:43:11 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,6 @@
 //	return (map);
 //}
 
-int 		check_map(t_params *prms)
-{
-	// int		in_map;
-	// char 	**map;
-	// int 	i;
-	// int 	j;
-
-	(void) prms;
-	// map = prms->map;
-	// i = 0;
-	// while (map[i])
-	// {
-	// 	j = 0;
-	// 	while (map[i][j] && map[i][j + 1])
-	// 	{
-	// 		if (map[i][j + 1] == '1' && !ft_strchr("02NSWE", map[i][j]))
-	// 			in_map = 1;
-	// 		if (!ft_strchr("02NSWE", map[i][j + 1]) && map[i][j] == '1' &&
-	// 		in_map)
-	// 			in_map = 0;
-	// 		j++;
-	// 	}
-	// 	if (in_map)
-	// 		return (0);
-	// 	i++;
-	// }
-	return (1);
-}
 
 int					map_parser(int fd, t_params *prms, char **line)
 {
@@ -79,19 +51,16 @@ int					map_parser(int fd, t_params *prms, char **line)
 		line_map = gnl_strjoin(line_map, "\n");
 		free(*line);
 	}
-	prms->map = map_split(line_map, '\n');//незащищенный маллок
-	free(line_map);
-	get_player(prms);
-	get_sprites(prms);
-//	all->plr.pos_x = 25.5;
-//	all->plr.pos_y = 11.2;
-//	all->plr.ang_h = M_PI;
-	if (check_map(prms))
+	if ((prms->map = map_split(line_map, '\n')) && check_map(prms) &&
+		get_player(prms) && get_sprites(prms))
 	{
-		ft_putstr("map - ok\n");
+		free(line_map);
+//		all->plr.pos_x = 25.5;
+//		all->plr.pos_y = 11.2;
+//		all->plr.ang_h = M_PI;
 		return (1);
 	}
-	ft_putstr("map - error\n");
+	free(line_map);
 	return (0);
 }
 
@@ -110,7 +79,7 @@ int 	get_player(t_params *prms)
 			if (ft_strchr("NSWE",prms->map[i][j]))
 			{
 				if (prms->plr.pos_y > 0)
-					return (-1);
+					return (0);
 				prms->plr.pos_x = (double)j + 0.5;
 				prms->plr.pos_y = (double)i + 0.5;
 				prms->plr.angle_v = 0;
@@ -160,9 +129,8 @@ int 	get_sprites(t_params *prms)
 	int 		count;
 
 	count = get_spr_count(prms->map);
-
-	if (count > 0 && (prms->sprites = (t_sprite **)ft_calloc(count + 1,
-															   sizeof(void *))))
+	if ((prms->sprites = (t_sprite **)ft_calloc(count + 1,
+		sizeof(t_sprite *))))
 	{
 		i = 0;
 		k = 0;
@@ -183,6 +151,7 @@ int 	get_sprites(t_params *prms)
 			i++;
 		}
 		prms->sprites[k] = NULL;
+		return (1);
 	}
-	return (1);
+	return (0);
 }

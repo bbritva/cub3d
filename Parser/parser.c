@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/24 16:07:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/26 19:51:56 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,14 @@ int 	parser(char *f_name, t_params *prms)
 		check_params(prms, &err);
 		if (err)
 			free_params(prms, &err);
-		else
+		else if (map_parser(fd, prms, &line))
 		{
-			map_parser(fd, prms, &line);
 			show_parse_res(prms);
 			close(fd);
 			return (1);
 		}
 	}
+	ft_putstr("Map error\n");
 	close(fd);
 	return (0);
 }
