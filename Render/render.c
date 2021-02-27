@@ -6,21 +6,13 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 11:48:17 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/27 17:50:59 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void		my_pixel_put(t_win *win, int x, int y, unsigned int color)
-{
-	char    *dst;
-
-	dst = win->addr + (y * win->line_l + x * (win->bpp / 8));
-	*(unsigned int*)dst = color;
-}
-
-void 		*tex_init(t_all *all, char *path)
+static void	*tex_init(t_all *all, char *path)
 {
 	t_tex *tex;
 
@@ -29,66 +21,23 @@ void 		*tex_init(t_all *all, char *path)
 										&tex->w_tex, &tex->h_tex)))
 		{
 			tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_l,
-										  &tex->en);
+				&tex->en);
 			return (tex);
 		}
 	return (NULL);
 }
 
-void 		start_game(t_all *all)
+static void	start_game(t_all *all)
 {
-	//				mlx_mouse_hook(win->win, mouse_hook, win);
-//				mlx_hook(win->win, 6, 1L << 6, mouse_move_hook, win);
 	mlx_hook(all->win->win, 2, 1L << 0, key_press, all);
 	mlx_hook(all->win->win, 3, 1L << 1, key_release, all);
 	mlx_loop_hook(all->win->mlx, render_next_frame, all);
 	mlx_loop(all->win->mlx);
 }
 
-int			free_tex(t_tex *tex, void *mlx)
+static int	init_window(t_all *all, int argc)
 {
-	if (tex)
-	{
-		if (tex->img)
-			mlx_destroy_image(mlx, tex->img);
-		free(tex);
-	}
-	return (0);
-}
-
-int			free_window(t_all *all)
-{
-	if (all->win->north)
-		free_tex(all->win->north, all->win->mlx);
-	if (all->win->south)
-		free_tex(all->win->south, all->win->mlx);
-	if (all->win->west)
-		free_tex(all->win->west, all->win->mlx);
-	if (all->win->east)
-		free_tex(all->win->east, all->win->mlx);
-	if (all->win->sprite)
-		free_tex(all->win->sprite, all->win->mlx);
-	mlx_clear_window(all->win->mlx, all->win->win);
-	mlx_destroy_image(all->win->mlx, all->win->img);
-	mlx_destroy_window(all->win->mlx, all->win->win);
-	return (0);
-}
-
-int			crop_resolution(t_all *all)
-{
-	int res_h;
-	int res_v;
-
-	mlx_get_screen_size(all->win->mlx, &res_h, &res_v);
-	all->prms->res_v = (all->prms->res_v > res_v) ? res_v : all->prms->res_v;
-	all->prms->res_h = (all->prms->res_h > res_h) ? res_h : all->prms->res_h;
-
-	return (0);
-}
-
-int 		init_window(t_all * all, int argc)
-{
-	if ((all->win = (t_win *) ft_calloc(1, sizeof(t_win))) &&
+	if ((all->win = (t_win *)ft_calloc(1, sizeof(t_win))) &&
 		(all->win->mlx = mlx_init()))
 	{
 		if (argc == 2)
@@ -121,12 +70,14 @@ void		render(t_params *prms, int argc)
 			else
 				get_shot(all);
 			free_window(all);
-		free(all->win);
-		} else
+			free(all->win);
+		}
+		else
 		{
-			PUT_INIT_ERR_MSG
+			ft_putstr(INIT_ERR_MSG);
 			free_window(all);
 		}
-	} else
+	}
+	else
 		ft_putstr(ALLOC_ERR_MSG);
 }

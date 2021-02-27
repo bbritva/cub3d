@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/21 10:40:25 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/27 17:45:27 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <math.h>
 # include "../minilibx_mms/mlx.h"
 # include "../cub3d.h"
-# define PUT_INIT_ERR_MSG ft_putstr("Initialization error\n");
+# define INIT_ERR_MSG "Initialization error\n"
 # define SCALE 1
 # define SCALE2 20
 # define SPEED 0.1f
@@ -88,5 +88,9 @@ int					is_sprite(t_all *all, t_player p, double angle, char hv);
 double				get_wall_dist(t_all *all, double angle);
 void 				get_shot(t_all *all);
 int					move(t_all *all, double angle);
+int					crop_resolution(t_all *all);
+int					free_window(t_all *all);
+
+
 
 #endif
