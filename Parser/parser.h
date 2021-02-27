@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:51 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/21 10:49:32 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/27 10:25:10 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct		s_player
 
 typedef struct		s_sprite
 {
-	int 			pos_x;
-	int 			pos_y;
+	int				pos_x;
+	int				pos_y;
 	double			dist;
 	double			angle;
 }					t_sprite;
@@ -47,15 +47,15 @@ typedef	struct		s_params
 {
 	int				res_v;
 	int				res_h;
-	char 			*north;
-	char 			*south;
-	char 			*west;
-	char 			*east;
-	char 			*sprite;
+	char			*north;
+	char			*south;
+	char			*west;
+	char			*east;
+	char			*sprite;
 	int				floor_color;
 	int				ceil_color;
 	int				i;
-	char 			**map;
+	char			**map;
 	t_sprite		**sprites;
 	t_player		plr;
 	double			*dists;
@@ -70,12 +70,7 @@ int					skip_spaces(const char *str, int i);
 void				show_parse_res(t_params *prms);
 int					map_parser(int fd, t_params *prms, char **line);
 int					get_player(t_params *prms);
-int				 	get_sprites(t_params *prms);
+int					get_sprites(t_params *prms);
 int					check_map(t_params *prms);
-
-
-
-
-
 
 #endif
