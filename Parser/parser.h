@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:51 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 10:25:10 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/27 13:03:17 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ t_params			*param_parser(int fd, t_params *prms, char **line, int
 *err);
 char				**map_split(char const *s, char c);
 int					skip_spaces(const char *str, int i);
-void				show_parse_res(t_params *prms);
 int					map_parser(int fd, t_params *prms, char **line);
 int					get_player(t_params *prms);
 int					get_sprites(t_params *prms);

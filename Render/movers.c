@@ -6,13 +6,13 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/25 10:53:36 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/27 13:46:13 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int 		can_step(t_all * all, double i, double j)
+static int		can_step(t_all *all, double i, double j)
 {
 	if (all->prms->map[(int)i][(int)j] == '1')
 		return (0);
@@ -27,43 +27,7 @@ int 		can_step(t_all * all, double i, double j)
 	return (1);
 }
 
-int			move(t_all *all, double angle);
-
-
-int			move_fwd(t_all *all)
-{
-	move(all, all->prms->plr.ang_h);
-	return (0);
-}
-
-int			move_bwd(t_all *all)
-{
-	double angle;
-
-	angle = all->prms->plr.ang_h + M_PI;
-	move(all, angle);
-	return(0);
-}
-
-int			move_left(t_all *all)
-{
-	double angle;
-
-	angle = all->prms->plr.ang_h + M_PI_2;
-	move(all, angle);
-	return(0);
-}
-
-int			move_right(t_all *all)
-{
-	double angle;
-
-	angle = all->prms->plr.ang_h - M_PI_2;
-	move(all, angle);
-	return(0);
-}
-
-int			move(t_all *all, double angle)
+int				move(t_all *all, double angle)
 {
 	double i_cur;
 	double j_cur;
