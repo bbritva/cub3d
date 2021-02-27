@@ -6,13 +6,13 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/24 18:59:08 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/27 17:00:10 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-double		get_dY(t_player *plr, double angle)
+static double	get_dy(t_player *plr, double angle)
 {
 	t_player	p;
 
@@ -34,7 +34,7 @@ double		get_dY(t_player *plr, double angle)
 	return ((p.pos_y - plr->pos_y) / sin(angle));
 }
 
-double		get_dX(t_player *plr, double angle)
+static double	get_dx(t_player *plr, double angle)
 {
 	t_player	p;
 
@@ -56,143 +56,60 @@ double		get_dX(t_player *plr, double angle)
 	return ((p.pos_x - plr->pos_x) / cos(angle));
 }
 
-
-int		get_height(t_all *all, int i)
+static double	get_ang(t_all *all, int i)
 {
-	int 		h;
-	int 		dir;
-	int 		x_coor;
-	double		dX;
-	double		dY;
-	double		dist;
+	double		ang;
+
+	ang = all->prms->plr.ang_h + M_PI / 6 - i * (M_PI / (3 * all->prms->res_h));
+	(ang < 0) ? ang += 2 * M_PI : ang;
+	(ang > 2 * M_PI) ? ang -= 2 * M_PI : ang;
+	return (ang);
+}
+
+static int		do_mgc(t_player *p, double ang, double d, char dir)
+{
+	int mgc;
+
+	if (dir == 'x')
+	{
+		p->pos_x += d * cos(ang);
+		p->pos_y -= d * sin(ang);
+		mgc = ((int)((p->pos_y - floor(p->pos_y)) * 255) << 16);
+		mgc = (ang > M_PI_2 && ang < 3 * M_PI_2) ? mgc | WEST : mgc | EAST;
+	}
+	else
+	{
+		p->pos_y += d * sin(ang);
+		p->pos_x -= d * cos(ang);
+		mgc = ((int)((p->pos_x - floor(p->pos_x)) * 255) << 16);
+		mgc = (ang > 0 && ang < M_PI) ? mgc | NORTH : mgc | SOUTH;
+	}
+	return (mgc);
+}
+
+int				get_height(t_all *all, int i)
+{
+	int			mgc;
+	double		dx;
+	double		dy;
 	t_player	p;
-	double		angle;
+	double		ang;
 
 	p = all->prms->plr;
-	angle = all->prms->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
-													 all->prms->res_h));
-	(angle < 0) ? angle += 2 * M_PI : angle;
-	(angle > 2 * M_PI) ? angle -= 2 * M_PI : angle;
-	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
+	ang = get_ang(all, i);
+	while (all->prms->map[(int)p.pos_y][(int)p.pos_x])
 	{
-		dX = get_dX(&p, angle);
-		dY = get_dY(&p, angle);
-		if (fabs(dY) > fabs(dX))
-		{
-			p.pos_x += dX * cos(angle);
-			p.pos_y -= dX * sin(angle);
-			x_coor = (int) ((p.pos_y - floor(p.pos_y)) * 255);
-			dir = (angle > M_PI_2 && angle < 3 * M_PI_2) ? WEST : EAST;
-			if (is_wall(all, p, angle, 'v'))
-				break;
-		}
-		else
-		{
-			p.pos_y += dY * sin(angle);
-			p.pos_x -= dY * cos(angle);
-			x_coor = (int) ((p.pos_x - floor(p.pos_x)) * 255);
-			dir = (angle > 0 && angle < M_PI) ? NORTH : SOUTH;
-			if (is_wall(all, p, angle, 'h'))
-				break;
-		}
+		dx = get_dx(&p, ang);
+		dy = get_dy(&p, ang);
+		if (fabs(dy) > fabs(dx))
+			if ((mgc = do_mgc(&p, ang, dx, 'x')) && is_wall(all, p, ang, 'v'))
+				break ;
+		if (fabs(dy) <= fabs(dx))
+			if ((mgc = do_mgc(&p, ang, dy, 'y')) && is_wall(all, p, ang, 'h'))
+				break ;
 	}
-	dX = p.pos_x - all->prms->plr.pos_x;
-	dY = p.pos_y - all->prms->plr.pos_y;
-	dist = sqrt(dX * dX + dY * dY);
-	dist *= cos(angle - all->prms->plr.ang_h);
-	all->prms->dists[i] = dist;
-//	dX = (all->prms->res_h > all->prms->res_v) ? all->prms->res_v :
-//			all->prms->res_h;
-	h = (int) ((double)all->prms->res_h / 2 / tan(M_PI / 6) / dist);
-	return (h | dir | (x_coor << 16));
+	all->prms->dists[i] = sqrt(pow(p.pos_x - all->prms->plr.pos_x, 2) + pow(
+		p.pos_y - all->prms->plr.pos_y, 2)) * cos(ang - all->prms->plr.ang_h);
+	return ((int)((double)all->prms->res_h / 2 / tan(M_PI / 6) /
+		all->prms->dists[i]) | mgc);
 }
-
-//сложный кастер для спрайтов
-//int		get_spr_prms(t_all *all, double angle)
-//{
-//	int 		h;
-//	int 		x_coor;
-//	double		dX;
-//	double		dY;
-//	double		dist;
-//	t_player	p;
-//
-//	p = all->plr;
-//	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
-//	{
-//		dX = get_dX(&p, angle);
-//		dY = get_dY(&p, angle);
-//		if (fabs(dY) > fabs(dX))
-//		{
-//			p.pos_x += dX * cos(angle);
-//			p.pos_y -= dX * sin(angle);
-//			x_coor = (int) ((p.pos_y - floor(p.pos_y)) * 255);
-//			if (is_wall(all, p, angle, 'v'))
-//				return (0);
-//			if (is_sprite(all, p, angle, 'v'))
-//				break;
-//		}
-//		else
-//		{
-//			p.pos_y += dY * sin(angle);
-//			p.pos_x -= dY * cos(angle);
-//			x_coor = (int) ((p.pos_x - floor(p.pos_x)) * 255);
-//			if (is_wall(all, p, angle, 'v'))
-//				return (0);
-//			if (is_sprite(all, p, angle, 'h'))
-//				break;
-//		}
-//	}
-//	dX = ceil(p.pos_x) - 0.5 - all->plr.pos_x;
-//	dY = ceil(p.pos_y) - 0.5 - all->plr.pos_y;
-//	dist = sqrt(dX * dX + dY * dY);
-//	dist *= cos(angle - all->plr.ang_h);
-//	h = (int) (((double)all->prms->res_v / 1.2) * SCALE / dist);
-//	return (h | (x_coor << 16));
-//}
-
-
-//упрощенный кастер для спрайтов
-//double		get_wall_dist(t_all *all, double angle)
-//{
-//	double		dX;
-//	double		dY;
-//	double		dist;
-//	t_player	p;
-//
-//	p = all->prms->plr;
-//	while (all->prms->map[(int) p.pos_y][(int) p.pos_x])
-//	{
-//		p.pos_x += 0.1 * cos(angle);
-//		p.pos_y -= 0.1 * sin(angle);
-//		if (is_wall(all, p, angle, 'v'))
-//			break;
-//	}
-//	dX = p.pos_x - all->prms->plr.pos_x;
-//	dY = p.pos_y - all->prms->plr.pos_y;
-//	dist = sqrt(dX * dX + dY * dY);
-//	dist *= cos(angle - all->prms->plr.ang_h);
-//	return (dist);
-//}
-
-//кастер для конкретного спрайта
-int		set_spr_prms(t_sprite *spr,  t_player plr)
-{
-	double		dX;
-	double		dY;
-
-	dX = ceil(spr->pos_x) + 0.5 - plr.pos_x;
-	dY = ceil(spr->pos_y) + 0.5 - plr.pos_y;
-	spr->angle = atan2(-dY, dX);
-	while (spr->angle < 0)
-		spr->angle += 2 * M_PI;
-	while (spr->angle > 2 * M_PI)
-		spr->angle -= 2 * M_PI;
-//	if (fabs(plr.ang_h - spr->angle) > M_PI / 6)
-//		return (0);
-//	x_coor = (int) ((0.5 - (dX * sin(p.ang_h) + dY * cos(p.ang_h))) * 255);
-	spr->dist = sqrt(pow(dX, 2) + pow(dY, 2));
-//	h = (int) (((double)200 / 1.2) * SCALE / spr->dist);
-	return (0);
-}
-
