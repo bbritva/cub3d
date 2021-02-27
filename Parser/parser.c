@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 12:03:47 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/27 12:08:24 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		show_param_errors(const int *err)
 		ft_putstr("None or wrong ceiling/floor color parameters\n");
 	if (*err & (1 << 5))
 		ft_putstr("Memory allocating error\n");
-	return(0);
+	return (0);
 }
 
 int		free_params(t_params *params, int *err)
@@ -86,8 +86,7 @@ int		parser(char *f_name, t_params *prms)
 	int		err;
 	char	*line;
 
-	fd = open(f_name, O_RDONLY);
-	if (fd == -1)
+	if (-1 == (fd = open(f_name, O_RDONLY)))
 	{
 		ft_putstr(NREAD_MSG);
 		return (0);
