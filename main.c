@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/24 10:50:26 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/27 11:48:17 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	params_free(t_params *params)
 
 void	ft_putstr(char *str)
 {
-		write(1, str, ft_strlen(str));
+	write(1, str, ft_strlen(str));
 }
 
 int		check_main_input(int argc, char *argv[])
@@ -48,11 +48,11 @@ int		check_main_input(int argc, char *argv[])
 	return (0);
 }
 
-int	main(int argc, char *argv[])
+int		main(int argc, char *argv[])
 {
 	t_params	*prms;
 
-	if ((prms = (t_params *)ft_calloc(1, sizeof (t_params))))
+	if ((prms = (t_params *)ft_calloc(1, sizeof(t_params))))
 	{
 		if (check_main_input(argc, argv) && (parser(argv[1], prms)))
 		{
@@ -61,6 +61,6 @@ int	main(int argc, char *argv[])
 		}
 	}
 	else
-		PUT_ALLOC_ERR_MSG
+		ft_putstr(ALLOC_ERR_MSG);
 	ft_putstr("end of cub3d\n");
 }
