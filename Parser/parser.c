@@ -6,14 +6,13 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/26 19:51:56 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/27 12:03:47 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <stdio.h>
 
-int 	show_param_errors(const int *err)
+int		show_param_errors(const int *err)
 {
 	if (*err & (1 << 0))
 		ft_putstr("None resolution parameters\n");
@@ -30,27 +29,27 @@ int 	show_param_errors(const int *err)
 	return(0);
 }
 
-int 	free_params(t_params *params, int *err)
+int		free_params(t_params *params, int *err)
 {
 	if (params->north)
-		free (params->north);
+		free(params->north);
 	if (params->south)
-		free (params->south);
+		free(params->south);
 	if (params->west)
-		free (params->west);
+		free(params->west);
 	if (params->east)
-		free (params->east);
+		free(params->east);
 	if (params->sprite)
-		free (params->sprite);
+		free(params->sprite);
 	if (params->dists)
-		free (params->dists);
+		free(params->dists);
 	free(params);
 	if (*err)
 		show_param_errors(err);
 	return (0);
 }
 
-int 	check_params(t_params *params, int *err)
+int		check_params(t_params *params, int *err)
 {
 	*err = (params->res_h == -1 || params->res_v == -1) ? *err | 1 : *err;
 	*err = (params->north) ? *err : *err | (1 << 2);
@@ -81,11 +80,11 @@ int		params_init(t_params *params)
 	return (0);
 }
 
-int 	parser(char *f_name, t_params *prms)
+int		parser(char *f_name, t_params *prms)
 {
-	int			fd;
-	int 		err;
-	char		*line;
+	int		fd;
+	int		err;
+	char	*line;
 
 	fd = open(f_name, O_RDONLY);
 	if (fd == -1)
@@ -102,7 +101,6 @@ int 	parser(char *f_name, t_params *prms)
 			free_params(prms, &err);
 		else if (map_parser(fd, prms, &line))
 		{
-			show_parse_res(prms);
 			close(fd);
 			return (1);
 		}
@@ -111,25 +109,3 @@ int 	parser(char *f_name, t_params *prms)
 	close(fd);
 	return (0);
 }
-
-void	show_parse_res(t_params *prms)
-{
-	int i;
-
-	printf("hrez = %d\n", prms->res_h);
-	printf("vrez = %d\n", prms->res_v);
-	printf("north = \"%s\"\n", prms->north);
-	printf("south = \"%s\"\n", prms->south);
-	printf("west = \"%s\"\n", prms->west);
-	printf("east = \"%s\"\n", prms->east);
-	printf("sprite = \"%s\"\n", prms->sprite);
-	printf("f_color = %d\n", prms->floor_color);
-	printf("c_color = %d\n", prms->ceil_color);
-	i = 0;
-	while (*(prms->map + i))
-		ft_putendl_fd(prms->map[i++], 1);
-}
-
-
-
-

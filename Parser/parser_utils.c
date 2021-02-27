@@ -12,12 +12,12 @@
 
 #include "../cub3d.h"
 
-int 		isclr(int color)
+int			isclr(int color)
 {
 	return (color >= 0 && color <= 255);
 }
 
-int is_map_line(char *line)
+int			is_map_line(char *line)
 {
 	int	result;
 
@@ -41,7 +41,7 @@ int			get_color(const char *line, int i, int *color, int *err)
 		return (i);
 	}
 	*err = *err | (1 << 4);
-	return(i);
+	return (i);
 }
 
 int			get_colors(const char *line, int color, int *err)
@@ -67,10 +67,9 @@ int			get_colors(const char *line, int color, int *err)
 	return (red << 16 | green << 8 | blue);
 }
 
-int		skip_spaces(const char *str, int i)
+int			skip_spaces(const char *str, int i)
 {
-	while ((str[i] >= 9 && str[i] <= 13 ) || str[i] == 32)
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
 	return (i);
 }
-

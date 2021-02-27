@@ -6,13 +6,13 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:58:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/26 15:26:54 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/27 11:58:08 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int		get_rez(t_params *params, const char *line, int *err)
+int			get_rez(t_params *params, const char *line, int *err)
 {
 	int i;
 
@@ -36,7 +36,7 @@ int		get_rez(t_params *params, const char *line, int *err)
 	return (i);
 }
 
-char	*get_path(char *line, char *path, int i, int *err)
+char		*get_path(char *line, char *path, int i, int *err)
 {
 	int		j;
 
@@ -46,7 +46,7 @@ char	*get_path(char *line, char *path, int i, int *err)
 	if ((path = ft_calloc(ft_strlen(&line[i]) + 1, sizeof(char))))
 	{
 		j = 0;
-		while(line[i])
+		while (line[i])
 			path[j++] = line[i++];
 		path[j] = 0;
 		return (path);
@@ -54,7 +54,7 @@ char	*get_path(char *line, char *path, int i, int *err)
 	return (0);
 }
 
-void 	parse_line(t_params *params, char *line, int *err)
+void		parse_line(t_params *params, char *line, int *err)
 {
 	if (line[0] == 'R')
 		get_rez(params, line, err);
@@ -74,15 +74,6 @@ void 	parse_line(t_params *params, char *line, int *err)
 		params->ceil_color = get_colors(line, params->ceil_color, err);
 }
 
-double 		*dists_init(int size)
-{
-	double	*dists;
-
-	if (size > 0 && (dists = (double *)ft_calloc(size, sizeof (double))))
-		return (dists);
-	return (NULL);
-}
-
 t_params	*param_parser(int fd, t_params *prms, char **line, int *err)
 {
 	while ((get_next_line(fd, line)) && !is_map_line(*line))
@@ -90,6 +81,6 @@ t_params	*param_parser(int fd, t_params *prms, char **line, int *err)
 		parse_line(prms, *line, err);
 		free(*line);
 	}
-	prms->dists = dists_init(prms->res_h);
+	prms->dists = (double *)ft_calloc(prms->res_h, sizeof(double));
 	return (prms);
 }

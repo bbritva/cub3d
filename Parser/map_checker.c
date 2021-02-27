@@ -36,11 +36,10 @@ int			check_zero(char **map, int i, int j)
 	return (1);
 }
 
-int 		check_map(t_params *prms)
+int			check_map(t_params *prms)
 {
-
-	int 	i;
-	int 	j;
+	int	i;
+	int	j;
 
 	if (!check_first_line(prms->map[0]))
 		return (0);
