@@ -74,6 +74,6 @@ int			render_next_frame(t_all *all)
 
 int			my_exit(t_all *all)
 {
-	(void) all;
+	(void)all;
 	exit(0);
 }

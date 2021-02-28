@@ -1,4 +1,4 @@
-NAME		=	cub3d
+NAME		=	cub3D
 LIBFT		=	libft.a
 CCF			=	@gcc $(CFLAGS)
 MKLIB		=	@ar rc

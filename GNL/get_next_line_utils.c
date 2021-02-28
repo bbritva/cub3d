@@ -33,8 +33,8 @@ char	*gnl_strjoin(char *s1, char *s2)
 
 	if (!s2)
 		return (NULL);
-	result = (char *)malloc((gnl_strlen(s1) + gnl_strlen(s2) + 1) * sizeof
-			(char));
+	result = (char *)malloc((gnl_strlen(s1) + gnl_strlen(s2) + 1) *
+		sizeof(char));
 	if (result)
 	{
 		j = 0;

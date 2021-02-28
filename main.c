@@ -41,7 +41,7 @@ int		check_main_input(int argc, char *argv[])
 	}
 	if (argc == 2 && ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
 		return (1);
-	if (argc == 3 && ft_strncmp("––save", argv[2], 6))
+	if (argc == 3 && ft_strncmp("––save", argv[2], 7))
 		if (ft_strlen(ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))) == 4)
 			return (1);
 	ft_putstr(M_ARGS_MSG);
