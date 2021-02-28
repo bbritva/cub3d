@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 13:46:13 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/28 17:35:43 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,16 @@ int			render_next_frame(t_all *all)
 	if (all->win->move_mask & RT_RIGHT)
 		all->prms->plr.ang_h += 0.06f;
 	if (all->win->move_mask & ESC)
-	{
-		mlx_clear_window(all->win->mlx, all->win->win);
-		mlx_destroy_window(all->win->mlx, all->win->win);
 		exit(0);
-	}
 	all->prms->plr.ang_h -= (all->prms->plr.ang_h > M_PI * 2) ? M_PI * 2 : 0;
 	all->prms->plr.ang_h += (all->prms->plr.ang_h < 0) ? M_PI * 2 : 0;
 	create_img(all);
 	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
 	return (1);
+}
+
+int			my_exit(t_all *all)
+{
+	(void) all;
+	exit(0);
 }

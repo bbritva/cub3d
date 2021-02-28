@@ -30,6 +30,8 @@ fclean:		clean
 			@make fclean -C $(LIB_DIR)
 			$(RM) $(NAME)
 			@echo $(NAME) deleted
+			$(RM) $(MNAME)
+			@echo $(MNAME) deleted
 
 re:			fclean all
 
