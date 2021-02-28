@@ -18,7 +18,6 @@
 # include "../cub3d.h"
 # define INIT_ERR_MSG "Initialization error\n"
 # define SCALE 1
-# define SCALE2 20
 # define SPEED 0.1f
 # define ESC 64
 # define FORWARD 32
@@ -81,6 +80,5 @@ int					crop_resolution(t_all *all);
 int					free_window(t_all *all);
 void				draw_txtr_line(t_all *all, int x_pos, int h);
 void				draw_sprites(t_all *all);
-void				draw_minimap(t_all *all);
 
 #endif

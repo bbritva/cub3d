@@ -55,6 +55,5 @@ int			create_img(t_all *all)
 	draw_fc(all);
 	draw_walls(all);
 	draw_sprites(all);
-	draw_minimap(all);
 	return (0);
 }

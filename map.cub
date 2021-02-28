@@ -1,9 +1,9 @@
-R 1280 1280
+R 16000 16000
 NO ./Render/textures/north.xpm
 SO ./Render/textures/south.xpm
 WE ./Render/textures/west.xpm
 EA ./Render/textures/east.xpm
-S ./Render/textures/butters.xpm
+S ./Render/textures/barrel.xpm
 F 0,151,57
 C 0,191,  255
 

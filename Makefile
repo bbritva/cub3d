@@ -8,7 +8,7 @@ SRCS		=	main.c Parser/parser.c Parser/param_parser.c Parser/map_parser.c Parser/
 				GNL/get_next_line.c Render/render_utils.c Render/drawers.c Render/hooks.c Render/movers.c \
 				GNL/get_next_line_utils.c Parser/parser_utils.c Render/render.c Render/raycast.c Render/get_shot.c \
 				Parser/map_checker.c Parser/get_sprites.c Render/sprites_handler.c Render/freeing.c \
-				Render/drawers_utils.c Render/draw_sprites.c Render/draw_minimap.c
+				Render/drawers_utils.c Render/draw_sprites.c
 P_SRCS		=	Parser/main_parser.c Parser/parser.c Parser/param_parser.c Parser/map_parser.c GNL/get_next_line.c \
 				GNL/get_next_line_utils.c Parser/parser_utils.c Parser/map_split.c 
 OBJS		=	$(SRCS:.c=.o)
