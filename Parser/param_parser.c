@@ -6,11 +6,18 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:58:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 11:58:08 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/01 16:32:22 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int			skip_nums(const char *str, int i)
+{
+	while (str[i] >= '0' && str[i] <= '9')
+		i++;
+	return (i);
+}
 
 int			get_rez(t_params *params, const char *line, int *err)
 {
@@ -24,13 +31,15 @@ int			get_rez(t_params *params, const char *line, int *err)
 		params->res_h = 0;
 	while (ft_isdigit(line[i]) && params->res_h < RES_MAX)
 		params->res_h = params->res_h * 10 + (line[i++] - '0');
-	*err = (params->res_h > RES_MAX) ? *err | (1 << 1) : *err;
+	params->res_h = (params->res_h > RES_MAX) ? RES_MAX : params->res_h;
+	i = skip_nums(line, i);
 	i = skip_spaces(line, i);
 	if (ft_isdigit(line[i]) && params->res_v == -1)
 		params->res_v = 0;
 	while (ft_isdigit(line[i]) && params->res_v < RES_MAX)
 		params->res_v = params->res_v * 10 + (line[i++] - '0');
-	*err = (params->res_v > RES_MAX) ? *err | (1 << 1) : *err;
+	params->res_v = (params->res_v > RES_MAX) ? RES_MAX : params->res_v;
+	i = skip_nums(line, i);
 	i = skip_spaces(line, i);
 	*err = (line[i] != 0) ? *err | (1 << 1) : *err;
 	return (i);
