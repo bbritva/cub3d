@@ -1,4 +1,4 @@
-R 128055555555555 8005555555554324243523
+R 1280 800
 NO ./Render/textures/north.xpm
 SO ./Render/textures/south.xpm
 WE ./Render/textures/west.xpm
