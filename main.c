@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/03 12:29:20 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/03 19:13:44 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,11 @@ int		check_main_input(int argc, char *argv[])
 		ft_putstr(F_MISS_MSG);
 		return (0);
 	}
-	if (argc == 2 && ft_strlen(ft_strnstr(argv[1], ".cub",
+	if (argc == 2 && ft_strlen(argv[1]) > 3 &&
+		ft_strlen(ft_strnstr(argv[1], ".cub",
 		ft_strlen(argv[1]))) == 4)
 		return (1);
-	if (argc == 3 &&
+	if (argc == 3 && ft_strlen(argv[2]) == 6 &&
 	ft_strlen(ft_strnstr(argv[2], "--save", ft_strlen(argv[1]))) == 6 &&
 	ft_strlen(ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))) == 4)
 		return (1);
