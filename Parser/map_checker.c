@@ -6,13 +6,27 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 19:11:35 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/26 19:36:21 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/03 11:57:17 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int			check_first_line(char *line)
+static int	simple_check_line(char **map)
+{
+	int	i;
+
+	i = 0;
+	while(map[i])
+	{
+		if (!is_map_line(map[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static int	check_first_line(char *line)
 {
 	int i;
 
@@ -23,8 +37,10 @@ int			check_first_line(char *line)
 	return (1);
 }
 
-int			check_zero(char **map, int i, int j)
+static int	check_zero(char **map, int i, int j)
 {
+	if (ft_strchr("1 ", map[i][j]))
+		return (1);
 	if (!map[i - 1][j] || map[i - 1][j] == ' ')
 		return (0);
 	if (!map[i + 1][j] || map[i + 1][j] == ' ')
@@ -41,6 +57,8 @@ int			check_map(t_params *prms)
 	int	i;
 	int	j;
 
+	if (!simple_check_line(prms->map))
+		return (0);
 	if (!check_first_line(prms->map[0]))
 		return (0);
 	i = 1;
@@ -49,7 +67,7 @@ int			check_map(t_params *prms)
 		j = 0;
 		while (prms->map[i][j])
 		{
-			if (prms->map[i][j] == '0' && !check_zero(prms->map, i, j))
+			if (!check_zero(prms->map, i, j))
 				return (0);
 			j++;
 		}
