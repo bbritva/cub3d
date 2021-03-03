@@ -23,6 +23,7 @@ all:		$(NAME)
 
 clean:
 			@make clean -C $(LIB_DIR)
+			@make clean -C $(MLIB_DIR)
 			$(RM) $(OBJS)
 			@echo objs deleted
 
