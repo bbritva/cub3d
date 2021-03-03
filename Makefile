@@ -38,7 +38,6 @@ re:			fclean all
 $(NAME):	$(OBJS) $(HDR)
 			@make bonus -C $(LIB_DIR)
 			@make -C $(MLIB_DIR)
-			@cp $(MLIB_DIR)$(MNAME) $(MNAME)
 			$(CCF) $(OBJS) -L$(LIB_DIR) -lft -L$(MLIB_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 			@echo $(NAME) compilled
 

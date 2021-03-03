@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 12:48:34 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/03 10:26:48 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,24 @@ int		map_parser(int fd, t_params *prms, char **line)
 
 	i = 1;
 	line_map = NULL;
-	while (is_map_line(*line) && i)
+	while (is_map_line(*line) && i > 0)
 	{
 		line_map = gnl_strjoin(line_map, *line);
 		line_map = gnl_strjoin(line_map, "\n");
 		free(*line);
 		i = get_next_line(fd, line);
 	}
-	if (**line)
+	if (is_map_line(*line))
 	{
 		line_map = gnl_strjoin(line_map, *line);
 		line_map = gnl_strjoin(line_map, "\n");
-		free(*line);
 	}
+	else
+	{
+//		free(*line);
+		return (0);
+	}
+	free(*line);
 	((prms->map = map_split(line_map, '\n')) && check_map(prms) &&
 		get_player(prms) && get_sprites(prms)) ? i = 1 : 0;
 	free(line_map);
