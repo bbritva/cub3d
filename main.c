@@ -6,13 +6,13 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/03 12:26:59 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/03 12:29:20 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void 	free_map(char **map)
+void	free_map(char **map)
 {
 	int i;
 
@@ -75,8 +75,6 @@ int		main(int argc, char *argv[])
 			render(prms, argc);
 			params_free(prms);
 		}
-//		else
-//			params_free(prms);
 	}
 	else
 		ft_putstr(ALLOC_ERR_MSG);

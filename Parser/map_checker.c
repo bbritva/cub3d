@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 19:11:35 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/03 11:57:17 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/03 11:59:07 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	simple_check_line(char **map)
 	int	i;
 
 	i = 0;
-	while(map[i])
+	while (map[i])
 	{
 		if (!is_map_line(map[i]))
 			return (0);

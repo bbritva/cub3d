@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 21:21:24 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/03 11:39:13 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/03 12:06:49 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,22 +62,19 @@ static void		ft_fill(char **res, char *str, size_t size, size_t wide)
 
 	i = 0;
 	while (i < size)
-//		if (*str != '\n')
-//		{
-			if ((res[i] = (char *)ft_calloc(wide, sizeof(char))))
-			{
-				j = 0;
-				while (*str && *str != '\n')
-					res[i][j++] = *str++;
-				i++;
-				str += 1;
-			}
-			else
-			{
-				ft_freeresult(res, i);
-				break ;
-			}
-//		}
+		if ((res[i] = (char *)ft_calloc(wide, sizeof(char))))
+		{
+			j = 0;
+			while (*str && *str != '\n')
+				res[i][j++] = *str++;
+			i++;
+			str += 1;
+		}
+		else
+		{
+			ft_freeresult(res, i);
+			break ;
+		}
 }
 
 char			**map_split(char const *s, char c)
