@@ -6,11 +6,21 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/03 10:36:54 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/03 10:42:24 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void 	free_map(char **map)
+{
+	int i;
+
+	i = 0;
+	while (map[i])
+		free(map[i++]);
+	free(map);
+}
 
 void	params_free(t_params *params)
 {
@@ -26,6 +36,8 @@ void	params_free(t_params *params)
 		free(params->east);
 	if (params->dists)
 		free(params->dists);
+	if (params->map)
+		free_map(params->map);
 	free(params);
 }
 
