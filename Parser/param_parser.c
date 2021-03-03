@@ -67,13 +67,13 @@ void		parse_line(t_params *params, char *line, int *err)
 {
 	if (line[0] == 'R')
 		get_rez(params, line, err);
-	if (!ft_strncmp("NO", line, 2))
+	if (!ft_strncmp("NO ", line, 3))
 		params->north = get_path(line, params->north, 2, err);
-	if (!ft_strncmp("SO", line, 2))
+	if (!ft_strncmp("SO ", line, 3))
 		params->south = get_path(line, params->south, 2, err);
-	if (!ft_strncmp("WE", line, 2))
+	if (!ft_strncmp("WE ", line, 3))
 		params->west = get_path(line, params->west, 2, err);
-	if (!ft_strncmp("EA", line, 2))
+	if (!ft_strncmp("EA ", line, 3))
 		params->east = get_path(line, params->east, 2, err);
 	if (!ft_strncmp("S ", line, 2))
 		params->sprite = get_path(line, params->sprite, 1, err);
