@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/03 11:24:07 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/03 11:31:17 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,7 @@ int		map_parser(int fd, t_params *prms, char **line)
 		free(*line);
 		i = get_next_line(fd, line);
 	}
-//	if (is_map_line(*line))
-//	{
-		line_map = gnl_strjoin(line_map, *line);
-//		line_map = gnl_strjoin(line_map, "\n");
-//	}
-//	else
-//	{
-//		free(*line);
-//		return (0);
-//	}
+	line_map = gnl_strjoin(line_map, *line);
 	free(*line);
 	((prms->map = map_split(line_map, '\n')) && check_map(prms) &&
 		get_player(prms) && get_sprites(prms)) ? i = 1 : 0;

@@ -4,13 +4,13 @@ CCF			=	@gcc $(CFLAGS)
 MKLIB		=	@ar rc
 RM			=	@rm -f
 CFLAGS		=	-Wall -Wextra -Werror -g
-SRCS		=	main.c Parser/parser.c Parser/param_parser.c Parser/map_parser.c Parser/map_split.c \
-				GNL/get_next_line.c Render/render_utils.c Render/drawers.c Render/hooks.c Render/movers.c \
-				GNL/get_next_line_utils.c Parser/parser_utils.c Render/render.c Render/raycast.c Render/get_shot.c \
-				Parser/map_checker.c Parser/get_sprites.c Render/sprites_handler.c Render/freeing.c \
-				Render/drawers_utils.c Render/draw_sprites.c
-P_SRCS		=	Parser/main_parser.c Parser/parser.c Parser/param_parser.c Parser/map_parser.c GNL/get_next_line.c \
-				GNL/get_next_line_utils.c Parser/parser_utils.c Parser/map_split.c 
+PARSER_PATH	=	./Parser/
+RENDER_PATH	=	./Render/
+SRCS		=	main.c GNL/get_next_line.c GNL/get_next_line_utils.c \
+				$(addprefix $(PARSER_PATH), parser.c param_parser.c map_parser.c map_split.c parser_utils.c \
+				map_checker.c get_sprites.c) \
+				$(addprefix $(RENDER_PATH), render_utils.c drawers.c sprites_handler.c freeing.c \
+				drawers_utils.c draw_sprites.c hooks.c movers.c render.c raycast.c get_shot.c)
 OBJS		=	$(SRCS:.c=.o)
 P_OBJS		=	$(P_SRCS:.c=.o)
 LIB_DIR		=	./libft/
@@ -41,11 +41,6 @@ $(NAME):	$(OBJS) $(HDR)
 			@cp $(MLIB_DIR)$(MNAME) $(MNAME)
 			$(CCF) $(OBJS) -L$(LIB_DIR) -lft -L$(MLIB_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 			@echo $(NAME) compilled
-
-parser:		$(P_OBJS)
-			@make bonus -C $(LIB_DIR)
-			$(CCF) $(P_OBJS) $(LIB_DIR)$(LIBFT) -o parser
-			@echo parser compilled
 
 %.o:		%.c $(HDR)
 			$(CCF) -o $@ -c $<

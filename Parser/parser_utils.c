@@ -38,7 +38,7 @@ int			get_color(const char *line, int i, int *color, int *err)
 		*color = 0;
 		while (ft_isdigit(line[i]) && *color < 256 && *color >= 0)
 			*color = *color * 10 + (line[i++] - '0');
-		return (i);
+		return (skip_spaces(line, i));
 	}
 	*err = *err | (1 << 4);
 	return (i);

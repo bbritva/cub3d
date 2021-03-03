@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/03 10:42:24 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/03 12:26:59 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,12 @@ int		main(int argc, char *argv[])
 	if ((prms = (t_params *)ft_calloc(1, sizeof(t_params))))
 	{
 		if (check_main_input(argc, argv) && (parser(argv[1], prms)))
+		{
 			render(prms, argc);
-		params_free(prms);
+			params_free(prms);
+		}
+//		else
+//			params_free(prms);
 	}
 	else
 		ft_putstr(ALLOC_ERR_MSG);
