@@ -46,5 +46,7 @@ $(NAME):	$(OBJS) $(HDR)
 			$(CCF) -o $@ -c $<
 			@echo $@ compilled
 
+norm:
+			norminette main.c Render/*c Render/*h Parser/*c Parser/*h libft/*c libft/*h GNL/*c GNL/*h
 
-.PHONY:		all clean fclean re so bonus $(NAME)
+.PHONY:		all clean fclean re so bonus norm $(NAME)
