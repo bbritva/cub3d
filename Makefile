@@ -17,7 +17,7 @@ LIB_DIR		=	./libft/
 MLIB_DIR	=	./minilibx_mms/
 MNAME		=	libmlx.dylib
 
-HDR			=	cub3d.h Parser/parser.h Render/render.h
+HDR			=	cub3d.h Parser/parser.h Render/render.h GNL/get_next_line.h libft/libft.h
 
 all:		$(NAME)
 

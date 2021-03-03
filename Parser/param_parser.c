@@ -51,7 +51,7 @@ char		*get_path(char *line, char *path, int i, int *err)
 
 	i = skip_spaces(line, i);
 	if (path && (*err = *err | (1 << 3)))
-		return (0);
+		free(path);
 	if ((path = ft_calloc(ft_strlen(&line[i]) + 1, sizeof(char))))
 	{
 		j = 0;
