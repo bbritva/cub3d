@@ -26,6 +26,7 @@
 # define M_ARGS_MSG "Wrong arguments.\n"
 # define NREAD_MSG "Cannot read file.\n"
 # define RES_MAX 16000
+# define RES_MIN 50
 
 typedef struct		s_player
 {

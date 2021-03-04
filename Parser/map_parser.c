@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/03 11:31:17 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/04 09:02:48 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ int		get_player(t_params *prms)
 		}
 		i++;
 	}
-	return (1);
+	return ((prms->plr.pos_x == 0) ? 0 : 1);
 }

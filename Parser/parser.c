@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 12:08:24 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/04 10:28:20 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,23 @@
 
 int		show_param_errors(const int *err)
 {
-	if (*err & (1 << 0))
-		ft_putstr("None resolution parameters\n");
-	if (*err & (1 << 1))
-		ft_putstr("Multiple/overflow(>10000) resolution parameters\n");
-	if (*err & (1 << 2))
-		ft_putstr("Not enough texture parameters\n");
-	if (*err & (1 << 3))
-		ft_putstr("Multiple texture parameters\n");
-	if (*err & (1 << 4))
-		ft_putstr("None or wrong ceiling/floor color parameters\n");
-	if (*err & (1 << 5))
-		ft_putstr("Memory allocating error\n");
+	if (*err & (1 << 6))
+		ft_putstr(NREAD_MSG);
+	else
+	{
+		if (*err & (1 << 0))
+			ft_putstr("None resolution parameters\n");
+		if (*err & (1 << 1))
+			ft_putstr("Multiple/overflow(>10000) resolution parameters\n");
+		if (*err & (1 << 2))
+			ft_putstr("Not enough texture parameters\n");
+		if (*err & (1 << 3))
+			ft_putstr("Multiple texture parameters\n");
+		if (*err & (1 << 4))
+			ft_putstr("None or wrong ceiling/floor color parameters\n");
+		if (*err & (1 << 5))
+			ft_putstr("Memory allocating error\n");
+	}
 	return (0);
 }
 

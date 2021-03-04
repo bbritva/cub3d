@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:58:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/01 16:32:22 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/04 10:21:38 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int			get_rez(t_params *params, const char *line, int *err)
 {
 	int i;
 
-	i = 1;
-	i = skip_spaces(line, i);
+	i = skip_spaces(line, 1);
 	if (params->res_v != -1 || params->res_h != -1)
 		*err = *err | (1 << 1);
 	if (ft_isdigit(line[i]) && params->res_h == -1)
@@ -32,6 +31,7 @@ int			get_rez(t_params *params, const char *line, int *err)
 	while (ft_isdigit(line[i]) && params->res_h < RES_MAX)
 		params->res_h = params->res_h * 10 + (line[i++] - '0');
 	params->res_h = (params->res_h > RES_MAX) ? RES_MAX : params->res_h;
+	params->res_h = (params->res_h < RES_MIN) ? RES_MIN : params->res_h;
 	i = skip_nums(line, i);
 	i = skip_spaces(line, i);
 	if (ft_isdigit(line[i]) && params->res_v == -1)
@@ -39,6 +39,7 @@ int			get_rez(t_params *params, const char *line, int *err)
 	while (ft_isdigit(line[i]) && params->res_v < RES_MAX)
 		params->res_v = params->res_v * 10 + (line[i++] - '0');
 	params->res_v = (params->res_v > RES_MAX) ? RES_MAX : params->res_v;
+	params->res_v = (params->res_v < RES_MIN) ? RES_MIN : params->res_v;
 	i = skip_nums(line, i);
 	i = skip_spaces(line, i);
 	*err = (line[i] != 0) ? *err | (1 << 1) : *err;
@@ -85,11 +86,14 @@ void		parse_line(t_params *params, char *line, int *err)
 
 t_params	*param_parser(int fd, t_params *prms, char **line, int *err)
 {
-	while ((get_next_line(fd, line)) && !is_map_line(*line))
+	int ret;
+
+	while (((ret = get_next_line(fd, line)) > 0) && !is_map_line(*line))
 	{
 		parse_line(prms, *line, err);
 		free(*line);
 	}
+	*err = (ret == -1) ? *err | (1 << 6) : *err;
 	prms->dists = (double *)ft_calloc(prms->res_h, sizeof(double));
 	return (prms);
 }
