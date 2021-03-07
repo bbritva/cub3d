@@ -43,6 +43,8 @@ $(NAME):	$(OBJS) $(HDR)
 			$(CCF) $(OBJS) -L$(LIB_DIR) -lft -L$(MLIB_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 			@echo $(NAME) compilled
 
+bonus:		$(NAME)
+
 %.o:		%.c $(HDR)
 			$(CCF) -o $@ -c $<
 			@echo $@ compilled

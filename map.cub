@@ -1,4 +1,4 @@
-R 1280 800
+R 280 200
 NO ./Render/textures/paporotnik-1.xpm
 WE ./Render/textures/paporotnik-2.xpm
 SO           ./Render/textures/wall_grass-3.xpm
