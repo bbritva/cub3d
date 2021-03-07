@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:00:04 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/07 09:13:58 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/07 10:17:27 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	shadow_color(int color, int h, int res_h)
 	int blue;
 	int	base;
 
-	base = (int)((double)res_h / 6 / tan(M_PI / 6));
+	base = (int)((double)res_h / 8 / tan(M_PI / 6));
 	if (h > base)
 		return (color);
 	h = (h < base / 10) ? (base / 10) : h;
