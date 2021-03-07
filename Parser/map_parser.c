@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/04 09:02:48 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/07 09:53:55 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int		get_player(t_params *prms)
 	int			j;
 
 	i = 0;
-	prms->plr.pos_y = 0;
 	while (prms->map[i] != 0)
 	{
 		j = 0;
@@ -60,7 +59,7 @@ int		get_player(t_params *prms)
 		{
 			if (ft_strchr("NSWE", prms->map[i][j]))
 			{
-				if (prms->plr.pos_y > 0)
+				if (prms->plr.pos_y > 0 && write(1, "Double player\n", 14))
 					return (0);
 				prms->plr.pos_x = (double)j + 0.5;
 				prms->plr.pos_y = (double)i + 0.5;
@@ -71,5 +70,7 @@ int		get_player(t_params *prms)
 		}
 		i++;
 	}
-	return ((prms->plr.pos_x == 0) ? 0 : 1);
+	if (prms->plr.pos_x == 0 && write(1, "No player\n", 10))
+		return (0);
+	return (1);
 }

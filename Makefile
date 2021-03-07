@@ -50,6 +50,9 @@ bonus:		$(NAME)
 			@echo $@ compilled
 
 norm:
-			norminette main.c Render/*c Render/*h Parser/*c Parser/*h libft/*c libft/*h GNL/*c GNL/*h
+			norminette main.c cub3d.h Render/*c Render/*h Parser/*c Parser/*h libft/*c libft/*h GNL/*c GNL/*h
+git:
+			git add main.c cub3d.h Makefile Render/*c Render/*h Parser/*c Parser/*h libft/*c libft/Makefile libft/*h \
+			GNL/*c GNL/*h minilibx_mms/* Render/textures/*xpm map.cub
 
 .PHONY:		all clean fclean re so bonus norm $(NAME)

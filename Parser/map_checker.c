@@ -20,7 +20,10 @@ static int	simple_check_line(char **map)
 	while (map[i])
 	{
 		if (!is_map_line(map[i]))
+		{
+			ft_putstr(MAP_ERR);
 			return (0);
+		}
 		i++;
 	}
 	return (1);
@@ -33,7 +36,10 @@ static int	check_first_line(char *line)
 	i = 0;
 	while (line[i])
 		if (ft_strchr("20NSWE", line[i++]))
+		{
+			ft_putstr(MAP_ERR);
 			return (0);
+		}
 	return (1);
 }
 
@@ -68,7 +74,10 @@ int			check_map(t_params *prms)
 		while (prms->map[i][j])
 		{
 			if (!check_zero(prms->map, i, j))
+			{
+				ft_putstr(MAP_ERR);
 				return (0);
+			}
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/04 10:28:20 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/07 09:51:25 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ int		params_init(t_params *params)
 		params->dists = NULL;
 		params->floor_color = -1;
 		params->ceil_color = -1;
+		params->plr.pos_y = 0;
+		params->plr.pos_x = 0;
+		params->plr.ang_h = 0;
 		return (1);
 	}
 	return (0);
@@ -109,7 +112,6 @@ int		parser(char *f_name, t_params *prms)
 			return (1);
 		}
 	}
-	ft_putstr("Map error\n");
 	close(fd);
 	return (0);
 }
