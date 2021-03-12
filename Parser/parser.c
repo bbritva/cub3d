@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 12:08:24 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/12 12:02:41 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,23 @@
 
 int		show_param_errors(const int *err)
 {
-	if (*err & (1 << 0))
-		ft_putstr("None resolution parameters\n");
-	if (*err & (1 << 1))
-		ft_putstr("Multiple/overflow(>10000) resolution parameters\n");
-	if (*err & (1 << 2))
-		ft_putstr("Not enough texture parameters\n");
-	if (*err & (1 << 3))
-		ft_putstr("Multiple texture parameters\n");
-	if (*err & (1 << 4))
-		ft_putstr("None or wrong ceiling/floor color parameters\n");
-	if (*err & (1 << 5))
-		ft_putstr("Memory allocating error\n");
+	if (*err & (1 << 6))
+		ft_putstr(NREAD_MSG);
+	else
+	{
+		if (*err & (1 << 0))
+			ft_putstr("None resolution parameters\n");
+		if (*err & (1 << 1))
+			ft_putstr("Multiple/overflow(>10000) resolution parameters\n");
+		if (*err & (1 << 2))
+			ft_putstr("Not enough texture parameters\n");
+		if (*err & (1 << 3))
+			ft_putstr("Multiple texture parameters\n");
+		if (*err & (1 << 4))
+			ft_putstr("None or wrong ceiling/floor color parameters\n");
+		if (*err & (1 << 5))
+			ft_putstr("Memory allocating error\n");
+	}
 	return (0);
 }
 
@@ -75,6 +80,9 @@ int		params_init(t_params *params)
 		params->dists = NULL;
 		params->floor_color = -1;
 		params->ceil_color = -1;
+		params->plr.pos_y = 0;
+		params->plr.pos_x = 0;
+		params->plr.ang_h = 0;
 		return (1);
 	}
 	return (0);
@@ -104,7 +112,6 @@ int		parser(char *f_name, t_params *prms)
 			return (1);
 		}
 	}
-	ft_putstr("Map error\n");
 	close(fd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:51 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 13:03:17 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/12 12:02:41 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@
 # include "../libft/libft.h"
 # include "../GNL/get_next_line.h"
 
-# define F_MISS_MSG "File name missing.\n"
-# define M_ARGS_MSG "Wrong arguments.\n"
-# define NREAD_MSG "Cannot read file.\n"
+# define F_MISS_MSG "File name missing\n"
+# define M_ARGS_MSG "Wrong arguments\n"
+# define NREAD_MSG "Cannot read file\n"
+# define MAP_ERR "Wrong map\n"
 # define RES_MAX 16000
+# define RES_MIN 50
 
 typedef struct		s_player
 {

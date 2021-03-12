@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:00:04 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 18:28:50 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/12 12:02:41 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,20 @@ static int	get_pxl(t_tex *tex, int i, int h, int x_coor)
 	return (color);
 }
 
-static int	shadow_color(int color, int h)
+static int	shadow_color(int color, int h, int res_h)
 {
 	int red;
 	int green;
 	int blue;
+	int	base;
 
-	if (h > 200)
+	base = (int)((double)res_h / 8 / tan(M_PI / 6));
+	if (h > base)
 		return (color);
-	h = (h < 50) ? 50 : h;
-	red = ((color & 0xFF << 16) >> 16) * h / 200;
-	green = ((color & 0xFF << 8) * h >> 8) / 200;
-	blue = (color & 0xFF) * h / 200;
+	h = (h < base / 10) ? (base / 10) : h;
+	red = ((color & 0xFF << 16) >> 16) * h / base;
+	green = ((color & 0xFF << 8) * h >> 8) / base;
+	blue = (color & 0xFF) * h / base;
 	color = red << 16 | green << 8 | blue;
 	return (color);
 }
@@ -63,8 +65,8 @@ void		draw_txtr_line(t_all *all, int x_pos, int h)
 		if ((all->prms->res_v - h) / 2 + i >= all->prms->res_v)
 			break ;
 		if ((color = get_pxl(tex, i, h, x_coor)) > 0)
-			my_pixel_put(all->win, x_pos, (all->prms->res_v - h) / 2
-				+ i, shadow_color(color, h));
+			my_pixel_put(all->win, x_pos, (all->prms->res_v - h) / 2 + i,
+				shadow_color(color, h, all->prms->res_h));
 		i++;
 	}
 }

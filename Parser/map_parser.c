@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 12:48:34 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/12 12:02:41 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,15 @@ int		map_parser(int fd, t_params *prms, char **line)
 
 	i = 1;
 	line_map = NULL;
-	while (is_map_line(*line) && i)
+	while (i)
 	{
 		line_map = gnl_strjoin(line_map, *line);
 		line_map = gnl_strjoin(line_map, "\n");
 		free(*line);
 		i = get_next_line(fd, line);
 	}
-	if (**line)
-	{
-		line_map = gnl_strjoin(line_map, *line);
-		line_map = gnl_strjoin(line_map, "\n");
-		free(*line);
-	}
+	line_map = gnl_strjoin(line_map, *line);
+	free(*line);
 	((prms->map = map_split(line_map, '\n')) && check_map(prms) &&
 		get_player(prms) && get_sprites(prms)) ? i = 1 : 0;
 	free(line_map);
@@ -56,7 +52,6 @@ int		get_player(t_params *prms)
 	int			j;
 
 	i = 0;
-	prms->plr.pos_y = 0;
 	while (prms->map[i] != 0)
 	{
 		j = 0;
@@ -64,7 +59,7 @@ int		get_player(t_params *prms)
 		{
 			if (ft_strchr("NSWE", prms->map[i][j]))
 			{
-				if (prms->plr.pos_y > 0)
+				if (prms->plr.pos_y > 0 && write(1, "Double player\n", 14))
 					return (0);
 				prms->plr.pos_x = (double)j + 0.5;
 				prms->plr.pos_y = (double)i + 0.5;
@@ -75,5 +70,7 @@ int		get_player(t_params *prms)
 		}
 		i++;
 	}
+	if (prms->plr.pos_x == 0 && write(1, "No player\n", 10))
+		return (0);
 	return (1);
 }
