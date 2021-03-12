@@ -79,5 +79,6 @@ void		get_shot(t_all *all)
 		ft_putstr("Write BMP-data done\n");
 		close(fd);
 	}
-	ft_putstr("Create/open file error\n");
+	else
+		ft_putstr("Create/open file error\n");
 }

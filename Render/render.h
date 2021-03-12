@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/12 12:02:41 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/02/28 17:35:43 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 # include <math.h>
 # include "../minilibx_mms/mlx.h"
 # include "../cub3d.h"
-# define INIT_ERR_MSG "Initialization error\n"
+# define INIT_ERR_MSG "IMG initialization error (wrong texture path)\n"
 # define SCALE 1
-# define SCALE2 20
 # define SPEED 0.1f
 # define ESC 64
 # define FORWARD 32
@@ -81,6 +80,6 @@ int					crop_resolution(t_all *all);
 int					free_window(t_all *all);
 void				draw_txtr_line(t_all *all, int x_pos, int h);
 void				draw_sprites(t_all *all);
-void				draw_minimap(t_all *all);
+int					my_exit(t_all *all);
 
 #endif

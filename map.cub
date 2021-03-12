@@ -1,11 +1,11 @@
-R 1280 1280
-NO ./Render/textures/north.xpm
-SO ./Render/textures/south.xpm
-WE ./Render/textures/west.xpm
-EA ./Render/textures/east.xpm
-S ./Render/textures/butters.xpm
+R    0  800
+NO ./Render/textures/paporotnik-1.xpm
+WE ./Render/textures/paporotnik-2.xpm
+SO           ./Render/textures/wall_grass-3.xpm
+EA ./Render/textures/wall_grass-1.xpm
+S ./Render/textures/clicker.xpm
 F 0,151,57
-C 0,191,  255
+C 0,191  ,  255
 
         1111111111111111111111111
 111     1000000000110000000000001

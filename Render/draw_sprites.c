@@ -19,6 +19,8 @@ static void		sort_sprites(t_sprite **sprites)
 	t_sprite	*temp;
 
 	i = 0;
+	if (!sprites || !sprites[0])
+		return ;
 	while (sprites[i + 1])
 	{
 		j = i;
