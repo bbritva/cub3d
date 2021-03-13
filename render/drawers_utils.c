@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 
 static int	get_pxl(t_tex *tex, int i, int h, int x_coor)
 {

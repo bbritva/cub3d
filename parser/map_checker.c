@@ -6,11 +6,11 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 19:11:35 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 11:33:36 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/13 11:33:44 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../includes/parser.h"
 
 static int	simple_check_line(char **map)
 {

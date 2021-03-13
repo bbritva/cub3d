@@ -1,11 +1,11 @@
 NAME		=	cub3D
 LIBFT		=	libft.a
-CCF			=	@gcc $(CFLAGS)
+CCF			=	gcc $(CFLAGS)
 MKLIB		=	@ar rc
 RM			=	@rm -f
 CFLAGS		=	-Wall -Wextra -Werror -g
-PARSER_PATH	=	./Parser/
-RENDER_PATH	=	./Render/
+PARSER_PATH	=	./parser/
+RENDER_PATH	=	./render/
 SRCS		=	main.c GNL/get_next_line.c GNL/get_next_line_utils.c \
 				$(addprefix $(PARSER_PATH), parser.c param_parser.c map_parser.c map_split.c parser_utils.c \
 				map_checker.c get_sprites.c) \
@@ -17,7 +17,7 @@ LIB_DIR		=	./libft/
 MLIB_DIR	=	./minilibx_mms/
 MNAME		=	libmlx.dylib
 
-HDR			=	cub3d.h Parser/parser.h Render/render.h GNL/get_next_line.h libft/libft.h
+HDR			=	./includes/
 
 all:		$(NAME)
 
@@ -36,23 +36,23 @@ fclean:		clean
 
 re:			fclean all
 
-$(NAME):	$(OBJS) $(HDR)
+$(NAME):	$(OBJS) $(HDR) $(LIB_DIR)$(LIBFT)
 			@make bonus -C $(LIB_DIR)
 			@make -C $(MLIB_DIR)
 			@cp $(MLIB_DIR)$(MNAME) $(MNAME)
-			$(CCF) $(OBJS) -L$(LIB_DIR) -lft -L$(MLIB_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+			$(CCF) $(OBJS) -I -Iincludes -L$(LIB_DIR) -lft -L$(MLIB_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 			@echo $(NAME) compilled
 
 bonus:		$(NAME)
 
 %.o:		%.c $(HDR)
-			$(CCF) -o $@ -c $<
+			$(CCF) -I -Iincludes -c $< -o $@
 			@echo $@ compilled
 
 norm:
-			norminette main.c cub3d.h Render/*c Render/*h Parser/*c Parser/*h libft/*c libft/*h GNL/*c GNL/*h
+			norminette main.c cub3d.h render/*c render/*h parser/*c parser/*h libft/*c libft/*h GNL/*c GNL/*h
 git:
-			git add main.c cub3d.h Makefile Render/*c Render/*h Parser/*c Parser/*h libft/*c libft/Makefile libft/*h \
-			GNL/*c GNL/*h minilibx_mms/* Render/textures/*xpm map.cub
+			git add main.c cub3d.h Makefile render/*c render/*h parser/*c parser/*h libft/*c libft/Makefile libft/*h \
+			GNL/*c GNL/*h minilibx_mms/* render/textures/*xpm map.cub
 
 .PHONY:		all clean fclean re so bonus norm $(NAME)

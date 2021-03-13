@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 19:24:13 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 11:46:25 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/13 11:39:32 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 # define CUB3D_H
 # define ALLOC_ERR_MSG "Memory allocating error\n"
 
-# include "./Parser/parser.h"
-# include "./Render/render.h"
+# include "parser.h"
+# include "render.h"
 
 void	render(t_params *prms, int argc);
 int		parser(char *f_name, t_params *prms);
-void	ft_putstr(char *str);
 
 #endif

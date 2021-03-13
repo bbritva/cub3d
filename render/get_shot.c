@@ -6,11 +6,11 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 13:11:28 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 11:33:36 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/13 11:33:44 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
+#include "../includes/render.h"
 
 static int	get_clr(t_all *all, int x, int y)
 {
