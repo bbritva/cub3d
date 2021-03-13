@@ -75,7 +75,7 @@ int					key_release(int keycode, t_all *all);
 int					render_next_frame(t_all *all);
 int					create_img(t_all *all);
 void				get_shot(t_all *all);
-int					move(t_all *all, double angle);
+int					move(t_all *all, double ang, double *pos_x, double *pos_y);
 int					crop_resolution(t_all *all);
 int					free_window(t_all *all);
 void				draw_txtr_line(t_all *all, int x_pos, int h);

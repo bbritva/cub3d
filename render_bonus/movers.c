@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 13:46:13 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/13 13:22:20 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,20 @@ static int		can_step(t_all *all, double i, double j)
 	return (1);
 }
 
-int				move(t_all *all, double angle)
+int				move(t_all *all, double ang, double *pos_x, double *pos_y)
 {
 	double i_cur;
 	double j_cur;
 	double i_new;
 	double j_new;
 
-	i_cur = all->prms->plr.pos_y / SCALE;
-	j_cur = all->prms->plr.pos_x / SCALE;
-	i_new = (all->prms->plr.pos_y - SPEED * sin(angle)) / SCALE;
-	j_new = (all->prms->plr.pos_x + SPEED * cos(angle)) / SCALE;
+	i_cur = *pos_y;
+	j_cur = *pos_x;
+	i_new = (all->prms->plr.pos_y - SPEED * sin(ang));
+	j_new = (all->prms->plr.pos_x + SPEED * cos(ang));
 	if (can_step(all, i_new, j_cur))
-		all->prms->plr.pos_y -= SPEED * sin(angle);
+		*pos_y -= SPEED * sin(ang);
 	if (can_step(all, i_cur, j_new))
-		all->prms->plr.pos_x += SPEED * cos(angle);
+		*pos_x += SPEED * cos(ang);
 	return (0);
 }
