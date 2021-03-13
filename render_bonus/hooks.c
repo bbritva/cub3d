@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 14:26:31 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/13 14:47:29 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			render_next_frame(t_all *all)
 {
 	mlx_destroy_image(all->win->mlx, all->win->img);
 	move_plr(all);
-//	move_zombies(all);
+	move_zombies(all);
 	create_img(all);
 	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
 	return (1);
