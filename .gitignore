@@ -6,6 +6,7 @@
 /minilibx_mms/
 /en.subject.pdf
 /*.o
+/*.cub*
 /cub3d
 /GNL/*.o
 /parser/*.o
