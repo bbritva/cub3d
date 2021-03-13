@@ -75,3 +75,9 @@ int			render_next_frame(t_all *all)
 	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
 	return (1);
 }
+
+int			my_exit(t_all *all)
+{
+	(void)all;
+	exit(0);
+}

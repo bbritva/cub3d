@@ -80,5 +80,6 @@ int					crop_resolution(t_all *all);
 int					free_window(t_all *all);
 void				draw_txtr_line(t_all *all, int x_pos, int h);
 void				draw_sprites(t_all *all);
+int					my_exit(t_all *all);
 
 #endif
