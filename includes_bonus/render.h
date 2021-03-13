@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/28 17:35:43 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/13 13:59:33 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,5 @@ int					crop_resolution(t_all *all);
 int					free_window(t_all *all);
 void				draw_txtr_line(t_all *all, int x_pos, int h);
 void				draw_sprites(t_all *all);
-int					my_exit(t_all *all);
 
 #endif

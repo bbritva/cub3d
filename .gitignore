@@ -8,10 +8,12 @@
 /*.o
 /cub3d
 /GNL/*.o
-/Parser/*.o
+/parser/*.o
+/parser_bonus/*.o
 /libft/
 /libmlx.dylib
-/Render/*.o
+/render/*.o
+/render_bonus/*.o
 parser.idea
 .idea/*
 /screenshot.txt
