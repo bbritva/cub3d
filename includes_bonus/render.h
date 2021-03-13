@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 14:19:55 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/13 14:26:31 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int					key_release(int keycode, t_all *all);
 int					render_next_frame(t_all *all);
 int					create_img(t_all *all);
 void				get_shot(t_all *all);
-int					move(t_all *all, double ang, double *pos_x, double *pos_y);
 int					crop_resolution(t_all *all);
 int					free_window(t_all *all);
 void				draw_txtr_line(t_all *all, int x_pos, int h);

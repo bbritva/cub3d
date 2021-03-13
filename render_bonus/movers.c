@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 15:35:49 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/13 15:39:27 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static int		can_step(t_all *all, double i, double j)
 	return (1);
 }
 
-int				move(t_all *all, double ang, double *pos_x, double *pos_y)
+static int		move(t_all *all, double ang, double *pos_x, double
+*pos_y)
 {
 	double i_cur;
 	double j_cur;
@@ -39,8 +40,8 @@ int				move(t_all *all, double ang, double *pos_x, double *pos_y)
 
 	i_cur = *pos_y;
 	j_cur = *pos_x;
-	i_new = (all->prms->plr.pos_y - SPEED * sin(ang));
-	j_new = (all->prms->plr.pos_x + SPEED * cos(ang));
+	i_new = (i_cur - SPEED * sin(ang));
+	j_new = (j_cur + SPEED * cos(ang));
 	if (can_step(all, i_new, j_cur))
 		*pos_y -= SPEED * sin(ang);
 	if (can_step(all, i_cur, j_new))
