@@ -6,10 +6,13 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 13:59:33 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/13 14:26:31 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ * BONUS
+ */
 #include "../includes_bonus/cub3d.h"
 
 int			key_press(int keycode, t_all *all)
@@ -51,26 +54,8 @@ int			key_release(int keycode, t_all *all)
 int			render_next_frame(t_all *all)
 {
 	mlx_destroy_image(all->win->mlx, all->win->img);
-	if (all->win->move_mask & FORWARD)
-		move(all, all->prms->plr.ang_h, &all->prms->plr.pos_x,
-	   &all->prms->plr.pos_x);
-	if (all->win->move_mask & MV_LEFT)
-		move(all, all->prms->plr.ang_h + M_PI_2, &all->prms->plr.pos_x,
-			 &all->prms->plr.pos_x);
-	if (all->win->move_mask & BACKWARD)
-		move(all, all->prms->plr.ang_h + M_PI, &all->prms->plr.pos_x,
-			 &all->prms->plr.pos_x);
-	if (all->win->move_mask & MV_RIGHT)
-		move(all, all->prms->plr.ang_h - M_PI_2, &all->prms->plr.pos_x,
-			 &all->prms->plr.pos_x);
-	if (all->win->move_mask & RT_LEFT)
-		all->prms->plr.ang_h -= 0.06f;
-	if (all->win->move_mask & RT_RIGHT)
-		all->prms->plr.ang_h += 0.06f;
-	if (all->win->move_mask & ESC)
-		exit(0);
-	all->prms->plr.ang_h -= (all->prms->plr.ang_h > M_PI * 2) ? M_PI * 2 : 0;
-	all->prms->plr.ang_h += (all->prms->plr.ang_h < 0) ? M_PI * 2 : 0;
+	move_plr(all);
+//	move_zombies(all);
 	create_img(all);
 	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
 	return (1);

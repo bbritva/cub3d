@@ -50,11 +50,11 @@ $(NAME):		$(OBJS) $(HDR) $(LIB_DIR)$(LIBFT)
 				$(CCF) $(OBJS) -I -Iincludes -L$(LIB_DIR) -lft -L$(MLIB_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 				@echo $(NAME) compilled
 
-bonus:			$(OBJSB) $(HDRB) $(LIB_DIR)$(LIBFT)
+bonus:			$(OBJSB) $(HDRB)
 				@make bonus -C $(LIB_DIR)
 				@make -C $(MLIB_DIR)
 				@cp $(MLIB_DIR)$(MNAME) $(MNAME)
-				$(CCF) $(OBJS) -I -Iincludes -L$(LIB_DIR) -lft -L$(MLIB_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+				$(CCF) $(OBJSB) -I -Iincludes -L$(LIB_DIR) -lft -L$(MLIB_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 				@echo $(NAME) compilled
 
 %.o:			%.c $(HDR)

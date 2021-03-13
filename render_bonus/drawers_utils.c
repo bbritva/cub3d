@@ -6,10 +6,13 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:00:04 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/07 10:17:27 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/13 13:22:20 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ * BONUS
+ */
 #include "../includes_bonus/cub3d.h"
 
 static int	get_pxl(t_tex *tex, int i, int h, int x_coor)

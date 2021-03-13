@@ -6,16 +6,19 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 19:24:13 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 11:39:32 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/13 14:26:31 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ * BONUS
+ */
 #ifndef CUB3D_H
 # define CUB3D_H
 # define ALLOC_ERR_MSG "Memory allocating error\n"
 
-# include "parser.h"
-# include "render.h"
+# include "../includes_bonus/parser.h"
+# include "../includes_bonus/render.h"
 
 void	render(t_params *prms, int argc);
 int		parser(char *f_name, t_params *prms);

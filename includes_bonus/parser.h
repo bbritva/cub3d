@@ -39,8 +39,8 @@ typedef struct		s_player
 
 typedef struct		s_sprite
 {
-	int				pos_x;
-	int				pos_y;
+	double			pos_x;
+	double			pos_y;
 	double			dist;
 	double			angle;
 }					t_sprite;

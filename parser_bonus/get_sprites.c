@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:50:14 by grvelva           #+#    #+#             */
-/*   Updated: 2021/02/27 12:50:45 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/13 15:13:30 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ t_sprite	*get_sprite(int j, int i)
 
 	if ((spr = (t_sprite *)ft_calloc(1, sizeof(t_sprite))))
 	{
-		spr->pos_x = j;
-		spr->pos_y = i;
+		spr->pos_x = (double)j + 0.5;
+		spr->pos_y = (double)i + 0.5;
 		spr->dist = 0;
+		spr->angle = 0;
 	}
 	return (spr);
 }
