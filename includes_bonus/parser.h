@@ -43,6 +43,7 @@ typedef struct		s_sprite
 	double			pos_y;
 	double			dist;
 	double			angle;
+	int 			is_alive;
 }					t_sprite;
 
 typedef	struct		s_params

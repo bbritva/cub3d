@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/15 15:54:40 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 15:58:17 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ int 			move_zombies(t_all *all)
 	while (all->prms->sprites[i])
 	{
 		if (all->prms->sprites[i]->dist > (0.5 + i * D * 3) &&
-				all->prms->sprites[i]->dist < SPOT_DIST)
+				all->prms->sprites[i]->dist < SPOT_DIST &&
+				all->prms->sprites[i]->is_alive)
 			move_z(all, all->prms->sprites[i]->angle + M_PI,
 				&all->prms->sprites[i]->pos_x, &all->prms->sprites[i]->pos_y);
 		i++;

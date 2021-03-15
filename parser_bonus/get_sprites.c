@@ -47,6 +47,7 @@ t_sprite	*get_sprite(int j, int i)
 		spr->pos_y = (double)i + 0.5;
 		spr->dist = 0;
 		spr->angle = 0;
+		spr->is_alive = 1;
 	}
 	return (spr);
 }

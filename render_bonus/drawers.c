@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/15 16:00:40 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 16:02:15 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void		draw_bite(t_all *all)
 		j = 0;
 		while (j < all->prms->res_h)
 		{
-			if (i % 3 == 0 && j % 3 == 0)
+			if (i % 2 == 0 && j % 2 == 0)
 				my_pixel_put(all->win, j, i, 0xFF0000);
 			j++;
 		}
