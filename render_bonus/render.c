@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 14:09:16 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 14:10:20 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ static void	start_game(t_all *all)
 {
 	mlx_hook(all->win->win, 2, 1L << 0, key_press, all);
 	mlx_hook(all->win->win, 17, 1L << 17, my_exit, all);
+	mlx_hook(all->win->win, 17, 1L << 17, my_exit, all);
 	mlx_hook(all->win->win, 3, 1L << 1, key_release, all);
+	mlx_key_hook(all->win->win, key_hook, all);
 	mlx_loop_hook(all->win->mlx, render_next_frame, all);
 	mlx_loop(all->win->mlx);
 }

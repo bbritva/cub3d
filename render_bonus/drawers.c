@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 11:33:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 14:32:44 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,39 @@ void		draw_fc(t_all *all)
 	{
 		j = 0;
 		while (j < all->prms->res_h)
-			my_pixel_put(all->win, j++, i, all->prms->ceil_color);
+		{
+			my_pixel_put(all->win, j, i, shadow_color(all->prms->ceil_color,
+				all->prms->res_v / 2 - i + 100, all->prms->res_h));
+			j++;
+		}
 		i++;
 	}
 	while (i < all->prms->res_v)
 	{
 		j = 0;
 		while (j < all->prms->res_h)
-			my_pixel_put(all->win, j++, i, all->prms->floor_color);
+		{
+			my_pixel_put(all->win, j, i, shadow_color(all->prms->floor_color,
+				100 + i - (all->prms->res_v >> 1), all->prms->res_h));
+			j++;
+		}
+		i++;
+	}
+}
+void		draw_deathscreen(t_all *all)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < all->prms->res_v)
+	{
+		j = 0;
+		while (j < all->prms->res_h)
+		{
+			my_pixel_put(all->win, j, i, 0x363636);
+			j++;
+		}
 		i++;
 	}
 }
@@ -49,11 +74,16 @@ void		draw_walls(t_all *all)
 int			create_img(t_all *all)
 {
 	all->win->img = mlx_new_image(all->win->mlx, all->prms->res_h,
-		all->prms->res_v);
+								  all->prms->res_v);
 	all->win->addr = mlx_get_data_addr(all->win->img, &all->win->bpp,
-		&all->win->line_l, &all->win->en);
-	draw_fc(all);
-	draw_walls(all);
-	draw_sprites(all);
+										   &all->win->line_l, &all->win->en);
+	if (all->prms->plr.health > 0)
+	{
+		draw_fc(all);
+		draw_walls(all);
+		draw_sprites(all);
+	}
+	else
+		draw_deathscreen(all);
 	return (0);
 }

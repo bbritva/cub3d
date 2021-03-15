@@ -63,7 +63,7 @@ int		get_player(t_params *prms)
 					return (0);
 				prms->plr.pos_x = (double)j + 0.5;
 				prms->plr.pos_y = (double)i + 0.5;
-				prms->plr.angle_v = 0;
+				prms->plr.health = 100;
 				prms->plr.ang_h = get_angle(prms->map[i][j]);
 			}
 			j++;

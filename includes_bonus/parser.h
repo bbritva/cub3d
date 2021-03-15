@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:51 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 11:33:36 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 10:55:58 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct		s_player
 	double			pos_x;
 	double			pos_y;
 	double			ang_h;
-	double			angle_v;
+	int 			health;
 }					t_player;
 
 typedef struct		s_sprite

@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:00:04 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/15 11:41:56 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 12:55:31 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	get_pxl(t_tex *tex, int i, int h, int x_coor)
 	return (color);
 }
 
-static int	shadow_color(int color, int h, int res_h)
+int			shadow_color(int color, int h, int res_h)
 {
 	int red;
 	int green;
