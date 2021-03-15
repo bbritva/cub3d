@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 14:26:31 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 10:29:21 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define INIT_ERR_MSG "IMG initialization error (wrong texture path)\n"
 # define SCALE 1
 # define SPEED 0.1f
+# define SPEED_Z 0.07f
 # define ESC 64
 # define FORWARD 32
 # define BACKWARD 16
@@ -34,6 +35,7 @@
 # define SOUTH 1 << 27
 # define WEST 1 << 28
 # define EAST 1 << 29
+# define SPOT_DIST 5
 
 typedef struct		s_tex
 {

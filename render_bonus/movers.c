@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 15:39:27 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 10:30:13 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,25 @@ static int		move(t_all *all, double ang, double *pos_x, double
 	return (0);
 }
 
+static int		move_z(t_all *all, double ang, double *pos_x, double
+*pos_y)
+{
+	double i_cur;
+	double j_cur;
+	double i_new;
+	double j_new;
+
+	i_cur = *pos_y;
+	j_cur = *pos_x;
+	i_new = (i_cur - SPEED_Z * sin(ang));
+	j_new = (j_cur + SPEED_Z * cos(ang));
+	if (can_step(all, i_new, j_cur))
+		*pos_y -= SPEED_Z * sin(ang);
+	if (can_step(all, i_cur, j_new))
+		*pos_x += SPEED_Z * cos(ang);
+	return (0);
+}
+
 int 			move_plr(t_all *all)
 {
 	if (all->win->move_mask & FORWARD)
@@ -84,8 +103,9 @@ int 			move_zombies(t_all *all)
 	i = 0;
 	while (all->prms->sprites[i])
 	{
-		if (all->prms->sprites[i]->dist > 0.5)
-			move(all, all->prms->sprites[i]->angle + M_PI,
+		if (all->prms->sprites[i]->dist > (0.5 + i * D * 3) &&
+				all->prms->sprites[i]->dist < SPOT_DIST)
+			move_z(all, all->prms->sprites[i]->angle + M_PI,
 				&all->prms->sprites[i]->pos_x, &all->prms->sprites[i]->pos_y);
 		i++;
 	}
