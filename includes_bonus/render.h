@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/15 10:29:21 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 10:33:17 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <math.h>
 # include "../minilibx_mms/mlx.h"
 # include "cub3d.h"
-# define INIT_ERR_MSG "IMG initialization error (wrong texture path)\n"
+# define INIT_ERR_MSG "Error\nIMG initialization error (wrong texture path)\n"
 # define SCALE 1
 # define SPEED 0.1f
 # define SPEED_Z 0.07f

@@ -15,7 +15,7 @@
  */
 #ifndef CUB3D_H
 # define CUB3D_H
-# define ALLOC_ERR_MSG "Memory allocating error\n"
+# define ALLOC_ERR_MSG "Error\nMemory allocating error\n"
 
 # include "../includes_bonus/parser.h"
 # include "../includes_bonus/render.h"

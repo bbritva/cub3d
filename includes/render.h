@@ -16,7 +16,7 @@
 # include <math.h>
 # include "../minilibx_mms/mlx.h"
 # include "cub3d.h"
-# define INIT_ERR_MSG "IMG initialization error (wrong texture path)\n"
+# define INIT_ERR_MSG "Error\nIMG initialization error (wrong texture path)\n"
 # define SCALE 1
 # define SPEED 0.1f
 # define ESC 64
