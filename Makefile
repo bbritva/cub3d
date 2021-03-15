@@ -32,6 +32,7 @@ clean:
 				@make clean -C $(LIB_DIR)
 				@make clean -C $(MLIB_DIR)
 				$(RM) $(OBJS)
+				$(RM) $(OBJSB)
 				@echo objs deleted
 
 fclean:			clean

@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/15 10:33:17 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 10:55:58 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define SOUTH 1 << 27
 # define WEST 1 << 28
 # define EAST 1 << 29
-# define SPOT_DIST 5
+# define SPOT_DIST 10
 
 typedef struct		s_tex
 {
