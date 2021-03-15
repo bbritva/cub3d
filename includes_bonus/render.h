@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/15 13:22:09 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 14:52:56 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # define SCALE 1
 # define SPEED 0.1f
 # define SPEED_Z 0.07f
-# define ESC 64
+# define ESC 1 << 6
+# define IS_BITTEN 1 << 7
 # define FORWARD 32
 # define BACKWARD 16
 # define MV_LEFT 8

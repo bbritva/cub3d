@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/15 10:30:13 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 15:54:40 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,11 @@ int 			move_plr(t_all *all)
 
 int 			move_zombies(t_all *all)
 {
-	int		i;
+	static int	count = 0;
+	int				i;
 
-
+	count++;
+	all->win->move_mask = all->win->move_mask & ~(IS_BITTEN);
 	if (!all->prms->sprites || !all->prms->sprites[0])
 		return (0);
 	i = 0;
@@ -109,5 +111,11 @@ int 			move_zombies(t_all *all)
 				&all->prms->sprites[i]->pos_x, &all->prms->sprites[i]->pos_y);
 		i++;
 	}
+	if (all->prms->sprites[0]->dist < 0.6 && count % 10 == 0)
+	{
+		all->win->move_mask = all->win->move_mask | IS_BITTEN;
+		all->prms->plr.health -= (all->prms->plr.health > 0) ? 20 : 0;
+	}
+	count = (count > 10 || all->prms->sprites[0]->dist > 0.6) ? 0 : count;
 	return (1);
 }

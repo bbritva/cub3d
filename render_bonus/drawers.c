@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/15 14:32:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 16:00:40 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,25 @@ void		draw_walls(t_all *all)
 	}
 }
 
+void		draw_bite(t_all *all)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < all->prms->res_v)
+	{
+		j = 0;
+		while (j < all->prms->res_h)
+		{
+			if (i % 3 == 0 && j % 3 == 0)
+				my_pixel_put(all->win, j, i, 0xFF0000);
+			j++;
+		}
+		i++;
+	}
+}
+
 int			create_img(t_all *all)
 {
 	all->win->img = mlx_new_image(all->win->mlx, all->prms->res_h,
@@ -82,6 +101,8 @@ int			create_img(t_all *all)
 		draw_fc(all);
 		draw_walls(all);
 		draw_sprites(all);
+		if (all->win->move_mask & IS_BITTEN)
+			draw_bite(all);
 	}
 	else
 		draw_deathscreen(all);
