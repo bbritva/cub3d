@@ -1,16 +1,16 @@
 R    1280  800
-NO ./Render/textures/paporotnik-3.xpm
-WE ./Render/textures/paporotnik-2.xpm
-SO           ./Render/textures/wall_grass-3.xpm
-EA ./Render/textures/wall_grass-1.xpm
-S ./Render/textures/clicker.xpm
+NO ./resources/textures/wall_grass-3.xpm
+WE ./resources/textures/paporotnik-2.xpm
+SO           ./resources/textures/wall_grass-1.xpm
+EA ./resources/textures/paporotnik-1.xpm
+S ./resources/textures/clicker.xpm
 F 0,151,57
 C 0,191  ,  255
 
 111111111111
 100S0001
 10000001
-10000001
+10111101
 10000001
 10000001
 10000001
@@ -19,10 +19,10 @@ C 0,191  ,  255
 10000001
 10000001
 10000001
-10000001
-10000001
-10000001
-10000001
+10111101
+10200001
 10020001
+10002001
+10020201
 10000001
 111111111111111111111111111111111

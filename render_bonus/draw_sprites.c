@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:05:08 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 13:22:20 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 10:17:52 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		sort_sprites(t_sprite **sprites)
 		j = i;
 		while (sprites[j + 1])
 		{
-			if (sprites[j]->dist < sprites[j + 1]->dist)
+			if (sprites[j]->dist > sprites[j + 1]->dist)
 			{
 				temp = sprites[j];
 				sprites[j] = sprites[j + 1];
@@ -80,7 +80,9 @@ void			draw_sprites(t_all *all)
 
 	i = 0;
 	prepare_sprites(all);
-	while (all->prms->sprites[i])
+	while (all->prms->sprites[i] && all->prms->sprites[i + 1])
+		i++;
+	while (i >= 0)
 	{
 		angle = get_angle(all->prms->plr.ang_h, all->prms->sprites[i]->angle);
 		n = (int)((0.5 + sin(angle)) * all->prms->res_h);
@@ -95,6 +97,6 @@ void			draw_sprites(t_all *all)
 				size) << 16));
 			j++;
 		}
-		i++;
+		i--;
 	}
 }
