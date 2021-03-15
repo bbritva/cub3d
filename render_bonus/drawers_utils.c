@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:00:04 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 13:22:20 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/15 11:41:56 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	get_pxl(t_tex *tex, int i, int h, int x_coor)
 	int		x;
 
 	y = tex->h_tex * i / h;
-	x = tex->w_tex * x_coor / 255;
+	x = tex->h_tex * x_coor / 255;
 	src = tex->addr + (y * tex->line_l + x * (tex->bpp / 8));
 	color = *(int *)src;
 	return (color);
@@ -61,7 +61,7 @@ void		draw_txtr_line(t_all *all, int x_pos, int h)
 	tex = (h & EAST) ? all->win->east : tex;
 	h = h & ~(0b1111 << 26);
 	x_coor = h >> 16;
-	h = h & ~(0b11111111 << 16);
+	h = h & ~(0b1111111111111111 << 16);
 	i = (all->prms->res_v < h) ? (-all->prms->res_v + h) / 2 : 0;
 	while (i < h)
 	{
