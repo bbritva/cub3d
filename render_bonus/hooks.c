@@ -77,6 +77,17 @@ int			key_hook(int key, t_all *all)
 	return (1);
 }
 
+int			mouse_move_hook(int x, int y, t_win *win)
+{
+	(void) win;
+	ft_putstr("Mouse_moved!\n");
+	ft_putnbr_fd(x, 1);
+	ft_putstr("\n");
+	ft_putnbr_fd(y, 1);
+	ft_putstr("\n");
+	return (0);
+}
+
 int			my_exit(t_all *all)
 {
 	(void)all;
