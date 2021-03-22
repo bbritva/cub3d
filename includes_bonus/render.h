@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 11:31:18 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 11:31:57 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define INIT_ERR_MSG "Error\nIMG initialization error (wrong texture path)\n"
 # define SCALE 1
 # define SPEED 0.1f
-# define SPEED_Z 0.07f
+# define SPEED_Z 0.03f
 # define ESC 1 << 6
 # define IS_BITTEN 1 << 7
 # define FORWARD 32
