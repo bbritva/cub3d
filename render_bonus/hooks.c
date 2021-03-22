@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/15 15:49:48 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 11:29:44 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int			render_next_frame(t_all *all)
 	return (1);
 }
 
-int			mouse_move_hook(int x, int y, t_win *win)
+int			mouse_move_hook(int x, int y, t_all *all)
 {
-	(void) win;
+	(void) all;
 	ft_putstr("Mouse_moved!\n");
 	ft_putnbr_fd(x, 1);
 	ft_putstr("\n");

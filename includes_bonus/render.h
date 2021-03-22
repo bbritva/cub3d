@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/15 14:52:56 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 11:31:18 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int					my_exit(t_all *all);
 int	 				move_plr(t_all *all);
 int					move_zombies(t_all *all);
 int					shadow_color(int color, int h, int res_h);
-int					key_hook(int key, t_all *all);
+int					mouse_move_hook(int x, int y, t_all *all);
 
 
 
