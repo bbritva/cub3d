@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 12:11:31 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 12:12:36 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,12 @@ int			render_next_frame(t_all *all)
 	move_zombies(all);
 	create_img(all);
 	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
-	mlx_string_put(all->win->mlx, all->win->win, 50, 50,
-				   0x360000, ft_itoa(all->prms->plr.health));
 	if (all->prms->plr.health <= 0)
 	{
 		mlx_string_put(all->win->mlx, all->win->win, 550, 300,
-					   0x360000, "YOU DIED");
+					   0x8B0000, "YOU DIED");
 		mlx_string_put(all->win->mlx, all->win->win, 550, 320,
-					   0x360000, "Press ESC to exit the game");
+					   0x8B0000, "Press ESC to exit the game");
 	}
 	return (1);
 }

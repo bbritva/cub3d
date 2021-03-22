@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 11:31:18 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 14:34:54 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		draw_deathscreen(t_all *all)
 		j = 0;
 		while (j < all->prms->res_h)
 		{
-			my_pixel_put(all->win, j, i, 0x363636);
+			my_pixel_put(all->win, j, i, 0x999999);
 			j++;
 		}
 		i++;
@@ -82,7 +82,7 @@ void		draw_bite(t_all *all)
 		j = 0;
 		while (j < all->prms->res_h)
 		{
-			my_pixel_put(all->win, j, i, 0xFF0000);
+			my_pixel_put(all->win, j, i, 0x8B0000);
 			j += 2;
 		}
 		i += 2;

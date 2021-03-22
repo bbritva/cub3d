@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 13:40:05 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 14:32:34 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 14:33:08 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void 		draw_livebar(t_all *all)
 	{
 		x = 6;
 		while (x < 70)
-			my_pixel_put(all->win, x++, y, 0xFF0000);
+			my_pixel_put(all->win, x++, y, 0x8B0000);
 		y--;
 	}
 }
