@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 11:31:57 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 12:56:34 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	 				move_plr(t_all *all);
 int					move_zombies(t_all *all);
 int					shadow_color(int color, int h, int res_h);
 int					mouse_move_hook(int x, int y, t_all *all);
+void				draw_hud(t_all *all);
+
 
 
 
