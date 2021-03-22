@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 11:29:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 12:53:03 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int 			move_plr(t_all *all)
 	return (1);
 }
 
+//static int 		z_canmove
+
 int 			move_zombies(t_all *all)
 {
 	static int	count = 0;
@@ -106,8 +108,8 @@ int 			move_zombies(t_all *all)
 	while (all->prms->sprites[i])
 	{
 		if (all->prms->sprites[i]->dist > (0.5 + i * D * 3) &&
-				all->prms->sprites[i]->dist < SPOT_DIST &&
-				all->prms->sprites[i]->is_alive)
+				all->prms->sprites[i]->status_mask & Z_GOING &&
+				all->prms->sprites[i]->status_mask & Z_ALIVE)
 			move_z(all, all->prms->sprites[i]->angle + M_PI,
 				&all->prms->sprites[i]->pos_x, &all->prms->sprites[i]->pos_y);
 		i++;

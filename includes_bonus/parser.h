@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:51 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 11:29:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 12:34:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # define MAP_ERR "Error\nWrong map\n"
 # define RES_MAX 16000
 # define RES_MIN 50
+# define Z_GOING 1 << 0
+# define Z_ALIVE 1 << 1
+# define Z_GET_SHOOT 1 << 2
 
 typedef struct		s_player
 {
@@ -43,7 +46,7 @@ typedef struct		s_sprite
 	double			pos_y;
 	double			dist;
 	double			angle;
-	int 			is_alive;
+	int 			status_mask;
 }					t_sprite;
 
 typedef	struct		s_params

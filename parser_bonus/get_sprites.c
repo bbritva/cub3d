@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:50:14 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 11:29:43 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 12:34:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_sprite	*get_sprite(int j, int i)
 		spr->pos_y = (double)i + 0.5;
 		spr->dist = 0;
 		spr->angle = 0;
-		spr->is_alive = 1;
+		spr->status_mask = Z_ALIVE;
 	}
 	return (spr);
 }
