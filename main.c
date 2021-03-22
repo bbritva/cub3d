@@ -6,21 +6,14 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 11:33:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 10:54:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "cub3d.h"
+#include <stdio.h>
 
-void	free_map(char **map)
-{
-	int i;
-
-	i = 0;
-	while (map[i])
-		free(map[i++]);
-	free(map);
-}
+void	show_parse_res(t_params * params);
 
 void	params_free(t_params *params)
 {
@@ -34,50 +27,47 @@ void	params_free(t_params *params)
 		free(params->west);
 	if (params->east)
 		free(params->east);
-	if (params->dists)
-		free(params->dists);
 	if (params->map)
-		free_map(params->map);
+		free(params->map);
 	free(params);
 }
 
 void	ft_putstr(char *str)
 {
-	write(1, str, ft_strlen(str));
+	while (*str != 0)
+	{
+		write(1, str, 1);
+		str++;
+	}
 }
 
-int		check_main_input(int argc, char *argv[])
+int		check_main_input(int argc)
 {
 	if (argc == 1)
 	{
 		ft_putstr(F_MISS_MSG);
 		return (0);
 	}
-	if (argc == 2 && ft_strlen(argv[1]) > 3 &&
-		ft_strlen(ft_strnstr(argv[1], ".cub",
-		ft_strlen(argv[1]))) == 4)
-		return (1);
-	if (argc == 3 && ft_strlen(argv[2]) == 6 &&
-	ft_strlen(ft_strnstr(argv[2], "--save", ft_strlen(argv[1]))) == 6 &&
-	ft_strlen(ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))) == 4)
-		return (1);
-	ft_putstr(M_ARGS_MSG);
-	return (0);
+	if (argc > 2)
+	{
+		ft_putstr(M_ARGS_MSG);
+		return (0);
+	}
+	return (1);
 }
 
-int		main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_params	*prms;
+	t_params	*params;
 
-	if ((prms = (t_params *)ft_calloc(1, sizeof(t_params))))
+	if (check_main_input(argc) && (params = parser(argv[1])))
 	{
-		if (check_main_input(argc, argv) && (parser(argv[1], prms)))
-		{
-			render(prms, argc);
-			params_free(prms);
-		}
+		printf("params - ok\n");
+
+		render(params);
+		params_free(params);
+
 	}
 	else
-		ft_putstr(ALLOC_ERR_MSG);
-	ft_putstr("end of cub3d\n");
+		printf("params error\n");
 }

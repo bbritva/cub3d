@@ -70,13 +70,6 @@ int			render_next_frame(t_all *all)
 	return (1);
 }
 
-int			key_hook(int key, t_all *all)
-{
-	if (key == 3)
-		all->prms->plr.health -= 20;
-	return (1);
-}
-
 int			mouse_move_hook(int x, int y, t_win *win)
 {
 	(void) win;

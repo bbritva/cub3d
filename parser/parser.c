@@ -6,68 +6,21 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 14:51:17 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/13 11:33:36 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 10:54:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../cub3d.h"
+#include <stdio.h>
 
-int		show_param_errors(const int *err)
-{
-	if (*err & (1 << 6))
-		ft_putstr(NREAD_MSG);
-	else
-	{
-		if (*err & (1 << 0))
-			ft_putstr("None resolution parameters\n");
-		if (*err & (1 << 1))
-			ft_putstr("Multiple/overflow(>10000) resolution parameters\n");
-		if (*err & (1 << 2))
-			ft_putstr("Not enough texture parameters\n");
-		if (*err & (1 << 3))
-			ft_putstr("Multiple texture parameters\n");
-		if (*err & (1 << 4))
-			ft_putstr("None or wrong ceiling/floor color parameters\n");
-		if (*err & (1 << 5))
-			ft_putstr("Memory allocating error\n");
-	}
-	return (0);
-}
 
-int		free_params(t_params *params, int *err)
-{
-	if (params->north)
-		free(params->north);
-	if (params->south)
-		free(params->south);
-	if (params->west)
-		free(params->west);
-	if (params->east)
-		free(params->east);
-	if (params->sprite)
-		free(params->sprite);
-	if (params->dists)
-		free(params->dists);
-	free(params);
-	if (*err)
-		show_param_errors(err);
-	return (0);
-}
+void	show_parse_res(t_params * params);
 
-int		check_params(t_params *params, int *err)
+t_params	*params_init()
 {
-	*err = (params->res_h == -1 || params->res_v == -1) ? *err | 1 : *err;
-	*err = (params->north) ? *err : *err | (1 << 2);
-	*err = (params->south) ? *err : *err | (1 << 2);
-	*err = (params->west) ? *err : *err | (1 << 2);
-	*err = (params->east) ? *err : *err | (1 << 2);
-	*err = (params->sprite) ? *err : *err | (1 << 2);
-	*err = (params->dists) ? *err : *err | (1 << 5);
-	return (1);
-}
+	t_params	*params;
 
-int		params_init(t_params *params)
-{
+	params = (t_params *)malloc(sizeof(t_params));
 	if (params)
 	{
 		params->res_h = -1;
@@ -77,41 +30,64 @@ int		params_init(t_params *params)
 		params->west = NULL;
 		params->east = NULL;
 		params->sprite = NULL;
-		params->dists = NULL;
-		params->floor_color = -1;
-		params->ceil_color = -1;
-		params->plr.pos_y = 0;
-		params->plr.pos_x = 0;
-		params->plr.ang_h = 0;
-		return (1);
+		params->map = NULL;
+		params->player = NULL;
+		params->floor_color.red = -1;
+		params->floor_color.green = -1;
+		params->floor_color.blue = -1;
+		params->ceil_color.red = -1;
+		params->ceil_color.green = -1;
+		params->ceil_color.blue = -1;
 	}
-	return (0);
+	return (params);
 }
 
-int		parser(char *f_name, t_params *prms)
+t_params	*parser(char *f_name)
 {
-	int		fd;
-	int		err;
-	char	*line;
+	int			fd;
+	char		*line;
+	t_params	*params;
 
-	if (-1 == (fd = open(f_name, O_RDONLY)))
+	fd = open(f_name, O_RDONLY);
+	if (fd == -1)
 	{
 		ft_putstr(NREAD_MSG);
-		return (0);
+		return (NULL);
 	}
-	if (params_init(prms))
+	if ((params = params_init()))
 	{
-		err = 0;
-		param_parser(fd, prms, &line, &err);
-		check_params(prms, &err);
-		if (err)
-			free_params(prms, &err);
-		else if (map_parser(fd, prms, &line))
-		{
-			close(fd);
-			return (1);
-		}
+		params = param_parser(fd, params, &line);
+		params = map_parser(fd, params, &line);
+		free(line);
+		show_parse_res(params);
+		return (params);
 	}
 	close(fd);
-	return (0);
+	return (params);
 }
+
+void	show_parse_res(t_params * params)
+{
+	int i;
+
+	printf("hrez = %d\n", params->res_h);
+	printf("vrez = %d\n", params->res_v);
+	printf("north = \"%s\"\n", params->north);
+	printf("south = \"%s\"\n", params->south);
+	printf("west = \"%s\"\n", params->west);
+	printf("east = \"%s\"\n", params->east);
+	printf("sprite = \"%s\"\n", params->sprite);
+	printf("f_color_r = %d\n", params->floor_color.red);
+	printf("f_color_g = %d\n", params->floor_color.green);
+	printf("f_color_b = %d\n", params->floor_color.blue);
+	printf("c_color_r = %d\n", params->ceil_color.red);
+	printf("c_color_g = %d\n", params->ceil_color.green);
+	printf("c_color_b = %d\n", params->ceil_color.blue);
+	i = 0;
+	while (*(params->map + i))
+		printf("%s\n", params->map[i++]);
+}
+
+
+
+
