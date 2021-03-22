@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 12:12:36 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 16:43:14 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ int			key_press(int keycode, t_all *all)
 		all->win->move_mask = all->win->move_mask | RT_RIGHT;
 	if (keycode == 53)
 		all->win->move_mask = all->win->move_mask | ESC;
+	if (keycode == 256)
+		shoot(all);
+	ft_putnbr_fd(keycode, 1);
+	ft_putstr("\n");
 	return (0);
 }
 
@@ -82,4 +86,27 @@ int			my_exit(t_all *all)
 	(void)all;
 	system("killall afplay");
 	exit(0);
+}
+
+int 		shoot(t_all *all)
+{
+	int		i;
+	double	angle;
+
+	(void) all;
+	i = 0;
+	while (all->prms->sprites[i] && all->prms->sprites[i]->dist < SHOOT_DIST)
+	{
+		angle = all->prms->plr.ang_h - all->prms->sprites[i]->angle;
+		angle -= (angle > M_PI * 2) ? M_PI * 2 : 0;
+		angle += (angle < 0) ? M_PI * 2 : 0;
+		if (fabs(angle) < M_PI_4 / 5)
+		{
+			all->prms->sprites[i]->status_mask =
+					all->prms->sprites[i]->status_mask & ~(Z_ALIVE);
+		}
+		i++;
+	}
+	ft_putstr("shoot!!!\n");
+	return (0);
 }

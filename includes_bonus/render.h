@@ -37,6 +37,7 @@
 # define WEST 1 << 28
 # define EAST 1 << 29
 # define SPOT_DIST 10
+# define SHOOT_DIST 10
 
 typedef struct		s_tex
 {
@@ -91,10 +92,6 @@ int					move_zombies(t_all *all);
 int					shadow_color(int color, int h, int res_h);
 int					mouse_move_hook(int x, int y, t_all *all);
 void				draw_hud(t_all *all);
-
-
-
-
-
+int 				shoot(t_all *all);
 
 #endif

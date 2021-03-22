@@ -93,7 +93,8 @@ void			draw_sprites(t_all *all)
 		while (j < n + size / 2)
 		{
 			x_c = ((j - n + size / 2) * 255 / size);
-			if (all->prms->sprites[i]->status_mask & Z_GOING)
+			if (all->prms->sprites[i]->status_mask & Z_GOING &&
+				all->prms->sprites[i]->status_mask & Z_ALIVE)
 				x_c += ((int)(all->prms->sprites[i]->dist * 4) % 2 == 1) ?
 						255 : 510;
 			if (j > 0 && j < all->prms->res_h && check_angle(angle) &&

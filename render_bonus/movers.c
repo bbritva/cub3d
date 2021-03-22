@@ -93,8 +93,6 @@ int 			move_plr(t_all *all)
 	return (1);
 }
 
-//static int 		z_canmove
-
 int 			move_zombies(t_all *all)
 {
 	static int	count = 0;
