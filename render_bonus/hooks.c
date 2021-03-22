@@ -80,5 +80,6 @@ int			key_hook(int key, t_all *all)
 int			my_exit(t_all *all)
 {
 	(void)all;
+	system("killall afplay");
 	exit(0);
 }

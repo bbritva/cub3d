@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/15 15:58:17 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/16 16:35:58 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int 			move_plr(t_all *all)
 	if (all->win->move_mask & RT_RIGHT)
 		all->prms->plr.ang_h += 0.06f;
 	if (all->win->move_mask & ESC)
-		exit(0);
+		my_exit(all);
 	all->prms->plr.ang_h -= (all->prms->plr.ang_h > M_PI * 2) ? M_PI * 2 : 0;
 	all->prms->plr.ang_h += (all->prms->plr.ang_h < 0) ? M_PI * 2 : 0;
 	return (1);
@@ -112,10 +112,11 @@ int 			move_zombies(t_all *all)
 				&all->prms->sprites[i]->pos_x, &all->prms->sprites[i]->pos_y);
 		i++;
 	}
-	if (all->prms->sprites[0]->dist < 0.6 && count % 10 == 0)
+	if (all->prms->sprites[0]->dist < 0.6 && count % 10 == 0 && all->prms->plr.health)
 	{
 		all->win->move_mask = all->win->move_mask | IS_BITTEN;
 		all->prms->plr.health -= (all->prms->plr.health > 0) ? 20 : 0;
+		system("afplay resources/sounds/bite.mp3 &");
 	}
 	count = (count > 10 || all->prms->sprites[0]->dist > 0.6) ? 0 : count;
 	return (1);

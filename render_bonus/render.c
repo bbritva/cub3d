@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/15 14:14:16 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/16 16:22:58 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	*tex_init(t_all *all, char *path)
 
 static void	start_game(t_all *all)
 {
+	system("afplay resources/sounds/combat0.mp3 &");
 	mlx_hook(all->win->win, 2, 1L << 0, key_press, all);
-	mlx_hook(all->win->win, 17, 1L << 17, my_exit, all);
 	mlx_hook(all->win->win, 17, 1L << 17, my_exit, all);
 	mlx_hook(all->win->win, 3, 1L << 1, key_release, all);
 //	mlx_key_hook(all->win->win, key_hook, all);
