@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:05:08 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 11:29:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 13:04:56 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,11 @@ void			draw_sprites(t_all *all)
 		while (j < n + size / 2)
 		{
 			x_c = ((j - n + size / 2) * 255 / size);
-			x_c += ((int)(all->prms->sprites[i]->dist * 4) % 4 == 1 &&
-					all->prms->sprites[i]->dist < SPOT_DIST) ? 255 : 0;
-			x_c += ((int)(all->prms->sprites[i]->dist * 4) % 4 == 3 &&
-					all->prms->sprites[i]->dist < SPOT_DIST) ? 510 : 0;
+			if (all->prms->sprites[i]->status_mask & Z_GOING)
+				x_c += ((int)(all->prms->sprites[i]->dist * 4) % 2 == 1) ?
+						255 : 510;
+//			x_c += ((int)(all->prms->sprites[i]->dist * 4) % 3 == 2 &&
+//					all->prms->sprites[i]->dist < SPOT_DIST) ? 510 : 0;
 			if (j > 0 && j < all->prms->res_h && check_angle(angle) &&
 			all->prms->dists[j] > all->prms->sprites[i]->dist)
 				draw_txtr_line(all, j, size | x_c << 16);
