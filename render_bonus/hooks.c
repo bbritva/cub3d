@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 16:43:14 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 16:55:25 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int			key_press(int keycode, t_all *all)
 		all->win->move_mask = all->win->move_mask | ESC;
 	if (keycode == 256)
 		shoot(all);
-	ft_putnbr_fd(keycode, 1);
-	ft_putstr("\n");
 	return (0);
 }
 
@@ -107,6 +105,5 @@ int 		shoot(t_all *all)
 		}
 		i++;
 	}
-	ft_putstr("shoot!!!\n");
 	return (0);
 }
