@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 11:29:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/22 12:11:31 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,10 @@ int			render_next_frame(t_all *all)
 
 int			mouse_move_hook(int x, int y, t_all *all)
 {
-	(void) all;
-	ft_putstr("Mouse_moved!\n");
-	ft_putnbr_fd(x, 1);
-	ft_putstr("\n");
-	ft_putnbr_fd(y, 1);
-	ft_putstr("\n");
+	(void) y;
+	mlx_mouse_hide();
+	all->prms->plr.ang_h += 0.02f * (640 - x) / 10;
+	mlx_mouse_move(all->win->win, 640, 0);
 	return (0);
 }
 
