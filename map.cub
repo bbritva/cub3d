@@ -3,7 +3,7 @@ NO ./resources/textures/wall_grass-3.xpm
 WE ./resources/textures/paporotnik-2.xpm
 SO           ./resources/textures/wall_grass-1.xpm
 EA ./resources/textures/paporotnik-1.xpm
-S ./resources/textures/clicker.xpm
+S ./resources/textures/clicker-triple.xpm
 F 0,151,57
 C 0,191  ,  255
 

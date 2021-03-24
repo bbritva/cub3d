@@ -109,5 +109,6 @@ void		draw_hud(t_all *all)
 {
 	draw_underlay(all);
 	draw_livebar(all);
+	draw_minimap(all);
 	draw_aim(all);
 }

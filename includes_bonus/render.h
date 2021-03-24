@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 12:56:34 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/24 11:42:33 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "cub3d.h"
 # define INIT_ERR_MSG "Error\nIMG initialization error (wrong texture path)\n"
 # define SCALE 1
+# define SCALE2 10
 # define SPEED 0.1f
 # define SPEED_Z 0.03f
 # define ESC 1 << 6
@@ -92,6 +93,7 @@ int					move_zombies(t_all *all);
 int					shadow_color(int color, int h, int res_h);
 int					mouse_move_hook(int x, int y, t_all *all);
 void				draw_hud(t_all *all);
+void				draw_minimap(t_all *all);
 int 				shoot(t_all *all);
 
 #endif
