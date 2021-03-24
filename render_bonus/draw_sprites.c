@@ -83,7 +83,7 @@ void			draw_sprites(t_all *all)
 	prepare_sprites(all);
 	while (all->prms->sprites[i] && all->prms->sprites[i + 1])
 		i++;
-	while (i >= 0)
+	while (i >= 0 && all->prms->sprites[0])
 	{
 		angle = get_angle(all->prms->plr.ang_h, all->prms->sprites[i]->angle);
 		n = (int)((0.5 + sin(angle)) * all->prms->res_h);
