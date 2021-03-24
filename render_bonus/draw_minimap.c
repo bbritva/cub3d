@@ -6,36 +6,36 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 11:00:28 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 11:45:25 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/24 13:36:29 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/cub3d.h"
 
-void 		draw_map(t_win *win, char **map)
+void 		draw_map(t_all *all, int x, int y, int scale)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while (map[i/SCALE2])
+	while (all->prms->map[i/scale] && i < all->prms->res_h)
 	{
 		j = 0;
-		while (map[i/SCALE2][j/SCALE2])
+		while (all->prms->map[i/scale][j/scale] && j < all->prms->res_v)
 		{
-			if (map[i/SCALE2][j/SCALE2] == '1')
-				my_pixel_put(win, j, i, 0x000000FF);
-			if (ft_strchr("02", map[i/SCALE2][j/SCALE2]))
-				my_pixel_put(win, j, i, 0x00FF0000);
-			if (ft_strchr("NSEW", map[i/SCALE2][j/SCALE2]))
-				my_pixel_put(win, j, i, 0x00FF0000);
+			if (all->prms->map[i/scale][j/scale] == '1')
+				my_pixel_put(all->win, j + x, i + y, 0x000000FF);
+			if (ft_strchr("02", all->prms->map[i/scale][j/scale]))
+				my_pixel_put(all->win, j + x, i + y, 0x00FF0000);
+			if (ft_strchr("NSEW", all->prms->map[i/scale][j/scale]))
+				my_pixel_put(all->win, j + x, i + y, 0x00FF0000);
 			j++;
 		}
 		i++;
 	}
 }
 
-void		draw_player_on_map(t_all *all)
+void		draw_player_on_map(t_all *all, int x_pos, int y_pos, int scale)
 {
 	t_player	p;
 	int 		x;
@@ -44,26 +44,52 @@ void		draw_player_on_map(t_all *all)
 	int 		b;
 
 	p = all->prms->plr;
-	p.pos_y *= SCALE2;
-	p.pos_x *= SCALE2;
-	x = (int) (p.pos_x - SCALE2);
-	while (x < p.pos_x + SCALE2)
+	p.pos_y *= scale;
+	p.pos_x *= scale;
+	x = (int) (p.pos_x - scale);
+	while (x < p.pos_x + scale)
 	{
-		y = (int) (p.pos_y - SCALE2);
-		while (y < p.pos_y + SCALE2)
+		y = (int) (p.pos_y - scale);
+		while (y < p.pos_y + scale)
 		{
-			a = (int) pow(SCALE2, 2) / 8;
+			a = (int) pow(scale, 2) / 8;
 			b = (int) (pow(p.pos_x - x, 2) + pow(p.pos_y - y, 2));
 			if (b < a)
-				my_pixel_put(all->win, x, y, 0x00FFFFFF);
+				my_pixel_put(all->win, x + x_pos, y + y_pos, 0x00FFFFFF);
 			y++;
 		}
 		x++;
 	}
 }
 
+static void	calc_map_size(char **map, int *h_size, int *v_size)
+{
+	int tmp;
+
+	*h_size = 0;
+	*v_size = 0;
+	while (map[*v_size])
+	{
+		tmp = 0;
+		while(map[*v_size][tmp])
+		{
+			tmp++;
+			*h_size = (tmp > *h_size) ? tmp : *h_size;
+		}
+		(*v_size)++;
+	}
+}
+
 void		draw_minimap(t_all *all)
 {
-	draw_map(all->win, all->prms->map);
-	draw_player_on_map(all);
+	int h_size;
+	int v_size;
+	int scale;
+
+	calc_map_size(all->prms->map, &h_size, &v_size);
+	scale = (h_size > v_size) ? (300 / h_size) : (300 / v_size);
+	draw_map(all, all->prms->res_h - h_size * scale - 5 - scale,
+		  all->prms->res_v - v_size * SCALE2 - 5, scale);
+	draw_player_on_map(all, all->prms->res_h - h_size * scale - 5 - scale,
+		all->prms->res_v - v_size * SCALE2 - 5, scale);
 }
