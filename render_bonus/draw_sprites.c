@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:05:08 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 13:06:14 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/24 15:02:12 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void			draw_sprites(t_all *all)
 		while (j < n + size / 2)
 		{
 			x_c = ((j - n + size / 2) * 255 / size);
+			x_c += (all->prms->sprites[i]->status_mask & Z_ALIVE) ? 0 : 765;
 			if (all->prms->sprites[i]->status_mask & Z_GOING &&
 				all->prms->sprites[i]->status_mask & Z_ALIVE)
 				x_c += ((int)(all->prms->sprites[i]->dist * 4) % 2 == 1) ?

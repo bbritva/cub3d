@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 16:55:25 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/24 14:29:02 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int 		shoot(t_all *all)
 		angle = all->prms->plr.ang_h - all->prms->sprites[i]->angle;
 		angle -= (angle > M_PI * 2) ? M_PI * 2 : 0;
 		angle += (angle < 0) ? M_PI * 2 : 0;
-		if (fabs(angle) < M_PI_4 / 5)
+		if (fabs(angle) < M_PI_4 / 5 || fabs(angle) > 39 * M_PI / 20)
 		{
 			all->prms->sprites[i]->status_mask =
 					all->prms->sprites[i]->status_mask & ~(Z_ALIVE);

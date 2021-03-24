@@ -112,7 +112,8 @@ int 			move_zombies(t_all *all)
 				&all->prms->sprites[i]->pos_x, &all->prms->sprites[i]->pos_y);
 		i++;
 	}
-	if (all->prms->sprites[0]->dist < 0.6 && count % 10 == 0 && all->prms->plr.health)
+	if (all->prms->sprites[0]->dist < 0.6 && count % 10 == 0 &&
+	all->prms->plr.health && all->prms->sprites[0]->status_mask & Z_ALIVE)
 	{
 		all->win->move_mask = all->win->move_mask | IS_BITTEN;
 		all->prms->plr.health -= (all->prms->plr.health > 0) ? 20 : 0;

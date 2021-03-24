@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 13:16:27 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/24 14:25:15 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include "cub3d.h"
 # define INIT_ERR_MSG "Error\nIMG initialization error (wrong texture path)\n"
 # define SCALE 1
-# define SCALE2 10
 # define SPEED 0.1f
 # define SPEED_Z 0.03f
 # define ESC 1 << 6
@@ -32,13 +31,13 @@
 # define MV_RIGHT 4
 # define RT_LEFT 2
 # define RT_RIGHT 1
-# define D 0.1f
+# define D 0.3f
 # define NORTH 1 << 26
 # define SOUTH 1 << 27
 # define WEST 1 << 28
 # define EAST 1 << 29
 # define SPOT_DIST 10
-# define SHOOT_DIST 10
+# define SHOOT_DIST 4
 
 typedef struct		s_tex
 {

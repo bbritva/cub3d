@@ -3,12 +3,27 @@ NO ./resources/textures/wall_grass-3.xpm
 WE ./resources/textures/paporotnik-2.xpm
 SO           ./resources/textures/wall_grass-1.xpm
 EA ./resources/textures/paporotnik-1.xpm
-S ./resources/textures/clicker-triple.xpm
-F 0,151,57
-C 0,191  ,  255
+S ./resources/textures/clicker-4.xpm
+F 25,90,0
+C 54, 186, 223
 
-111111111111
+11111111
 100S0001
 10000001
 10000001
-111111111111111111111111111111111
+11111001
+10000001
+10002001
+10000001
+10011111
+10000001
+10020001
+10000001
+10000001
+11111001
+10020001
+10000001
+10011111
+10000001
+10020001
+11111111

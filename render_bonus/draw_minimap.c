@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 11:00:28 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 13:36:29 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/24 14:14:11 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void		draw_minimap(t_all *all)
 	calc_map_size(all->prms->map, &h_size, &v_size);
 	scale = (h_size > v_size) ? (300 / h_size) : (300 / v_size);
 	draw_map(all, all->prms->res_h - h_size * scale - 5 - scale,
-		  all->prms->res_v - v_size * SCALE2 - 5, scale);
+		  all->prms->res_v - v_size * scale - 5 - scale, scale);
 	draw_player_on_map(all, all->prms->res_h - h_size * scale - 5 - scale,
-		all->prms->res_v - v_size * SCALE2 - 5, scale);
+		all->prms->res_v - v_size * scale - 5 - scale, scale);
 }
