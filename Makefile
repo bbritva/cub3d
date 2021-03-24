@@ -63,9 +63,16 @@ bonus:			$(OBJSB) $(HDRB)
 				@echo $@ compilled
 
 norm:
-				norminette main.c cub3d.h render/*c render/*h parser/*c parser/*h libft/*c libft/*h GNL/*c GNL/*h
-git:
-				git add main.c cub3d.h Makefile render/*c render/*h parser/*c parser/*h libft/*c libft/Makefile libft/*h \
-				GNL/*c GNL/*h minilibx_mms/* render/textures/*xpm map.cub
+				norminette main.c cub3d.h $(RENDER_PATH)*c $(HDR)*h $(PARSER_PATH)*c $(LIB_DIR)*c $(LIB_DIR)*h GNL/*c GNL/*h
+
+norm_b:
+				norminette main_bonus.c cub3d.h $(RENDERB_PATH)*c $(HDRB)*h $(PARSERB_PATH)*c $(LIB_DIR)*c $(LIB_DIR)*h GNL/*c GNL/*h
+
+git:			fclean
+				git add main.c Makefile $(RENDER_PATH)*c $(HDR)*h $(PARSER_PATH)*c $(LIB_DIR)*c $(LIB_DIR)Makefile $(LIB_DIR)*h \
+				GNL/*c GNL/*h minilibx_mms/* resources/textures/*xpm map.cub
+
+git_b:			git
+				git add main_bonus.c Makefile $(RENDERB_PATH)*c $(HDRB)*h $(PARSERB_PATH)*c resources/sounds/*
 
 .PHONY:			all clean fclean re so bonus norm $(NAME)
