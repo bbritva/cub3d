@@ -44,7 +44,7 @@ fclean:			clean
 
 re:				fclean all
 
-$(NAME):		$(OBJS) $(HDR) $(LIB_DIR)$(LIBFT)
+$(NAME):		$(OBJS) $(HDR)
 				@make bonus -C $(LIB_DIR)
 				@make -C $(MLIB_DIR)
 				@cp $(MLIB_DIR)$(MNAME) $(MNAME)

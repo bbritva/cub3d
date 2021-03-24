@@ -6,11 +6,11 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 13:11:28 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 11:29:43 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/24 10:43:13 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/render.h"
+# include "../includes/cub3d.h"
 
 static int	get_clr(t_all *all, int x, int y)
 {

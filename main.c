@@ -6,11 +6,11 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 18:59:31 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 10:04:42 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/24 10:43:16 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "./includes/cub3d.h"
 
 void	free_map(char **map)
 {
@@ -55,11 +55,11 @@ int		check_main_input(int argc, char *argv[])
 	}
 	if (argc == 2 && ft_strlen(argv[1]) > 3 &&
 		ft_strlen(ft_strnstr(argv[1], ".cub",
-							 ft_strlen(argv[1]))) == 4)
+		ft_strlen(argv[1]))) == 4)
 		return (1);
 	if (argc == 3 && ft_strlen(argv[2]) == 6 &&
-		ft_strlen(ft_strnstr(argv[2], "--save", ft_strlen(argv[1]))) == 6 &&
-		ft_strlen(ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))) == 4)
+	ft_strlen(ft_strnstr(argv[2], "--save", ft_strlen(argv[1]))) == 6 &&
+	ft_strlen(ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))) == 4)
 		return (1);
 	ft_putstr(M_ARGS_MSG);
 	return (0);

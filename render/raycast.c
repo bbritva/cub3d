@@ -6,11 +6,11 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 09:47:24 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/24 10:43:13 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+# include "../includes/cub3d.h"
 
 static double	get_dy(t_player *plr, double angle)
 {

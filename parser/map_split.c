@@ -6,36 +6,46 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 21:21:24 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 09:47:24 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/24 10:43:16 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../includes/cub3d.h"
 
-static size_t	ft_calcsize(char *s, char c)
+static size_t	map_calcsize(char *s, char c)
 {
 	size_t result;
 
 	result = 1;
+	if (!s)
+		return (0);
 	if (*s == 0)
 		return (0);
-	while (*(s + 1))
+	while (*s)
 	{
-		if (*s != c && *(s + 1) == c)
+		if (*s == c)
 			result++;
 		s++;
 	}
 	return (result);
 }
 
-static size_t	ft_wrdlen(char *s, char c)
+static size_t	arr_wide(const char *s, char c)
 {
-	size_t result;
+	size_t i;
+	size_t len;
+	size_t cur_len;
 
-	result = 0;
-	while (*(s + result) != c && *(s + result))
-		result++;
-	return (++result);
+	i = 0;
+	while (s[i])
+	{
+		cur_len = 0;
+		while (s[i + cur_len] && s[i + cur_len] != c)
+			cur_len++;
+		len = (cur_len > len) ? cur_len : len;
+		i += cur_len + 1;
+	}
+	return (++len);
 }
 
 static void		ft_freeresult(char **res, size_t count)
@@ -45,51 +55,40 @@ static void		ft_freeresult(char **res, size_t count)
 	free(res);
 }
 
-static void		ft_fillarr(char **result, char *str, size_t size, char c)
+static void		ft_fill(char **res, char *str, size_t size, size_t wide)
 {
 	size_t i;
-	size_t wrd_len;
+	size_t j;
 
 	i = 0;
 	while (i < size)
-	{
-		if (*str != c)
+		if ((res[i] = (char *)ft_calloc(wide, sizeof(char))))
 		{
-			wrd_len = ft_wrdlen(str, c);
-			result[i] = (char *)malloc(sizeof(char) * (wrd_len));
-			if (result[i])
-			{
-				ft_strlcpy(result[i++], str, wrd_len);
-				str = str + wrd_len - 1;
-			}
-			else
-			{
-				ft_freeresult(result, i);
-				break ;
-			}
+			j = 0;
+			while (*str && *str != '\n')
+				res[i][j++] = *str++;
+			i++;
+			str += 1;
 		}
-		str++;
-	}
-	result[i] = 0;
+		else
+		{
+			ft_freeresult(res, i);
+			break ;
+		}
 }
 
 char			**map_split(char const *s, char c)
 {
-	char	*str;
 	size_t	res_size;
 	char	**result;
+	size_t	wide;
 
 	if (s == NULL)
 		return (NULL);
-	str = ft_strtrim(s, &c);
-	if (!str)
-		return (NULL);
-	res_size = ft_calcsize(str, c);
-	result = (char **)malloc(sizeof(char *) * (res_size + 1));
+	res_size = map_calcsize((char *)s, c);
+	wide = arr_wide(s, c);
+	result = (char **)ft_calloc((res_size + 1), sizeof(char *));
 	if (result)
-	{
-		ft_fillarr(result, str, res_size, c);
-	}
-	free(str);
+		ft_fill(result, (char *)s, res_size, wide);
 	return (result);
 }
