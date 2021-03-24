@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 14:25:15 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/24 19:34:01 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct		s_win
 	t_tex			*west;
 	t_tex			*east;
 	t_tex			*sprite;
+	t_tex			*sky;
 }					t_win;
 
 typedef struct		s_all
@@ -93,6 +94,7 @@ int					shadow_color(int color, int h, int res_h);
 int					mouse_move_hook(int x, int y, t_all *all);
 void				draw_hud(t_all *all);
 void				draw_minimap(t_all *all);
+void				draw_sky(t_all *all);
 int 				shoot(t_all *all);
 
 #endif

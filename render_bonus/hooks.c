@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 14:29:02 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/24 15:12:00 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,13 @@ int 		shoot(t_all *all)
 
 	(void) all;
 	i = 0;
+	system("afplay resources/sounds/shoot.mp3 &");
 	while (all->prms->sprites[i] && all->prms->sprites[i]->dist < SHOOT_DIST)
 	{
 		angle = all->prms->plr.ang_h - all->prms->sprites[i]->angle;
 		angle -= (angle > M_PI * 2) ? M_PI * 2 : 0;
 		angle += (angle < 0) ? M_PI * 2 : 0;
-		if (fabs(angle) < M_PI_4 / 5 || fabs(angle) > 39 * M_PI / 20)
+		if (fabs(angle) < M_PI_4 / 10 || fabs(angle) > 79 * M_PI / 40)
 		{
 			all->prms->sprites[i]->status_mask =
 					all->prms->sprites[i]->status_mask & ~(Z_ALIVE);
