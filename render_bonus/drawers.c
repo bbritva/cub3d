@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 14:34:54 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/26 10:22:05 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int			create_img(t_all *all)
 	if (all->prms->plr.health > 0)
 	{
 		draw_fc(all);
+//		draw_txtr_floor(all);
 		draw_sky(all);
 		draw_walls(all);
 		draw_sprites(all);

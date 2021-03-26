@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:08:11 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 16:31:16 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/26 11:17:30 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	start_game(t_all *all)
 	mlx_hook(all->win->win, 17, 1L << 17, my_exit, all);
 	mlx_hook(all->win->win, 3, 1L << 1, key_release, all);
 	mlx_hook(all->win->win, 6, 1L<<6, mouse_move_hook, all);
-//	mlx_mouse_hook(all->win->win, shoot, all);
 	mlx_loop_hook(all->win->mlx, render_next_frame, all);
 	mlx_loop(all->win->mlx);
 	}
@@ -53,7 +52,8 @@ static int	init_window(t_all *all, int argc)
 			(all->win->west = tex_init(all, all->prms->west)) &&
 			(all->win->east = tex_init(all, all->prms->east)) &&
 			(all->win->sprite = tex_init(all, all->prms->sprite)) &&
-			(all->win->sky = tex_init(all, SKY_PATH)))
+			(all->win->sky = tex_init(all, SKY_PATH)) &&
+			(all->win->floor = tex_init(all, FLOOR_PATH)))
 			return (1);
 	}
 	return (0);

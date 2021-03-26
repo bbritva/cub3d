@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/26 09:58:31 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/26 10:00:29 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "cub3d.h"
 # define INIT_ERR_MSG "Error\nIMG initialization error (wrong texture path)\n"
 # define SKY_PATH "./resources/textures/sky360.xpm"
+# define FLOOR_PATH "./resources/textures/floor.xpm"
 # define SCALE 1
 # define SPEED 0.1f
 # define SPEED_Z 0.03f
@@ -67,6 +68,7 @@ typedef struct		s_win
 	t_tex			*east;
 	t_tex			*sprite;
 	t_tex			*sky;
+	t_tex			*floor;
 }					t_win;
 
 typedef struct		s_all
