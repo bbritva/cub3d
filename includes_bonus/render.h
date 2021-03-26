@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 19:34:01 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/26 09:58:31 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "../minilibx_mms/mlx.h"
 # include "cub3d.h"
 # define INIT_ERR_MSG "Error\nIMG initialization error (wrong texture path)\n"
+# define SKY_PATH "./resources/textures/sky360.xpm"
 # define SCALE 1
 # define SPEED 0.1f
 # define SPEED_Z 0.03f

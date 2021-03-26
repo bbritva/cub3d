@@ -53,7 +53,7 @@ static int	init_window(t_all *all, int argc)
 			(all->win->west = tex_init(all, all->prms->west)) &&
 			(all->win->east = tex_init(all, all->prms->east)) &&
 			(all->win->sprite = tex_init(all, all->prms->sprite)) &&
-			(all->win->sky = tex_init(all, "./resources/textures/sky.xpm")))
+			(all->win->sky = tex_init(all, SKY_PATH)))
 			return (1);
 	}
 	return (0);

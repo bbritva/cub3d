@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 19:27:20 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 20:04:19 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/26 09:56:47 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void		draw_skyline(t_all *all, int x_pos, int h)
 	double	angle;
 
 	angle = get_ang(all, x_pos);
-	x_coor = (int)(angle * all->prms->res_h * 6 / M_PI);
 	tex = all->win->sky;
+	x_coor = (int)(angle * tex->w_tex * 0.745);
 	i = 0;
 	while (i < h)
 	{
