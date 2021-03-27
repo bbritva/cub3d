@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/27 11:02:01 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/27 11:09:38 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int			render_next_frame(t_all *all)
 		mlx_string_put(all->win->mlx, all->win->win, all->prms->res_h / 3,
 			all->prms->res_v / 3 + 20, 0x8B0000, "Press ESC to exit the game");
 	}
+	mlx_do_sync(all->win->mlx);
 	return (1);
 }
 

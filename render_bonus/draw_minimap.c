@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 11:00:28 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 14:14:11 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/27 13:14:20 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		draw_player_on_map(t_all *all, int x_pos, int y_pos, int scale)
 		y = (int) (p.pos_y - scale);
 		while (y < p.pos_y + scale)
 		{
-			a = (int) pow(scale, 2) / 8;
+			a = (int) pow(scale, 2) / 4;
 			b = (int) (pow(p.pos_x - x, 2) + pow(p.pos_y - y, 2));
 			if (b < a)
 				my_pixel_put(all->win, x + x_pos, y + y_pos, 0x00FFFFFF);
@@ -87,7 +87,7 @@ void		draw_minimap(t_all *all)
 	int scale;
 
 	calc_map_size(all->prms->map, &h_size, &v_size);
-	scale = (h_size > v_size) ? (300 / h_size) : (300 / v_size);
+	scale = (h_size > v_size) ? (500 / h_size) : (300 / v_size);
 	draw_map(all, all->prms->res_h - h_size * scale - 5 - scale,
 		  all->prms->res_v - v_size * scale - 5 - scale, scale);
 	draw_player_on_map(all, all->prms->res_h - h_size * scale - 5 - scale,

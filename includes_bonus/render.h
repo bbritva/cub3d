@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/27 12:42:57 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/27 13:13:23 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@
 # define INIT_ERR_MSG "Error\nIMG initialization error (wrong texture path)\n"
 # define SKY_PATH "./resources/textures/sky.xpm"
 # define FLOOR_PATH "./resources/textures/floor.xpm"
-//# define GUN_PATH "./resources/textures/gun.xpm"
-//# define GUN2_PATH "./resources/textures/gun2.xpm"
 # define GUN_PATH "./resources/textures/Shotgun.xpm"
 # define GUN2_PATH "./resources/textures/Shotgun2.xpm"
 # define SCALE 1
-# define SPEED 0.1f
-# define SPEED_Z 0.08f
+# define SPEED 0.2f
+# define SPEED_Z 0.18f
 # define ESC 1 << 6
 # define IS_BITTEN 1 << 7
 # define IS_SHOOT 1 << 8
