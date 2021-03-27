@@ -98,7 +98,7 @@ int			create_img(t_all *all)
 	if (all->prms->plr.health > 0)
 	{
 		draw_fc(all);
-//		draw_txtr_floor(all);
+		draw_txtr_floor(all);
 		draw_sky(all);
 		draw_walls(all);
 		draw_sprites(all);

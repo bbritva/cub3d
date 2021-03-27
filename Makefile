@@ -18,7 +18,7 @@ SRCSB			=	main_bonus.c GNL/get_next_line.c GNL/get_next_line_utils.c \
 					map_checker.c get_sprites.c) \
 					$(addprefix $(RENDERB_PATH), render_utils.c drawers.c sprites_handler.c freeing.c \
 					drawers_utils.c draw_sprites.c hooks.c movers.c render.c raycast.c get_shot.c draw_hud.c \
-					draw_minimap.c draw_sky.c)
+					draw_minimap.c draw_sky.c draw_txtr_floor.c)
 OBJSB			=	$(SRCSB:.c=.o)
 OBJS			=	$(SRCS:.c=.o)
 LIB_DIR			=	./libft/
