@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 10:21:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/27 09:40:20 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/27 10:16:49 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void		draw_floor_pxl(int j, int i, t_all *all)
 	tex = all->win->floor;
 	calc_pos(&x, &y, all, j, i);
 	if ((color = get_pxl(tex, x, y)) > 0)
-		my_pixel_put(all->win, i, j, color);
+		my_pixel_put(all->win, i, j, shadow_color(color,
+			(2 * j - all->prms->res_v), all->prms->res_h));
 }
 
 void		draw_txtr_floor(t_all *all)
