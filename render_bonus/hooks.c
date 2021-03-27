@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 15:12:00 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/27 11:02:01 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ int			render_next_frame(t_all *all)
 	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
 	if (all->prms->plr.health <= 0)
 	{
-		mlx_string_put(all->win->mlx, all->win->win, 550, 300,
-					   0x8B0000, "YOU DIED");
-		mlx_string_put(all->win->mlx, all->win->win, 550, 320,
-					   0x8B0000, "Press ESC to exit the game");
+		mlx_string_put(all->win->mlx, all->win->win, all->prms->res_h / 3,
+			all->prms->res_v / 3, 0x8B0000, "YOU DIED");
+		mlx_string_put(all->win->mlx, all->win->win, all->prms->res_h / 3,
+			all->prms->res_v / 3 + 20, 0x8B0000, "Press ESC to exit the game");
 	}
 	return (1);
 }
@@ -93,7 +93,10 @@ int 		shoot(t_all *all)
 
 	(void) all;
 	i = 0;
+	if (all->prms->plr.status_mask)
+		return (0);
 	system("afplay resources/sounds/shoot.mp3 &");
+	all->prms->plr.status_mask = all->prms->plr.status_mask | IS_SHOOT;
 	while (all->prms->sprites[i] && all->prms->sprites[i]->dist < SHOOT_DIST)
 	{
 		angle = all->prms->plr.ang_h - all->prms->sprites[i]->angle;

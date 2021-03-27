@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/26 10:22:05 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/27 11:10:27 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ void		draw_bite(t_all *all)
 
 int			create_img(t_all *all)
 {
+	static int count = 0;
+
+	count++;
 	all->win->img = mlx_new_image(all->win->mlx, all->prms->res_h,
 								  all->prms->res_v);
 	all->win->addr = mlx_get_data_addr(all->win->img, &all->win->bpp,
@@ -104,9 +107,12 @@ int			create_img(t_all *all)
 		draw_sprites(all);
 		if (all->win->move_mask & IS_BITTEN)
 			draw_bite(all);
+		draw_gun(all);
 		draw_hud(all);
 	}
 	else
 		draw_deathscreen(all);
+	all->prms->plr.status_mask = (count == 10) ? 0 : all->prms->plr.status_mask;
+	count = (count == 30) ? 0 : count;
 	return (0);
 }

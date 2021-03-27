@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/27 08:14:19 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/27 12:42:57 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,18 @@
 # include "../minilibx_mms/mlx.h"
 # include "cub3d.h"
 # define INIT_ERR_MSG "Error\nIMG initialization error (wrong texture path)\n"
-# define SKY_PATH "./resources/textures/sky360.xpm"
+# define SKY_PATH "./resources/textures/sky.xpm"
 # define FLOOR_PATH "./resources/textures/floor.xpm"
+//# define GUN_PATH "./resources/textures/gun.xpm"
+//# define GUN2_PATH "./resources/textures/gun2.xpm"
+# define GUN_PATH "./resources/textures/Shotgun.xpm"
+# define GUN2_PATH "./resources/textures/Shotgun2.xpm"
 # define SCALE 1
 # define SPEED 0.1f
-# define SPEED_Z 0.03f
+# define SPEED_Z 0.08f
 # define ESC 1 << 6
 # define IS_BITTEN 1 << 7
+# define IS_SHOOT 1 << 8
 # define FORWARD 32
 # define BACKWARD 16
 # define MV_LEFT 8
@@ -39,7 +44,7 @@
 # define WEST 1 << 28
 # define EAST 1 << 29
 # define SPOT_DIST 10
-# define SHOOT_DIST 4
+# define SHOOT_DIST 7
 
 typedef struct		s_tex
 {
@@ -69,6 +74,8 @@ typedef struct		s_win
 	t_tex			*sprite;
 	t_tex			*sky;
 	t_tex			*floor;
+	t_tex			*gun;
+	t_tex			*gun2;
 }					t_win;
 
 typedef struct		s_all
@@ -99,6 +106,7 @@ void				draw_hud(t_all *all);
 void				draw_minimap(t_all *all);
 void				draw_sky(t_all *all);
 void				draw_txtr_floor(t_all *all);
+void 				draw_gun(t_all *all);
 int 				shoot(t_all *all);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 10:21:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/27 10:16:49 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/27 10:57:49 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ void		calc_pos(int *x, int *y, t_all *all, int j, int i)
 {
 	t_player	p;
 	double		ang_h;
+	double		fov_v;
 	double		len;
 
-	(void)i;
+	fov_v = M_PI * all->prms->res_h / (5 * all->prms->res_v);
 	ang_h = all->prms->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
 			all->prms->res_h));
-	len = all->prms->res_v / (4 * tan(M_PI / 6) * (j - all->prms->res_v / 2));
+	len = all->prms->res_v / (4 * tan(fov_v / 2) * (j - all->prms->res_v / 2));
 	p.pos_y = all->prms->plr.pos_y - len * sin(ang_h);
 	p.pos_x = all->prms->plr.pos_x + len * cos(ang_h);
 	*y = (int)((p.pos_y - floor(p.pos_y)) * 255);
