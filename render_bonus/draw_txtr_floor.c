@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 10:21:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/27 10:57:49 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/27 10:58:39 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		calc_pos(int *x, int *y, t_all *all, int j, int i)
 	double		fov_v;
 	double		len;
 
-	fov_v = M_PI * all->prms->res_h / (5 * all->prms->res_v);
+	fov_v = M_PI * all->prms->res_v / (3 * all->prms->res_h);
 	ang_h = all->prms->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
 			all->prms->res_h));
 	len = all->prms->res_v / (4 * tan(fov_v / 2) * (j - all->prms->res_v / 2));
