@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 12:22:56 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 13:31:21 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int			shoot(t_all *all)
 		{
 			all->prms->sprites[i]->status_mask =
 					all->prms->sprites[i]->status_mask & ~(Z_ALIVE);
+			break;
 		}
 		i++;
 	}

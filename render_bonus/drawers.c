@@ -62,9 +62,6 @@ void		draw_bite(t_all *all)
 
 int			create_img(t_all *all)
 {
-	static int count = 0;
-
-	count++;
 	all->win->img = mlx_new_image(all->win->mlx, all->prms->res_h,
 		all->prms->res_v);
 	all->win->addr = mlx_get_data_addr(all->win->img, &all->win->bpp,
@@ -82,7 +79,5 @@ int			create_img(t_all *all)
 	}
 	else
 		draw_deathscreen(all);
-	all->prms->plr.status_mask = (count == 10) ? 0 : all->prms->plr.status_mask;
-	count = (count == 30) ? 0 : count;
 	return (0);
 }

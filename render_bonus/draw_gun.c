@@ -28,11 +28,13 @@ static int	get_pxl(t_tex *tex, int j, int i, t_all *all)
 
 void		draw_gun(t_all *all)
 {
-	int		i;
-	int		j;
-	t_tex	*tex;
-	int		color;
+	static int	count = 0;
+	int			i;
+	int			j;
+	t_tex		*tex;
+	int			color;
 
+	count += (all->prms->plr.status_mask & IS_SHOOT) ? 1 : 0;
 	tex = (all->prms->plr.status_mask & IS_SHOOT) ? all->win->gun2 :
 		all->win->gun;
 	j = 0.6 * all->prms->res_v;
@@ -47,4 +49,6 @@ void		draw_gun(t_all *all)
 		}
 		j++;
 	}
+	all->prms->plr.status_mask = (count == 10) ? 0 : all->prms->plr.status_mask;
+	count = (count == 10) ? 0 : count;
 }
