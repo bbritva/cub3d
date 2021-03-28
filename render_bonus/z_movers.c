@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 15:30:10 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 16:24:25 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static int		is_z_near(t_all *all, double i, double j, int index)
 	dist = pow(i - all->prms->sprites[index - 1]->pos_y, 2) +
 		pow(j - all->prms->sprites[index - 1]->pos_x, 2);
 	return (dist < pow(0.4, 2) &&
-		(all->prms->sprites[index - 1]->status_mask & Z_ALIVE));
+			((all->prms->sprites[index - 1]->status_mask & Z_ALIVE) ||
+			(all->prms->sprites[index - 1]->status_mask & Z_BARREL)));
 }
 
 static int		can_step(t_all *all, double i, double j, int index)
@@ -79,7 +80,7 @@ void			move_zombies(t_all *all)
 	all->prms->plr.health && all->prms->sprites[0]->status_mask & Z_ALIVE)
 	{
 		all->win->move_mask = all->win->move_mask | IS_BITTEN;
-//		all->prms->plr.health -= (all->prms->plr.health > 0) ? 20 : 0;
+		all->prms->plr.health -= (all->prms->plr.health > 0) ? 20 : 0;
 		system("afplay resources/sounds/bite.mp3 &");
 	}
 	count = (count > 10 || all->prms->sprites[0]->dist > 0.6) ? 0 : count;

@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 14:49:41 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 16:22:26 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int		is_z_near(t_all *all, double i, double j)
 
 	dist = pow(i - all->prms->sprites[0]->pos_y, 2) + pow(j -
 			all->prms->sprites[0]->pos_x, 2);
-	return (dist < pow(0.4, 2) && (all->prms->sprites[0]->status_mask & Z_ALIVE));
+	return (dist < pow(0.4, 2) && ((all->prms->sprites[0]->status_mask &
+	Z_ALIVE) || (all->prms->sprites[0]->status_mask & Z_BARREL)));
 }
 
 static int		can_step(t_all *all, double i, double j)

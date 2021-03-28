@@ -51,12 +51,12 @@ void		draw_txtr_line(t_all *all, int x_pos, int h)
 	t_tex	*tex;
 	int		color;
 
-	tex = all->win->sprite;
+	tex = (h & BARREL) ? all->win->sprite2 : all->win->sprite;
 	tex = (h & NORTH) ? all->win->north : tex;
 	tex = (h & SOUTH) ? all->win->south : tex;
 	tex = (h & WEST) ? all->win->west : tex;
 	tex = (h & EAST) ? all->win->east : tex;
-	h = h & ~(0b1111 << 26);
+	h = h & ~(0b11111 << 26);
 	x_coor = h >> 16;
 	h = h & ~(0b1111111111111111 << 16);
 	i = (all->prms->res_v < h) ? (-all->prms->res_v + h) / 2 : 0;

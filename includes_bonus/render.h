@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 11:34:28 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 14:45:25 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define FLOOR_PATH "./resources/textures/floor.xpm"
 # define GUN_PATH "./resources/textures/Shotgun.xpm"
 # define GUN2_PATH "./resources/textures/Shotgun2.xpm"
+# define SPRITE2_PATH "./resources/textures/barrel.xpm"
 # define SCALE 1
 # define SPEED 0.2f
 # define SPEED_Z 0.18f
@@ -38,6 +39,7 @@
 # define SOUTH 1 << 27
 # define WEST 1 << 28
 # define EAST 1 << 29
+# define BARREL 1 << 30
 # define SPOT_DIST 10
 # define SHOOT_DIST 7
 
@@ -67,6 +69,7 @@ typedef struct		s_win
 	t_tex			*west;
 	t_tex			*east;
 	t_tex			*sprite;
+	t_tex			*sprite2;
 	t_tex			*sky;
 	t_tex			*floor;
 	t_tex			*gun;

@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:05:08 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 11:58:35 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 16:21:01 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,20 @@ static void		draw_sprite(int size, t_sprite *spr, int n, t_all *all)
 	j = n - size / 2;
 	while (j < n + size / 2)
 	{
-		x_c = ((j - n + size / 2) * 255 / size);
-		x_c += (spr->status_mask & Z_ALIVE) ? 0 : 765;
-		if (spr->status_mask & Z_GOING &&
-				spr->status_mask & Z_ALIVE)
-			x_c += ((int)(spr->dist * 4) % 2 == 1) ?
-				255 : 510;
 		if (j > 0 && j < all->prms->res_h && all->prms->dists[j] > spr->dist)
-			draw_txtr_line(all, j, size | x_c << 16);
+		{
+			x_c = ((j - n + size / 2) * 255 / size);
+			if (spr->status_mask & Z_BARREL)
+				draw_txtr_line(all, j, size | x_c << 16 | BARREL);
+			else
+			{
+				x_c += (spr->status_mask & Z_ALIVE) ? 0 : 765;
+				if (spr->status_mask & Z_GOING &&
+					spr->status_mask & Z_ALIVE)
+					x_c += ((int)(spr->dist * 4) % 2 == 1) ? 255 : 510;
+				draw_txtr_line(all, j, size | x_c << 16);
+			}
+		}
 		j++;
 	}
 }

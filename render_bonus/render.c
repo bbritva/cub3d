@@ -55,7 +55,8 @@ static int	init_window(t_all *all, int argc)
 			(all->win->sky = tex_init(all, SKY_PATH)) &&
 			(all->win->floor = tex_init(all, FLOOR_PATH)) &&
 			(all->win->gun = tex_init(all, GUN_PATH)) &&
-			(all->win->gun2 = tex_init(all, GUN2_PATH)))
+			(all->win->gun2 = tex_init(all, GUN2_PATH)) &&
+			(all->win->sprite2 = tex_init(all, SPRITE2_PATH)))
 			return (1);
 	}
 	return (0);
