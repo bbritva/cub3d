@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * BONUS
- */
 #include "../includes_bonus/cub3d.h"
 
 int			set_spr_prms(t_sprite *spr, t_player plr)

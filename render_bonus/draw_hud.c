@@ -6,16 +6,13 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 13:40:05 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 14:33:08 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 12:18:37 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * BONUS
- */
 #include "../includes_bonus/cub3d.h"
 
-void		draw_circle(t_all *data, int X1, int Y1, int r, int color)
+static void		draw_circle(t_all *data, int x_c, int y_c, int r)
 {
 	int x;
 	int y;
@@ -27,52 +24,40 @@ void		draw_circle(t_all *data, int X1, int Y1, int r, int color)
 	delta = 1 - 2 * r;
 	while (y >= 0)
 	{
-		my_pixel_put(data->win, X1 + x, Y1 + y, color);
-		my_pixel_put(data->win, X1 + x, Y1 - y, color);
-		my_pixel_put(data->win, X1 - x, Y1 + y, color);
-		my_pixel_put(data->win, X1 - x, Y1 - y, color);
+		my_pixel_put(data->win, x_c + x, y_c + y, 0xFFFFFF);
+		my_pixel_put(data->win, x_c + x, y_c - y, 0xFFFFFF);
+		my_pixel_put(data->win, x_c - x, y_c + y, 0xFFFFFF);
+		my_pixel_put(data->win, x_c - x, y_c - y, 0xFFFFFF);
 		error = 2 * (delta + y) - 1;
 		if ((delta < 0) && (error <= 0))
 			delta += 2 * ++x + 1;
-		else
-		if ((delta > 0) && (error > 0))
+		else if ((delta > 0) && (error > 0))
 			delta -= 2 * --y + 1;
 		else
 			delta += 2 * (++x - --y);
 	}
 }
 
-void		draw_cross(t_all *data, int X1, int Y1, int r, int color)
+static void		draw_cross(t_all *data, int x_c, int y_c, int r)
 {
 	int x;
 	int y;
 
-	x = X1 - r - 5;
-	while (x < X1 - r + 5)
-		my_pixel_put(data->win, x++, Y1, color);
-	x = X1 + r - 5;
-	while (x < X1 + r + 5)
-		my_pixel_put(data->win, x++, Y1, color);
-	y = Y1 - r - 5;
-	while (y < Y1 - r + 5)
-		my_pixel_put(data->win, X1, y++, color);
-	y = Y1 + r - 5;
-	while (y < Y1 + r + 5)
-		my_pixel_put(data->win, X1, y++, color);
+	x = x_c - r - 5;
+	while (x < x_c - r + 5)
+		my_pixel_put(data->win, x++, y_c, 0xFFFFFF);
+	x = x_c + r - 5;
+	while (x < x_c + r + 5)
+		my_pixel_put(data->win, x++, y_c, 0xFFFFFF);
+	y = y_c - r - 5;
+	while (y < y_c - r + 5)
+		my_pixel_put(data->win, x_c, y++, 0xFFFFFF);
+	y = y_c + r - 5;
+	while (y < y_c + r + 5)
+		my_pixel_put(data->win, x_c, y++, 0xFFFFFF);
 }
 
-void		draw_aim(t_all *all)
-{
-	int x_c;
-	int y_c;
-
-	x_c = all->prms->res_h / 2;
-	y_c = all->prms->res_v / 2;
-	draw_circle(all, x_c, y_c, 20, 0xFFFFFF);
-	draw_cross(all, x_c, y_c, 20, 0xFFFFFF);
-}
-
-void 		draw_underlay(t_all *all)
+static void		draw_underlay(t_all *all)
 {
 	int x;
 	int y;
@@ -89,7 +74,7 @@ void 		draw_underlay(t_all *all)
 		my_pixel_put(all->win, x, y++, 0xFFFFFF);
 }
 
-void 		draw_livebar(t_all *all)
+static void		draw_livebar(t_all *all)
 {
 	int x;
 	int y;
@@ -104,11 +89,16 @@ void 		draw_livebar(t_all *all)
 	}
 }
 
-
-void		draw_hud(t_all *all)
+void			draw_hud(t_all *all)
 {
+	int x_c;
+	int y_c;
+
 	draw_underlay(all);
 	draw_livebar(all);
 	draw_minimap(all);
-	draw_aim(all);
+	x_c = all->prms->res_h / 2;
+	y_c = all->prms->res_v / 2;
+	draw_circle(all, x_c, y_c, 20);
+	draw_cross(all, x_c, y_c, 20);
 }

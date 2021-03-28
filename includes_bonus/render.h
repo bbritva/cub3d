@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 09:08:23 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 11:34:28 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void				draw_txtr_line(t_all *all, int x_pos, int h);
 void				draw_sprites(t_all *all);
 int					my_exit(t_all *all);
 int					move_plr(t_all *all);
-int					move_zombies(t_all *all);
+void				move_zombies(t_all *all);
 int					shadow_color(int color, int h, int res_h);
 int					mouse_move_hook(int x, int y, t_all *all);
 void				draw_hud(t_all *all);

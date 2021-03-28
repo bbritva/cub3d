@@ -6,13 +6,10 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 12:53:03 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 12:25:26 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * BONUS
- */
 #include "../includes_bonus/cub3d.h"
 
 static int		can_step(t_all *all, double i, double j)
@@ -68,20 +65,20 @@ static int		move_z(t_all *all, double ang, double *pos_x, double
 	return (0);
 }
 
-int 			move_plr(t_all *all)
+int				move_plr(t_all *all)
 {
 	if (all->win->move_mask & FORWARD)
 		move(all, all->prms->plr.ang_h, &all->prms->plr.pos_x,
-			 &all->prms->plr.pos_y);
+			&all->prms->plr.pos_y);
 	if (all->win->move_mask & MV_LEFT)
 		move(all, all->prms->plr.ang_h + M_PI_2, &all->prms->plr.pos_x,
-			 &all->prms->plr.pos_y);
+			&all->prms->plr.pos_y);
 	if (all->win->move_mask & BACKWARD)
 		move(all, all->prms->plr.ang_h + M_PI, &all->prms->plr.pos_x,
-			 &all->prms->plr.pos_y);
+			&all->prms->plr.pos_y);
 	if (all->win->move_mask & MV_RIGHT)
 		move(all, all->prms->plr.ang_h - M_PI_2, &all->prms->plr.pos_x,
-			 &all->prms->plr.pos_y);
+			&all->prms->plr.pos_y);
 	if (all->win->move_mask & RT_LEFT)
 		all->prms->plr.ang_h -= 0.06f;
 	if (all->win->move_mask & RT_RIGHT)
@@ -93,15 +90,15 @@ int 			move_plr(t_all *all)
 	return (1);
 }
 
-int 			move_zombies(t_all *all)
+void			move_zombies(t_all *all)
 {
 	static int	count = 0;
-	int				i;
+	int			i;
 
 	count++;
 	all->win->move_mask = all->win->move_mask & ~(IS_BITTEN);
 	if (!all->prms->sprites || !all->prms->sprites[0])
-		return (0);
+		return ;
 	i = 0;
 	while (all->prms->sprites[i])
 	{
@@ -120,5 +117,4 @@ int 			move_zombies(t_all *all)
 		system("afplay resources/sounds/bite.mp3 &");
 	}
 	count = (count > 10 || all->prms->sprites[0]->dist > 0.6) ? 0 : count;
-	return (1);
 }

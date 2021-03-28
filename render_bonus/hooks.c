@@ -6,13 +6,10 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/27 11:09:38 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 12:22:56 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * BONUS
- */
 #include "../includes_bonus/cub3d.h"
 
 int			key_press(int keycode, t_all *all)
@@ -73,26 +70,18 @@ int			render_next_frame(t_all *all)
 
 int			mouse_move_hook(int x, int y, t_all *all)
 {
-	(void) y;
+	(void)y;
 	mlx_mouse_hide();
 	all->prms->plr.ang_h += 0.02f * (640 - x) / 10;
 	mlx_mouse_move(all->win->win, 640, 0);
 	return (0);
 }
 
-int			my_exit(t_all *all)
-{
-	(void)all;
-	system("killall afplay");
-	exit(0);
-}
-
-int 		shoot(t_all *all)
+int			shoot(t_all *all)
 {
 	int		i;
 	double	angle;
 
-	(void) all;
 	i = 0;
 	if (all->prms->plr.status_mask)
 		return (0);
