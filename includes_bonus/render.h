@@ -80,6 +80,7 @@ typedef struct		s_all
 }					t_all;
 
 int					set_spr_prms(t_sprite *spr, t_player plr);
+void				prepare_sprites(t_all *all);
 void				my_pixel_put(t_win *win, int x, int y, unsigned int	color);
 int					get_height(t_all *all, int i);
 int					is_wall(t_all *all, t_player p, double angle, char hv);
