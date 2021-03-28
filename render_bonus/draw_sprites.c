@@ -6,51 +6,37 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:05:08 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 15:02:12 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 11:58:35 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * BONUS
- */
 #include "../includes_bonus/cub3d.h"
 
-static void		sort_sprites(t_sprite **sprites)
+static int		check_angle(double angle)
 {
-	int			i;
-	int			j;
-	t_sprite	*temp;
-
-	i = 0;
-	if (!sprites || !sprites[0])
-		return ;
-	while (sprites[i + 1])
-	{
-		j = i;
-		while (sprites[j + 1])
-		{
-			if (sprites[j]->dist > sprites[j + 1]->dist)
-			{
-				temp = sprites[j];
-				sprites[j] = sprites[j + 1];
-				sprites[j + 1] = temp;
-			}
-			j++;
-		}
-		i++;
-	}
+	if ((angle < (M_PI / 2) || angle > (3 * M_PI / 2)))
+		return (1);
+	return (0);
 }
 
-static void		prepare_sprites(t_all *all)
+static void		draw_sprite(int size, t_sprite *spr, int n, t_all *all)
 {
-	int			i;
+	int		j;
+	int		x_c;
 
-	i = 0;
-	while (all->prms->sprites[i])
+	j = n - size / 2;
+	while (j < n + size / 2)
 	{
-		set_spr_prms(all->prms->sprites[i++], all->prms->plr);
+		x_c = ((j - n + size / 2) * 255 / size);
+		x_c += (spr->status_mask & Z_ALIVE) ? 0 : 765;
+		if (spr->status_mask & Z_GOING &&
+				spr->status_mask & Z_ALIVE)
+			x_c += ((int)(spr->dist * 4) % 2 == 1) ?
+				255 : 510;
+		if (j > 0 && j < all->prms->res_h && all->prms->dists[j] > spr->dist)
+			draw_txtr_line(all, j, size | x_c << 16);
+		j++;
 	}
-	sort_sprites(all->prms->sprites);
 }
 
 static double	get_angle(double plr_ang, double spr_ang)
@@ -63,19 +49,10 @@ static double	get_angle(double plr_ang, double spr_ang)
 	return (angle);
 }
 
-static int		check_angle(double angle)
-{
-	if ((angle < (M_PI / 2) || angle > (3 * M_PI / 2)))
-		return (1);
-	return (0);
-}
-
 void			draw_sprites(t_all *all)
 {
 	int		i;
-	int		j;
 	int		n;
-	int		x_c;
 	double	angle;
 	int		size;
 
@@ -89,20 +66,8 @@ void			draw_sprites(t_all *all)
 		n = (int)((0.5 + sin(angle)) * all->prms->res_h);
 		size = (int)((double)all->prms->res_h / 2 / tan(M_PI / 6) /
 			all->prms->sprites[i]->dist);
-		j = n - size / 2;
-		while (j < n + size / 2)
-		{
-			x_c = ((j - n + size / 2) * 255 / size);
-			x_c += (all->prms->sprites[i]->status_mask & Z_ALIVE) ? 0 : 765;
-			if (all->prms->sprites[i]->status_mask & Z_GOING &&
-				all->prms->sprites[i]->status_mask & Z_ALIVE)
-				x_c += ((int)(all->prms->sprites[i]->dist * 4) % 2 == 1) ?
-						255 : 510;
-			if (j > 0 && j < all->prms->res_h && check_angle(angle) &&
-			all->prms->dists[j] > all->prms->sprites[i]->dist)
-				draw_txtr_line(all, j, size | x_c << 16);
-			j++;
-		}
+		if (check_angle(angle))
+			draw_sprite(size, all->prms->sprites[i], n, all);
 		i--;
 	}
 }
