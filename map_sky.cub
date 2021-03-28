@@ -1,0 +1,19 @@
+R    1280  800
+NO ./resources/textures/wall_grass-3.xpm
+WE ./resources/textures/paporotnik-2.xpm
+SO           ./resources/textures/wall_grass-1.xpm
+EA ./resources/textures/paporotnik-1.xpm
+S ./resources/textures/clicker-4.xpm
+F 25,90,0
+C 54, 186, 223
+
+
+11111111111111111
+10000000000000001
+10000000000000001
+10000000000000001
+1000000N000000001
+10000000000000001
+10000000000000001
+10000000000000001
+11111111111111111
