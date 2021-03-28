@@ -77,3 +77,4 @@ git_b:			git
 				git add main_bonus.c Makefile $(RENDERB_PATH)*c $(HDRB)*h $(PARSERB_PATH)*c resources/sounds/*
 
 .PHONY:			all clean fclean re so bonus norm $(NAME)
+#for commit
