@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 10:21:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 09:20:50 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 11:04:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	get_pxl(t_tex *tex, int j, int i)
 	return (color);
 }
 
-void		calc_pos(int *x, int *y, t_all *all, int j, int i)
+void		calc_pos(int *x, int *y, t_all *all, int pos)
 {
 	t_player	p;
 	double		ang_h;
@@ -30,9 +30,10 @@ void		calc_pos(int *x, int *y, t_all *all, int j, int i)
 	double		len;
 
 	fov_v = M_PI * all->prms->res_v / (3 * all->prms->res_h);
-	ang_h = all->prms->plr.ang_h + M_PI / 6 - i * (M_PI / (3 *
+	ang_h = all->prms->plr.ang_h + M_PI / 6 - (pos >> 16) * (M_PI / (3 *
 			all->prms->res_h));
-	len = all->prms->res_v / (4 * tan(fov_v / 2) * (j - all->prms->res_v / 2));
+	len = all->prms->res_v / (4 * tan(fov_v / 2) * (((pos << 16) >> 16) -
+			all->prms->res_v / 2));
 	p.pos_y = all->prms->plr.pos_y - len * sin(ang_h);
 	p.pos_x = all->prms->plr.pos_x + len * cos(ang_h);
 	*y = (int)((p.pos_y - floor(p.pos_y)) * 255);
@@ -47,7 +48,7 @@ void		draw_floor_pxl(int j, int i, t_all *all)
 	int		color;
 
 	tex = all->win->floor;
-	calc_pos(&x, &y, all, j, i);
+	calc_pos(&x, &y, all, j | (i << 16));
 	if ((color = get_pxl(tex, x, y)) > 0)
 		my_pixel_put(all->win, i, j, shadow_color(color,
 			(2 * j - all->prms->res_v), all->prms->res_h));
