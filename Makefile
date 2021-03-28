@@ -64,10 +64,10 @@ bonus:			$(OBJSB) $(HDRB)
 				@echo $@ compilled
 
 norm:
-				norminette main.c cub3d.h $(RENDER_PATH)*c $(HDR)*h $(PARSER_PATH)*c $(LIB_DIR)*c $(LIB_DIR)*h GNL/*c GNL/*h
+				norminette main.c $(RENDER_PATH)*c $(HDR)*h $(PARSER_PATH)*c $(LIB_DIR)*c $(LIB_DIR)*h GNL/*c GNL/*h
 
 norm_b:
-				norminette main_bonus.c cub3d.h $(RENDERB_PATH)*c $(HDRB)*h $(PARSERB_PATH)*c $(LIB_DIR)*c $(LIB_DIR)*h GNL/*c GNL/*h
+				norminette main_bonus.c $(RENDERB_PATH)*c $(HDRB)*h $(PARSERB_PATH)*c $(LIB_DIR)*c $(LIB_DIR)*h GNL/*c GNL/*h
 
 git:			fclean
 				git add main.c Makefile $(RENDER_PATH)*c $(HDR)*h $(PARSER_PATH)*c $(LIB_DIR)*c $(LIB_DIR)Makefile $(LIB_DIR)*h \
