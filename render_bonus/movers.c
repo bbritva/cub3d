@@ -6,11 +6,20 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 12:25:26 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 14:48:03 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/cub3d.h"
+
+static int		is_z_near(t_all *all, double i, double j)
+{
+	double dist;
+
+	dist = pow(i - all->prms->sprites[0]->pos_y, 2) + pow(j -
+			all->prms->sprites[0]->pos_x, 2);
+	return (dist < pow(0.4, 2));
+}
 
 static int		can_step(t_all *all, double i, double j)
 {
@@ -24,7 +33,7 @@ static int		can_step(t_all *all, double i, double j)
 		return (0);
 	if (all->prms->map[(int)i][(int)(j - D)] == '1')
 		return (0);
-	return (1);
+	return (!is_z_near(all, i, j));
 }
 
 static int		move(t_all *all, double ang, double *pos_x, double
