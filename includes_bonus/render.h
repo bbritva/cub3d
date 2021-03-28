@@ -6,13 +6,10 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/27 13:13:23 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 09:08:23 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * BONUS
- */
 #ifndef RENDER_H
 # define RENDER_H
 
@@ -96,7 +93,7 @@ int					free_window(t_all *all);
 void				draw_txtr_line(t_all *all, int x_pos, int h);
 void				draw_sprites(t_all *all);
 int					my_exit(t_all *all);
-int	 				move_plr(t_all *all);
+int					move_plr(t_all *all);
 int					move_zombies(t_all *all);
 int					shadow_color(int color, int h, int res_h);
 int					mouse_move_hook(int x, int y, t_all *all);
@@ -104,7 +101,7 @@ void				draw_hud(t_all *all);
 void				draw_minimap(t_all *all);
 void				draw_sky(t_all *all);
 void				draw_txtr_floor(t_all *all);
-void 				draw_gun(t_all *all);
-int 				shoot(t_all *all);
+void				draw_gun(t_all *all);
+int					shoot(t_all *all);
 
 #endif

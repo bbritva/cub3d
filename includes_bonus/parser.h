@@ -37,8 +37,8 @@ typedef struct		s_player
 	double			pos_x;
 	double			pos_y;
 	double			ang_h;
-	int 			health;
-	int 			status_mask;
+	int				health;
+	int				status_mask;
 }					t_player;
 
 typedef struct		s_sprite
@@ -47,7 +47,7 @@ typedef struct		s_sprite
 	double			pos_y;
 	double			dist;
 	double			angle;
-	int 			status_mask;
+	int				status_mask;
 }					t_sprite;
 
 typedef	struct		s_params
