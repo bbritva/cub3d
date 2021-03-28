@@ -6,13 +6,10 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:50:14 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 12:34:06 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 09:04:15 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * BONUS
- */
 #include "../includes_bonus/cub3d.h"
 
 int			get_spr_count(char **map)

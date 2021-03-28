@@ -36,7 +36,7 @@
 # define MV_RIGHT 4
 # define RT_LEFT 2
 # define RT_RIGHT 1
-# define D 0.3f
+# define D 0.2f
 # define NORTH 1 << 26
 # define SOUTH 1 << 27
 # define WEST 1 << 28

@@ -6,13 +6,13 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:03:59 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 11:29:43 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 09:03:01 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/cub3d.h"
 
-double	get_angle(char c)
+double		get_angle(char c)
 {
 	double	angle;
 
@@ -24,7 +24,19 @@ double	get_angle(char c)
 	return (angle);
 }
 
-int		map_parser(int fd, t_params *prms, char **line)
+t_player	init_player(int j, int i, char dir)
+{
+	t_player p;
+
+	p.pos_x = (double)j + 0.5;
+	p.pos_y = (double)i + 0.5;
+	p.health = 100;
+	p.status_mask = 0;
+	p.ang_h = get_angle(dir);
+	return (p);
+}
+
+int			map_parser(int fd, t_params *prms, char **line)
 {
 	int		i;
 	char	*line_map;
@@ -46,7 +58,7 @@ int		map_parser(int fd, t_params *prms, char **line)
 	return (i);
 }
 
-int		get_player(t_params *prms)
+int			get_player(t_params *prms)
 {
 	int			i;
 	int			j;
@@ -59,19 +71,16 @@ int		get_player(t_params *prms)
 		{
 			if (ft_strchr("NSWE", prms->map[i][j]))
 			{
-				if (prms->plr.pos_y > 0 && write(1, "Double player\n", 14))
+				if (prms->plr.pos_y > 0 && write(1,
+					"Error\nDouble player\n", 20))
 					return (0);
-				prms->plr.pos_x = (double)j + 0.5;
-				prms->plr.pos_y = (double)i + 0.5;
-				prms->plr.health = 100;
-				prms->plr.status_mask = 0;
-				prms->plr.ang_h = get_angle(prms->map[i][j]);
+				prms->plr = init_player(j, i, prms->map[i][j]);
 			}
 			j++;
 		}
 		i++;
 	}
-	if (prms->plr.pos_x == 0 && write(1, "No player\n", 10))
+	if (prms->plr.pos_x == 0 && write(1, "Error\nNo player\n", 16))
 		return (0);
 	return (1);
 }
