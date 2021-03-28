@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 static int	get_clr(t_all *all, int x, int y)
 {
