@@ -6,13 +6,13 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 19:27:20 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/26 09:56:47 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 09:17:10 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/cub3d.h"
 
-static int	get_pxl(t_tex *tex, int i, int h, int x_coor)
+static int		get_pxl(t_tex *tex, int i, int h, int x_coor)
 {
 	char	*src;
 	int		color;
@@ -36,8 +36,7 @@ static double	get_ang(t_all *all, int i)
 	return (ang);
 }
 
-
-void		draw_skyline(t_all *all, int x_pos, int h)
+static void		draw_skyline(t_all *all, int x_pos, int h)
 {
 	int		i;
 	int		x_coor;
@@ -57,7 +56,7 @@ void		draw_skyline(t_all *all, int x_pos, int h)
 	}
 }
 
-void		draw_sky(t_all *all)
+void			draw_sky(t_all *all)
 {
 	int	i;
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_txtr_floor .c                                 :+:      :+:    :+:   */
+/*   draw_txtr_floor.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 10:21:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/27 10:58:39 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 09:20:50 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		draw_floor_pxl(int j, int i, t_all *all)
 	int		y;
 	int		x;
 	t_tex	*tex;
-	int 	color;
+	int		color;
 
 	tex = all->win->floor;
 	calc_pos(&x, &y, all, j, i);

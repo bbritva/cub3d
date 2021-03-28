@@ -16,8 +16,8 @@ static int	get_pxl(t_tex *tex, int j, int i, t_all *all)
 {
 	char	*src;
 	int		color;
-	int 	x;
-	int 	y;
+	int		x;
+	int		y;
 
 	x = (i - all->prms->res_h / 2) * 2 * tex->w_tex / all->prms->res_h;
 	y = (j - 0.6 * all->prms->res_v) * 2.5 * tex->h_tex / all->prms->res_v;
@@ -26,14 +26,15 @@ static int	get_pxl(t_tex *tex, int j, int i, t_all *all)
 	return (color);
 }
 
-void 		draw_gun(t_all *all)
+void		draw_gun(t_all *all)
 {
 	int		i;
 	int		j;
 	t_tex	*tex;
-	int 	color;
+	int		color;
 
-	tex = (all->prms->plr.status_mask & IS_SHOOT) ? all->win->gun2 : all->win->gun;
+	tex = (all->prms->plr.status_mask & IS_SHOOT) ? all->win->gun2 :
+		all->win->gun;
 	j = 0.6 * all->prms->res_v;
 	while (j < all->prms->res_v)
 	{
