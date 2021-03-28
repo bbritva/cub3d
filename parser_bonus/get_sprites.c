@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:50:14 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 09:04:15 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 15:40:08 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			get_spr_count(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (ft_strchr("2", map[i][j]))
+			if (ft_strchr("23", map[i][j]))
 				size++;
 			j++;
 		}
@@ -34,7 +34,7 @@ int			get_spr_count(char **map)
 	return (size);
 }
 
-t_sprite	*get_sprite(int j, int i)
+t_sprite	*get_sprite(int j, int i, char type)
 {
 	t_sprite	*spr;
 
@@ -44,7 +44,9 @@ t_sprite	*get_sprite(int j, int i)
 		spr->pos_y = (double)i + 0.5;
 		spr->dist = 0;
 		spr->angle = 0;
-		spr->status_mask = Z_ALIVE;
+		spr->status_mask = (type == '2') ? Z_ALIVE : 0;
+		spr->status_mask = (type == '3') ? (spr->status_mask | Z_BARREL) :
+			spr->status_mask;
 	}
 	return (spr);
 }
@@ -65,8 +67,8 @@ int			get_sprites(t_params *prms)
 			j = 0;
 			while (prms->map[i][j])
 			{
-				if (ft_strchr("2", prms->map[i][j]) &&
-					!(prms->sprites[k++] = get_sprite(j, i)))
+				if (ft_strchr("23", prms->map[i][j]) &&
+					!(prms->sprites[k++] = get_sprite(j, i, prms->map[i][j])))
 					return (0);
 				j++;
 			}

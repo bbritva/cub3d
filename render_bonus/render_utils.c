@@ -60,7 +60,7 @@ int			is_wall(t_all *all, t_player p, double angle, char hv)
 		set_horizontal_intersect(&x, &y, angle, p);
 	else
 		set_vertical_intersect(&x, &y, angle, p);
-	if (ft_strchr("02NSWE", all->prms->map[y][x]))
+	if (ft_strchr("032NSWE", all->prms->map[y][x]))
 		return (0);
 	return (1);
 }

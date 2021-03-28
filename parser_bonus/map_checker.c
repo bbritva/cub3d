@@ -35,7 +35,7 @@ static int	check_first_line(char *line)
 
 	i = 0;
 	while (line[i])
-		if (ft_strchr("20NSWE", line[i++]))
+		if (ft_strchr("320NSWE", line[i++]))
 		{
 			ft_putstr(MAP_ERR);
 			return (0);

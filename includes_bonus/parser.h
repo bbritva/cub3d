@@ -30,6 +30,7 @@
 # define RES_MIN 50
 # define Z_GOING 1 << 0
 # define Z_ALIVE 1 << 1
+# define Z_BARREL 1 << 3
 # define Z_GET_SHOOT 1 << 2
 
 typedef struct		s_player

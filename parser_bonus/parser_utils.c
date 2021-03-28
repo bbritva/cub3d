@@ -25,7 +25,7 @@ int			is_map_line(char *line)
 	if (*line)
 		result = 1;
 	while (*line)
-		if (!ft_strchr(" 012NSWE", *line++))
+		if (!ft_strchr(" 0123NSWE", *line++))
 			return (0);
 	return (result);
 }
