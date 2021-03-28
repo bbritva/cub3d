@@ -6,41 +6,12 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:53:07 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/27 11:14:08 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 12:07:59 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/cub3d.h"
 
-void		draw_fc(t_all *all)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < all->prms->res_v / 2)
-	{
-		j = 0;
-		while (j < all->prms->res_h)
-		{
-			my_pixel_put(all->win, j, i, shadow_color(all->prms->ceil_color,
-				all->prms->res_v / 2 - i + 100, all->prms->res_h));
-			j++;
-		}
-		i++;
-	}
-	while (i < all->prms->res_v)
-	{
-		j = 0;
-		while (j < all->prms->res_h)
-		{
-			my_pixel_put(all->win, j, i, shadow_color(all->prms->floor_color,
-				100 + i - (all->prms->res_v >> 1), all->prms->res_h));
-			j++;
-		}
-		i++;
-	}
-}
 void		draw_deathscreen(t_all *all)
 {
 	int i;
@@ -95,12 +66,11 @@ int			create_img(t_all *all)
 
 	count++;
 	all->win->img = mlx_new_image(all->win->mlx, all->prms->res_h,
-								  all->prms->res_v);
+		all->prms->res_v);
 	all->win->addr = mlx_get_data_addr(all->win->img, &all->win->bpp,
-										   &all->win->line_l, &all->win->en);
+		&all->win->line_l, &all->win->en);
 	if (all->prms->plr.health > 0)
 	{
-//		draw_fc(all);
 		draw_txtr_floor(all);
 		draw_sky(all);
 		draw_walls(all);

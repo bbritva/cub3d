@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 11:27:36 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 11:27:36 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 11:34:28 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void		sort_sprites(t_sprite **sprites)
 	}
 }
 
-void		prepare_sprites(t_all *all)
+void			prepare_sprites(t_all *all)
 {
 	int			i;
 

@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 11:00:28 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 11:23:52 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/28 12:04:10 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void		draw_minimap(t_all *all)
 	int scale;
 
 	calc_map_size(all->prms->map, &h_size, &v_size);
-	scale = (h_size > v_size) ? (500 / h_size) : (300 / v_size);
+	scale = (h_size > v_size) ? (all->prms->res_h / (4 * h_size)) :
+		(all->prms->res_h / (4 * v_size));
 	draw_map(all, all->prms->res_h - h_size * scale - 5 - scale,
 		all->prms->res_v - v_size * scale - 5 - scale, scale);
 	draw_player_on_map(all, all->prms->res_h - h_size * scale - 5 - scale,
