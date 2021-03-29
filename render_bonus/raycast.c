@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:32:27 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 11:29:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/29 10:50:25 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,11 @@ int				get_height(t_all *all, int i)
 	{
 		dx = get_dx(&p, ang);
 		dy = get_dy(&p, ang);
-		if (fabs(dy) > fabs(dx))
-			if ((mgc = do_mgc(&p, ang, dx, 'x')) && is_wall(all, p, ang, 'v'))
+		if ((fabs(dy) > fabs(dx)) && ((mgc = do_mgc(&p, ang, dx, 'x')) &&
+		is_wall(all, p, ang, 'v')))
 				break ;
-		if (fabs(dy) <= fabs(dx))
-			if ((mgc = do_mgc(&p, ang, dy, 'y')) && is_wall(all, p, ang, 'h'))
+		if ((fabs(dy) <= fabs(dx)) && ((mgc = do_mgc(&p, ang, dy, 'y')) &&
+		is_wall(all, p, ang, 'h')))
 				break ;
 	}
 	all->prms->dists[i] = sqrt(pow(p.pos_x - all->prms->plr.pos_x, 2) + pow(
