@@ -79,5 +79,4 @@ int		main(int argc, char *argv[])
 	}
 	else
 		ft_putstr(ALLOC_ERR_MSG);
-	ft_putstr("end of cub3d\n");
 }

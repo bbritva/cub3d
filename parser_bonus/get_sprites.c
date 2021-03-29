@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:50:14 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 15:40:08 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/29 12:08:20 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			get_spr_count(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (ft_strchr("23", map[i][j]))
+			if (ft_strchr("234", map[i][j]))
 				size++;
 			j++;
 		}
@@ -47,6 +47,8 @@ t_sprite	*get_sprite(int j, int i, char type)
 		spr->status_mask = (type == '2') ? Z_ALIVE : 0;
 		spr->status_mask = (type == '3') ? (spr->status_mask | Z_BARREL) :
 			spr->status_mask;
+		spr->status_mask = (type == '4') ? (spr->status_mask | Z_DOOR) :
+			spr->status_mask;
 	}
 	return (spr);
 }
@@ -67,7 +69,7 @@ int			get_sprites(t_params *prms)
 			j = 0;
 			while (prms->map[i][j])
 			{
-				if (ft_strchr("23", prms->map[i][j]) &&
+				if (ft_strchr("234", prms->map[i][j]) &&
 					!(prms->sprites[k++] = get_sprite(j, i, prms->map[i][j])))
 					return (0);
 				j++;

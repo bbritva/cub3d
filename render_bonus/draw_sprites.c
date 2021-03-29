@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:05:08 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 16:21:01 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/29 13:18:54 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,12 @@ void			draw_sprites(t_all *all)
 		size = (int)((double)all->prms->res_h / 2 / tan(M_PI / 6) /
 			all->prms->sprites[i]->dist);
 		if (check_angle(angle))
-			draw_sprite(size, all->prms->sprites[i], n, all);
+		{
+			if (all->prms->sprites[i]->status_mask & Z_DOOR)
+				draw_door(size, all->prms->sprites[i], n, all);
+			else
+				draw_sprite(size, all->prms->sprites[i], n, all);
+		}
 		i--;
 	}
 }

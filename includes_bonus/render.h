@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 14:45:25 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/29 12:53:41 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "cub3d.h"
 # define INIT_ERR_MSG "Error\nIMG initialization error (wrong texture path)\n"
 # define SKY_PATH "./resources/textures/sky.xpm"
+# define DOOR_PATH "./resources/textures/door.xpm"
 # define FLOOR_PATH "./resources/textures/floor.xpm"
 # define GUN_PATH "./resources/textures/Shotgun.xpm"
 # define GUN2_PATH "./resources/textures/Shotgun2.xpm"
@@ -40,6 +41,7 @@
 # define WEST 1 << 28
 # define EAST 1 << 29
 # define BARREL 1 << 30
+# define DOOR 1 << 31
 # define SPOT_DIST 10
 # define SHOOT_DIST 7
 
@@ -70,6 +72,7 @@ typedef struct		s_win
 	t_tex			*east;
 	t_tex			*sprite;
 	t_tex			*sprite2;
+	t_tex			*door;
 	t_tex			*sky;
 	t_tex			*floor;
 	t_tex			*gun;
@@ -106,6 +109,7 @@ void				draw_minimap(t_all *all);
 void				draw_sky(t_all *all);
 void				draw_txtr_floor(t_all *all);
 void				draw_gun(t_all *all);
+void				draw_door(int size, t_sprite *spr, int n, t_all *all);
 int					shoot(t_all *all);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 09:59:41 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 11:29:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/29 11:31:50 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			is_wall(t_all *all, t_player p, double angle, char hv)
 		set_horizontal_intersect(&x, &y, angle, p);
 	else
 		set_vertical_intersect(&x, &y, angle, p);
-	if (ft_strchr("032NSWE", all->prms->map[y][x]))
+	if ('1' != all->prms->map[y][x])
 		return (0);
 	return (1);
 }

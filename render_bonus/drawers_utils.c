@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:00:04 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 11:29:44 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/29 12:49:55 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ void		draw_txtr_line(t_all *all, int x_pos, int h)
 	int		color;
 
 	tex = (h & BARREL) ? all->win->sprite2 : all->win->sprite;
+	tex = (h & DOOR) ? all->win->door : tex;
 	tex = (h & NORTH) ? all->win->north : tex;
 	tex = (h & SOUTH) ? all->win->south : tex;
 	tex = (h & WEST) ? all->win->west : tex;
 	tex = (h & EAST) ? all->win->east : tex;
-	h = h & ~(0b11111 << 26);
+	h = h & ~(0b111111 << 26);
 	x_coor = h >> 16;
 	h = h & ~(0b1111111111111111 << 16);
 	i = (all->prms->res_v < h) ? (-all->prms->res_v + h) / 2 : 0;
