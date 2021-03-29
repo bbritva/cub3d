@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:21:21 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/29 16:51:12 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/29 17:03:31 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ void		draw_door(int size, t_sprite *spr, int n, t_all *all)
 		angle += 2 * M_PI;
 	while (angle > 2 * M_PI)
 		angle -= 2 * M_PI;
-	n_start = (int)((0.5 + sin(angle)) * all->prms->res_h);
+	n_start = (int)(angle * all->prms->res_h * 3 / M_PI);
 	dx = tmp.pos_x + 1 - all->prms->plr.pos_x;
 	angle = atan2(-dy, dx);
 	while (angle < 0)
 		angle += 2 * M_PI;
 	while (angle > 2 * M_PI)
 		angle -= 2 * M_PI;
-	n_stop = (int)((0.5 + sin(angle)) * all->prms->res_h);
+	n_stop = (int)(angle * all->prms->res_h * 3 / M_PI);
 	i = 0;
 	while (n_start + i < n_stop)
 	{
