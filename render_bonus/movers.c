@@ -34,6 +34,8 @@ static int		can_step(t_all *all, double i, double j)
 		return (0);
 	if (all->prms->map[(int)i][(int)(j - D)] == '1')
 		return (0);
+	if (all->prms->map[(int)i][(int)(j)] == '4')
+		return (0);
 	return (!is_z_near(all, i, j));
 }
 
