@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/30 17:42:14 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/30 18:17:49 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int		can_step(t_all *all, double i, double j, int index)
 	if (all->prms->map[(int)i][(int)(j + D)] == '1')
 		return (0);
 	if (all->prms->map[(int)i][(int)(j - D)] == '1')
+		return (0);
+	if (all->prms->map[(int)i][(int)(j)] == '4')
 		return (0);
 	return (!is_z_near(all, i, j, index));
 }
@@ -79,7 +81,7 @@ void			move_zombies(t_all *all)
 	}
 	if (all->prms->sprites[0]->dist < 0.6 && count % 10 == 0 &&
 	all->prms->plr.health && all->prms->sprites[0]->status_mask & Z_ALIVE &&
-							 !(all->prms->sprites[i]->status_mask & Z_DOOR))
+							 !(all->prms->sprites[0]->status_mask & Z_DOOR))
 	{
 		all->win->move_mask = all->win->move_mask | IS_BITTEN;
 		all->prms->plr.health -= (all->prms->plr.health > 0) ? 20 : 0;

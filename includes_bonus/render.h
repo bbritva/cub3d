@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/30 17:20:11 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/30 17:36:47 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define GUN2_PATH "./resources/textures/Shotgun2.xpm"
 # define SPRITE2_PATH "./resources/textures/barrel.xpm"
 # define SCALE 1
-# define SPEED 0.2f
-# define SPEED_Z 0.18f
+# define SPEED 0.1f
+# define SPEED_Z 0.08f
 # define ESC 1 << 6
 # define IS_BITTEN 1 << 7
 # define IS_SHOOT 1 << 8
