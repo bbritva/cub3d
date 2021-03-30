@@ -6,7 +6,7 @@
 /*   By: bbritva <bbritva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 13:09:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/29 12:53:41 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/30 17:20:11 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ void				draw_txtr_floor(t_all *all);
 void				draw_gun(t_all *all);
 void				draw_door(int size, t_sprite *spr, int n, t_all *all);
 int					shoot(t_all *all);
+void 				move_doors(t_all *all);
 
 #endif

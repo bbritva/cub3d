@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 16:24:25 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/30 17:42:14 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,14 @@ void			move_zombies(t_all *all)
 	{
 		if (all->prms->sprites[i]->dist > (0.5 + i * D * 3) &&
 				all->prms->sprites[i]->status_mask & Z_GOING &&
-				all->prms->sprites[i]->status_mask & Z_ALIVE)
+				all->prms->sprites[i]->status_mask & Z_ALIVE &&
+				!(all->prms->sprites[i]->status_mask & Z_DOOR))
 			move_z(all, all->prms->sprites[i]->angle + M_PI, i);
 		i++;
 	}
 	if (all->prms->sprites[0]->dist < 0.6 && count % 10 == 0 &&
-	all->prms->plr.health && all->prms->sprites[0]->status_mask & Z_ALIVE)
+	all->prms->plr.health && all->prms->sprites[0]->status_mask & Z_ALIVE &&
+							 !(all->prms->sprites[i]->status_mask & Z_DOOR))
 	{
 		all->win->move_mask = all->win->move_mask | IS_BITTEN;
 		all->prms->plr.health -= (all->prms->plr.health > 0) ? 20 : 0;

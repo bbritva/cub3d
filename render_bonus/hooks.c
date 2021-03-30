@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:40:19 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/28 13:37:53 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/30 17:20:29 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int			key_press(int keycode, t_all *all)
 		all->win->move_mask = all->win->move_mask | ESC;
 	if (keycode == 256)
 		shoot(all);
+	if (keycode == 14)
+		all->prms->sprites[0]->status_mask =
+				all->prms->sprites[0]->status_mask | Z_GOING;
 	return (0);
 }
 
@@ -55,6 +58,7 @@ int			render_next_frame(t_all *all)
 	mlx_destroy_image(all->win->mlx, all->win->img);
 	move_plr(all);
 	move_zombies(all);
+	move_doors(all);
 	create_img(all);
 	mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
 	if (all->prms->plr.health <= 0)

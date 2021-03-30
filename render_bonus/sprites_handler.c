@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 16:59:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/22 12:55:42 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/30 17:48:27 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,36 @@ int			set_spr_prms(t_sprite *spr, t_player plr)
 	while (spr->angle > 2 * M_PI)
 		spr->angle -= 2 * M_PI;
 	spr->dist = sqrt(pow(dx, 2) + pow(dy, 2));
-	if (spr->dist < SPOT_DIST)
+	if (spr->dist < SPOT_DIST && spr->status_mask & Z_ALIVE)
 		spr->status_mask = spr->status_mask | Z_GOING;
-	if (spr->dist > SPOT_DIST)
+	if (spr->dist > SPOT_DIST && spr->status_mask & Z_ALIVE)
 		spr->status_mask = spr->status_mask & ~(Z_GOING);
 	return (0);
+}
+
+void 		move_door(t_sprite *spr)
+{
+	unsigned int dist;
+
+	if (spr->status_mask & Z_GOING)
+	{
+		spr->pos_x += 0.05;
+		dist = ((spr->status_mask >> 15) + 1);
+		spr->status_mask  = spr->status_mask & ~(0b1111 << 15);
+		spr->status_mask  = spr->status_mask | (dist << 15);
+	}
+}
+
+void 		move_doors(t_all *all)
+{
+	int i;
+
+	i = 0;
+	while (all->prms->sprites[i])
+	{
+		if (all->prms->sprites[i]->status_mask & Z_DOOR &&
+		(all->prms->sprites[i]->status_mask >> 15) < 20)
+			move_door(all->prms->sprites[i]);
+		i++;
+	}
 }

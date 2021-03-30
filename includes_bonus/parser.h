@@ -49,7 +49,7 @@ typedef struct		s_sprite
 	double			pos_y;
 	double			dist;
 	double			angle;
-	int				status_mask;
+	unsigned int	status_mask;
 }					t_sprite;
 
 typedef	struct		s_params
