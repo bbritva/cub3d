@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:21:21 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/30 13:02:32 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/30 16:11:27 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		draw_door(int size, t_sprite *spr, int n, t_all *all)
 	int 		n_start;
 	int 		i;
 	int 		n_stop;
+	int 		n_tmp;
 	double		dist;
 
 	(void)size;
@@ -41,21 +42,23 @@ void		draw_door(int size, t_sprite *spr, int n, t_all *all)
 	tmp.pos_x -= 0.5;
 	dx = tmp.pos_x - all->prms->plr.pos_x;
 	dy = tmp.pos_y - all->prms->plr.pos_y;
-	angle =  - atan2(-dy, dx) + all->prms->plr.ang_h + M_PI / 6;
-	while (angle < 0)
-		angle += 2 * M_PI;
-	while (angle > 2 * M_PI)
-		angle -= 2 * M_PI;
-	n_start = (int)(angle * all->prms->res_h * 3 / M_PI);
+	angle =  - atan2(-dy, dx) + all->prms->plr.ang_h;
+	angle -= (angle > M_PI * 2) ? M_PI * 2 : 0;
+	angle += (angle < 0) ? M_PI * 2 : 0;
+	n_start = (int)((0.5 + sin(angle)) * all->prms->res_h);
 	dx = tmp.pos_x + 1 - all->prms->plr.pos_x;
-	angle =  - atan2(-dy, dx) + all->prms->plr.ang_h + M_PI / 6;
-	while (angle < 0)
-		angle += 2 * M_PI;
-	while (angle > 2 * M_PI)
-		angle -= 2 * M_PI;
-	n_stop = (int)(angle * all->prms->res_h * 3 / M_PI);
-	i = 0;
-	while (n_start + i < n_stop)
+	angle =  - atan2(-dy, dx) + all->prms->plr.ang_h;
+	angle -= (angle > M_PI * 2) ? M_PI * 2 : 0;
+	angle += (angle < 0) ? M_PI * 2 : 0;
+	n_stop = (int)((0.5 + sin(angle)) * all->prms->res_h);
+	if (n_stop < n_start)
+	{
+		n_tmp = n_start;
+		n_start = n_stop;
+		n_stop = n_tmp;
+	}
+	i = (n_start < 0) ? -n_start : 0;
+	while (n_start + i < n_stop && n_start + i < all->prms->res_h)
 	{
 		angle = get_ang(all, n_start + i);
 		dist = fabs(dy / sin(angle)) * cos(angle - all->prms->plr.ang_h);
