@@ -79,7 +79,7 @@ void			move_zombies(t_all *all)
 	i = 0;
 	while (all->prms->sprites[i])
 	{
-		if (all->prms->sprites[i]->dist > (0.5 + i * D * 3) &&
+		if (all->prms->sprites[i]->dist > (0.5) &&
 				all->prms->sprites[i]->status_mask & Z_GOING &&
 				all->prms->sprites[i]->status_mask & Z_ALIVE &&
 				!(all->prms->sprites[i]->status_mask & Z_DOOR))
