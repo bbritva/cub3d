@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 16:59:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/30 17:57:20 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/30 17:59:34 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void 		move_doors(t_all *all)
 			all->prms->sprites[i]->status_mask & Z_GOING)
 		{
 			move_door(all->prms->sprites[i]);
-			if ((all->prms->sprites[i]->status_mask >> 15) < 3)
+			if (((all->prms->sprites[i]->status_mask >> 15) == 9))
 				all->prms->map[(int)all->prms->sprites[i]->pos_y][(int)all->prms
 			->sprites[i]->pos_x] = '0';
 		}

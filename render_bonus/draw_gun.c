@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:12:08 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/27 12:46:32 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/30 18:49:39 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void		draw_gun(t_all *all)
 	int			color;
 
 	count += (all->prms->plr.status_mask & IS_SHOOT) ? 1 : 0;
-	tex = (all->prms->plr.status_mask & IS_SHOOT) ? all->win->gun2 :
-		all->win->gun;
+	tex = (all->prms->plr.status_mask & IS_SHOOT && count > 7) ?
+			all->win->gun2 : all->win->gun;
 	j = 0.6 * all->prms->res_v;
 	while (j < all->prms->res_v)
 	{
