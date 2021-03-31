@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:51 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/24 10:43:13 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/31 09:18:06 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define M_ARGS_MSG "Error\nWrong arguments\n"
 # define NREAD_MSG "Error\nCannot read file\n"
 # define MAP_ERR "Error\nWrong map\n"
+# define DBL_PLR "Error\nDouble player on map\n"
+# define NO_PLR "Error\nNo player on map\n"
 # define RES_MAX 16000
 # define RES_MIN 50
 
