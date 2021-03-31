@@ -22,10 +22,10 @@
 # include "../libft/libft.h"
 # include "../GNL/get_next_line.h"
 
-# define F_MISS_MSG "File name missing\n"
-# define M_ARGS_MSG "Wrong arguments\n"
-# define NREAD_MSG "Cannot read file\n"
-# define MAP_ERR "Wrong map\n"
+# define F_MISS_MSG "Error\nFile name missing\n"
+# define M_ARGS_MSG "Error\nWrong arguments\n"
+# define NREAD_MSG "Error\nCannot read file\n"
+# define MAP_ERR "Error\nWrong map\n"
 # define RES_MAX 16000
 # define RES_MIN 50
 

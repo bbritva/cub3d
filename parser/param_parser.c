@@ -31,7 +31,8 @@ int			get_rez(t_params *params, const char *line, int *err)
 	while (ft_isdigit(line[i]) && params->res_h < RES_MAX)
 		params->res_h = params->res_h * 10 + (line[i++] - '0');
 	params->res_h = (params->res_h > RES_MAX) ? RES_MAX : params->res_h;
-	params->res_h = (params->res_h < RES_MIN) ? RES_MIN : params->res_h;
+	params->res_h = (params->res_h < RES_MIN && params->res_h != -1) ?
+					RES_MIN : params->res_h;
 	i = skip_nums(line, i);
 	i = skip_spaces(line, i);
 	if (ft_isdigit(line[i]) && params->res_v == -1)
@@ -39,7 +40,8 @@ int			get_rez(t_params *params, const char *line, int *err)
 	while (ft_isdigit(line[i]) && params->res_v < RES_MAX)
 		params->res_v = params->res_v * 10 + (line[i++] - '0');
 	params->res_v = (params->res_v > RES_MAX) ? RES_MAX : params->res_v;
-	params->res_v = (params->res_v < RES_MIN) ? RES_MIN : params->res_v;
+	params->res_v = (params->res_v < RES_MIN && params->res_v != -1) ?
+					RES_MIN : params->res_v;
 	i = skip_nums(line, i);
 	i = skip_spaces(line, i);
 	*err = (line[i] != 0) ? *err | (1 << 1) : *err;
