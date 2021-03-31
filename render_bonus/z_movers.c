@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:51:18 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/30 18:17:49 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/31 09:56:29 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,13 @@ static int		move_z(t_all *all, double ang, int index)
 	return (0);
 }
 
+static void		bite(t_all *all)
+{
+	all->win->move_mask = all->win->move_mask | IS_BITTEN;
+	all->prms->plr.health -= (all->prms->plr.health > 0) ? 20 : 0;
+	system("afplay resources/sounds/bite.mp3 &");
+}
+
 void			move_zombies(t_all *all)
 {
 	static int	count = 0;
@@ -80,12 +87,8 @@ void			move_zombies(t_all *all)
 		i++;
 	}
 	if (all->prms->sprites[0]->dist < 0.6 && count % 10 == 0 &&
-	all->prms->plr.health && all->prms->sprites[0]->status_mask & Z_ALIVE &&
-							 !(all->prms->sprites[0]->status_mask & Z_DOOR))
-	{
-		all->win->move_mask = all->win->move_mask | IS_BITTEN;
-		all->prms->plr.health -= (all->prms->plr.health > 0) ? 20 : 0;
-		system("afplay resources/sounds/bite.mp3 &");
-	}
+		all->prms->plr.health && all->prms->sprites[0]->status_mask & Z_ALIVE &&
+		!(all->prms->sprites[0]->status_mask & Z_DOOR))
+		bite(all);
 	count = (count > 10 || all->prms->sprites[0]->dist > 0.6) ? 0 : count;
 }

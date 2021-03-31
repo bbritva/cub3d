@@ -103,10 +103,10 @@ int				get_height(t_all *all, int i)
 		dy = get_dy(&p, ang);
 		if ((fabs(dy) > fabs(dx)) && ((mgc = do_mgc(&p, ang, dx, 'x')) &&
 		is_wall(all, p, ang, 'v')))
-				break ;
+			break ;
 		if ((fabs(dy) <= fabs(dx)) && ((mgc = do_mgc(&p, ang, dy, 'y')) &&
 		is_wall(all, p, ang, 'h')))
-				break ;
+			break ;
 	}
 	all->prms->dists[i] = sqrt(pow(p.pos_x - all->prms->plr.pos_x, 2) + pow(
 		p.pos_y - all->prms->plr.pos_y, 2)) * cos(ang - all->prms->plr.ang_h);

@@ -111,6 +111,6 @@ void				draw_txtr_floor(t_all *all);
 void				draw_gun(t_all *all);
 void				draw_door(int size, t_sprite *spr, int n, t_all *all);
 int					shoot(t_all *all);
-void 				move_doors(t_all *all);
+void				move_doors(t_all *all);
 
 #endif

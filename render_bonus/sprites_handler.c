@@ -6,7 +6,7 @@
 /*   By: grvelva <grvelva@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 16:59:00 by grvelva           #+#    #+#             */
-/*   Updated: 2021/03/30 17:59:34 by grvelva          ###   ########.fr       */
+/*   Updated: 2021/03/31 09:51:37 by grvelva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			set_spr_prms(t_sprite *spr, t_player plr)
 	return (0);
 }
 
-void 		move_door(t_sprite *spr)
+static void	move_door(t_sprite *spr)
 {
 	unsigned int dist;
 
@@ -40,12 +40,12 @@ void 		move_door(t_sprite *spr)
 	{
 		spr->pos_x += 0.05;
 		dist = ((spr->status_mask >> 15) + 1);
-		spr->status_mask  = spr->status_mask & ~(0b1111 << 15);
-		spr->status_mask  = spr->status_mask | (dist << 15);
+		spr->status_mask = spr->status_mask & ~(0b1111 << 15);
+		spr->status_mask = spr->status_mask | (dist << 15);
 	}
 }
 
-void 		move_doors(t_all *all)
+void		move_doors(t_all *all)
 {
 	int i;
 
