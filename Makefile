@@ -76,5 +76,5 @@ git:			fclean
 git_b:			git
 				git add main_bonus.c Makefile $(RENDERB_PATH)*c $(HDRB)*h $(PARSERB_PATH)*c resources/sounds/* map_b.cub
 
-.PHONY:			all clean fclean re so bonus norm $(NAME)
+.PHONY:			all clean fclean re so bonus norm
 #for commit
